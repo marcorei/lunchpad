@@ -7,7 +7,7 @@
 ### MISC
 
 # Compass Cache
-static/.sass-cache/*
+dev/.sass-cache/*
 
 # Textmate
 *.tmproj
