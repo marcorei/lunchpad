@@ -7,7 +7,7 @@
 ### MISC
 
 # Compass Cache
-vorlagen/.sass-cache/*
+static/.sass-cache/*
 
 # Textmate
 *.tmproj
@@ -25,6 +25,6 @@ vorlagen/.sass-cache/*
 .gitshots
 
 # Exclude compiled css because of merging errors.
-vorlagen/css/ie.css
-vorlagen/css/print.css
-vorlagen/css/screen.css
+static/css/ie.css
+static/css/print.css
+static/css/screen.css
