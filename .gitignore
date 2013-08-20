@@ -1,0 +1,30 @@
+### SYMFONY 2.1
+
+# see Symfony/.gitignore
+
+
+
+### MISC
+
+# Compass Cache
+vorlagen/.sass-cache/*
+
+# Textmate
+*.tmproj
+
+# Apfel
+.DS_Store*
+
+# Joe backup files
+*~
+
+# phpstorm project files
+.idea
+
+# Git fun
+.gitshots
+
+# Exclude compiled css because of merging errors.
+vorlagen/css/ie.css
+vorlagen/css/print.css
+vorlagen/css/screen.css
