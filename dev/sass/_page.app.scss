@@ -1,0 +1,115 @@
+/*
+ * App Page
+ *
+ */
+
+
+.lunch-apppage-head,
+.lunch-apppage-body {
+
+	@extend .lunch-grid-column;
+}
+
+
+
+/* Apppage Header */
+
+// Mobile First
+
+.lunch-apppage-head {
+
+	// Skin
+	
+	background: {
+		color: $agencycolor;
+	}
+
+	color: white;
+
+}
+
+// Desktop Second
+
+@mixin lunch-apppage-head-desktop() {
+
+	.lunch-apppage-head {
+		
+		width: 38.2%;
+		
+		// Positioning
+
+		position: fixed;
+
+		top: 0;
+		bottom: 0;
+		left: 0;
+	}
+}
+
+
+
+/* Lunch Timer */
+
+// Mobile First 
+
+.lunch-timer {
+
+}
+
+// Desktop Second
+
+@mixin lunch-timer-desktop() {
+	.lunch-timer {
+
+		position: absolute;
+
+		bottom: 0;
+
+	}
+}
+
+
+
+/* Apppage Body */
+
+// Mobile First
+
+.lunch-apppage-body {
+
+}
+
+// Desktop Second
+
+@mixin lunch-apppage-body-desktop() {
+
+	.lunch-apppage-body {
+		
+		margin-left: 38.2%;
+		
+		width: 61.8%;
+		
+		// float: left;
+	}
+}
+
+
+
+/* Desktop Second */
+
+// Collect all Desktopstyles here
+
+@mixin lunch-apppage-desktop() {
+
+	@include lunch-apppage-head-desktop;
+	@include lunch-apppage-body-desktop;
+	@include lunch-timer-desktop;
+
+}
+
+// Apply
+
+@media screen and (min-width: 960px) {
+
+	@include lunch-apppage-desktop;
+
+}
