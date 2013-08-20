@@ -28,3 +28,14 @@ dev/.sass-cache/*
 static/css/ie.css
 static/css/print.css
 static/css/screen.css
+
+
+
+
+### NODE
+
+# exclude modules
+node/node_modules/*
+
+# exclude config file
+node/config.json
