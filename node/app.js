@@ -40,13 +40,13 @@ function getUser( username, callback ){
 	connection.query("SELECT * FROM  `users` WHERE  `email` = '" + username + "' LIMIT 0 , 1",
 		function( err, rows ) {
 
-			console.log('getting user: ' + username);
+			//console.log('getting user: ' + username);
 
 			var user = {};
 
 			if( !err ){
 
-				console.log('found user: ' + username);
+				//console.log('found user: ' + username);
 
 				user.id = rows[0].id;
 				user.username = rows[0].email;
