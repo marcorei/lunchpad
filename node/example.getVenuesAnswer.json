@@ -1,0 +1,73 @@
+{
+	"error" : "",
+	"venues" : 	[
+	    {
+	        "name": "void",
+	        "url": "http://www.foursquare.com",
+	        "users": [
+	            {
+	                "name" : "mr",
+	                "img" : "/static/userpics/mr.png"
+	            },
+	            {
+	                "name" : "mk",
+	                "img" : "/static/userpics/mk.png"
+	            },
+	            {
+	                "name" : "mrz",
+	                "img" : "/static/userpics/mrz.png"
+	            }
+	        ]
+	    },
+	    {
+	        "name": "Scheidegger",
+	        "url": "http://www.scheidegger-schwabing.com",
+	        "users": [
+	            {
+	                "name" : "kb",
+	                "img" : "/static/userpics/kb.png"
+	            },
+	            {
+	                "name" : "kh",
+	                "img" : "/static/userpics/kh.png"
+	            }
+	        ]
+	    },
+	    {
+	        "name": "Alfons Cafe",
+	        "url": "http://www.alfons.com",
+	        "users": [
+	            {
+	                "name" : "mr",
+	                "img" : "/static/userpics/mr.png"
+	            },
+	            {
+	                "name" : "mk",
+	                "img" : "/static/userpics/mk.png"
+	            },
+	            {
+	                "name" : "mrz",
+	                "img" : "/static/userpics/mrz.png"
+	            }
+	        ]
+	    },
+	    {
+	        "name": "TestVenue2",
+	        "url": "http://www.foursquare.com",
+	        "users": [
+	            {
+	                "name" : "mr",
+	                "img" : "/static/userpics/mr.png"
+	            },
+	            {
+	                "name" : "mk",
+	                "img" : "/static/userpics/mk.png"
+	            },
+	            {
+	                "name" : "mrz",
+	                "img" : "/static/userpics/mrz.png"
+	            }
+	        ]
+	    }
+	]
+}
