@@ -2,6 +2,7 @@
 	"error" : "",
 	"venues" : 	[
 	    {
+	    	"id" : "0",
 	        "name": "void",
 	        "url": "http://www.foursquare.com",
 	        "users": [
@@ -20,6 +21,7 @@
 	        ]
 	    },
 	    {
+	    	"id" : "3",
 	        "name": "Scheidegger",
 	        "url": "http://www.scheidegger-schwabing.com",
 	        "users": [
@@ -34,6 +36,7 @@
 	        ]
 	    },
 	    {
+	    	"id": "4",
 	        "name": "Alfons Cafe",
 	        "url": "http://www.alfons.com",
 	        "users": [
@@ -52,6 +55,7 @@
 	        ]
 	    },
 	    {
+	    	"id": "5",
 	        "name": "TestVenue2",
 	        "url": "http://www.foursquare.com",
 	        "users": [
