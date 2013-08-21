@@ -1,6 +1,5 @@
 /*
  * App Page
- *
  */
 
 
@@ -26,6 +25,19 @@
 
 	color: white;
 
+	.lunch-logo-container {
+		@extend .clearfix;
+	}
+
+	.lunch-logo {
+
+		&:hover {
+			background: {
+				color: #D6003B;
+			}
+		}
+	}
+
 }
 
 // Desktop Second
@@ -46,9 +58,41 @@
 
 
 		.lunch-container {
-			
+
 			float: right;
 			width: 300px;
+		}
+
+		.lunch-logo-container {
+
+			display: block;
+
+			text-align: center;
+
+			background: {
+				color: #E90040;
+			}
+
+			border: {
+				width: 0px;
+				bottom-width: 0px;
+				style: solid;
+				color: white;
+			}
+		}
+
+		.lunch-logo {
+
+			display: block;
+			width: 260px;
+			float: right;
+
+			padding: {
+				top: 40px;
+				right: 20px;
+				left: 20px;
+				bottom: 40px;
+			}
 		}
 	}
 }
@@ -82,7 +126,11 @@
 // Mobile First
 
 .lunch-apppage-body {
+	min-height: 100%;
 
+	background: {
+		color: #efefef;
+	}
 }
 
 // Desktop Second
@@ -96,6 +144,20 @@
 		width: 61.8%;
 		
 		// float: left;
+	}
+}
+
+
+.lunch-venue {
+
+	background: {
+		color: white;
+	}
+	margin: {
+		top: 40px;
+		bottom: 40px;
+		left: 20px;
+		right: 20px;
 	}
 }
 

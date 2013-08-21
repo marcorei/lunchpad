@@ -3,14 +3,27 @@
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
+
+// External Code
+
 @import "vendor.normalize";
+@import "vendor.clearfix";
 
 @import "ui.grid";
 
 @import "variables";
 @import "typo";
 
+
+
 // Pages
+
 @import "page.app";
 
 
+
+// General styles
+
+html, body {
+	height: 100%;
+}
