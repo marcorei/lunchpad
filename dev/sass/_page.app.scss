@@ -11,12 +11,15 @@
 
 
 
+
+
+
 /* Apppage Header */
 
 // Mobile First
 
 .lunch-apppage-head {
-
+	
 	// Skin
 	
 	background: {
@@ -31,14 +34,14 @@
 
 	.lunch-logo {
 
-		&:hover {
-			background: {
-				color: #D6003B;
-			}
-		}
 	}
 
 }
+
+
+
+
+
 
 // Desktop Second
 
@@ -46,7 +49,9 @@
 
 	.lunch-apppage-head {
 		
+		text-align: right;
 		width: 38.2%;
+
 		
 		// Positioning
 
@@ -67,11 +72,8 @@
 
 			display: block;
 
-			text-align: center;
+			//text-align: center;
 
-			background: {
-				color: #E90040;
-			}
 
 			border: {
 				width: 0px;
@@ -84,40 +86,137 @@
 		.lunch-logo {
 
 			display: block;
+			height: 122px;
 			width: 260px;
 			float: right;
+			
 
 			padding: {
-				top: 40px;
-				right: 20px;
+				top: 100px;
+				right: 80px;
 				left: 20px;
 				bottom: 40px;
+			}
+		}
+		
+		.lunch-user {
+			position: relative;
+			// background-color: #D6003B;
+		}
+		.lunch-user-image {
+			display: block;
+			position: absolute;
+			top: -28px;
+			right: 35px;
+
+		}
+		.lunch-user-name {
+			text-align: right;
+			line-height: 1em;
+			padding: {
+				left: 60px;
+				top: 20px;
+				bottom: 15px;
+				right: 80px;
+				
+			}
+			font: {
+				size: 1.8em;
+				family: "bebas-neue", Arial;
+			}
+		}
+		.lunch-user-surname {
+			font: {
+				family: Georgia;
 			}
 		}
 	}
 }
 
 
-
-/* Lunch Timer */
-
-// Mobile First 
-
+.lunch-fn-notify,
+.lunch-fn-logout, 
 .lunch-timer {
+	
+	font: {
+		family: Georgia;
+	}
+	position: relative;
+
+	text-decoration: none;
+
+	color: white;
+
+	display: block;
+	padding: {
+		top: 6px;
+		bottom: 6px;
+		left: 60px;
+		right: 80px;
+	}
 
 }
 
-// Desktop Second
 
-@mixin lunch-timer-desktop() {
-	.lunch-timer {
 
-		position: absolute;
+.lunch-inp-notify {
+	margin-right: 5px;
+	// position: absolute;
+	// top: 12px;
+	// right: 50px;
+}
 
-		bottom: 0;
 
+
+
+
+
+// Lunch Flash
+
+.lunch-flash {
+	margin-bottom: -59px;
+	background-color: #FFF080;
+	color: #E27F00;
+	font: {
+		family: Georgia;
+	}
+	
+	padding: {
+		top:20px;
+		left: 60px;
+		bottom: 20px;
+		right: 60px;
+	}
+	p {
+		margin: 0;
+	}
+	.lunch-flash-close {
+		border-radius: 33px;
+		text-align: center;
+		margin-top: -7px;
+		padding: 7px 4px;
+		width: 25px;
+		text-decoration: none;
+		font: {
+			family: "Helvetica Neue", Arial;
+		}
+		float: right;
+		background-color: #e27f00;
+		color: #fff;
+	}
+
+	.lunch-flash-container {
+		max-width: 600px;
 	}
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -126,12 +225,22 @@
 // Mobile First
 
 .lunch-apppage-body {
+
 	min-height: 100%;
+	
+	padding: {
+		top: 0px;
+		bottom: 0px;
+	}
 
 	background: {
-		color: #efefef;
+		color: #fff;
 	}
 }
+
+
+
+
 
 // Desktop Second
 
@@ -148,20 +257,305 @@
 }
 
 
+.lunch-venues {
+	margin: {
+		top:59px;
+	}
+}
+
 .lunch-venue {
+	
+
+
+	// General Venue Styles
+
+	@extend .clearfix;
+
+	position: relative;
 
 	background: {
 		color: white;
 	}
+
+	border: {
+		width: 0px;
+		bottom-width: 1px;
+		style: solid;
+		color: #eee;
+	}
+
 	margin: {
 		top: 0px;
-		bottom: 40px;
-		left: 20px;
-		right: 20px;
+		bottom: 0px;
+		left: 0px;
+		right: 0px;
+	}
+
+	padding: {
+		top: 50px;
+		right: 60px;
+		bottom: 50px;
+		left: 60px;
+	}
+	
+	// Venue Title
+
+	.lunch-venue-title {
+		
+		font: {
+			size: 2.4em;
+		}
+
+		margin: {
+			top: 0;
+			bottom: 5px;
+		}
+
+		display: block;
+	}
+
+
+
+	// Venue Header
+
+	.lunch-venue-header {
+		margin-bottom: 30px;
+	}
+	
+	
+
+	// Lunch Venue Guests
+
+	.lunch-venue-guests {
+		max-width: 600px;
+		margin-top: 50px;
+	}
+
+	// Venue Group
+
+	.lunch-venue-guest {
+		float: left;
+	}
+
+	// Venue Interaction
+
+	.lunch-venue-interaction {
+
+		clear: left;
+		border: {
+			width: 0px;
+			top-width: 0px;
+			style: solid;
+			color: #efefef;
+		}
+
+		padding:  {
+			top: 20px;
+		}
+	}
+
+	.lunch-fn-attend {
+		
+	}
+
+	.lunch-fn-menu {
+		
+		text-decoration: none;
+
+		font: {
+			family: Georgia;
+			style: italic;
+		}
+
+		border: {
+			width: 0px;
+			bottom-width: 1px;
+			style: dashed;
+			color: #ddd;
+		}
+
+		color: #666;
+		right: 0;
+		top: 10px;
+		bottom: 50%;
+
+		&:hover {
+			color: #00BEEE;
+		}
+	}
+
+	.lunch-fn-attend {
+		display: block;
+
+		float: left;
+
+		margin-right: 10px;
+
+		text-align: right;
+		
+		padding: 10px 20px;
+		//width: 150px;
+
+		text-decoration: none;
+		
+		font: {
+			family: Georgia;
+			style: regular;
+		}
+
+		color: white;
+		background: {
+			color: #00BEEE;
+		}
+
+		float: right;
+		width: 50px;
+		height: 20px;
+		margin: {
+			left: 20px;
+			right: 0px;
+			top: 12px;
+		}
+		text-align: center;
+		padding: 22px 7px;
+		border-radius: 34px;
+		text-decoration: none;
+		font-family: Georgia;
 	}
 }
 
 
+.lunch-fn-addvenue {
+
+	display: block;
+
+	float: left;
+
+	margin-right: 10px;
+
+	text-align: right;
+	
+	padding: 10px 20px;
+	//width: 150px;
+
+	text-decoration: none;
+	
+	font: {
+		family: Georgia;
+		style: regular;
+	}
+
+	color: white;
+	background: {
+		color: #ccc;
+	}
+
+	float: right;
+	width: 50px;
+	height: 20px;
+	margin: {
+		left: 20px;
+		right: 0;
+		top: 50px;
+	}
+	text-align: center;
+	padding: 22px 7px;
+	border-radius: 34px;
+	text-decoration: none;
+	font-family: Georgia;
+}
+
+
+
+
+// Create Lunch Venue
+
+.lunch-venue-create {
+	
+	background-color: #efefef;
+	@extend .clearfix;
+	
+	padding: {
+		top: 50px;
+		right: 60px;
+		bottom: 50px;
+		left: 60px;
+	}
+
+	border: {
+		width: 0px;
+		bottom-width: 0px;
+		style: solid;
+		color: #dedede;
+	}
+
+	.venue-title-input {
+		
+		margin: {
+			left:-10px;
+			top: 0px;
+		}
+
+		padding: 10px;
+
+		padding: {
+			bottom: 5px;
+		}
+
+		font: {
+			family: "bebas-neue";
+			size: 2.4em;
+		}
+		min-width: 450px;
+		background-color: #eee;
+		border: {
+			width: 1px;
+			style: dashed;
+			color: #ccc;
+		}
+	}
+
+	.venue-menu-input {
+
+		min-width: 450px;
+		margin: {
+			left:-10px;
+			top: 10px;
+		}
+		padding: {
+			left: 10px;
+			right: 10px;
+			top: 5px;
+			bottom: 5px;
+		};
+		
+		font: {
+			family: Georgia;
+			style: italic;
+		}
+
+		background-color: #eee;
+		border: {
+			width: 1px;
+			style: dashed;
+			color: #ccc;
+		}
+
+	}
+	.venue-title-input,
+	.venue-menu-input {
+		display: block;
+
+		&:focus {
+			outline: none;
+			border: {
+				style: solid;
+				color: #aaa;
+			
+			}
+		}
+	}
+}
 
 /* Desktop Second */
 
@@ -171,7 +565,6 @@
 
 	@include lunch-apppage-head-desktop;
 	@include lunch-apppage-body-desktop;
-	@include lunch-timer-desktop;
 
 }
 

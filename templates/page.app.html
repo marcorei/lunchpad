@@ -44,20 +44,20 @@
 				<!-- User -->
 
 				<div class="lunch-user">
-					<img src="" alt="" class="lunch-user-image">
-					<div class="lunch-user-name">Jogga Fröstl</div>
-					<a href="/logout" class="lunch-fn-logout">Logout</a>
+					<img src="../static/img/jf.png" alt="" class="lunch-user-image">
+					<div class="lunch-user-name">JF@19h13.com</div>
 				</div>
 				
 
-				
+				<a href="/logout" class="lunch-fn-logout">Logout</a>
 				<!-- Notification Settings -->
 				
-				<div class="lunch-notifications">
-					<a href="" class="lunch-fn-notify">Notify me</a>
+				
+				<div class="lunch-fn-notify">
+				<input type="checkbox" id="notifications" class="lunch-inp-notify">
+				<label for="notifications">I like Emails!</label>
 				</div>
-
-
+	
 				
 				<!-- Time -->
 
@@ -76,8 +76,55 @@
 		<!-- Content: List of Venues -->
 
 		<div class="lunch-apppage-body">
-
 			
+				
+			<!-- Flash Gordon Savior of the Universe -->
+			<div class="lunch-flash">
+
+				<div class="lunch-flash-container">
+					<a href="" class="lunch-flash-close">X</a>
+					<p>My Database doesn't include the routines of human peer-bounding</p>
+				</div>
+			</div>
+			
+			<div class="lunch-venues">
+			<!-- 
+			Single Lunch Venue 
+			Should become a template
+			-->
+			<div class="lunch-venue">
+				
+				<div class="lunch-venue-header">
+					<h2 class="lunch-venue-title effra">Da Bello e Bello</h2>
+					<a href="" class="lunch-fn-menu">View Menu</a>
+				</div>
+
+				<div class="lunch-venue-guests">
+						
+					<!-- Venue Guest -->
+
+					<div class="lunch-venue-guest">
+						<img src="../static/img/ni.png" alt="" class="lunch-user-image" alt="MM">
+					</div>
+					<div class="lunch-venue-guest">
+						<img src="../static/img/kba.png" alt="" class="lunch-user-image" alt="MM">
+					</div>
+					<div class="lunch-venue-guest">
+						<img src="../static/img/kb.png" alt="" class="lunch-user-image" alt="MM">
+					</div>
+					<div class="lunch-venue-guest">
+						<img src="../static/img/dh.png" alt="" class="lunch-user-image" alt="MM">
+					</div>
+					<div class="lunch-venue-guest">
+						<img src="../static/img/js.png" alt="" class="lunch-user-image" alt="MM">
+					</div>
+
+					<a href="" class="lunch-fn-attend lunch-venue-guest">Go!</a>
+				</div>				
+			</div><!-- END Venue -->
+
+
+
 
 			<!-- 
 			Single Lunch Venue 
@@ -85,26 +132,52 @@
 			-->
 			<div class="lunch-venue">
 				
-				<h2 class="lunch-venue-title">Scheidegger</h2>
-
-				<a href="" class="lunch-fn-menu">View Menu</a>
-
-				<div class="lunch-venue-group">
-
-					<!-- Venue Guest -->
-
-					<div class="lunch-venue-guest">
-						<img src="meh.jpg" alt="" class="lunch-user-image" alt="JF">
-					</div>
-					
+				<div class="lunch-venue-header">
+					<h2 class="lunch-venue-title effra">Scheidegger</h2>
+					<a href="" class="lunch-fn-menu">View Menu</a>
 				</div>
+
+				<div class="lunch-venue-guests">
+						
+					<!-- Venue Guest -->
+					<div class="lunch-venue-guest">
+						<img src="../static/img/jw.png" alt="" class="lunch-user-image" alt="MM">
+					</div>
+					<div class="lunch-venue-guest">
+						<img src="../static/img/mk.png" alt="" class="lunch-user-image" alt="MM">
+					</div>
+					<div class="lunch-venue-guest">
+						<img src="../static/img/mrz.png" alt="" class="lunch-user-image" alt="MM">
+					</div>
+					<div class="lunch-venue-guest">
+						<img src="../static/img/jf.png" alt="" class="lunch-user-image" alt="MM">
+					</div>
+					<div class="lunch-venue-guest">
+						<img src="../static/img/mr.png" alt="" class="lunch-user-image" alt="MM">
+					</div>
+					<div class="lunch-venue-guest">
+						<img src="../static/img/vb.png" alt="" class="lunch-user-image" alt="MM">
+					</div>
+					<div class="lunch-venue-guest">
+						<img src="../static/img/mm.png" alt="" class="lunch-user-image" alt="MM">
+					</div>
+
+					<a href="" class="lunch-fn-attend lunch-venue-guest">Go!</a>
+				</div>				
 			</div><!-- END Venue -->
+				
 
+			<!-- Create Venue -->
+			<form action="" class="lunch-venue-create lunch-venue">
+				<input type="text" class="venue-title-input" placeholder="New Venue Name">
+				<input type="text" class="venue-menu-input" placeholder="Link to Menu">
 
+				<div class="lunch-venue-guests">
+					<a href="#" class="lunch-fn-addvenue">Add</a>
+				</div>
 
-			<button class="lunch-fn-addvenue">Add Venue</button>
-
+			</form>
 		</div><!-- End List of Restaurants -->
-
+		</div>
 	</body>
 </html>
