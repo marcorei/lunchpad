@@ -13,6 +13,10 @@
 		<link rel="stylesheet" href="../static/css/screen.css">
 
 		<script src="../static/js/vendor/modernizr-2.6.2.min.js"></script>
+
+		<!-- Type kit -->
+		<script type="text/javascript" src="//use.typekit.net/tjo7bse.js"></script>
+		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 	</head>
 
 	<body class="lunch-page-app">
@@ -25,38 +29,40 @@
 
 
 
-			<!-- Logo -->
+			<div class="lunch-container">
 
-			<h1>19:13 Lunchpad</h1>
+				<!-- Logo -->
+
+				<img src="../static/img/logo.png" alt="">
+				<h1>Lunchpad</h1>
 
 
+				<!-- User -->
 
-			<!-- User -->
+				<div class="lunch-user">
+					<img src="" alt="" class="lunch-user-image">
+					<div class="lunch-user-name">Jogga Fröstl</div>
+					<button class="lunch-fn-logout">log out</button>
+				</div>
+				
 
-			<div class="lunch-user">
-				<img src="" alt="" class="lunch-user-image">
-				<div class="lunch-user-name">Jogga Fröstl</div>
-				<button class="lunch-fn-logout">log out</button>
+				
+				<!-- Notification Settings -->
+				
+				<div class="lunch-notifications">
+					<button class="lunch-fn-notify">Notify me</button>
+				</div>
+
+
+				
+				<!-- Time -->
+
+				<div class="lunch-timer">
+					<span class="lunch-icon">O'clock</span>
+					<span class="lunch-label">11:15</span>
+				</div>
+
 			</div>
-			
-
-			
-			<!-- Notification Settings -->
-			
-			<div class="lunch-notifications">
-				<button class="lunch-fn-notify">Notify me</button>
-			</div>
-
-
-			
-			<!-- Time -->
-
-			<div class="lunch-timer">
-				<span class="lunch-icon">O'clock</span>
-				<span class="lunch-label">11:15</span>
-			</div>
-
-
 
 
 		</header>
@@ -93,7 +99,7 @@
 
 
 			<button class="lunch-fn-addvenue">Add Venue</button>
-			
+
 		</div><!-- End List of Restaurants -->
 
 	</body>
