@@ -134,7 +134,7 @@
 						<img src="" alt="" class="lunch-user-image" alt="MM">
 					</div>
 
-					<a href="" class="lunch-fn-attend">Out!</a>
+					<a href="javascript:visitVenue()" class="lunch-fn-attend">Out!</a>
 				</div>
 
 			</div><!-- END Venue -->
@@ -145,12 +145,12 @@
 			Create Venue 
 			============
 			-->
-			<form action="" class="lunch-venue-create">
+			<form action="" class="lunch-venue-create" id="">
 				<input type="text" name="venuename" class="venue-title-input" placeholder="New Venue Name">
 				<input type="text" name="venueurl" class="venue-menu-input" placeholder="Link to Menu">
 
 				<div class="lunch-venue-guests-container">
-					<a href="#" class="lunch-fn-addvenue">Add!</a>
+					<a href="javascript:addVenue()" class="lunch-fn-addvenue">Add!</a>
 				</div>
 
 			</form>
@@ -160,16 +160,6 @@
 
 
 	<script type="text/javascript">
-
-	var userData = {
-		"error" : "",
-		"user": {
-			"name":"jf@19h14.com",
-			"img": "../static/img/jf.png",
-			"notify": "1"
-		}
-	}
-
 
 
 
@@ -235,6 +225,10 @@
 	var refreshVenueData = function( data ) {
 
 		if (data.error === ""){
+
+			for (var i = data.venues.length - 1; i >= 0; i--) {
+				data.venues.[i].id = "i";
+			};
 			$('.lunch-apppage-body').render(data, venueDirective);
 			$('.void-venue').render(data, voidDirective);
 		} else {
@@ -320,8 +314,15 @@
 
 	// Visit Venue
 
-	var visitVenue = function() {
-		// /post/visit
+	var visitVenue = function( id ) {
+		 $.ajax({
+        	type: "POST",
+        	url: serverUrl + '/post/visit',
+        	data: id,
+        	success: function(data){
+
+        	}
+        });
 	}
 
 
@@ -331,9 +332,6 @@
 	var timy = new timer(1, 2);
 	timy.start;
 
-
-	/* On Window Load */
-	// $(refreshVenueData);
 
 	</script>
 	</body>
