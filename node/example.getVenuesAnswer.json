@@ -1,5 +1,22 @@
 {
 	"error" : "",
+	"voidvenue" : 
+	{
+		"users": [
+            {
+                "name" : "mr",
+                "img" : "/static/userpics/mr.png"
+            },
+            {
+                "name" : "mk",
+                "img" : "/static/userpics/mk.png"
+            },
+            {
+                "name" : "mrz",
+                "img" : "/static/userpics/mrz.png"
+            }
+        ]
+	},
 	"venues" : 	[
 	    {
 	    	"id" : "0",
