@@ -14,11 +14,21 @@
 
 		<script src="../static/js/vendor/modernizr-2.6.2.min.js"></script>
 	</head>
-	<body>
+	<body class="lunch-page-login">
 	
+	<header>
+		<a  href="#" class="lunch-logo">
+			<img src="../static/img/logo.png" alt="">
+		</a>
+	</header>
 	<form action="/login" method="post" class="lunch-login-form">
+		
+		<label for="username" class="lunch-inp-label"></label>
 		<input type="text" name="username" class="lunch-inp-username">
+
+		<label for="password" class="lunch-inp-label"></label>
 		<input type="password" name="password" class="lunch-inp-password">
+		
 		<button type="submit" class="lunch-fn-login">Login</button>
 	</form>
 

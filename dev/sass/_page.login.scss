@@ -1,0 +1,36 @@
+/*
+ * Loginpage
+ */
+
+ .lunch-page-login {
+ 	height: 100%;
+ 	background-color: $agencycolor;
+ }
+
+.lunch-logo {
+	display: block;
+	text-align: center;
+}
+
+.lunch-login-form {
+	margin: 200px auto;
+	max-width: 500px;
+	padding: 50px;
+	background-color: #fff;
+
+
+	.lunch-inp-username,
+	.lunch-inp-password {
+		margin: {
+			bottom: 10px;
+		}
+		padding: 10px;
+		display: block;
+		background-color: white;
+		border: {
+			width: 1px;
+			style: solid;
+			color: #ccc;
+		}
+	}
+}
