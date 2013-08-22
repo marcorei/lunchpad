@@ -263,7 +263,7 @@ function createVenue( venue, callback ){
 							console.log( err );
 						}
 
-						console.log( 'New Venue ' + req.user.username + ' adds ' + venue.name );
+						console.log( 'New Venue:' + venue.name );
 
 						callback( err, venue );
 					}
@@ -465,7 +465,7 @@ function addVisit( userid, venueid, callback ){
 	checkVisitExists( userid, datestr, function(err,count){
 		if( 0 == count ){
 
-			console.log( 'New visit! ' + req.user.username + ' visits venue ' + venueid );
+			console.log( 'New visit! ' + userid + ' visits venue ' + venueid );
 
 			//new entry
 			connection.query("INSERT INTO `"+
@@ -488,7 +488,7 @@ function addVisit( userid, venueid, callback ){
 
 		}else{
 
-			console.log( 'Update! ' + req.user.username + ' visits now venue ' + venueid );
+			console.log( 'Update! ' + userid + ' visits now venue ' + venueid );
 
 			//update entry
 			connection.query("UPDATE  `"+
