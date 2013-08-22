@@ -95,49 +95,6 @@
 
 
 
-			<!-- 
-			Single Lunch Venue 
-			Should become a template
-			-->
-			<div class="lunch-venue">
-				
-				<h2 class="lunch-venue-title"></h2>
-
-				<div class="lunch-venue-header">
-					<a href="" class="lunch-fn-menu">View Menu</a>
-				</div>
-
-				<div class="lunch-venue-guests-container">
-					<div class="lunch-venue-guests">
-						<img src="" alt="" class="lunch-user-image" alt="MM">
-					</div>
-
-					<a href="" class="lunch-fn-attend">Go!</a>
-				</div>
-
-			</div><!-- END Venue -->
-
-			<!-- 
-			Single Lunch Venue 
-			Should become a template
-			-->
-			<div class="void-venue">
-				
-				<h2 class="lunch-venue-title">Spalter</h2>
-
-				<div class="lunch-venue-header">
-					Wir sind raus!
-				</div>
-
-				<div class="lunch-void-guests-container">
-					<div class="lunch-venue-guests">
-						<img src="" alt="" class="lunch-user-image" alt="MM">
-					</div>
-
-					<a href="javascript:visitVenue()" class="lunch-fn-attend">Out!</a>
-				</div>
-
-			</div><!-- END Venue -->
 
 
 			<!-- 
@@ -219,14 +176,22 @@
 
 	var serverUrl = "http://localhost:1924";
 
-
+	
 
 	// Venue Data
 
 	var refreshVenueData = function( data ) {
 
-		if (data.error === ""){
+		$('body').remove('.lunch-venue');
+		$('body').remove('.void-venue');
+		
+		$('.lunch-venue-template').clone().prependTo('.lunch-apppage-body')
+		.removeClass('lunch-venue-template').addClass('lunch-venue');
+		
+		$('.void-venue-template').clone().appendTo('.lunch-apppage-body')
+		.removeClass('void-venue-template').addClass('void-venue');
 
+		if (data.error === ""){
 
 			for (var i = 0; i < data.venues.length ; i++ ){
 				console.log(data.venues[i].id);
@@ -245,7 +210,7 @@
 
     var requestVenueData = function() {
 	    $.ajax({
-	  		url: serverUrl + "/get/venues",
+	  		url: serverUrl + "/get/venues?nocache=",
 			success: function(data) {
 
 				refreshVenueData( data );
@@ -323,12 +288,13 @@
 	// Visit Venue
 
 	var visitVenue = function( id ) {
+		console.log(id);
 		 $.ajax({
         	type: "POST",
         	url: serverUrl + '/post/visit',
-        	data: id,
+        	data: { 'venueid' : id },
         	success: function(data){
-
+        		console.log(data);
         	}
         });
 	}
@@ -342,5 +308,49 @@
 
 
 	</script>
+
+	<!-- 
+	Single Lunch Venue 
+	Should become a template
+	-->
+	<div class="lunch-venue-template">
+		
+		<h2 class="lunch-venue-title"></h2>
+
+		<div class="lunch-venue-header">
+			<a href="" class="lunch-fn-menu">View Menu</a>
+		</div>
+
+		<div class="lunch-venue-guests-container">
+			<div class="lunch-venue-guests">
+				<img src="" alt="" class="lunch-user-image" alt="MM">
+			</div>
+
+			<a href="" class="lunch-fn-attend">Go!</a>
+		</div>
+
+	</div>
+	<!-- END Venue -->
+	<!-- 
+	Single Lunch Venue 
+	Should become a template
+	-->
+	<div class="void-venue-template">
+		
+		<h2 class="lunch-venue-title">Spalter</h2>
+
+		<div class="lunch-venue-header">
+			Wir sind raus!
+		</div>
+
+		<div class="lunch-void-guests-container">
+			<div class="lunch-venue-guests">
+				<img src="" alt="" class="lunch-user-image" alt="MM">
+			</div>
+
+			<a href="javascript:visitVenue()" class="lunch-fn-attend">Out!</a>
+		</div>
+
+	</div><!-- END Venue -->
 	</body>
 </html>
