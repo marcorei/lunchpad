@@ -678,6 +678,17 @@ function requireAuthJSON( req, res, next ){
 
 
 
+// manifesto
+
+app.get( '/maifesto', function(req,res){
+
+	var file = '../templates/page.manifesto.html';
+	res.sendfile( path.join( __dirname, file ) );
+
+});
+
+
+
 
 // login page
 
