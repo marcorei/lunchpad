@@ -10,37 +10,7 @@
  	height: 100%;
  	background-color: $agencycolor;
 
- 	.lunch-footer {
- 		ul{
- 			margin: 0;
- 			padding: 0;
- 		}
- 		li{
- 			list-style: none;
- 			display: inline;
- 			padding:{
- 				left: 15px;
- 				right: 15px;
- 			}
- 		}
- 		a{
- 			text-decoration: none;
- 			color: #fff;
-
- 			font: {
-				family: Georgia;
-				style: regular;
-				weight: normal;
-				size: 16px;
-			}
- 		}
-
-
- 		position: absolute;
- 		bottom: 40px;
- 		width: 100%;
- 		text-align: center;
- 	}
+ 	
  	
  }
 
@@ -178,4 +148,36 @@
 		//display: none;
 
 	}
+}
+
+.lunch-footer {
+	ul{
+		margin: 0;
+		padding: 0;
+	}
+	li{
+		list-style: none;
+		display: inline;
+		padding:{
+			left: 15px;
+			right: 15px;
+		}
+	}
+	a{
+		text-decoration: none;
+		color: #fff;
+
+		font: {
+		family: Georgia;
+		style: regular;
+		weight: normal;
+		size: 16px;
+	}
+	}
+
+
+	position: absolute;
+	bottom: 40px;
+	width: 100%;
+	text-align: center;
 }

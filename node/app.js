@@ -445,9 +445,12 @@ function getVenueList( callback ){
 
 
 
-
-				sq1();
-
+				if( iMax > i ){
+					sq1();
+				}else{
+					sq2();
+				}
+				
 			}
 		}
 
@@ -680,7 +683,7 @@ function requireAuthJSON( req, res, next ){
 
 // manifesto
 
-app.get( '/maifesto', function(req,res){
+app.get( '/manifesto', function(req,res){
 
 	var file = '../templates/page.manifesto.html';
 	res.sendfile( path.join( __dirname, file ) );
