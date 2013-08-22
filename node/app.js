@@ -11,6 +11,7 @@ var path = require('path'),
 	passwordHash = require('password-hash'),
 	mysql = require('mysql'),
 	Validator = require('validator').Validator,
+	nodemailer = require("nodemailer"),
 	config = require('./config.json');
 
 
@@ -545,6 +546,28 @@ function checkVisitExists( userid, datestr, callback ){
 
 
 
+/*
+ * Mail Stuff
+ */
+
+var smtpTransport = nodemailer.createTransport("SMTP",{
+    host: config.smtp.host,
+    auth: {
+        user: config.smtp.user,
+        pass: config.smtp.pass
+    }
+});
+
+
+
+function sendNotifications( userid, venueid ){
+
+	console.log('sending notifications; userid: '+userid+' venueid: '+venueid);
+
+}
+
+
+
 
 
 
@@ -958,11 +981,14 @@ app.post( '/post/visit', function(req, res){
 				res.json({ error: "Could not register visit."});
 			}else{
 
-				// SEND NOTIFICATIONS
 				res.json({
 					error: "",
 					venueid: venueid
-				})
+				});
+
+				// SEND NOTIFICATIONS
+
+				sendNotifications( req.user.id, venueid );
 
 			}
 
