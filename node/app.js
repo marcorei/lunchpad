@@ -810,6 +810,7 @@ app.get( '/get/user', function(req, res){
 		var a = {};
 		a.name = req.user.username;
 		a.img = req.user.image;
+		a.error = "";
 
 		if( req.user.notify == 1 ){
 			a.notify = 1;
