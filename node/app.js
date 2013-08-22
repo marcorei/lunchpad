@@ -4,12 +4,13 @@
  * Put all your passwords in ./config.json
  */
 
-var path = require('path');
+var path = require('path'),
 	express = require('express'),
 	passport = require('passport'),
 	LocalStrategy = require('passport-local').Strategy,
 	passwordHash = require('password-hash'),
 	mysql = require('mysql'),
+	Validator = require('validator').Validator,
 	config = require('./config.json');
 
 
@@ -61,16 +62,16 @@ function esc( str ){
 
 function escId( id ){
 	id = id.toString();
-	return "'" + mysql.escapeId( id ) + "'";
+	return mysql.escapeId( id );
 }
 
 
 // callback() err, user )
 function getUserById( id, callback ){
 
-	//console.log('trying to get user by id: ' + id);
+	console.log('trying to get user by id: ' + id + ' ... escape: ' + esc(id));
 
-	connection.query("SELECT * FROM  `users` WHERE  `id` = " + escId(id) + " LIMIT 0 , 1;",
+	connection.query("SELECT * FROM  `users` WHERE  `id` = " + esc(id) + " LIMIT 0 , 1;",
 		function( err, rows ) {
 
 			if( err ){
@@ -123,7 +124,7 @@ function getUserByName( username, callback ){
 function composeUserObj( err, rows, callback )
 {
 
-	//console.log('comopising user: ' + rows[0].sid);
+	//console.log('comopising user: ' + rows[0].id);
 
 	var user = {};
 
@@ -215,7 +216,7 @@ function changeUserNotify( userid, notify, callback ){
 		"`.`users` SET  `notify` =  '"+
 		notifyUint +
 		"' WHERE  `users`.`id` ="+
-		escId(userid)+
+		esc(userid)+
 		";", 
 
 		function( err ){
@@ -241,31 +242,43 @@ function createVenue( venue, callback ){
 	// check if venue with that name exists.
 	checkVenueExists( venue.name, function( err, count ){
 
-		if( 0 == count ){
+		if( !err )
+		{
+			console.log('trying to insert new venue. venuename: ' + venue.name);
 
-			connection.query("INSERT INTO  `"+
-				config.mysql.database+
-				"`.`venues` (`id` ,`name` ,`url` ,`createdby`)VALUES (NULL ,  "+
-				esc(venue.name)+
-				",  "+
-				esc(venue.url)+
-				",  "+
-				escId(venue.userid)+
-				");",
+			if( 0 == count ){
 
-				function( err ){
-					if( err ){
-						console.log( err );
+				connection.query("INSERT INTO  `"+
+					config.mysql.database+
+					"`.`venues` (`id` ,`name` ,`url` ,`createdby`)VALUES (NULL ,  "+
+					esc(venue.name)+
+					",  "+
+					esc(venue.url)+
+					",  "+
+					esc(venue.userid)+
+					");",
+
+					function( err ){
+						if( err ){
+							console.log( err );
+						}
+
+						console.log( 'New Venue ' + req.user.username + ' adds ' + venue.name );
+
+						callback( err, venue );
 					}
-					callback( err, venue );
-				}
-			);
+				);
 
+			}else{
+				var err = "venue already exists!";
+				console.log(err);
+				callback( err, venue.name );
+			}
 		}else{
-			var err = "venue already exists!";
-			console.log(err);
-			callback( err, venue.name );
+			callback( err, "" );
 		}
+
+		
 
 	});
 
@@ -276,6 +289,8 @@ function createVenue( venue, callback ){
 
 // callback( err, count )
 function checkVenueExists( venuename, callback ){
+
+	console.log( 'checking for existing venue' );
 
 	connection.query("SELECT count(*) AS `numvenues` FROM  `venues` WHERE  `name` = " + esc(venuename) + ";",
 		function( err, rows ) {
@@ -316,19 +331,33 @@ function getVenueList( callback ){
 				callback(err, null);
 			}else{
 
+
+				var i = 0;
+				var iMax = rows.length;
+
+
 				// compose visits
-				var i;
-				for( i = 0; i < rows.length; i++ ){
+
+				var sq1 = function(){
 
 					var venueId = rows[i].vid;
 
+					//console.log('composing visits. venueId: ' + venueId + ' , uid:' + rows[i].uid );
+
 					// get user data
 					getUserById( rows[i].uid, function( err, user ){
+
+						if( err ){
+							console.log( err );
+						}
 
 						//visits[i] = {
 						//	vid: vid,
 						//	user: user
 						//};
+
+						//console.log('reaffirming venueId: ' + venueId );
+						//console.log('reaffirming user.id ' + user.id);
 
 						// and push the visit where it belongs
 						if( !usersSorted['v'+venueId] )
@@ -344,55 +373,80 @@ function getVenueList( callback ){
 						});
 
 
+						// node for loop
+						i++;
+						if( i < iMax ) {
+							sq1();
+						}else{
+							sq2();
+						}
+
 					});
+
+
+					
+
+				}
+				
+
+
+
+
+				// compose venues
+
+				var sq2 = function(){
+
+
+					connection.query("SELECT * FROM  `venues`;", function( err, rows ){
+
+						var i,
+							tmpVenue;
+
+						for( i = 0; i < rows.length; i++ )
+						{
+
+							// users?
+							var tmpUsers = (usersSorted['v'+rows[i].id]) ? usersSorted['v'+rows[i].id] : [];
+
+							// check if void venue with conversion
+							if( rows[i].name == "void" ){
+
+								// compose void venue
+								tmpVenue = {
+									users: tmpUsers
+								}
+
+								answer.voidvenue = tmpVenue;
+
+							}else{
+
+								// compose normal venue
+								tmpVenue = {
+									id: rows[i].id,
+									name: rows[i].name,
+									url: rows[i].url,
+									users: tmpUsers
+								}
+
+								answer.venues.push( tmpVenue );
+
+							};
+
+						}
+
+						// callback!
+						callback( err, answer );
+
+					});				
+
+
 
 				}
 
 
-				// hopefully this will work sequentially due to the nature of mysql XD
 
-				// next get all venues.
-				connection.query("SELECT * FROM  `venues`;",
-				function( err, rows ){
 
-					var i,
-						tmpVenue;
-					for( i = 0; i < rows.length; i++ )
-					{
-
-						// users?
-						var tmpUsers = (usersSorted['v'+rows[i].id]) ? usersSorted['v'+rows[i].id] : [];
-
-						// check if void venue with conversion
-						if( rows[i].name == "void" ){
-
-							// compose void venue
-							tmpVenue = {
-								users: tmpUsers
-							}
-
-							answer.voidvenue = tmpVenue;
-
-						}else{
-
-							// compose normal venue
-							tmpVenue = {
-								id: rows[i].id,
-								name: rows[i].name,
-								url: rows[i].url,
-								users: tmpUsers
-							}
-
-							answer.venues.push( tmpVenue );
-
-						};
-
-					}
-
-					// callback!
-					callback( err, answer );
-
-				});
+				sq1();
 
 			}
 		}
@@ -410,16 +464,19 @@ function addVisit( userid, venueid, callback ){
 
 	checkVisitExists( userid, datestr, function(err,count){
 		if( 0 == count ){
+
+			console.log( 'New visit! ' + req.user.username + ' visits venue ' + venueid );
+
 			//new entry
 			connection.query("INSERT INTO `"+
 				config.mysql.database+
 				"`.`visits` (`id`, `date`, `uid`, `vid`) VALUES (NULL, '"+
 				datestr+
-				"', '"+
-				escId(userid)+
-				"', '"+
-				escId(venueid)+
-				"');",
+				"', "+
+				esc(userid)+
+				", "+
+				esc(venueid)+
+				");",
 
 				function( err, rows ){
 					if( err ){
@@ -430,16 +487,19 @@ function addVisit( userid, venueid, callback ){
 			);
 
 		}else{
+
+			console.log( 'Update! ' + req.user.username + ' visits now venue ' + venueid );
+
 			//update entry
 			connection.query("UPDATE  `"+
 				config.mysql.database+
-				"`.`visits` SET  `vid` =  '"+
-				escId(venueId)+
-				"' WHERE  `uid` = '" + 
-				escId(userid) + 
-				"' AND `date` = '" + 
+				"`.`visits` SET  `vid` =  "+
+				esc(venueid)+
+				" WHERE  `uid` = " + 
+				esc(userid) + 
+				" AND `date` = '" + 
 				datestr + 
-				"' LIMIT 0 , 1;",
+				"';",
 
 				function( err ){
 					if( err ){
@@ -458,11 +518,13 @@ function addVisit( userid, venueid, callback ){
 // callback( err, count )
 function checkVisitExists( userid, datestr, callback ){
 
-	connection.query("SELECT count(*) AS `numvisits` FROM  `visits` WHERE  `uid` = '" + 
-		escId(userid) + 
-		"' AND `date` = '" + 
+	//console.log( 'checking if visit exists' );
+
+	connection.query("SELECT count(*) AS `numvisits` FROM  `visits` WHERE  `uid` = " + 
+		esc(userid) + 
+		" AND `date` = '" + 
 		datestr + 
-		"'",
+		"';",
 
 		function( err, rows ) {
 			if( err ){
@@ -515,6 +577,8 @@ app.use( passport.session() );
 app.use('/static', express.static(__dirname + '/../static'));
 
 
+// enable callback for local cross computer testing
+// app.enable('jsonp callback');
 
 
 
@@ -746,6 +810,7 @@ app.get( '/get/user', function(req, res){
 		var a = {};
 		a.name = req.user.username;
 		a.img = req.user.image;
+		a.error = "";
 
 		if( req.user.notify == 1 ){
 			a.notify = 1;
@@ -764,6 +829,25 @@ app.get( '/get/user', function(req, res){
 app.post( '/post/venue', function(req, res){
 
 	requireAuthJSON( req, res, function(){
+
+
+		// Validation
+
+		var v = new Validator(),
+			errors = [];
+		v.error = function(msg){ errors.push(msg); };
+
+		v.check( req.body.venuename, 'Venue name is too short.').len(2);
+		v.check( req.body.venueurl, 'Venue url is no valid url').isUrl();
+
+		if( errors.length > 0 ){
+			res.json({
+				error: errors.join(' ')
+			})
+			return;
+		}
+
+		// Response
 
 		var v = {
 			name: req.body.venuename,
@@ -796,10 +880,27 @@ app.post( '/post/notify', function(req, res){
 
 	requireAuthJSON( req, res, function(){
 
+		// Validation
+
+		var v = new Validator(),
+			errors = [];
+		v.error = function(msg){ errors.push(msg); };
+
+		v.check( req.body.notify, 'Notify is not a boolean value.').isIn(['true','false']);
+
+		if( errors.length > 0 ){
+			res.json({
+				error: errors.join(' ')
+			})
+			return;
+		}
+
+		// Response
+
 		changeUserNotify( req.user.id, req.body.notify, function(err, notify){
 
 			if(err){
-				res.json({ error: "could not change notify option"});
+				res.json({ error: "Could not change notify option"});
 			}else{
 				res.json({
 					error: "",
@@ -820,10 +921,27 @@ app.post( '/post/visit', function(req, res){
 
 	requireAuthJSON( req, res, function(){
 
-		addVisit( req.user.id, req.body.venueid, function(err,venueid){
+		// Validation
+
+		var v = new Validator(),
+			errors = [];
+		v.error = function(msg){ errors.push(msg); };
+
+		v.check( req.post.venueid, 'Venue id is not an integer.').isInt();
+
+		if( errors.length > 0 ){
+			res.json({
+				error: errors.join(' ')
+			})
+			return;
+		}
+
+		// Response
+
+		addVisit( req.user.id, req.post.venueid, function(err,venueid){
 
 			if( err ){
-				res.json({ error: "could not register visit."});
+				res.json({ error: "Could not register visit."});
 			}else{
 
 				// SEND NOTIFICATIONS
