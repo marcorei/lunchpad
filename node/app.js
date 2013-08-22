@@ -61,16 +61,16 @@ function esc( str ){
 
 function escId( id ){
 	id = id.toString();
-	return "'" + mysql.escapeId( id ) + "'";
+	return mysql.escapeId( id );
 }
 
 
 // callback() err, user )
 function getUserById( id, callback ){
 
-	//console.log('trying to get user by id: ' + id);
+	console.log('trying to get user by id: ' + id + ' ... escape: ' + esc(id));
 
-	connection.query("SELECT * FROM  `users` WHERE  `id` = " + escId(id) + " LIMIT 0 , 1;",
+	connection.query("SELECT * FROM  `users` WHERE  `id` = " + esc(id) + " LIMIT 0 , 1;",
 		function( err, rows ) {
 
 			if( err ){
@@ -123,7 +123,7 @@ function getUserByName( username, callback ){
 function composeUserObj( err, rows, callback )
 {
 
-	//console.log('comopising user: ' + rows[0].sid);
+	console.log('comopising user: ' + rows[0].id);
 
 	var user = {};
 
@@ -215,7 +215,7 @@ function changeUserNotify( userid, notify, callback ){
 		"`.`users` SET  `notify` =  '"+
 		notifyUint +
 		"' WHERE  `users`.`id` ="+
-		escId(userid)+
+		esc(userid)+
 		";", 
 
 		function( err ){
@@ -250,7 +250,7 @@ function createVenue( venue, callback ){
 				",  "+
 				esc(venue.url)+
 				",  "+
-				escId(venue.userid)+
+				esc(venue.userid)+
 				");",
 
 				function( err ){
@@ -316,19 +316,33 @@ function getVenueList( callback ){
 				callback(err, null);
 			}else{
 
+
+				var i = 0;
+				var iMax = rows.length;
+
+
 				// compose visits
-				var i;
-				for( i = 0; i < rows.length; i++ ){
+
+				var sq1 = function(){
 
 					var venueId = rows[i].vid;
 
+					console.log('composing visits. venueId: ' + venueId + ' , uid:' + rows[i].uid );
+
 					// get user data
 					getUserById( rows[i].uid, function( err, user ){
+
+						if( err ){
+							console.log( err );
+						}
 
 						//visits[i] = {
 						//	vid: vid,
 						//	user: user
 						//};
+
+						console.log('reaffirming venueId: ' + venueId );
+						console.log('reaffirming user.id ' + user.id);
 
 						// and push the visit where it belongs
 						if( !usersSorted['v'+venueId] )
@@ -344,55 +358,80 @@ function getVenueList( callback ){
 						});
 
 
+						// node for loop
+						i++;
+						if( i < iMax ) {
+							sq1();
+						}else{
+							sq2();
+						}
+
 					});
+
+
+					
+
+				}
+				
+
+
+
+
+				// compose venues
+
+				var sq2 = function(){
+
+
+					connection.query("SELECT * FROM  `venues`;", function( err, rows ){
+
+						var i,
+							tmpVenue;
+
+						for( i = 0; i < rows.length; i++ )
+						{
+
+							// users?
+							var tmpUsers = (usersSorted['v'+rows[i].id]) ? usersSorted['v'+rows[i].id] : [];
+
+							// check if void venue with conversion
+							if( rows[i].name == "void" ){
+
+								// compose void venue
+								tmpVenue = {
+									users: tmpUsers
+								}
+
+								answer.voidvenue = tmpVenue;
+
+							}else{
+
+								// compose normal venue
+								tmpVenue = {
+									id: rows[i].id,
+									name: rows[i].name,
+									url: rows[i].url,
+									users: tmpUsers
+								}
+
+								answer.venues.push( tmpVenue );
+
+							};
+
+						}
+
+						// callback!
+						callback( err, answer );
+
+					});				
+
+
 
 				}
 
 
-				// hopefully this will work sequentially due to the nature of mysql XD
 
-				// next get all venues.
-				connection.query("SELECT * FROM  `venues`;",
-				function( err, rows ){
 
-					var i,
-						tmpVenue;
-					for( i = 0; i < rows.length; i++ )
-					{
-
-						// users?
-						var tmpUsers = (usersSorted['v'+rows[i].id]) ? usersSorted['v'+rows[i].id] : [];
-
-						// check if void venue with conversion
-						if( rows[i].name == "void" ){
-
-							// compose void venue
-							tmpVenue = {
-								users: tmpUsers
-							}
-
-							answer.voidvenue = tmpVenue;
-
-						}else{
-
-							// compose normal venue
-							tmpVenue = {
-								id: rows[i].id,
-								name: rows[i].name,
-								url: rows[i].url,
-								users: tmpUsers
-							}
-
-							answer.venues.push( tmpVenue );
-
-						};
-
-					}
-
-					// callback!
-					callback( err, answer );
-
-				});
+				sq1();
 
 			}
 		}
@@ -416,9 +455,9 @@ function addVisit( userid, venueid, callback ){
 				"`.`visits` (`id`, `date`, `uid`, `vid`) VALUES (NULL, '"+
 				datestr+
 				"', '"+
-				escId(userid)+
+				esc(userid)+
 				"', '"+
-				escId(venueid)+
+				esc(venueid)+
 				"');",
 
 				function( err, rows ){
@@ -434,9 +473,9 @@ function addVisit( userid, venueid, callback ){
 			connection.query("UPDATE  `"+
 				config.mysql.database+
 				"`.`visits` SET  `vid` =  '"+
-				escId(venueId)+
+				esc(venueId)+
 				"' WHERE  `uid` = '" + 
-				escId(userid) + 
+				esc(userid) + 
 				"' AND `date` = '" + 
 				datestr + 
 				"' LIMIT 0 , 1;",
@@ -459,7 +498,7 @@ function addVisit( userid, venueid, callback ){
 function checkVisitExists( userid, datestr, callback ){
 
 	connection.query("SELECT count(*) AS `numvisits` FROM  `visits` WHERE  `uid` = '" + 
-		escId(userid) + 
+		esc(userid) + 
 		"' AND `date` = '" + 
 		datestr + 
 		"'",
@@ -515,6 +554,8 @@ app.use( passport.session() );
 app.use('/static', express.static(__dirname + '/../static'));
 
 
+// enable callback for local cross computer testing
+// app.enable('jsonp callback');
 
 
 
