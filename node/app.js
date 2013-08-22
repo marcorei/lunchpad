@@ -682,14 +682,14 @@ function requireAuthJSON( req, res, next ){
 
 
 // manifesto
-/*
+
 app.get( '/manifesto', function(req,res){
 
 	var file = '../templates/page.manifesto.html';
 	res.sendfile( path.join( __dirname, file ) );
 
 });
-*/
+
 
 
 
