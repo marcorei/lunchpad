@@ -4,15 +4,15 @@
 	{
 		"users": [
             {
-                "name" : "mr",
+                "name" : "mr@19h13.com",
                 "img" : "/static/userpics/mr.png"
             },
             {
-                "name" : "mk",
+                "name" : "mk@19h13.com",
                 "img" : "/static/userpics/mk.png"
             },
             {
-                "name" : "mrz",
+                "name" : "mrz@19h13.com",
                 "img" : "/static/userpics/mrz.png"
             }
         ]
@@ -24,15 +24,15 @@
 	        "url": "http://www.foursquare.com",
 	        "users": [
 	            {
-	                "name" : "mr",
+	                "name" : "mr@19h13.com",
 	                "img" : "/static/userpics/mr.png"
 	            },
 	            {
-	                "name" : "mk",
+	                "name" : "mk@19h13.com",
 	                "img" : "/static/userpics/mk.png"
 	            },
 	            {
-	                "name" : "mrz",
+	                "name" : "mrz@19h13.com",
 	                "img" : "/static/userpics/mrz.png"
 	            }
 	        ]
@@ -43,11 +43,11 @@
 	        "url": "http://www.scheidegger-schwabing.com",
 	        "users": [
 	            {
-	                "name" : "kb",
+	                "name" : "kb@19h13.com",
 	                "img" : "/static/userpics/kb.png"
 	            },
 	            {
-	                "name" : "kh",
+	                "name" : "kh@19h13.com",
 	                "img" : "/static/userpics/kh.png"
 	            }
 	        ]
@@ -58,15 +58,15 @@
 	        "url": "http://www.alfons.com",
 	        "users": [
 	            {
-	                "name" : "mr",
+	                "name" : "mr@19h13.com",
 	                "img" : "/static/userpics/mr.png"
 	            },
 	            {
-	                "name" : "mk",
+	                "name" : "mk@19h13.com",
 	                "img" : "/static/userpics/mk.png"
 	            },
 	            {
-	                "name" : "mrz",
+	                "name" : "mrz@19h13.com",
 	                "img" : "/static/userpics/mrz.png"
 	            }
 	        ]
@@ -77,15 +77,15 @@
 	        "url": "http://www.foursquare.com",
 	        "users": [
 	            {
-	                "name" : "mr",
+	                "name" : "mr@19h13.com",
 	                "img" : "/static/userpics/mr.png"
 	            },
 	            {
-	                "name" : "mk",
+	                "name" : "mk@19h13.com",
 	                "img" : "/static/userpics/mk.png"
 	            },
 	            {
-	                "name" : "mrz",
+	                "name" : "mrz@19h13.com",
 	                "img" : "/static/userpics/mrz.png"
 	            }
 	        ]

@@ -60,12 +60,15 @@ function esc( str ){
 }
 
 function escId( id ){
-	return mysql.escapeId( id );
+	id = id.toString();
+	return "'" + mysql.escapeId( id ) + "'";
 }
 
 
 // callback() err, user )
 function getUserById( id, callback ){
+
+	//console.log('trying to get user by id: ' + id);
 
 	connection.query("SELECT * FROM  `users` WHERE  `id` = " + escId(id) + " LIMIT 0 , 1;",
 		function( err, rows ) {
@@ -126,14 +129,22 @@ function composeUserObj( err, rows, callback )
 
 	if( !err ){
 
-		//console.log('found user: ' + rows[0].sid);
+		if( rows.length > 0 )
+		{
+			//console.log('found user: ' + rows[0].sid);
 
-		user.id = rows[0].id;
-		user.sid = rows[0].sid;
-		user.username = rows[0].email;
-		user.password = rows[0].password;
-		user.notify = rows[0].notify;
-		user.image = rows[0].image;
+			user.id = rows[0].id;
+			user.sid = rows[0].sid;
+			user.username = rows[0].email;
+			user.password = rows[0].password;
+			user.notify = rows[0].notify;
+			user.image = rows[0].image;
+		}else{
+			err = "user not found."
+			callback( err, null );
+		}
+
+		
 
 	}else{
 		console.log( err );
@@ -320,13 +331,13 @@ function getVenueList( callback ){
 						//};
 
 						// and push the visit where it belongs
-						if( !usersSorted['v'+vid] )
+						if( !usersSorted['v'+venueId] )
 						{
-							usersSorted['v'+vid] = [];
+							usersSorted['v'+venueId] = [];
 						}
 
 						// push visit obj.
-						usersSorted['v'+vid].push({
+						usersSorted['v'+venueId].push({
 							name: user.username,
 							img: user.image
 
@@ -360,7 +371,7 @@ function getVenueList( callback ){
 								users: tmpUsers
 							}
 
-							answer.voidvenue = tempVenue;
+							answer.voidvenue = tmpVenue;
 
 						}else{
 
@@ -725,6 +736,28 @@ app.get( '/get/venues', function(req, res){
 });
 
 
+// get user
+// no data required, returns always the logged in user.
+
+app.get( '/get/user', function(req, res){
+
+	requireAuthJSON( req, res, function(){
+
+		var a = {};
+		a.name = req.user.username;
+		a.img = req.user.image;
+
+		if( req.user.notify == 1 ){
+			a.notify = 1;
+		}
+
+		res.json(a);
+
+	});
+
+});
+
+
 // post venue
 // data: venuename, venueurl
 
@@ -837,7 +870,8 @@ app.listen(1924);
  * Admin stuff
  */
 
-//createUser( "test@19h13.com", "test", "test.png" );
+//createUser( "test2@19h13.com", "test2", "test2.png" );
+//createUser( "test3@19h13.com", "test3", "test3.png" );
 
 
 
