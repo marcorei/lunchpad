@@ -263,9 +263,8 @@
 	}
 }
 
-.lunch-venue {
-	
 
+.lunch-venue, .void-venue {
 
 	// General Venue Styles
 
@@ -297,132 +296,160 @@
 		bottom: 50px;
 		left: 60px;
 	}
-	
-	// Venue Title
+}
 
-	.lunch-venue-title {
-		
-		font: {
-			size: 2.4em;
-		}
 
-		margin: {
-			top: 0;
-			bottom: 5px;
-		}
 
-		display: block;
+// Special Voidvenue
+.void-venue {
+	background: {
+		color: #fff;
 	}
-
-
-
-	// Venue Header
-
-	.lunch-venue-header {
-		margin-bottom: 30px;
-	}
-	
-	
-
-	// Lunch Venue Guests
-
-	.lunch-venue-guests-container {
-		max-width: 600px;
-		margin-top: 50px;
-	}
-
-	// Venue Group
-
-	.lunch-venue-guests {
-		float: left;
-	}
-
-	// Venue Interaction
-
-	.lunch-venue-interaction {
-
-		clear: left;
-		border: {
-			width: 0px;
-			top-width: 0px;
-			style: solid;
-			color: #efefef;
-		}
-
-		padding:  {
-			top: 20px;
-		}
+	border: {
+		bottom-width: 0px;
 	}
 
 	.lunch-fn-attend {
-		
+		background: {
+			color: $agencycolor;
+		}
 	}
 
-	.lunch-fn-menu {
-		
-		text-decoration: none;
-
+	.lunch-venue-header {
+		color: $agencycolor;
 		font: {
 			family: Georgia;
 			style: italic;
 		}
-
-		border: {
-			width: 0px;
-			bottom-width: 1px;
-			style: dashed;
-			color: #ddd;
-		}
-
-		color: #666;
-		right: 0;
-		top: 10px;
-		bottom: 50%;
-
-		&:hover {
-			color: #00BEEE;
-		}
-	}
-
-	.lunch-fn-attend {
-		display: block;
-
-		float: left;
-
-		margin-right: 10px;
-
-		text-align: right;
-		
-		padding: 10px 20px;
-		//width: 150px;
-
-		text-decoration: none;
-		
-		font: {
-			family: Georgia;
-			style: regular;
-		}
-
-		color: white;
-		background: {
-			color: #00BEEE;
-		}
-
-		float: right;
-		width: 50px;
-		height: 20px;
-		margin: {
-			left: 20px;
-			right: 0px;
-			top: 12px;
-		}
-		text-align: center;
-		padding: 22px 7px;
-		border-radius: 34px;
-		text-decoration: none;
-		font-family: Georgia;
 	}
 }
+
+// Venue Title
+
+.lunch-venue-title {
+	
+	font: {
+		size: 2.4em;
+	}
+
+	margin: {
+		top: 0;
+		bottom: 5px;
+	}
+
+	display: block;
+}
+
+
+
+// Venue Header
+
+.lunch-venue-header {
+	margin-bottom: 30px;
+}
+
+
+// Venue Interaction
+
+.lunch-venue-interaction {
+
+	clear: left;
+	border: {
+		width: 0px;
+		top-width: 0px;
+		style: solid;
+		color: #efefef;
+	}
+
+	padding:  {
+		top: 20px;
+	}
+}
+
+
+.lunch-fn-menu {
+	
+	text-decoration: none;
+
+	font: {
+		family: Georgia;
+		style: italic;
+	}
+
+	border: {
+		width: 0px;
+		bottom-width: 1px;
+		style: dashed;
+		color: #ddd;
+	}
+
+	color: #666;
+	right: 0;
+	top: 10px;
+	bottom: 50%;
+
+	&:hover {
+		color: #00BEEE;
+	}
+}
+
+.lunch-fn-attend {
+
+	display: block;
+
+	float: left;
+
+	margin-right: 10px;
+
+	text-align: right;
+	
+	padding: 10px 20px;
+	//width: 150px;
+
+	text-decoration: none;
+	
+	font: {
+		family: Georgia;
+		style: regular;
+	}
+
+	color: white;
+	background: {
+		color: #00B9E7;
+	}
+
+	float: right;
+	width: 50px;
+	height: 20px;
+	margin: {
+		left: 20px;
+		right: 0px;
+		top: 12px;
+	}
+
+	text-align: center;
+	padding: 22px 7px;
+	border-radius: 34px;
+	text-decoration: none;
+	font-family: Georgia;
+}
+
+
+
+// Lunch Venue Guests
+
+.lunch-venue-guests-container,
+.lunch-void-guests-container {
+	max-width: 600px;
+	margin-top: 50px;
+}
+
+// Venue Group
+
+.lunch-venue-guests {
+	float: left;
+}
+
 
 
 .lunch-fn-addvenue {
@@ -554,6 +581,13 @@
 			
 			}
 		}
+	}
+}
+
+
+.lunch-fn-addvenue {
+	background: {
+		color: #98D300;
 	}
 }
 
