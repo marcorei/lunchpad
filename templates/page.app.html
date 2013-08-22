@@ -99,25 +99,61 @@
 			Single Lunch Venue 
 			Should become a template
 			-->
+			<div class="lunch-venue">
+				
+				<h2 class="lunch-venue-title"></h2>
 
-				<div class="lunch-venue">
-					
-					<h2 class="lunch-venue-title"></h2>
+				<div class="lunch-venue-header">
+					<a href="" class="lunch-fn-menu">View Menu</a>
+				</div>
 
-					<div class="lunch-venue-header">
-						<a href="" class="lunch-fn-menu">View Menu</a>
+				<div class="lunch-venue-guests-container">
+					<div class="lunch-venue-guests">
+						<img src="" alt="" class="lunch-user-image" alt="MM">
 					</div>
 
-					<div class="lunch-venue-guests-container">
-						<div class="lunch-venue-guests">
-							<img src="" alt="" class="lunch-user-image" alt="MM">
-						</div>
+					<a href="" class="lunch-fn-attend">Go!</a>
+				</div>
 
-						<a href="" class="lunch-fn-attend lunch-venue-guest">Go!</a>
+			</div><!-- END Venue -->
+
+			<!-- 
+			Single Lunch Venue 
+			Should become a template
+			-->
+			<div class="void-venue">
+				
+				<h2 class="lunch-venue-title">Spalter</h2>
+
+				<div class="lunch-venue-header">
+					Wir sind raus!
+				</div>
+
+				<div class="lunch-void-guests-container">
+					<div class="lunch-venue-guests">
+						<img src="" alt="" class="lunch-user-image" alt="MM">
 					</div>
-				</div><!-- END Venue -->
+
+					<a href="" class="lunch-fn-attend">Out!</a>
+				</div>
+
+			</div><!-- END Venue -->
 
 
+			<!-- 
+			============
+			Create Venue 
+			============
+			-->
+			<form action="" class="lunch-venue-create">
+				<input type="text" class="venue-title-input" placeholder="New Venue Name">
+				<input type="text" class="venue-menu-input" placeholder="Link to Menu">
+
+				<div class="lunch-venue-guests-container">
+					<a href="#" class="lunch-fn-addvenue">Add!</a>
+				</div>
+
+			</form>
 
 		</div><!-- End List of Restaurants -->
 		</div>
@@ -134,107 +170,12 @@
 		}
 	}
 
-	var venueData = {
-		"error" : "",
-		"venues" : 	[
-			{
-				"name": "void",
-				"url": "http://www.foursquare.com",
-				"users": [
-					{
-						"name" : "mr",
-						"img" : "../static/img/mr.png"
-					},
-					{
-						"name" : "mk",
-						"img" : "../static/img/mk.png"
-					},
-					{
-						"name" : "mrz",
-						"img" : "../static/img/mrz.png"
-					}
-				]
-			},
-			{
-				"name": "Scheidegger",
-				"url": "http://www.scheidegger-schwabing.com",
-				"users": [
-					{
-						"name" : "kb",
-						"img" : "../static/img/kb.png"
-					},
-					{
-						"name" : "kh",
-						"img" : "../static/img/kh.png"
-					}
-				]
-			},
-			{
-				"name": "Alfons Cafe",
-				"url": "http://www.alfons.com",
-				"users": [
-					{
-						"name" : "mr",
-						"img" : "../static/img/mr.png"
-					},
-					{
-						"name" : "vb",
-						"img" : "../static/img/vb.png"
-					},
-					{
-						"name" : "mk",
-						"img" : "../static/img/mk.png"
-					},
-					{
-						"name" : "mrz",
-						"img" : "../static/img/mrz.png"
-					}
-				]
-			},
-			{
-				"name": "TestVenue2",
-				"url": "http://www.foursquare.com",
-				"users": [
-					{
-						"name" : "mr",
-						"img" : "../static/img/mr.png"
-					},
-					{
-						"name" : "mk",
-						"img" : "../static/img/mk.png"
-					},
-					{
-						"name" : "mrz",
-						"img" : "../static/img/mrz.png"
-					},
-					{
-						"name" : "jk",
-						"img" : "../static/img/jk.png"
-					},
-					{
-						"name" : "jw",
-						"img" : "../static/img/jw.png"
-					}
-				]
-			},
-			{
-				"name": "Assiboazn Uno Monacco",
-				"url": "http://www.foursquare.com",
-				"users": [
-					{
-						"name" : "jf",
-						"img" : "../static/img/jf.png"
-					}
-				]
-			}
-		]
-	}
+
 
 
 
 	/* Directive to parse the venues */
     var venueDirective = {
-
     	'.lunch-venue' : {
     		'venue<-venues': {
 				'.lunch-venue-title':'venue.name',
@@ -249,6 +190,18 @@
 			sort:function(a, b){
 		      return a.users < b.users ? 1 : -1;
 		    }
+		}		
+    }
+
+
+
+    /* Directive for Voidvenue */
+    var voidDirective = {
+		'.lunch-venue-guests' : {
+			'user<-voidvenue.users': {
+				'.lunch-user-image@src':'user.img',
+				'.lunch-user-image@alt':'user.name',
+			}
 		}
     }
 
@@ -256,40 +209,49 @@
 
     /* Directive to parse the User */
     var userDirective = {
- 
 		'.lunch-user-name':'user.name',
 		'.lunch-user-image':'user.image',
 		'.lunch-inp-notify@checked': 'user.notify'
-
     }
 
 
 
 
 
-
-    /* Run Templateing of Venues*/
-  	var refreshVenueData = function() {
-  		$('.lunch-user').render(userData, userDirective);
+  	/*	$('.lunch-user').render(userData, userDirective);
 		$('.lunch-apppage-body').render(venueData, venueDirective);
+		$('.void-venue').render(venueData, voidDirective);
+	*/
+
+
+	var venueData;
+
+	var serverUrl = "http://localhost:1924";
+
+
+	var refreshVenueData = function( data ) {
+
+		if (data.error === ""){
+			$('.lunch-apppage-body').render(data, venueDirective);
+			$('.void-venue').render(data, voidDirective);
+		} else {
+			alert('error!');
+		}
+	}
+
+
+    var requestVenueData = function() {
+	    $.ajax({
+	  		url: serverUrl + "/get/venues",
+			success: function(data) {
+
+				refreshVenueData( data );
+			}
+		});
 	}
 
 
 
-
-
-
-	/* Ajax Request */
-	$.ajax({
-		url: "http://fiddle.jshell.net/favicon.png",
-		beforeSend: function ( xhr ) {
-		xhr.overrideMimeType("text/plain; charset=x-user-defined");
-		}
-		}).done(function ( data ) {
-	if( console && console.log ) {
-		console.log("Sample of data:", data.slice(0, 100));
-		}
-	});
 
 
 	/* Test the Timer */
@@ -300,7 +262,7 @@
 
 
 	/* On Window Load */
-	$(refreshVenueData);
+	// $(refreshVenueData);
 
 	</script>
 	</body>
