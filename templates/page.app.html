@@ -146,8 +146,8 @@
 			============
 			-->
 			<form action="" class="lunch-venue-create">
-				<input type="text" class="venue-title-input" placeholder="New Venue Name">
-				<input type="text" class="venue-menu-input" placeholder="Link to Menu">
+				<input type="text" name="venuename" class="venue-title-input" placeholder="New Venue Name">
+				<input type="text" name="venueurl" class="venue-menu-input" placeholder="Link to Menu">
 
 				<div class="lunch-venue-guests-container">
 					<a href="#" class="lunch-fn-addvenue">Add!</a>
@@ -209,9 +209,9 @@
 
     /* Directive to parse the User */
     var userDirective = {
-		'.lunch-user-name':'user.name',
-		'.lunch-user-image':'user.image',
-		'.lunch-inp-notify@checked': 'user.notify'
+		'.lunch-user-name':'name',
+		'.lunch-user-image':'image',
+		'.lunch-inp-notify@checked': 'notify'
     }
 
 
@@ -229,27 +229,18 @@
 	var serverUrl = "http://localhost:1924";
 
 
+
+	// Venue Data
+
 	var refreshVenueData = function( data ) {
 
 		if (data.error === ""){
 			$('.lunch-apppage-body').render(data, venueDirective);
 			$('.void-venue').render(data, voidDirective);
 		} else {
-			alert('error!');
+			alert('error!' + data.error);
 		}
 	}
-
-
-
-	var refreshUserData = function( data ) {
-		if (data.error === ""){
-			$('.lunch-user').render(data, userDirective);
-		} else {
-			console.log(data.error)
-		}	
-	}
-
-
 
     var requestVenueData = function() {
 	    $.ajax({
@@ -262,6 +253,27 @@
 	}
 
 
+	// Userdata
+
+	var refreshUserData = function( data ) {
+		if (data.error === ""){
+			$('.lunch-user').render(data, userDirective);
+		} else {
+			alert('error!' + data.error)
+		}
+
+
+		// Bind Event Listener
+
+		$('input[type=checkbox]').change(function() {
+			if (this.checked) {
+				changeNotify(true);
+			} else {
+				changeNotify(false);
+			}
+		});
+	}
+
 	var requestUserData = function() {
 	    $.ajax({
 	  		url: serverUrl + "/get/user",
@@ -273,6 +285,49 @@
 	}
 
 
+
+	// Notify 
+
+	var changeNotify = function( notifyState ){
+
+		$.ajax({
+		  type: "POST",
+		  url: serverUrl + '/post/notify',
+		  data: { 'notify': notifyState},
+		  success: function(data) {
+		  		console.log(data);
+			}
+		});
+	}
+
+
+	// Create New Venue
+
+	var addVenue = function() {
+		 $.ajax({
+        	type: "POST",
+        	url: serverUrl + '/post/venue',
+			data: $('form.lunch-venue-create').serialize(),
+			success: function(data){
+				console.log(data);
+			}
+		});
+	}
+
+
+	// Listens to change of checkbox
+/*
+	$('input[type=checkbox]').on( 'change', ( function(){
+        if (this.checked) {
+            changeNotify(true);
+            console.log('meow');
+        } else {
+        	changeNotify(false);
+        	console.log('fart');
+        }
+    });
+
+*/
 
 
 	/* Test the Timer */
