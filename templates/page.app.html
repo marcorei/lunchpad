@@ -240,6 +240,17 @@
 	}
 
 
+
+	var refreshUserData = function( data ) {
+		if (data.error === ""){
+			$('.lunch-user').render(data, userDirective);
+		} else {
+			console.log(data.error)
+		}	
+	}
+
+
+
     var requestVenueData = function() {
 	    $.ajax({
 	  		url: serverUrl + "/get/venues",
@@ -250,6 +261,16 @@
 		});
 	}
 
+
+	var requestUserData = function() {
+	    $.ajax({
+	  		url: serverUrl + "/get/user",
+			success: function(data) {
+
+				refreshUserData( data );
+			}
+		});
+	}
 
 
 
