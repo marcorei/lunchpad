@@ -941,7 +941,7 @@ app.post( '/post/visit', function(req, res){
 			errors = [];
 		v.error = function(msg){ errors.push(msg); };
 
-		v.check( req.post.venueid, 'Venue id is not an integer.').isInt();
+		v.check( req.body.venueid, 'Venue id is not an integer.').isInt();
 
 		if( errors.length > 0 ){
 			res.json({
@@ -952,7 +952,7 @@ app.post( '/post/visit', function(req, res){
 
 		// Response
 
-		addVisit( req.user.id, req.post.venueid, function(err,venueid){
+		addVisit( req.user.id, req.body.venueid, function(err,venueid){
 
 			if( err ){
 				res.json({ error: "Could not register visit."});

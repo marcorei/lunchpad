@@ -162,18 +162,21 @@
 			left: 15px;
 			right: 15px;
 		}
-	}
-	a{
-		text-decoration: none;
+
 		color: #fff;
 
 		font: {
-		family: Georgia;
-		style: regular;
-		weight: normal;
-		size: 16px;
+			family: Georgia;
+			style: regular;
+			weight: normal;
+			size: 16px;
+		}
+	}	
+	a{
+		text-decoration: none;
+		color: #fff;
 	}
-	}
+	
 
 
 	position: absolute;
