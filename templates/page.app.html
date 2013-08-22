@@ -13,6 +13,10 @@
 		<link rel="stylesheet" href="../static/css/screen.css">
 
 		<script src="../static/js/vendor/modernizr-2.6.2.min.js"></script>
+		<script src="../static/js/vendor/jquery.js"></script>
+		<script src="../static/js/vendor/pure.js"></script>
+		<script src="../static/js/vendor/eventDispatcher.js"></script>
+		<script src="../static/js/vendor/timer.js"></script>
 
 		<!-- Type kit -->
 		<script type="text/javascript" src="//use.typekit.net/tjo7bse.js"></script>
@@ -44,27 +48,28 @@
 				<!-- User -->
 
 				<div class="lunch-user">
+					
+
+					<!-- User Name -->
 					<img src="../static/img/jf.png" alt="" class="lunch-user-image">
-					<div class="lunch-user-name">JF@19h13.com</div>
-				</div>
-				
+					<div class="lunch-user-name"></div>
 
-				<a href="/logout" class="lunch-fn-logout">Logout</a>
-				<!-- Notification Settings -->
-				
-				
-				<div class="lunch-fn-notify">
-				<input type="checkbox" id="notifications" class="lunch-inp-notify">
-				<label for="notifications">I like Emails!</label>
-				</div>
-	
-				
-				<!-- Time -->
+					<!-- Time -->
+					<div class="lunch-timer">
+						<span class="lunch-icon">O'clock</span>
+						<span class="lunch-label">11:15</span>
+					</div>
 
-				<div class="lunch-timer">
-					<span class="lunch-icon">O'clock</span>
-					<span class="lunch-label">11:15</span>
+					<!-- Notification Settings -->
+					<div class="lunch-fn-notify">
+						<input type="checkbox" id="notifications" class="lunch-inp-notify">
+						<label for="notifications">I like Emails!</label>
+					</div>
+
+					<a href="/logout" class="lunch-fn-logout">Logout</a>
+
 				</div>
+			
 
 			</div>
 
@@ -78,50 +83,14 @@
 		<div class="lunch-apppage-body">
 			
 				
-			<!-- Flash Gordon Savior of the Universe -->
+			<!-- Flash Gordon Savior of the Universe
 			<div class="lunch-flash">
 
 				<div class="lunch-flash-container">
 					<a href="" class="lunch-flash-close">X</a>
 					<p>My Database doesn't include the routines of human peer-bounding</p>
 				</div>
-			</div>
-			
-			<div class="lunch-venues">
-			<!-- 
-			Single Lunch Venue 
-			Should become a template
-			-->
-			<div class="lunch-venue">
-				
-				<div class="lunch-venue-header">
-					<h2 class="lunch-venue-title effra">Da Bello e Bello</h2>
-					<a href="" class="lunch-fn-menu">View Menu</a>
-				</div>
-
-				<div class="lunch-venue-guests">
-						
-					<!-- Venue Guest -->
-
-					<div class="lunch-venue-guest">
-						<img src="../static/img/ni.png" alt="" class="lunch-user-image" alt="MM">
-					</div>
-					<div class="lunch-venue-guest">
-						<img src="../static/img/kba.png" alt="" class="lunch-user-image" alt="MM">
-					</div>
-					<div class="lunch-venue-guest">
-						<img src="../static/img/kb.png" alt="" class="lunch-user-image" alt="MM">
-					</div>
-					<div class="lunch-venue-guest">
-						<img src="../static/img/dh.png" alt="" class="lunch-user-image" alt="MM">
-					</div>
-					<div class="lunch-venue-guest">
-						<img src="../static/img/js.png" alt="" class="lunch-user-image" alt="MM">
-					</div>
-
-					<a href="" class="lunch-fn-attend lunch-venue-guest">Go!</a>
-				</div>				
-			</div><!-- END Venue -->
+			</div> -->
 
 
 
@@ -130,54 +99,209 @@
 			Single Lunch Venue 
 			Should become a template
 			-->
-			<div class="lunch-venue">
-				
-				<div class="lunch-venue-header">
-					<h2 class="lunch-venue-title effra">Scheidegger</h2>
-					<a href="" class="lunch-fn-menu">View Menu</a>
-				</div>
 
-				<div class="lunch-venue-guests">
-						
-					<!-- Venue Guest -->
-					<div class="lunch-venue-guest">
-						<img src="../static/img/jw.png" alt="" class="lunch-user-image" alt="MM">
-					</div>
-					<div class="lunch-venue-guest">
-						<img src="../static/img/mk.png" alt="" class="lunch-user-image" alt="MM">
-					</div>
-					<div class="lunch-venue-guest">
-						<img src="../static/img/mrz.png" alt="" class="lunch-user-image" alt="MM">
-					</div>
-					<div class="lunch-venue-guest">
-						<img src="../static/img/jf.png" alt="" class="lunch-user-image" alt="MM">
-					</div>
-					<div class="lunch-venue-guest">
-						<img src="../static/img/mr.png" alt="" class="lunch-user-image" alt="MM">
-					</div>
-					<div class="lunch-venue-guest">
-						<img src="../static/img/vb.png" alt="" class="lunch-user-image" alt="MM">
-					</div>
-					<div class="lunch-venue-guest">
-						<img src="../static/img/mm.png" alt="" class="lunch-user-image" alt="MM">
+				<div class="lunch-venue">
+					
+					<h2 class="lunch-venue-title"></h2>
+
+					<div class="lunch-venue-header">
+						<a href="" class="lunch-fn-menu">View Menu</a>
 					</div>
 
-					<a href="" class="lunch-fn-attend lunch-venue-guest">Go!</a>
-				</div>				
-			</div><!-- END Venue -->
-				
+					<div class="lunch-venue-guests-container">
+						<div class="lunch-venue-guests">
+							<img src="" alt="" class="lunch-user-image" alt="MM">
+						</div>
 
-			<!-- Create Venue -->
-			<form action="" class="lunch-venue-create lunch-venue">
-				<input type="text" class="venue-title-input" placeholder="New Venue Name">
-				<input type="text" class="venue-menu-input" placeholder="Link to Menu">
+						<a href="" class="lunch-fn-attend lunch-venue-guest">Go!</a>
+					</div>
+				</div><!-- END Venue -->
 
-				<div class="lunch-venue-guests">
-					<a href="#" class="lunch-fn-addvenue">Add</a>
-				</div>
 
-			</form>
+
 		</div><!-- End List of Restaurants -->
 		</div>
+
+
+	<script type="text/javascript">
+
+	var userData = {
+		"error" : "",
+		"user": {
+			"name":"jf@19h14.com",
+			"img": "../static/img/jf.png",
+			"notify": "1"
+		}
+	}
+
+	var venueData = {
+		"error" : "",
+		"venues" : 	[
+			{
+				"name": "void",
+				"url": "http://www.foursquare.com",
+				"users": [
+					{
+						"name" : "mr",
+						"img" : "../static/img/mr.png"
+					},
+					{
+						"name" : "mk",
+						"img" : "../static/img/mk.png"
+					},
+					{
+						"name" : "mrz",
+						"img" : "../static/img/mrz.png"
+					}
+				]
+			},
+			{
+				"name": "Scheidegger",
+				"url": "http://www.scheidegger-schwabing.com",
+				"users": [
+					{
+						"name" : "kb",
+						"img" : "../static/img/kb.png"
+					},
+					{
+						"name" : "kh",
+						"img" : "../static/img/kh.png"
+					}
+				]
+			},
+			{
+				"name": "Alfons Cafe",
+				"url": "http://www.alfons.com",
+				"users": [
+					{
+						"name" : "mr",
+						"img" : "../static/img/mr.png"
+					},
+					{
+						"name" : "vb",
+						"img" : "../static/img/vb.png"
+					},
+					{
+						"name" : "mk",
+						"img" : "../static/img/mk.png"
+					},
+					{
+						"name" : "mrz",
+						"img" : "../static/img/mrz.png"
+					}
+				]
+			},
+			{
+				"name": "TestVenue2",
+				"url": "http://www.foursquare.com",
+				"users": [
+					{
+						"name" : "mr",
+						"img" : "../static/img/mr.png"
+					},
+					{
+						"name" : "mk",
+						"img" : "../static/img/mk.png"
+					},
+					{
+						"name" : "mrz",
+						"img" : "../static/img/mrz.png"
+					},
+					{
+						"name" : "jk",
+						"img" : "../static/img/jk.png"
+					},
+					{
+						"name" : "jw",
+						"img" : "../static/img/jw.png"
+					}
+				]
+			},
+			{
+				"name": "Assiboazn Uno Monacco",
+				"url": "http://www.foursquare.com",
+				"users": [
+					{
+						"name" : "jf",
+						"img" : "../static/img/jf.png"
+					}
+				]
+			}
+		]
+	}
+
+
+
+	/* Directive to parse the venues */
+    var venueDirective = {
+
+    	'.lunch-venue' : {
+    		'venue<-venues': {
+				'.lunch-venue-title':'venue.name',
+				'.lunch-fn-menu@href':'venue.url',	
+				'.lunch-venue-guests' : {
+					'user<-venue.users': {
+						'.lunch-user-image@src':'user.img',
+						'.lunch-user-image@alt':'user.name',
+					}
+				}
+			},
+			sort:function(a, b){
+		      return a.users < b.users ? 1 : -1;
+		    }
+		}
+    }
+
+
+
+    /* Directive to parse the User */
+    var userDirective = {
+ 
+		'.lunch-user-name':'user.name',
+		'.lunch-user-image':'user.image',
+		'.lunch-inp-notify@checked': 'user.notify'
+
+    }
+
+
+
+
+
+
+    /* Run Templateing of Venues*/
+  	var refreshVenueData = function() {
+  		$('.lunch-user').render(userData, userDirective);
+		$('.lunch-apppage-body').render(venueData, venueDirective);
+	}
+
+
+
+
+
+
+	/* Ajax Request */
+	$.ajax({
+		url: "http://fiddle.jshell.net/favicon.png",
+		beforeSend: function ( xhr ) {
+		xhr.overrideMimeType("text/plain; charset=x-user-defined");
+		}
+		}).done(function ( data ) {
+	if( console && console.log ) {
+		console.log("Sample of data:", data.slice(0, 100));
+		}
+	});
+
+
+	/* Test the Timer */
+	var timer = marcorei.tools.Timer;
+
+	var timy = new timer(1, 2);
+	timy.start;
+
+
+	/* On Window Load */
+	$(refreshVenueData);
+
+	</script>
 	</body>
 </html>
