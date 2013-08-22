@@ -169,7 +169,8 @@
     	'.lunch-venue' : {
     		'venue<-venues': {
 				'.lunch-venue-title':'venue.name',
-				'.lunch-fn-menu@href':'venue.url',	
+				'.lunch-fn-menu@href':'venue.url',
+				'.lunch-fn-attend@href': 'venue.id',
 				'.lunch-venue-guests' : {
 					'user<-venue.users': {
 						'.lunch-user-image@src':'user.img',
@@ -226,11 +227,17 @@
 
 		if (data.error === ""){
 
-			for (var i = data.venues.length - 1; i >= 0; i--) {
-				data.venues.[i].id = "i";
-			};
+
+			for (var i = 0; i < data.venues.length ; i++ ){
+				console.log(data.venues[i].id);
+				data.venues[i].id = 'javascript:visitVenue('+ data.venues[i].id +');';
+				console.log(data.venues[i].id);
+			}
+
+
 			$('.lunch-apppage-body').render(data, venueDirective);
 			$('.void-venue').render(data, voidDirective);
+
 		} else {
 			alert('error!' + data.error);
 		}
@@ -304,6 +311,7 @@
         	url: serverUrl + '/post/venue',
 			data: $('form.lunch-venue-create').serialize(),
 			success: function(data){
+				requestVenueData();
 				console.log(data);
 			}
 		});
