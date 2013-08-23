@@ -128,12 +128,7 @@
 		margin: auto;
 		margin-top: 30px;
 
-		@include transition( background-color 1 );
 
-		&:hover{
-			background-color: #111;
-			@include transition( background-color 0.2 );
-		}
 
 	}
 
@@ -182,6 +177,13 @@
 	a{
 		text-decoration: none;
 		color: #fff;
+
+		@include transition( background-color 1 );
+
+		&:hover{
+			background-color: #000;
+			@include transition( background-color 0.2 );
+		}
 	}
 	
 

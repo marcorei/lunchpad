@@ -36,12 +36,26 @@
  	a{
  		text-decoration: none;
  		color: $agencycolor;
+
+ 		@include transition( background-color 1 );
+
+		&:hover{
+			background-color: #fff;
+			@include transition( background-color 0.2 );
+		}
  	}
 
 
  	.lunch-footer{
  		a{
  			color: #fff;
+
+ 			@include transition( background-color 1 );
+
+			&:hover{
+				background-color: $agencycolor;
+				@include transition( background-color 0.2 );
+			}
  		}
  	}
  	
