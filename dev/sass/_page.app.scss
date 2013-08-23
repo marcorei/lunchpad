@@ -10,7 +10,13 @@
 }
 
 
-
+@mixin hoverrotate( ){
+	-moz-transform: rotate(340deg);  /* FF3.5+ */
+       -o-transform: rotate(340deg);  /* Opera 10.5 */
+  -webkit-transform: rotate(340deg);  /* Saf3.1+, Chrome */
+      -ms-transform: rotate(340deg);  /* IE9 */
+          transform: rotate(340deg);  
+}
 
 
 
@@ -255,7 +261,7 @@
 	min-height: 100%;
 	
 	padding: {
-		top: 0px;
+		top: 65px;
 		bottom: 0px;
 	}
 
@@ -342,6 +348,7 @@
 
 		&:hover {
 			background-color: #CE0038;
+			@include hoverrotate();
 		}
 	}
 
@@ -423,6 +430,23 @@
 	}
 }
 
+
+
+
+// Lunch Venue Guests
+
+.lunch-venue-guests-container,
+.lunch-void-guests-container {
+	max-width: 600px;
+	margin-top: 50px;
+}
+
+// Venue Group
+
+.lunch-venue-guests {
+	float: left;
+}
+
 .lunch-fn-attend {
 
 	display: block;
@@ -472,23 +496,11 @@
 
 
 
-// Lunch Venue Guests
-
-.lunch-venue-guests-container,
-.lunch-void-guests-container {
-	max-width: 600px;
-	margin-top: 50px;
-}
-
-// Venue Group
-
-.lunch-venue-guests {
-	float: left;
-}
-
-
 
 .lunch-fn-addvenue {
+	
+
+	@include transition(all 1);
 
 	display: block;
 
@@ -526,6 +538,30 @@
 	border-radius: 34px;
 	text-decoration: none;
 	font-family: Georgia;
+
+	&:hover {
+		@include hoverrotate();
+	}
+}
+
+
+
+.lunch-fn-addvenue {
+
+	@include transition(all 1);
+	
+	background: {
+		color: #98D300;
+	}
+
+	&:hover {
+		background-color: #79A800;
+	}
+
+
+	&:hover {
+		@include hoverrotate();
+	}
 }
 
 
@@ -627,15 +663,6 @@
 	display: none;
 }
 
-.lunch-fn-addvenue {
-	background: {
-		color: #98D300;
-	}
-
-	&:hover {
-		background-color: #79A800;
-	}
-}
 
 /* Desktop Second */
 
