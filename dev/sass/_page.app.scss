@@ -58,11 +58,12 @@
 		label {
 			cursor: pointer;
 		}
+		@include transition( color 1000ms );
 
 		&:hover{
 
 			color: #000;
-			@include transition( all 200ms );
+			@include transition( color 200ms );
 			}
 		
 		}
