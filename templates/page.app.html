@@ -83,14 +83,7 @@
 		<div class="lunch-apppage-body">
 			
 				
-			<!-- Flash Gordon Savior of the Universe
-			<div class="lunch-flash">
 
-				<div class="lunch-flash-container">
-					<a href="" class="lunch-flash-close">X</a>
-					<p>My Database doesn't include the routines of human peer-bounding</p>
-				</div>
-			</div> -->
 
 
 
@@ -113,7 +106,6 @@
 			</form>
 
 		</div><!-- End List of Restaurants -->
-		</div>
 
 
 	<script type="text/javascript">
@@ -163,6 +155,11 @@
     }
 
 
+    /* Error Directive */
+    var errorDirective = {
+    	'p': 'error'
+    }
+
 
 
 
@@ -177,21 +174,23 @@
 	var serverUrl = "http://localhost:1924";
 
 	
+	var removeShit = function() {
+	}
 
 	// Venue Data
 
 	var refreshVenueData = function( data ) {
 
-		$('body').remove('.lunch-venue');
-		$('body').remove('.void-venue');
-		
-		$('.lunch-venue-template').clone().prependTo('.lunch-apppage-body')
-		.removeClass('lunch-venue-template').addClass('lunch-venue');
-		
-		$('.void-venue-template').clone().appendTo('.lunch-apppage-body')
-		.removeClass('void-venue-template').addClass('void-venue');
-
 		if (data.error === ""){
+
+
+			$('.lunch-venue').remove();
+			$('.lunch-venue-template').clone().prependTo('.lunch-apppage-body')
+			.removeClass('lunch-venue-template').addClass('lunch-venue');
+
+			$('.void-venue').remove();
+			$('.void-venue-template').clone().appendTo('.lunch-apppage-body')
+			.removeClass('void-venue-template').addClass('void-venue');
 
 			for (var i = 0; i < data.venues.length ; i++ ){
 				console.log(data.venues[i].id);
@@ -203,7 +202,10 @@
 			$('.lunch-apppage-body').render(data, venueDirective);
 			$('.void-venue').render(data, voidDirective);
 
+			$('.lunch-venue-create').appendTo('.lunch-apppage-body');
+
 		} else {
+			buildError(data);
 			alert('error!' + data.error);
 		}
 	}
@@ -225,7 +227,7 @@
 		if (data.error === ""){
 			$('.lunch-user').render(data, userDirective);
 		} else {
-			alert('error!' + data.error)
+			buildError(data);
 		}
 
 
@@ -294,20 +296,74 @@
         	url: serverUrl + '/post/visit',
         	data: { 'venueid' : id },
         	success: function(data){
+        		requestVenueData();
         		console.log(data);
         	}
         });
 	}
 
 
+
+	// BuildError
+
+
+
+	var buildError = function( data ) {
+		$('.lunch-flash').remove();
+		$('.lunch-flash-template').clone().prependTo('.lunch-apppage-body')
+			.removeClass('lunch-flash-template').addClass('lunch-flash');
+			console.log(data.error);
+		$('.lunch-flash').render(data, errorDirective);
+	}
+
+	// Request Error
+
+	var requestError = function() {
+
+		$.ajax({
+        	type: "POST",
+        	url: serverUrl + '/post/visit',
+        	data: { 'venueid' : 'errorplz' },
+
+        	success: function(data){
+        		
+        		console.log( data );
+        		buildError( data );
+        	}
+        });
+	}
+
+
 	/* Test the Timer */
-	var timer = marcorei.tools.Timer;
 
-	var timy = new timer(1, 2);
-	timy.start;
+	var Timer = marcorei.tools.Timer;
+	var timy = new Timer(1000*60, 0);
 
+	timy.addEventListener('onTimer', this, 'onTimerHandler');
+
+	this.onTimerHandler = function(){
+		console.log("Refreshing data...");
+		requestVenueData();
+	}
+	timy.start();
+
+
+	$(
+		requestUserData(),
+		requestVenueData()
+	);
 
 	</script>
+
+	<!-- Flash Gordon Savior of the Universe -->
+	<div class="lunch-flash-template">
+
+		<div class="lunch-flash-container">
+			<a href="" class="lunch-flash-close">X</a>
+			<p></p>
+		</div>
+	</div>
+
 
 	<!-- 
 	Single Lunch Venue 
@@ -328,8 +384,9 @@
 
 			<a href="" class="lunch-fn-attend">Go!</a>
 		</div>
-
 	</div>
+
+
 	<!-- END Venue -->
 	<!-- 
 	Single Lunch Venue 
@@ -348,7 +405,7 @@
 				<img src="" alt="" class="lunch-user-image" alt="MM">
 			</div>
 
-			<a href="javascript:visitVenue()" class="lunch-fn-attend">Out!</a>
+			<a href="javascript:visitVenue(0)" class="lunch-fn-attend">Out!</a>
 		</div>
 
 	</div><!-- END Venue -->

@@ -174,7 +174,10 @@
 // Lunch Flash
 
 .lunch-flash {
-	margin-bottom: -59px;
+	width: 100%;
+	position: fixed;
+	z-index: 5;
+	top: 0;
 	background-color: #FFF080;
 	color: #E27F00;
 	font: {
@@ -584,6 +587,12 @@
 	}
 }
 
+
+.void-venue-template,
+.lunch-venue-template,
+.lunch-flash-template {
+	display: none;
+}
 
 .lunch-fn-addvenue {
 	background: {
