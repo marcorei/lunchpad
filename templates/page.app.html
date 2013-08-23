@@ -56,8 +56,7 @@
 
 					<!-- Time -->
 					<div class="lunch-timer">
-						<span class="lunch-icon">O'clock</span>
-						<span class="lunch-label">11:15</span>
+						
 					</div>
 
 					<!-- Notification Settings -->
@@ -150,7 +149,7 @@
     /* Directive to parse the User */
     var userDirective = {
 		'.lunch-user-name':'name',
-		'.lunch-user-image':'image',
+		'.lunch-user-image@href':'img',
 		'.lunch-inp-notify@checked': 'notify'
     }
 
@@ -196,6 +195,10 @@
 				console.log(data.venues[i].id);
 				data.venues[i].id = 'javascript:visitVenue('+ data.venues[i].id +');';
 				console.log(data.venues[i].id);
+
+				for ( var j = 0; j < data.venues[i].users.length; i++ ) {
+					data.venues[i].users[j].img = '../static/img/' + data.venues[i].users[j].img;
+				}
 			}
 
 
@@ -215,7 +218,11 @@
 	  		url: serverUrl + "/get/venues?nocache=",
 			success: function(data) {
 
-				refreshVenueData( data );
+				if (data.error === ""){
+					refreshVenueData( data );
+				} else {
+					buildError( data );
+				}
 			}
 		});
 	}
@@ -225,7 +232,11 @@
 
 	var refreshUserData = function( data ) {
 		if (data.error === ""){
+
+			data.img = '../static/img/'+ data.img;
+
 			$('.lunch-user').render(data, userDirective);
+			setDay();
 		} else {
 			buildError(data);
 		}
@@ -247,7 +258,11 @@
 	  		url: serverUrl + "/get/user",
 			success: function(data) {
 
-				refreshUserData( data );
+				if (data.error === ""){
+					refreshUserData( data );
+				} else {
+					buildError(data);
+				}
 			}
 		});
 	}
@@ -263,7 +278,11 @@
 		  url: serverUrl + '/post/notify',
 		  data: { 'notify': notifyState},
 		  success: function(data) {
+			if (data.error === ""){
 		  		console.log(data);
+			} else {
+				buildError(data);
+			}
 			}
 		});
 	}
@@ -278,8 +297,11 @@
         	url: serverUrl + '/post/venue',
 			data: $('form.lunch-venue-create').serialize(),
 			success: function(data){
-				requestVenueData();
-				console.log(data);
+				if (data.error === ""){
+					requestVenueData();
+				} else {
+					buildError(data);
+				}
 			}
 		});
 	}
@@ -296,8 +318,11 @@
         	url: serverUrl + '/post/visit',
         	data: { 'venueid' : id },
         	success: function(data){
-        		requestVenueData();
-        		console.log(data);
+				if (data.error === ""){
+        			requestVenueData();
+        		} else {
+					buildError(data);
+				}
         	}
         });
 	}
@@ -305,8 +330,6 @@
 
 
 	// BuildError
-
-
 
 	var buildError = function( data ) {
 		$('.lunch-flash').remove();
@@ -326,11 +349,37 @@
         	data: { 'venueid' : 'errorplz' },
 
         	success: function(data){
-        		
         		console.log( data );
         		buildError( data );
         	}
         });
+	}
+
+
+
+	// Error Close
+	$('.lunch-flash>.lunch-flash-container>.lunch-flash-close').click(
+		function() {
+  			alert( "Handler for .click() called." );
+		});
+
+	var closeError = function( ) {
+
+		$('.lunch-flash-close').closest('.lunch-flash').remove();
+		console.log('close');
+		console.log( obj );
+	}
+
+
+
+	// Time
+	var setDay = function () {
+		var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+		var now = new Date();
+		var day = days[ now.getDay() ];
+		console.log(day);
+
+		$('.lunch-timer').append(day);
 	}
 
 
@@ -355,11 +404,13 @@
 
 	</script>
 
+
+
 	<!-- Flash Gordon Savior of the Universe -->
 	<div class="lunch-flash-template">
 
 		<div class="lunch-flash-container">
-			<a href="" class="lunch-flash-close">X</a>
+			<a href="javascript:closeError()" class="lunch-flash-close">X</a>
 			<p></p>
 		</div>
 	</div>

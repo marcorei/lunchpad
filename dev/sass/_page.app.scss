@@ -174,10 +174,11 @@
 // Lunch Flash
 
 .lunch-flash {
-	width: 100%;
 	position: fixed;
 	z-index: 5;
 	top: 0;
+	left: 38.2%;
+	right: 0;
 	background-color: #FFF080;
 	color: #E27F00;
 	font: {
@@ -228,6 +229,8 @@
 // Mobile First
 
 .lunch-apppage-body {
+	
+	position: relative;
 
 	min-height: 100%;
 	
