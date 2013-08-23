@@ -70,7 +70,7 @@ function escId( id ){
 // callback() err, user )
 function getUserById( id, callback ){
 
-	console.log('trying to get user by id: ' + id + ' ... escape: ' + esc(id));
+	//console.log('trying to get user by id: ' + id + ' ... escape: ' + esc(id));
 
 	connection.query("SELECT * FROM  `users` WHERE  `id` = " + esc(id) + " LIMIT 0 , 1;",
 		function( err, rows ) {
@@ -626,17 +626,17 @@ function sendNotifications( username, venueid ){
 
 				// basic mail options
 				var mailOptions = {
-				    from: "19:13 Lunchpad <no-reply.lunchpad@19h13.com>", // sender address
+				    from: "Lunchpad <no-reply.lunchpad@19h13.com>", // sender address
 				    to: "", // list of receivers
 				    subject: username + " plans to lunch at " + venuename + "!", // Subject line
 				    text: "Hey! It's your 19:13 lunchpad! \r\n \r\n "+
 				    	username + " plans to lunch at " + venuename + ".\r\n"+
 				    	"Join him on http://lunchpad.19h13.com and be ready to take off!\r\n\r\n"+
 				    	"Enjoy your lunch break!", // plaintext body
-				    html: "<img src='http://lunchpad.19h13.com/static/img/logo-mail.jpg /><p style='font-family: Georgia, serif'>Hey! It's your 19:13 lunchpad!<br>"+
+				    html: "<div style='text-align: center'><a style='border:0' href='http://lunchpad.19h13.com'><img style='border:0' src='http://localhost:1924/static/img/logo-mail.jpg' /></a><br><br><br><p style='font-family: Georgia, serif; font-size:16px;'>Hey! It's your 19:13 lunchpad!<br><br>"+
 				    	username + " plans to lunch at " + venuename + ".<br>"+
-				    	"Join him on <a style='color:#ff0046' href='http://lunchpad.19h13.com'>lunchpad.19h13.com</a> and be ready to take off!<br><br>"+
-				    	"Enjoy your lunch break!</p>"
+				    	"Join your collegue on <a style='color:#ff0046' href='http://lunchpad.19h13.com'>lunchpad.19h13.com</a> and be ready to take off!<br><br>"+
+				    	"Enjoy your lunch break!</p></div>"
 				    	 // html body
 				}
 
@@ -645,39 +645,22 @@ function sendNotifications( username, venueid ){
 				var i;
 				for( i = 0; i < users.length; i++ ){
 
-					mailOptions.to = users[i].email;
+					if( username !== users[i].email)
+					{
+						mailOptions.to = users[i].email;
 
-					smtpTransport.sendMail(mailOptions, function(error, response){
-					    if(error){
-					        console.log(error);
-					    }else{
-					        console.log("Message sent: " + response.message);
-					    }
-					});
+						smtpTransport.sendMail(mailOptions, function(error, response){
+						    if(error){
+						        console.log(error);
+						    }else{
+						        console.log("Message sent: " + response.message);
+						    }
+						});
+					}
+
+					
 
 				}
-
-
-				/*
-				var mailOptions = {
-				    from: "Fred Foo ✔ <foo@blurdybloop.com>", // sender address
-				    to: "bar@blurdybloop.com, baz@blurdybloop.com", // list of receivers
-				    subject: "Hello ✔", // Subject line
-				    text: "Hello world ✔", // plaintext body
-				    html: "<b>Hello world ✔</b>" // html body
-				}
-				*/
-
-				/*
-				smtpTransport.sendMail(mailOptions, function(error, response){
-				    if(error){
-				        console.log(error);
-				    }else{
-				        console.log("Message sent: " + response.message);
-				    }
-				*/
-
-
 
 
 			});
