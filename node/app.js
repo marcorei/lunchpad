@@ -633,7 +633,7 @@ function sendNotifications( username, venueid ){
 				    	username + " plans to lunch at " + venuename + ".\r\n"+
 				    	"Join him on http://lunchpad.19h13.com and be ready to take off!\r\n\r\n"+
 				    	"Enjoy your lunch break!", // plaintext body
-				    html: "<div style='text-align: center'><a style='border:0' href='http://lunchpad.19h13.com'><img style='border:0' src='http://localhost:1924/static/img/logo-mail.jpg' /></a><br><br><br><p style='font-family: Georgia, serif; font-size:16px;'>Hey! It's your 19:13 lunchpad!<br><br>"+
+				    html: "<div style='text-align: center'><a style='border:0' href='http://lunchpad.19h13.com'><img style='border:0' src='http://lunchpad.19h13.com/static/img/logo-mail.jpg' /></a><br><br><br><p style='font-family: Georgia, serif; font-size:16px;'>Hey! It's your 19:13 lunchpad!<br><br>"+
 				    	username + " plans to lunch at " + venuename + ".<br>"+
 				    	"Join your collegue on <a style='color:#ff0046' href='http://lunchpad.19h13.com'>lunchpad.19h13.com</a> and be ready to take off!<br><br>"+
 				    	"Enjoy your lunch break!</p></div>"
