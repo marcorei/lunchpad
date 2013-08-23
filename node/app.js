@@ -70,7 +70,7 @@ function escId( id ){
 // callback() err, user )
 function getUserById( id, callback ){
 
-	console.log('trying to get user by id: ' + id + ' ... escape: ' + esc(id));
+	//console.log('trying to get user by id: ' + id + ' ... escape: ' + esc(id));
 
 	connection.query("SELECT * FROM  `users` WHERE  `id` = " + esc(id) + " LIMIT 0 , 1;",
 		function( err, rows ) {
@@ -231,6 +231,51 @@ function changeUserNotify( userid, notify, callback ){
 	);
 
 
+
+}
+
+
+// callback(err,users)
+function getNotifyUserList(callback){
+
+	var users = [];
+
+	connection.query("SELECT * FROM  `users` WHERE  `notify` =1;",
+
+		function(err,rows){
+
+			if(err){
+				console.log(err);
+			}else{
+
+				users = rows;
+			}
+
+			callback(err,users);
+
+		}
+	);
+
+}
+
+
+
+// callback( err, venue )
+function getVenueById( id, callback ){
+
+	//console.log('trying to get venue by id: ' + id + ' ... escape: ' + esc(id));
+
+	connection.query("SELECT * FROM  `venues` WHERE  `id` = " + esc(id) + " LIMIT 0 , 1;",
+		function( err, rows ) {
+
+			if( err ){
+				console.log( err );
+			}
+
+			callback( err, rows[0] );
+
+		}
+	);
 
 }
 
@@ -560,9 +605,70 @@ var smtpTransport = nodemailer.createTransport("SMTP",{
 
 
 
-function sendNotifications( userid, venueid ){
+function sendNotifications( username, venueid ){
 
-	console.log('sending notifications; userid: '+userid+' venueid: '+venueid);
+	console.log('sending notifications; userid: '+username+' venueid: '+venueid);
+
+	// venue name
+	var venue = getVenueById( venueid, function( err, venue ){
+
+		if(err){
+			console.log(err);
+		}else{
+
+			var venuename = venue.name;
+			
+			//console.log( 'venue name: ' + venue.name );
+
+			// user list?
+			getNotifyUserList(function(err,users){
+
+
+				// basic mail options
+				var mailOptions = {
+				    from: "Lunchpad <no-reply.lunchpad@19h13.com>", // sender address
+				    to: "", // list of receivers
+				    subject: username + " plans to lunch at " + venuename + "!", // Subject line
+				    text: "Hey! It's your 19:13 lunchpad! \r\n \r\n "+
+				    	username + " plans to lunch at " + venuename + ".\r\n"+
+				    	"Join him on http://lunchpad.19h13.com and be ready to take off!\r\n\r\n"+
+				    	"Enjoy your lunch break!", // plaintext body
+				    html: "<div style='text-align: center'><a style='border:0' href='http://lunchpad.19h13.com'><img style='border:0' src='http://lunchpad.19h13.com/static/img/logo-mail.jpg' /></a><br><br><br><p style='font-family: Georgia, serif; font-size:16px;'>Hey! It's your 19:13 lunchpad!<br><br>"+
+				    	username + " plans to lunch at " + venuename + ".<br>"+
+				    	"Join your collegue on <a style='color:#ff0046' href='http://lunchpad.19h13.com'>lunchpad.19h13.com</a> and be ready to take off!<br><br>"+
+				    	"Enjoy your lunch break!</p></div>"
+				    	 // html body
+				}
+
+
+				// All ze users!
+				var i;
+				for( i = 0; i < users.length; i++ ){
+
+					if( username !== users[i].email)
+					{
+						mailOptions.to = users[i].email;
+
+						smtpTransport.sendMail(mailOptions, function(error, response){
+						    if(error){
+						        console.log(error);
+						    }else{
+						        console.log("Message sent: " + response.message);
+						    }
+						});
+					}
+
+					
+
+				}
+
+
+			});
+
+		}
+
+	} );
+	
 
 }
 
@@ -988,7 +1094,7 @@ app.post( '/post/visit', function(req, res){
 
 				// SEND NOTIFICATIONS
 
-				sendNotifications( req.user.id, venueid );
+				sendNotifications( req.user.username, venueid );
 
 			}
 
