@@ -178,10 +178,10 @@
 			$('.void-venue').remove();
 			$('.void-venue-template').clone().prependTo('.lunch-apppage-body')
 			.removeClass('void-venue-template').addClass('void-venue');
+
 			$('.lunch-venue').remove();
 			$('.lunch-venue-template').clone().prependTo('.lunch-apppage-body')
 			.removeClass('lunch-venue-template').addClass('lunch-venue');
-
 
 
 			for (var i = 0; i < data.venues.length ; i++ ){
@@ -195,6 +195,10 @@
 					
 					venue.users[j].img = '../static/img/' + venue.users[j].img;
 				}
+			}
+
+			for (var i =0; i < data.voidvenue.users.length; i++) {
+				data.voidvenue.users[i].img ='../static/img/' + data.voidvenue.users[i].img;
 			}
 
 			$('.void-venue').render(data, voidDirective);
@@ -371,6 +375,8 @@
 		var now = new Date();
 		var day = days[ now.getDay() ];
 		console.log(day);
+
+		day = "It's " + day + ".";
 
 		$('.lunch-timer').append(day);
 	}

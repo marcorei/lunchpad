@@ -59,10 +59,13 @@
 			cursor: pointer;
 		}
 
-		&:hover {
-			text-decoration: underline;
+		&:hover{
+
+			color: #000;
+			@include transition( all 200ms );
+			}
+		
 		}
-	}
 
 }
 
@@ -431,9 +434,16 @@
 	top: 10px;
 	bottom: 50%;
 
-	&:hover {
+	@include transition( all 1000ms );
+
+	&:hover{
+		border: {
+			bottom-color: #00BEEE;
+		}
 		color: #00BEEE;
-	}
+		@include transition( all 200ms );
+		}
+	
 }
 
 
