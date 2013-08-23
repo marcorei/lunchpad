@@ -128,7 +128,17 @@
 		margin: auto;
 		margin-top: 30px;
 
+		@include transition( all 1000ms );
+		@include hoverrotateStart();
 
+		&:hover {
+
+			background-color: #222;
+
+			@include hoverrotate();
+			@include transition( all 200ms );
+		}
+		
 
 	}
 
@@ -178,11 +188,11 @@
 		text-decoration: none;
 		color: #fff;
 
-		@include transition( background-color 1 );
+		@include transition( color 1000ms );
 
 		&:hover{
-			background-color: #000;
-			@include transition( background-color 0.2 );
+			color: #000;
+			@include transition( color 200ms );
 		}
 	}
 	

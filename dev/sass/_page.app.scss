@@ -8,14 +8,20 @@
 
 	@extend .lunch-grid-column;
 }
-
+@mixin hoverrotateStart( ){
+	-moz-transform: rotate(0deg);  /* FF3.5+ */
+       -o-transform: rotate(0deg);  /* Opera 10.5 */
+  -webkit-transform: rotate(0deg);  /* Saf3.1+, Chrome */
+      -ms-transform: rotate(0deg);  /* IE9 */
+          transform: rotate(0deg);  
+}
 
 @mixin hoverrotate( ){
-	-moz-transform: rotate(340deg);  /* FF3.5+ */
-       -o-transform: rotate(340deg);  /* Opera 10.5 */
-  -webkit-transform: rotate(340deg);  /* Saf3.1+, Chrome */
-      -ms-transform: rotate(340deg);  /* IE9 */
-          transform: rotate(340deg);  
+	-moz-transform: rotate(360deg);  /* FF3.5+ */
+       -o-transform: rotate(360deg);  /* Opera 10.5 */
+  -webkit-transform: rotate(360deg);  /* Saf3.1+, Chrome */
+      -ms-transform: rotate(360deg);  /* IE9 */
+          transform: rotate(360deg);  
 }
 
 
@@ -347,7 +353,7 @@
 		}
 
 		&:hover {
-			background-color: #CE0038;
+			background-color: #FF1A59;
 			@include hoverrotate();
 		}
 	}
@@ -448,6 +454,7 @@
 }
 
 .lunch-fn-attend {
+	
 
 	display: block;
 
@@ -486,12 +493,20 @@
 	border-radius: 34px;
 	text-decoration: none;
 	font-family: Georgia;
+	
+	@include hoverrotateStart();
+
+	@include transition( all 1000ms );
 
 	&:hover{
+		color: #efefef;
 		background: {
-			color: #0096BB;
+			color: #15D0FF;
 		}
+		@include hoverrotate();
+		@include transition( all 200ms );
 	}
+	
 }
 
 
@@ -538,31 +553,22 @@
 	border-radius: 34px;
 	text-decoration: none;
 	font-family: Georgia;
-
-	&:hover {
-		@include hoverrotate();
-	}
-}
-
-
-
-.lunch-fn-addvenue {
-
-	@include transition(all 1);
-	
 	background: {
 		color: #98D300;
 	}
+	@include transition( all 1000ms );
+	@include hoverrotateStart();
 
 	&:hover {
-		background-color: #79A800;
-	}
 
+		background-color: #ADE61A;
 
-	&:hover {
 		@include hoverrotate();
+		@include transition( all 200ms );
 	}
 }
+
+
 
 
 

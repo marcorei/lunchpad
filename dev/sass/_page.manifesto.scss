@@ -37,11 +37,11 @@
  		text-decoration: none;
  		color: $agencycolor;
 
- 		@include transition( background-color 1 );
+ 		@include transition( color 1000ms );
 
 		&:hover{
-			background-color: #fff;
-			@include transition( background-color 0.2 );
+			color: #fff;
+			@include transition( color 200ms );
 		}
  	}
 
@@ -50,11 +50,11 @@
  		a{
  			color: #fff;
 
- 			@include transition( background-color 1 );
+ 			@include transition( color 1000ms );
 
 			&:hover{
-				background-color: $agencycolor;
-				@include transition( background-color 0.2 );
+				color: $agencycolor;
+				@include transition( color 200ms );
 			}
  		}
  	}
