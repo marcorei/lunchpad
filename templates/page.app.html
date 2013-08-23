@@ -51,7 +51,7 @@
 					
 
 					<!-- User Name -->
-					<img src="../static/img/jf.png" alt="" class="lunch-user-image">
+					<img src="" alt="" class="lunch-user-image">
 					<div class="lunch-user-name"></div>
 
 					<!-- Time -->
@@ -80,15 +80,10 @@
 		<!-- Content: List of Venues -->
 
 		<div class="lunch-apppage-body">
-			
-				
+		</div>
 
-
-
-
-
-
-
+		
+		<div class="lunch-venue-create-container">
 			<!-- 
 			============
 			Create Venue 
@@ -103,9 +98,7 @@
 				</div>
 
 			</form>
-
-		</div><!-- End List of Restaurants -->
-
+		</div>
 
 	<script type="text/javascript">
 
@@ -149,7 +142,7 @@
     /* Directive to parse the User */
     var userDirective = {
 		'.lunch-user-name':'name',
-		'.lunch-user-image@href':'img',
+		'.lunch-user-image@src':'img',
 		'.lunch-inp-notify@checked': 'notify'
     }
 
@@ -170,7 +163,7 @@
 
 	var venueData;
 
-	var serverUrl = "http://localhost:1924";
+	var serverUrl = "";
 
 	
 	var removeShit = function() {
@@ -182,30 +175,30 @@
 
 		if (data.error === ""){
 
-
+			$('.void-venue').remove();
+			$('.void-venue-template').clone().prependTo('.lunch-apppage-body')
+			.removeClass('void-venue-template').addClass('void-venue');
 			$('.lunch-venue').remove();
 			$('.lunch-venue-template').clone().prependTo('.lunch-apppage-body')
 			.removeClass('lunch-venue-template').addClass('lunch-venue');
 
-			$('.void-venue').remove();
-			$('.void-venue-template').clone().appendTo('.lunch-apppage-body')
-			.removeClass('void-venue-template').addClass('void-venue');
+
 
 			for (var i = 0; i < data.venues.length ; i++ ){
 				console.log(data.venues[i].id);
 				data.venues[i].id = 'javascript:visitVenue('+ data.venues[i].id +');';
 				console.log(data.venues[i].id);
 
-				for ( var j = 0; j < data.venues[i].users.length; i++ ) {
-					data.venues[i].users[j].img = '../static/img/' + data.venues[i].users[j].img;
+				venue = data.venues[i];
+
+				for (var j = 0; j < venue.users.length; j++ ){
+					
+					venue.users[j].img = '../static/img/' + venue.users[j].img;
 				}
 			}
 
-
-			$('.lunch-apppage-body').render(data, venueDirective);
 			$('.void-venue').render(data, voidDirective);
-
-			$('.lunch-venue-create').appendTo('.lunch-apppage-body');
+			$('.lunch-apppage-body').render(data, venueDirective);
 
 		} else {
 			buildError(data);
