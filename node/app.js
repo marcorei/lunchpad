@@ -1134,8 +1134,7 @@ app.listen(1924);
  * Admin stuff
  */
 
-//createUser( "test2@19h13.com", "test2", "test2.png" );
-//createUser( "test3@19h13.com", "test3", "test3.png" );
+//createUser( "test@test.test", "test", "test.png" );
 
 
 
