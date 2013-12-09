@@ -1,6 +1,16 @@
-/* Venues */
+/* 
+ * Venue Variables
+ */
 
-.lunch-venue, .void-venue {
+$venue-vertical-padding: 50px;
+
+
+/* 
+ * Venues 
+ * Mobile First
+ */
+
+.lunch-venue {
 
 	// General Venue Styles
 
@@ -28,13 +38,15 @@
 		right: 30px;
 		left: 30px;
 	}
+
+	@include box-sizing(border-box);
 }
 
 /* Mixin for medium screens */
 
 @mixin lunch-venue-screen-m() {
 
-	.lunch-venue,.void-venue {
+	.lunch-venue {
 		
 		padding: {
 			right: 60px;
@@ -43,9 +55,6 @@
 	}
 }
 
-.lunch-venue-guests-container {
-	@extend .clearfix;
-}
 
 
 
@@ -54,23 +63,183 @@
 
 
 
+/* 
+ * Venue Body 
+ * Mobile First
+ */
 
-/* Venue Body */
-
-.lunch-venue-body{
+.lunch-venue-body {
+	
+	overflow: hidden; // clearfix workaround
 
 	max-width: 600px;
 
 	position: relative;
 
 	padding: {
-		top: 50px;
-		bottom: 50px;
+		top: $venue-vertical-padding;
+		bottom: $venue-vertical-padding;
+	}
+
+	margin: {
+		left: auto;
+		right: auto
 	}
 }
 
-@mixin lunch-venue-body-screen-m() {
+/* Mixin for medium screens */
 
+@mixin lunch-venue-body-screen-m() {
+	
+	.lunch-venue-body {
+		
+		margin: {
+			left: 0;
+			right: auto;
+		}
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+/* 
+ * Venue Guests 
+ * Mobile First
+ */
+
+.lunch-venue-guests-container {
+
+	display: inline;
+	overflow: hidden;
+	margin-top: 20px;
+}
+
+/* Mixin for medium screens */
+
+@mixin lunch-venue-guests-container-screen-m() {
+	
+	.lunch-venue-guests-container {
+		
+		display: block;
+		margin-right: 60px;
+	}
+}
+
+
+
+
+
+
+
+
+
+/*
+ * Venue Interaction
+ * Mobile First
+ */
+
+.lunch-fn-attend, 
+.lunch-fn-quit {
+	
+
+	display: block;
+	
+	float: right;
+
+	text-decoration: none;
+	
+	font: {
+		family: Georgia;
+		style: regular;
+	}
+
+	color: white;
+
+	//float: right;
+	width: 50px;
+	height: 20px;
+	margin: {
+		left: 20px;
+		right: 0px;
+		top: 40px;
+	}
+
+	text-align: center;
+	padding: 22px 7px;
+	border-radius: 34px;
+	text-decoration: none;
+	//font-family: Georgia;
+	
+	//@include hoverrotateStart();
+
+	@include transition( all 1000ms );
+
+	&:hover{
+		// @include hoverrotate();
+		@include transition( all 200ms );
+	}
+	
+}
+
+.lunch-fn-attend {
+
+	background: {
+		color: #00B9E7;
+	}
+
+	&:hover{
+
+		color: #efefef;
+
+		background: {
+			color: #15D0FF;
+		}
+
+	}
+}
+
+.lunch-fn-quit {
+
+	background: {
+		color: #ff0046;
+	}
+
+	&:hover{
+
+		color: #efefef;
+
+		background: {
+			color: #000;
+		}
+
+	}
+
+}
+
+
+
+/* Mixin for medium screens */
+
+@mixin lunch-venue-interaction-button() {
+
+	.lunch-fn-attend,
+	.lunch-fn-quit {
+
+		float: none;
+
+		position: absolute;
+
+		bottom: $venue-vertical-padding;
+		right: 0;
+	}
 }
 
 
@@ -86,6 +255,9 @@
 @mixin lunch-venue-screen-m-mixin() {
 
 	@include lunch-venue-screen-m;
+	@include lunch-venue-body-screen-m;
+	@include lunch-venue-interaction-button;
+	@include lunch-venue-guests-container-screen-m;
 
 }
 
