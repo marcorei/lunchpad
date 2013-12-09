@@ -13,6 +13,62 @@
 
 
 
+// state change animation
+
+.lunch-view-container.ng-enter, .lunch-view-container.ng-leave {
+	@include transition( all .7s ease 0 );
+}
+
+.lunch-view-container.ng-enter {
+	position: fixed;
+	top:0;left:0;
+	margin-left: 100%;
+	width: 61.8%;
+}
+
+.lunch-view-container.ng-enter-active {
+	margin-left: 38.2%;
+}
+
+.lunch-view-container.ng-leave {
+	position:relative;
+	margin-left: 38.2%;
+}
+
+.lunch-view-container.ng-leave-active {
+	margin-left: -100%;
+}
+
+// backward compatible ;)
+
+.back .lunch-view-container.ng-enter {
+	position: fixed;
+	width: 61.8%;
+	top:0;left:0;
+	margin-left: -100%;
+}
+
+.back .lunch-view-container.ng-enter-active {
+	margin-left: 38.2%;
+}
+
+.back .lunch-view-container.ng-leave {
+	position:relative;
+	margin-left: 38.2%;
+}
+
+.back .lunch-view-container.ng-leave-active {
+	margin-left: 100%;
+}
+
+
+
+
+
+
+
+
+
 // slide vertical for venues
 
 .anim-venue-slide.ng-enter, .anim-venue-slide.ng-leave {

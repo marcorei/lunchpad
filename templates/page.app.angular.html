@@ -22,6 +22,7 @@
 		<!-- angular and socket.io -->
 		<script type="text/javascript" src="../static/js/vendor/angular.min.js"></script>
 		<script type="text/javascript" src="../static/js/vendor/angular-animate.min.js"></script>
+		<script type="text/javascript" src="../static/js/vendor/angular-route.min.js"></script>
 		<script type="text/javascript" src="../static/js/front.js"></script>
 
 	</head>
@@ -69,7 +70,9 @@
 					-->
 
 					<!-- Settings Mode -->
-					<a href="#" class="">Settings</a>
+					<a href="#/settings" class="">Settings</a>
+					<a href="#/venue/1" class="">Detail</a>
+					<a href="#/venues" class="">Ois</a>
 
 					<a href="/logout" class="lunch-fn-logout">Logout</a>
 
@@ -80,83 +83,30 @@
 
 
 		</header>
+
+
+
+		<!-- Error -->
+
+		<div class="lunch-flash" ng-controller="ErrorCtrl" ng-show="errors">
+
+			<div class="lunch-flash-container">
+
+				<a href="javascript:closeError()" class="lunch-flash-close">X</a>
+				<ul>
+					<li ng-repeat="error in errors">{{error.msg}}</li>
+				</ul>
+
+			</div>
+		</div>
 		
+
 
 
 		<!-- Content -->
 
-		<div class="lunch-apppage-body">
-
-
-			<div class="lunch-flash" ng-controller="ErrorCtrl" ng-show="errors">
-
-				<div class="lunch-flash-container">
-
-					<a href="javascript:closeError()" class="lunch-flash-close">X</a>
-					<ul>
-						<li ng-repeat="error in errors">{{error.msg}}</li>
-					</ul>
-
-				</div>
-			</div>
-
-
-			<div class="lunch-filter">
-				<input type="text" class="venue-title-input" placeholder="Filter" ng-model="searchInput.name">
-			</div>
-
-
-
-			<!-- Venues -->
-
-			<div ng-controller="VenueListCtrl" class="lunch-venues">
-
-				<div ng-repeat="venue in venues | orderBy:['-attending','-users'] | filter:searchInput" class="lunch-venue anim-venue-slide">
-
-					<div class="lunch-venue-body">
-			
-						<h2 class="lunch-venue-title">{{venue.name}}</h2>
-
-						<div class="lunch-venue-header">
-							<a href="{{venue.url}}" class="lunch-fn-menu" target="blank">View Menu</a>
-						</div>
-
-						<div class="lunch-venue-guests-container" ng-show="venue.users">
-
-							<div class="lunch-venue-guest anim-user-slide" ng-repeat="user in venue.users">
-								<img width="40" height="80" src="..{{user.img}}" alt="" class="lunch-user-image" alt="{{user.name}}">
-								<p class="anim-status-fade" ng-show="user.status">{{user.status}}</p>
-							</div>
-
-						</div>
-
-						<a ng-hide="venue.attending" href="" class="lunch-fn-attend">Go!</a>
-						<a ng-show="venue.attending" href="" class="lunch-fn-quit">Quit!</a>
-
-					</div>
-
-				</div>
-
-			</div>
-
-
-		
-			<div class="lunch-venue-create-container">
-				<!-- 
-				============
-				Create Venue 
-				============
-				-->
-				<form action="" class="lunch-venue-create" id="">
-
-					<input type="text" name="venuename" class="venue-title-input" placeholder="New Venue Name">
-					<input type="text" name="venueurl" class="venue-menu-input" placeholder="Link to Menu">
-
-					<a href="javascript:addVenue()" class="lunch-fn-addvenue">Add!</a>
-
-				</form>
-			</div>
-
+		<div ng-controller="ViewCtrl" ng-class="stateAnimClass">
+			<div ng-view class="lunch-view-container"></div>
 		</div>
 
 
@@ -177,28 +127,7 @@
 		
 
 
-		<!-- END Venue -->
-		<!-- 
-		Single Lunch Venue 
-		Should become a template
-		-->
-		<div class="void-venue-template">
-			
-			<h2 class="lunch-venue-title">Spalter</h2>
-
-			<div class="lunch-venue-header">
-				Wir sind raus!
-			</div>
-
-			<div class="lunch-void-guests-container">
-				<div class="lunch-venue-guests">
-					<img src="" alt="" class="lunch-user-image" alt="MM">
-				</div>
-
-				<a href="javascript:visitVenue(0)" class="lunch-fn-attend">Out!</a>
-			</div>
-
-		</div><!-- END Venue -->
+		
 
 
 
