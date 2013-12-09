@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>19:13 Lunchpad</title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width">
+
+		<link rel="stylesheet" href="../static/css/screen.css">
+		<link rel="icon" href="../static/img/favicon.ico" type="image/x-icon"/>
+
+		<script src="../static/js/vendor/modernizr-2.6.2.min.js"></script>
+
+		<!-- Type kit -->
+		<script type="text/javascript" src="//use.typekit.net/tjo7bse.js"></script>
+		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+		<!-- angular and socket.io -->
+		<script type="text/javascript" src="../static/js/vendor/angular.min.js"></script>
+		<script type="text/javascript" src="../static/js/front.js"></script>
+
+	</head>
+
+	<body ng-app="lunchpadApp" class="lunch-page-app">
+		
+
+
+		<!-- Header -->
+
+		<header class="lunch-apppage-head">
+
+
+
+			<!-- Logo -->
+			<div class="lunch-logo-container">
+				<a  href="#" class="lunch-logo">
+					<img src="../static/img/logo.png" alt="">
+				</a>
+			</div>
+
+
+			<div class="lunch-container">
+
+
+
+				<!-- User -->
+
+				<div class="lunch-user" ng-controller="DetailsCtrl">
+					
+
+					<!-- User Name -->
+					<img src="{{details.user.img}}" alt="" class="lunch-user-image">
+					<div class="lunch-user-name">{{detils.user.name}}</div>
+
+					<!-- Time -->
+					<div class="lunch-timer">It's {{details.day}}</div>
+
+					<!-- Notification Settings -->
+					<!--
+					<div class="lunch-fn-notify">
+						<input type="checkbox" id="notifications" class="lunch-inp-notify">
+						<label for="notifications">I like Emails!</label>
+					</div>
+					-->
+
+					<!-- Settings Mode -->
+					<a href="#" class="">Settings</a>
+
+					<a href="/logout" class="lunch-fn-logout">Logout</a>
+
+				</div>
+			
+
+			</div>
+
+
+		</header>
+		
+
+
+		<!-- Content -->
+
+		<div class="lunch-apppage-body">
+
+
+			<div class="lunch-flash" ng-controller="ErrorCtrl" ng-show="errors">
+
+				<div class="lunch-flash-container">
+
+					<a href="javascript:closeError()" class="lunch-flash-close">X</a>
+					<ul>
+						<li ng-repeat="error in errors">{{error.msg}}</li>
+					</ul>
+
+				</div>
+			</div>
+
+
+			<div class="lunch-filter">
+				<input type="text" class="venue-title-input" placeholder="Filter" ng-model="searchInput.name">
+			</div>
+
+
+
+			<!-- Venues -->
+
+			<div ng-controller="VenueListCtrl" class="lunch-venues">
+
+				<div ng-repeat="venue in venues | orderBy:['-attending','-users'] | filter:searchInput" class="lunch-venue" ng-animate=" '' ">
+
+					<div class="lunch-venue-body">
+			
+						<h2 class="lunch-venue-title">{{venue.name}}</h2>
+
+						<div class="lunch-venue-header">
+							<a href="{{venue.url}}" class="lunch-fn-menu" target="blank">View Menu</a>
+						</div>
+
+						<div class="lunch-venue-guests-container" ng-show="venue.users">
+
+							<div class="lunch-venue-guest" ng-repeat="user in venue.users">
+								<img width="40" height="80" src="..{{user.img}}" alt="" class="lunch-user-image" alt="{{user.name}}">
+								<p ng-show="user.status">{{user.status}}</p>
+							</div>
+
+						</div>
+
+						<a ng-hide="venue.attending" href="" class="lunch-fn-attend">Go!</a>
+						<a ng-show="venue.attending" href="" class="lunch-fn-quit">Quit!</a>
+
+					</div>
+
+				</div>
+
+			</div>
+
+
+		
+			<div class="lunch-venue-create-container">
+				<!-- 
+				============
+				Create Venue 
+				============
+				-->
+				<form action="" class="lunch-venue-create" id="">
+
+					<input type="text" name="venuename" class="venue-title-input" placeholder="New Venue Name">
+					<input type="text" name="venueurl" class="venue-menu-input" placeholder="Link to Menu">
+
+					<a href="javascript:addVenue()" class="lunch-fn-addvenue">Add!</a>
+
+				</form>
+			</div>
+
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+  	
+
+
+
+		<!-- Flash Gordon Savior of the Universe -->
+		
+
+
+		<!-- END Venue -->
+		<!-- 
+		Single Lunch Venue 
+		Should become a template
+		-->
+		<div class="void-venue-template">
+			
+			<h2 class="lunch-venue-title">Spalter</h2>
+
+			<div class="lunch-venue-header">
+				Wir sind raus!
+			</div>
+
+			<div class="lunch-void-guests-container">
+				<div class="lunch-venue-guests">
+					<img src="" alt="" class="lunch-user-image" alt="MM">
+				</div>
+
+				<a href="javascript:visitVenue(0)" class="lunch-fn-attend">Out!</a>
+			</div>
+
+		</div><!-- END Venue -->
+
+
+
+
+	</body>
+</html>
