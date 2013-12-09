@@ -5,7 +5,7 @@
 
 
 
- var lunchpadApp = angular.module('lunchpadApp', []);
+ var lunchpadApp = angular.module('lunchpadApp', ['ngAnimate']);
 
 
 lunchpadApp.controller('VenueListCtrl', function($scope){
