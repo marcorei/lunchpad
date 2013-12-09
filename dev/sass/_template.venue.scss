@@ -1,0 +1,98 @@
+/* Venues */
+
+.lunch-venue, .void-venue {
+
+	// General Venue Styles
+
+	background: {
+		color: white;
+	}
+
+	border: {
+		width: 0px;
+		bottom-width: 1px;
+		style: solid;
+		color: #eee;
+	}
+
+	margin: {
+		top: 0px;
+		bottom: 0px;
+		left: 0px;
+		right: 0px;
+	}
+
+	padding: {
+		top: 0;
+		bottom: 0;
+		right: 30px;
+		left: 30px;
+	}
+}
+
+/* Mixin for medium screens */
+
+@mixin lunch-venue-screen-m() {
+
+	.lunch-venue,.void-venue {
+		
+		padding: {
+			right: 60px;
+			left: 60px;
+		}
+	}
+}
+
+.lunch-venue-guests-container {
+	@extend .clearfix;
+}
+
+
+
+
+
+
+
+
+
+/* Venue Body */
+
+.lunch-venue-body{
+
+	max-width: 600px;
+
+	position: relative;
+
+	padding: {
+		top: 50px;
+		bottom: 50px;
+	}
+}
+
+@mixin lunch-venue-body-screen-m() {
+
+}
+
+
+
+
+
+
+
+
+
+/* Collect all Medium Screen Styles here */
+
+@mixin lunch-venue-screen-m-mixin() {
+
+	@include lunch-venue-screen-m;
+
+}
+
+// Apply
+
+@media screen and (min-width: 960px) {
+
+	@include lunch-venue-screen-m-mixin;
+
+}

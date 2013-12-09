@@ -8,6 +8,7 @@
 
 	@extend .lunch-grid-column;
 }
+
 @mixin hoverrotateStart( ){
 	-moz-transform: rotate(0deg);  /* FF3.5+ */
        -o-transform: rotate(0deg);  /* Opera 10.5 */
@@ -26,124 +27,9 @@
 
 
 
-/* Apppage Header */
-
-// Mobile First
-
-.lunch-apppage-head {
-	
-	// Skin
-	
-	background: {
-		color: $agencycolor;
-	}
-
-	color: white;
-
-	.lunch-logo-container {
-		@extend .clearfix;
-	}
-
-	.lunch-logo {
-
-	}
-
-}
 
 
 
-
-
-
-// Desktop Second
-
-@mixin lunch-apppage-head-desktop() {
-
-	.lunch-apppage-head {
-		
-		text-align: right;
-		width: 38.2%;
-
-		
-		// Positioning
-
-		position: fixed;
-
-		top: 0;
-		bottom: 0;
-		left: 0;
-
-
-		.lunch-container {
-
-			float: right;
-			width: 300px;
-		}
-
-		.lunch-logo-container {
-
-			display: block;
-
-			text-align: right;
-
-
-			border: {
-				width: 0px;
-				bottom-width: 0px;
-				style: solid;
-				color: white;
-			}
-		}
-
-		.lunch-logo {
-			text-align: right;
-			display: block;
-			height: 122px;
-			width: 260px;
-			float: right;
-			
-
-			padding: {
-				top: 100px;
-				right: 80px;
-				left: 20px;
-				bottom: 40px;
-			}
-		}
-		
-		.lunch-user {
-			position: relative;
-			// background-color: #D6003B;
-		}
-		.lunch-user-image {
-			display: block;
-			position: absolute;
-			top: -28px;
-			right: 35px;
-
-		}
-		.lunch-user-name {
-			text-align: right;
-			line-height: 1em;
-			padding: {
-				left: 60px;
-				top: 20px;
-				bottom: 15px;
-				right: 80px;
-				
-			}
-			font: {
-				size: 1.8em;
-				family: "bebas-neue", Arial;
-			}
-		}
-		.lunch-user-surname {
-			font: {
-				family: Georgia;
-			}
-		}
-	}
-}
 
 
 /*
@@ -341,7 +227,7 @@
 	}
 }
 
-
+/*
 .lunch-venue, .void-venue {
 
 	// General Venue Styles
@@ -380,10 +266,8 @@
 		@extend .clearfix;
 
 	}
-
-
 }
-
+*/
 
 
 
@@ -534,7 +418,7 @@
 
 	position: absolute;
 	right: 0;
-	bottom: 0;
+	bottom: 50px;
 
 	//float: left;
 
@@ -783,7 +667,7 @@
 
 @mixin lunch-apppage-desktop() {
 
-	@include lunch-apppage-head-desktop;
+	//@include lunch-apppage-head-desktop;
 	@include lunch-apppage-body-desktop;
 
 }
