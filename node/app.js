@@ -642,6 +642,7 @@ function sendNotifications( username, venueid ){
 
 
 				// All ze users!
+				/*
 				var i;
 				for( i = 0; i < users.length; i++ ){
 
@@ -661,6 +662,7 @@ function sendNotifications( username, venueid ){
 					
 
 				}
+				*/
 
 
 			});
@@ -1134,7 +1136,7 @@ app.listen(1924);
  * Admin stuff
  */
 
-//createUser( "test@test.test", "test", "test.png" );
+createUser( "test@test.test", "test", "test.png" );
 
 
 

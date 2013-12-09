@@ -48,26 +48,6 @@
 
 	}
 
-	.lunch-fn-notify,
-	.lunch-fn-logout {
-		cursor: pointer;
-
-		.lunch-inp-notify {
-			cursor: pointer;
-		}
-		label {
-			cursor: pointer;
-		}
-		@include transition( color 1000ms );
-
-		&:hover{
-
-			color: #000;
-			@include transition( color 200ms );
-			}
-		
-		}
-
 }
 
 
@@ -166,6 +146,7 @@
 }
 
 
+/*
 .lunch-fn-notify,
 .lunch-fn-logout, 
 .lunch-timer {
@@ -188,6 +169,54 @@
 	}
 
 }
+*/
+
+.lunch-user{
+
+	a, div{
+
+		font: {
+			family: Georgia;
+		}
+		position: relative;
+
+		text-decoration: none;
+
+		color: white;
+
+		display: block;
+		padding: {
+			top: 6px;
+			bottom: 6px;
+			left: 60px;
+			right: 80px;
+		}
+
+
+		@include transition( color 1000ms );
+
+	}
+
+
+	a {
+
+		cursor: pointer;
+
+		&:hover{
+
+			color: #000;
+			@include transition( color 200ms );
+		}
+			
+		
+		
+	}
+}
+
+
+
+
+
 
 
 
@@ -250,8 +279,15 @@
 
 
 .lunch-venue-create-container{
-	margin-left: 38.2%;
-	width: 61.8%;
+	//margin-left: 38.2%;
+	//width: 61.8%;
+
+	background-color: #efefef;
+
+	.lunch-venue-create{
+		max-width: 600px;
+	}
+
 }
 
 
@@ -310,10 +346,6 @@
 
 	// General Venue Styles
 
-	@extend .clearfix;
-
-	position: relative;
-
 	background: {
 		color: white;
 	}
@@ -338,7 +370,23 @@
 		bottom: 50px;
 		left: 60px;
 	}
+
+
+	.lunch-venue-body{
+
+		max-width: 600px;
+
+		position: relative;
+		@extend .clearfix;
+
+	}
+
+
 }
+
+
+
+
 
 
 
@@ -392,7 +440,7 @@
 // Venue Header
 
 .lunch-venue-header {
-	margin-bottom: 30px;
+	//margin-bottom: 30px;
 }
 
 
@@ -452,30 +500,49 @@
 
 // Lunch Venue Guests
 
+
 .lunch-venue-guests-container,
 .lunch-void-guests-container {
-	max-width: 600px;
-	margin-top: 50px;
+	
+	margin-top: 20px;
+
+	margin-right: 100px;
 }
+
+
+
+
 
 // Venue Group
 
 .lunch-venue-guests {
-	float: left;
+	//float: left;
 }
 
-.lunch-fn-attend {
+.lunch-venue-guest{
+	float: left;
+
+	padding-top: 30px;
+}
+
+
+
+.lunch-fn-attend, .lunch-fn-quit {
 	
 
 	display: block;
 
-	float: left;
+	position: absolute;
+	right: 0;
+	bottom: 0;
 
-	margin-right: 10px;
+	//float: left;
 
-	text-align: right;
+	//margin-right: 10px;
+
+	//text-align: right;
 	
-	padding: 10px 20px;
+	//padding: 10px 20px;
 	//width: 150px;
 
 	text-decoration: none;
@@ -486,11 +553,8 @@
 	}
 
 	color: white;
-	background: {
-		color: #00B9E7;
-	}
 
-	float: right;
+	//float: right;
 	width: 50px;
 	height: 20px;
 	margin: {
@@ -503,22 +567,55 @@
 	padding: 22px 7px;
 	border-radius: 34px;
 	text-decoration: none;
-	font-family: Georgia;
+	//font-family: Georgia;
 	
 	@include hoverrotateStart();
 
 	@include transition( all 1000ms );
 
 	&:hover{
-		color: #efefef;
-		background: {
-			color: #15D0FF;
-		}
 		@include hoverrotate();
 		@include transition( all 200ms );
 	}
 	
 }
+
+.lunch-fn-attend {
+
+	background: {
+		color: #00B9E7;
+	}
+
+	&:hover{
+
+		color: #efefef;
+
+		background: {
+			color: #15D0FF;
+		}
+
+	}
+}
+
+.lunch-fn-quit {
+
+	background: {
+		color: #ff0046;
+	}
+
+	&:hover{
+
+		color: #efefef;
+
+		background: {
+			color: #000;
+		}
+
+	}
+
+}
+
+
 
 
 
@@ -588,7 +685,6 @@
 
 .lunch-venue-create {
 	
-	background-color: #efefef;
 	@extend .clearfix;
 	
 	padding: {
