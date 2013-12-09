@@ -123,9 +123,9 @@
 
 						<div class="lunch-venue-guests-container" ng-show="venue.users">
 
-							<div class="lunch-venue-guest" ng-repeat="user in venue.users">
+							<div class="lunch-venue-guest anim-user-slide" ng-repeat="user in venue.users">
 								<img width="40" height="80" src="..{{user.img}}" alt="" class="lunch-user-image" alt="{{user.name}}">
-								<p ng-show="user.status">{{user.status}}</p>
+								<p class="anim-status-fade" ng-show="user.status">{{user.status}}</p>
 							</div>
 
 						</div>
