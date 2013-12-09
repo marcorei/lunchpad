@@ -21,6 +21,7 @@
 
 		<!-- angular and socket.io -->
 		<script type="text/javascript" src="../static/js/vendor/angular.min.js"></script>
+		<script type="text/javascript" src="../static/js/vendor/angular-animate.min.js"></script>
 		<script type="text/javascript" src="../static/js/front.js"></script>
 
 	</head>
@@ -110,7 +111,7 @@
 
 			<div ng-controller="VenueListCtrl" class="lunch-venues">
 
-				<div ng-repeat="venue in venues | orderBy:['-attending','-users'] | filter:searchInput" class="lunch-venue" ng-animate=" '' ">
+				<div ng-repeat="venue in venues | orderBy:['-attending','-users'] | filter:searchInput" class="lunch-venue anim-venue-slide">
 
 					<div class="lunch-venue-body">
 			
