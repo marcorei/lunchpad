@@ -17,11 +17,12 @@
 @import "variables";
 @import "typo";
 
-@import "ui.animations";
-
 
 // UI Elements
+@import "ui.animations";
 @import "ui.header";
+@import "ui.inputs";
+@import "ui.buttons";
 
 // Templates
 @import "template.venue";
@@ -36,7 +37,11 @@
 // General styles
 
 html, body {
+	height: auto;
+	background-color: #fff;
+}
 
-height: 100%;
-  background-color: #fff;
+body {
+	overflow-y: scroll;
+	overflow-x: hidden;
 }

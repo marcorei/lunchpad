@@ -1,0 +1,165 @@
+/*
+ * Link Bubbles
+ * General Styles
+ */
+
+.lunch-fn-attend, 
+.lunch-fn-quit,
+.lunch-fn-addvenue {
+	
+
+	display: block;
+
+	font: {
+		family: Georgia;
+		style: regular;
+	}
+
+	color: white;
+
+	//float: right;
+	width: 50px;
+	height: 20px;
+
+	margin: {
+		left: 20px;
+		right: 0px;
+		top: 40px;
+	}
+
+	text-decoration: none;
+	text-align: center;
+	padding: 22px 7px;
+	border-radius: 34px;
+
+	//@include hoverrotateStart();
+
+	@include transition( all 1000ms );
+
+	&:hover{
+		// @include hoverrotate();
+		@include transition( all 200ms );
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+/* Special Attend Styles */
+
+.lunch-fn-attend {
+		
+	float: right;
+
+	background: {
+		color: #00B9E7;
+	}
+
+	&:hover{
+
+		color: #efefef;
+
+		background: {
+			color: #15D0FF;
+		}
+
+	}
+}
+
+
+
+
+
+
+
+
+
+/* Special Quit Styles */
+
+.lunch-fn-quit {
+	
+	float: right;
+	
+	background: {
+		color: #ff0046;
+	}
+
+	&:hover{
+
+		color: #efefef;
+
+		background: {
+			color: #000;
+		}
+
+	}
+
+}
+
+
+
+/* Mixin for medium screens */
+
+@mixin lunch-venue-interaction-button() {
+
+	.lunch-fn-attend,
+	.lunch-fn-quit {
+
+		float: none;
+
+		position: absolute;
+
+		bottom: $venue-vertical-padding;
+		right: 0;
+	}
+}
+
+
+
+
+
+
+
+
+
+/* Add Venue Button */
+
+.lunch-fn-addvenue {
+	
+
+	@include transition(all 1);
+
+	float: left;
+
+	margin-right: 10px;
+
+	float: right;
+	width: 50px;
+	height: 20px;
+	margin: {
+		left: 20px;
+		right: 0;
+		top: 50px;
+	}
+
+	background: {
+		color: #98D300;
+	}
+	@include transition( all 1000ms );
+	// @include hoverrotateStart();
+
+	&:hover {
+
+		background-color: #ADE61A;
+
+		//@include hoverrotate();
+		@include transition( all 200ms );
+	}
+}

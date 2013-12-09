@@ -55,10 +55,12 @@
 
 					<!-- User Name -->
 					<img src="{{details.user.img}}" alt="" class="lunch-user-image">
-					<div class="lunch-user-name">{{detils.user.name}}</div>
-
+					<div class="lunch-user-name">{{details.user.name}}</div>
+				
+				</div>
+				<nav class="lunch-nav" ng-controller="DetailsCtrl">
 					<!-- Time -->
-					<div class="lunch-timer">It's {{details.day}}</div>
+					<div class="lunch-nav-elem lunch-timer">It's {{details.day}}</div>
 
 					<!-- Notification Settings -->
 					<!--
@@ -69,11 +71,11 @@
 					-->
 
 					<!-- Settings Mode -->
-					<a href="#" class="">Settings</a>
+					<a href="#" class="lunch-nav-elem lunch-fn-settings">Settings</a>
 
-					<a href="/logout" class="lunch-fn-logout">Logout</a>
+					<a href="/logout" class="lunch-nav-elem lunch-fn-logout">Logout</a>
 
-				</div>
+				</nav>
 			
 
 			</div>
@@ -101,8 +103,8 @@
 			</div>
 
 
-			<div class="lunch-filter">
-				<input type="text" class="venue-title-input" placeholder="Filter" ng-model="searchInput.name">
+			<div class="lunch-venue-filter">
+				<input type="text" class="lunch-venue-filter-input" placeholder="Filter" ng-model="searchInput.name">
 			</div>
 
 

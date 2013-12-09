@@ -13,8 +13,18 @@
 	color: white;
 
 	.lunch-logo {
-		height: 80px; // Overwrite Loginpage Styling
+		height: 60px; // Overwrite Loginpage Styling
 		
+		margin: {
+			top: 0;
+			bottom: 0;
+		}
+
+		padding: {
+			top: 20px;
+			bottom: 20px;
+		}
+
 		img {
 			height: 100%;
 		}
@@ -99,7 +109,7 @@
 			text-align: right;
 			line-height: 1em;
 			padding: {
-				left: 60px;
+				left: 0;
 				top: 20px;
 				bottom: 15px;
 				right: 80px;
@@ -126,6 +136,114 @@
 
 
 
+/*
+ * User
+ */
+
+.lunch-user {
+	text-align: center;
+}
+
+
+
+
+
+
+
+
+
+/* 
+ * Nav Elements 
+ */
+
+.lunch-nav {
+
+	text-align: center;
+
+	padding: {
+		top: 20px;
+		bottom: 20px;
+	}
+}
+
+
+
+/* Mixin for medium sized screens */
+
+@mixin lunch-nav-screen-m() {
+
+	.lunch-nav {
+
+		text-align: right;
+
+		padding: {
+			top: 0;
+			bottom: 0;
+			right: 80px;
+			left: 0;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+/* Single Nav Element */
+
+.lunch-nav-elem {
+	
+	font: {
+		family: Georgia;
+	}
+	padding: {
+		left: 10px;
+		right: 10px;
+	}
+
+	display: inline;
+
+	color: white;
+	text-decoration: none;
+	
+	@include transition( color 1000ms );
+
+	&:hover{
+		color: #000;
+		@include transition( color 200ms );
+	}
+}
+
+
+
+/* Mixin for medium sized screens */
+
+@mixin lunch-nav-elem-screen-m() {
+	.lunch-nav-elem {
+		
+		display: block;
+
+		padding: {
+			left: 0;
+			right: 0;
+			top: 5px;
+			bottom: 5px;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
 
 .lunch-logo-container {
 	@extend .clearfix;
@@ -139,6 +257,8 @@
 @mixin lunch-apppage-header-screen-m() {
 
 	@include lunch-apppage-head-screen-m;
+	@include lunch-nav-screen-m;
+	@include lunch-nav-elem-screen-m;
 
 }
 

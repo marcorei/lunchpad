@@ -142,7 +142,7 @@ lunchpadApp.controller('DetailsCtrl', function($scope){
 	$scope.details = {
 		"user": {
 			"id": "0",
-			"name": "Alfons",
+			"name": "mr@19h13.com",
 			"img": "../static/img/mr.png"
 		},
 		"day": "Thursday"

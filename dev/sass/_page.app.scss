@@ -57,47 +57,7 @@
 }
 */
 
-.lunch-user{
 
-	a, div{
-
-		font: {
-			family: Georgia;
-		}
-		position: relative;
-
-		text-decoration: none;
-
-		color: white;
-
-		display: block;
-		padding: {
-			top: 6px;
-			bottom: 6px;
-			left: 60px;
-			right: 80px;
-		}
-
-
-		@include transition( color 1000ms );
-
-	}
-
-
-	a {
-
-		cursor: pointer;
-
-		&:hover{
-
-			color: #000;
-			@include transition( color 200ms );
-		}
-			
-		
-		
-	}
-}
 
 
 
@@ -193,7 +153,7 @@
 	min-height: 100%;
 	
 	padding: {
-		top: 65px;
+		top: 20px;
 		bottom: 0px;
 	}
 
@@ -221,11 +181,6 @@
 }
 
 
-.lunch-venues {
-	margin: {
-		top:59px;
-	}
-}
 
 /*
 .lunch-venue, .void-venue {

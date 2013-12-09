@@ -1,0 +1,113 @@
+/* Input elements */
+
+
+
+/* 
+ * Venue List Filter
+ */
+
+.lunch-venue-filter {
+	max-width: 600px;
+
+	margin: {
+		left: auto;
+		right: auto;
+	}
+
+	padding: {
+		left: 30px;
+		right: 30px;
+	}
+}
+
+
+
+/* Mixin for medium screens */
+
+@mixin lunch-venue-filter-screen-m() {
+	
+	.lunch-venue-filter {
+
+		margin: {
+			left: 0;
+		}
+
+		padding: {
+			left: 60px;
+			right: 60px;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+/* 
+ * Lunch Venue Filter Input
+ * Mobile First
+ */
+
+.lunch-venue-filter-input {
+
+	display: block;
+
+	//@include box-sizing(border-box);
+	width: 100%;
+
+	padding: {
+		top: 15px;
+		left: 10px;
+		right: 10px;
+		bottom: 15px;
+	};
+
+	margin:{
+		left: -10px;
+	}
+
+	border: {
+		width: 1px;
+		style: dashed;
+		color: #ccc;
+	}
+}
+
+
+
+/* Mixin for medium screens */
+
+@mixin lunch-venue-filter-input-screen-m() {
+
+	.lunch-venue-filter-input {
+		margin-left: -10px;
+	}
+}
+
+
+
+
+
+
+
+
+
+/* Collect all Medium Screen Styles here */
+
+@mixin lunch-inputs-screen-m-mixin() {
+
+	@include lunch-venue-filter-screen-m;
+	@include lunch-venue-filter-input-screen-m;
+}
+
+// Apply
+
+@media screen and (min-width: 960px) {
+
+	@include lunch-inputs-screen-m-mixin;
+
+}
