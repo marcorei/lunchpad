@@ -10,6 +10,14 @@
 
 lunchpadApp.controller('VenueListCtrl', function($scope){
 
+	
+	$scope.removeUser = function( userId ){
+		
+	}
+
+
+
+	// Local data
 
 	$scope.venues = [
 		{
@@ -120,6 +128,10 @@ lunchpadApp.controller('VenueListCtrl', function($scope){
 	        "users": []
 	    }
 	];
+
+
+
+
 
 });
 

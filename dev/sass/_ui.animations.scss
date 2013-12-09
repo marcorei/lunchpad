@@ -1,0 +1,108 @@
+/*
+ * Angular Animation classes (and perhaps the other ones too)
+ *
+ * All animation classes start with anim-[name]
+ */
+
+
+
+/*
+ * Angular!
+ */
+
+
+
+
+// slide vertical for venues
+
+.anim-venue-slide.ng-enter, .anim-venue-slide.ng-leave {
+	@include transition( all .7s ease 0 );
+} 
+
+.anim-venue-slide.ng-enter { 
+	max-height: 0px;
+	overflow: hidden;
+	opacity: 0;
+}       
+.anim-venue-slide.ng-enter-active { 
+	max-height: 500px;
+	opacity: 1;
+} 
+.anim-venue-slide.ng-leave { 
+	max-height: 500px;
+	overflow: hidden;
+	opacity: 1;
+}        
+.anim-venue-slide.ng-leave-active { 
+	max-height: 0px;
+	opacity: 0;
+} 
+
+
+
+
+// slide horizontal for users
+
+.anim-user-slide.ng-enter, .anim-user-slide.ng-leave {
+	@include transition( all .5 ease 0 );
+}
+
+.anim-user-slide.ng-enter { 
+	width: 0px;
+	overflow: hidden;
+	opacity: 0;
+}
+
+.anim-user-slide.ng-enter-active { 
+	width: 40px;
+	opacity: 1;
+}
+
+.anim-user-slide.ng-leave { 
+	width: 40px;
+	overflow: hidden;
+	opacity:1;
+}
+
+.anim-user-slide.ng-leave-active { 
+	width: 0px;
+	opacity: 0;
+}
+
+
+
+
+// fade stati in and out
+
+.anim-status-fade.ng-enter, .anim-status-fade.ng-leave {
+	@include transition( all .5 ease 0 );
+}
+
+.anim-status-fade.ng-enter { 
+	opacity: 0;
+}
+
+.anim-status-fade.ng-enter-active { 
+	opacity: 1;
+}
+
+.anim-status-fade.ng-leave { 
+	opacity:1;
+}
+
+.anim-status-fade.ng-leave-active { 
+	opacity: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
