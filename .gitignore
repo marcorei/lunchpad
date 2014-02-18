@@ -36,6 +36,7 @@ static/css/screen.css
 
 # exclude modules
 node/node_modules/*
+dev/node_modules/*
 
 # exclude config file
 node/config.json

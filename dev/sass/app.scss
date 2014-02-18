@@ -9,28 +9,31 @@
 @import "compass/css3/transition";
 @import "compass/css3/box-sizing";
 
+// Imported
 @import "vendor.normalize";
 @import "vendor.clearfix";
 
-@import "ui.grid";
-
-@import "variables";
-@import "typo";
-
+// Utilities
+@import "util.grid";
+@import "util.vars";
+@import "util.typo";
+@import "util.animations";
 
 // UI Elements
-@import "ui.animations";
 @import "ui.header";
 @import "ui.inputs";
 @import "ui.buttons";
 
 // Templates
-@import "template.venue";
+@import "tmpl.venue";
+@import "tmpl.guest";
+@import "tmpl.flash";
 
 // Pages
 @import "page.app";
 @import "page.login";
 @import "page.manifesto";
+
 
 
 

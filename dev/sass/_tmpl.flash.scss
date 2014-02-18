@@ -1,0 +1,43 @@
+// Lunch Flash
+
+.lunch-flash {
+
+	position: fixed;
+	z-index: 5;
+	top: 0;
+	left: 38.2%;
+	right: 0;
+	background-color: #FFF080;
+	color: #E27F00;
+	font: {
+		family: Georgia;
+	}
+	
+	padding: {
+		top:20px;
+		left: 60px;
+		bottom: 20px;
+		right: 60px;
+	}
+	p {
+		margin: 0;
+	}
+	.lunch-flash-close {
+		border-radius: 33px;
+		text-align: center;
+		margin-top: -7px;
+		padding: 7px 4px;
+		width: 25px;
+		text-decoration: none;
+		font: {
+			family: "Helvetica Neue", Arial;
+		}
+		float: right;
+		background-color: #e27f00;
+		color: #fff;
+	}
+
+	.lunch-flash-container {
+		max-width: 600px;
+	}
+}
