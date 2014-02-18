@@ -65,6 +65,7 @@ module.exports = function (grunt) {
 					cssDir: '../static/css',
 					fontsDir: '../static/font',
 					imagesDir: '../static/img',
+					httpPath: '../templates',
 					relativeAssets: true
 				}
 			},
