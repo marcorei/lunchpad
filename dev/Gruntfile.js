@@ -43,7 +43,7 @@ module.exports = function (grunt) {
 			my_target: {
 				files: {
 
-					// [destination]: [source]
+					// [destination]: [source(, source, source)],
 					'../static/js/app.js': ['../static/js/app.js'],
 					'../static/js/libraries.js': ['../static/js/libraries.js']
 				}

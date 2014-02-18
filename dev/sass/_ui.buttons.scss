@@ -24,11 +24,13 @@
 
 
 
+
+
+
 .lunch-fn-attend, 
 .lunch-fn-quit,
 .lunch-fn-addvenue {
 	
-
 	display: block;
 
 	font: {
@@ -61,7 +63,6 @@
 		// @include hoverrotate();
 		@include transition( all 200ms );
 	}
-	
 }
 
 
@@ -90,7 +91,6 @@
 		background: {
 			color: #15D0FF;
 		}
-
 	}
 }
 
