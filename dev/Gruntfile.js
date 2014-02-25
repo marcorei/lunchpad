@@ -5,7 +5,11 @@ module.exports = function (grunt) {
 
 
 	var libraries = [
-		'js/vendor/**/*.js'
+		'bower_components/modernizr/modernizr.js',
+		'bower_components/angular/angular.min.js',
+		'bower_components/angular-route/angular-route.min.js',
+		'bower_components/angular-animate/angular-animate.min.js',
+		'bower_components/angular-sanitize/angular-sanitize.min.js'
 	];
 
 
@@ -21,16 +25,14 @@ module.exports = function (grunt) {
 
 			dev: {
 				src: [
-					'js/**/*.js',
-					'!js/vendor/**/*.js' // exclude libraries
+					'js/**/*.js'
 				],
 				dest: '../static/js/app.js'
 			},
 
 			build: {
 				src: [
-					'js/**/*.js',
-					'!js/vendor/**/*.js' // exclude libraries
+					'js/**/*.js'
 				],
 				dest: '../static/js/app.js'
 			}
@@ -93,7 +95,7 @@ module.exports = function (grunt) {
 			},
 
 			scripts: {
-				files: ['js/*.js', libraries ],
+				files: ['js/**/*.js', libraries ],
 				tasks: ['dev']
 			},
 
