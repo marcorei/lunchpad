@@ -1,54 +1,73 @@
-/* 
- * Venue Variables
+/*
+ * Lunchpad. Venue Styles
+ * @author Joachim Fröstl <jf@19h13.com>
  */
 
+
+
+
+
+
+
+
+/*
+ * Lunch Venue Variables
+ */
 $venue-vertical-padding: 50px;
 
 
-/* 
- * Venues 
- * Mobile First
- */
 
+
+
+
+
+
+
+/* 
+ * Venues Mobile First
+ */
 .lunch-venue {
 
-	// General Venue Styles
-
-	background: {
-		color: white;
-	}
-
+	// Box
 	border: {
 		width: 0px;
 		bottom-width: 1px;
 		style: solid;
 		color: #eee;
 	}
-
 	margin: {
 		top: 0px;
 		bottom: 0px;
 		left: 0px;
 		right: 0px;
 	}
-
 	padding: {
-		top: 0;
-		bottom: 0;
+		top: 30px;
+		bottom: 60px;
 		right: 30px;
 		left: 30px;
 	}
-
 	@include box-sizing(border-box);
+
+	// Skin
+	background: {
+		color: white;
+	}
 }
 
-/* Mixin for medium screens */
 
+
+/* 
+ * Mixin for medium screens 
+ */
 @mixin lunch-venue-screen-m() {
 
 	.lunch-venue {
 		
+		// Box
 		padding: {
+			top: 50px;
+			bottom: 50px;
 			right: 60px;
 			left: 60px;
 		}
@@ -64,31 +83,28 @@ $venue-vertical-padding: 50px;
 
 
 /* 
- * Venue Body 
- * Mobile First
+ * Venue Body Mobile First
  */
-
 .lunch-venue-body {
 	
-	overflow: hidden; // clearfix workaround
-
+	// Box
 	max-width: 600px;
-
-	position: relative;
-
-	padding: {
-		top: $venue-vertical-padding;
-		bottom: $venue-vertical-padding;
-	}
-
 	margin: {
 		left: auto;
 		right: auto
 	}
+	
+	// Skin
+	position: relative;
+	display: table; // clearfix workaround
+	width: 100%;
 }
 
-/* Mixin for medium screens */
 
+
+/* 
+ * Mixin for medium screens 
+ */
 @mixin lunch-venue-body-screen-m() {
 	
 	.lunch-venue-body {
@@ -98,7 +114,6 @@ $venue-vertical-padding: 50px;
 			right: auto;
 		}
 	}
-
 }
 
 
@@ -111,25 +126,26 @@ $venue-vertical-padding: 50px;
 
 
 /* 
- * Venue Guests 
- * Mobile First
+ * Venue Guests Mobile First
  */
-
-.lunch-venue-guests-container {
-
+.lunch-venue-guests {
+	
+	// box
 	display: inline;
+	margin: {
+		top: 30px;
+	}
 	overflow: hidden;
-	margin-top: 20px;
 }
 
 /* Mixin for medium screens */
 
-@mixin lunch-venue-guests-container-screen-m() {
+@mixin lunch-venue-guests-screen-m() {
 	
-	.lunch-venue-guests-container {
+	.lunch-venue-guests {
 		
 		display: block;
-		margin-right: 60px;
+		margin-right: 66px;
 	}
 }
 
@@ -138,149 +154,207 @@ $venue-vertical-padding: 50px;
 
 
 
-// Special Voidvenue
-.void-venue {
-	background: {
-		color: #fff;
+
+
+
+/*
+ * Guest
+ */
+.lunch-venue-guest{
+	margin: {
+		top: 0;
 	}
-	border: {
-		bottom-width: 0px;
+	float: left;
+
+	&:first-child {
+		clear: left;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+/*
+ * Lunch Venue Header
+ */
+.lunch-venue-header {
+	
+	// Box
+	margin: {
+		bottom: 20px;
 	}
 
-	.lunch-fn-attend {
-		background: {
-			color: $agencycolor;
-		}
+	// Position
+	float: left;
+	
+}
 
-		&:hover {
-			background-color: #FF1A59;
-			@include hoverrotate();
-		}
-	}
 
+
+/*
+ * Mixin for medium screens
+ */
+@mixin lunch-venue-header-screen-m() {
 	.lunch-venue-header {
-		color: $agencycolor;
-		font: {
-			family: Georgia;
-			style: italic;
+
+		// Box
+		margin: {
+			bottom: 0;
 		}
+	
+		// Position
+		float: none;
 	}
 }
 
 
 
 
-// Venue Title
 
+
+
+
+
+/* 
+ * Venue Name/Title
+ */
 .lunch-venue-title {
 	
+	// Box
+	margin: {
+		top: 0;
+		bottom: 0;
+	}
+	display: block;
+	
+	// Skin
 	font: {
 		size: 2.4em;
 	}
+}
 
+
+
+
+
+
+
+
+
+/* 
+ * Link to Venue Menu
+ */
+.lunch-fn-menu {
+	
+	// Box
+	display: block;
+
+	// Skin
+	color: #666;
+	text-decoration: none;
+	font: {
+		family: Georgia;
+		style: italic;
+	}
+	
+	// Effects
+	@include transition-duration( $lunch-time-out );
+	@include transition-property( color );
+	
+	&:hover{
+		color: #00BEEE;
+		@include transition-duration( $lunch-time-over );
+	}
+}
+
+
+
+
+
+
+
+/*
+ * Venue Interaction
+ */
+
+// Venue buttons
+.lunch-fn-attend,
+.lunch-fn-quit {
+
+	// import
+	@extend .lunch-venue-btn;
+	
+	// Box
 	margin: {
-		top: 0;
+		top:10px;
+	}
+
+	// Position
+	float: right;
+}
+
+
+
+// Attend Lunch at venue
+.lunch-fn-attend {
+	
+	// Skin
+	background: {
+		color: $lunch-color-blu;
+	}
+	&:hover {
+		background: {
+			color: $lunch-color-blu-dark;
+		}
+	}
+}
+
+
+
+// Opt out of lunch at venue
+.lunch-fn-quit {
+	
+	// Skin
+	background: {
+		color: $lunch-color-red;
+	}
+	&:hover {
+		background: {
+			color: $lunch-color-red-dark;
+		}
+	}
+}
+
+
+
+/*
+ * Mixin for medium screens
+ */
+@mixin lunch-venue-button-screen-m() {
+	
+	.lunch-fn-attend,
+	.lunch-fn-quit {
+		
+		// Box 
+		margin: {
+			top: 0;
+		}
+
+		// Position
+		position: absolute;
+		right: 0;
 		bottom: 5px;
 	}
-
-	display: block;
 }
 
 
 
-
-
-
-
-
-// Create Lunch Venue
-
-.lunch-venue-create {
-	
-	@extend .clearfix;
-	
-	padding: {
-		top: 50px;
-		right: 60px;
-		bottom: 50px;
-		left: 60px;
-	}
-
-	border: {
-		width: 0px;
-		bottom-width: 0px;
-		style: solid;
-		color: #dedede;
-	}
-
-	.venue-title-input {
-		
-		margin: {
-			left:-10px;
-			top: 0px;
-		}
-
-		padding: 10px;
-
-		padding: {
-			bottom: 5px;
-		}
-
-		font: {
-			family: "bebas-neue";
-			size: 2.4em;
-		}
-		min-width: 450px;
-		background-color: #eee;
-		border: {
-			width: 1px;
-			style: dashed;
-			color: #ccc;
-		}
-	}
-
-	.venue-menu-input {
-
-		min-width: 450px;
-		margin: {
-			left:-10px;
-			top: 10px;
-		}
-		padding: {
-			left: 10px;
-			right: 10px;
-			top: 5px;
-			bottom: 5px;
-		};
-		
-		font: {
-			family: Georgia;
-			style: italic;
-		}
-
-		background-color: #eee;
-		border: {
-			width: 1px;
-			style: dashed;
-			color: #ccc;
-		}
-
-	}
-
-	.venue-title-input,
-	.venue-menu-input {
-		display: block;
-
-		&:focus {
-			outline: none;
-			border: {
-				style: solid;
-				color: #aaa;
-			
-			}
-		}
-	}
-}
 
 
 
@@ -292,9 +366,9 @@ $venue-vertical-padding: 50px;
 
 	@include lunch-venue-screen-m;
 	@include lunch-venue-body-screen-m;
-	@include lunch-venue-interaction-button;
-	@include lunch-venue-guests-container-screen-m;
-
+	@include lunch-venue-guests-screen-m;
+	@include lunch-venue-button-screen-m;
+	@include lunch-venue-header-screen-m;
 }
 
 // Apply

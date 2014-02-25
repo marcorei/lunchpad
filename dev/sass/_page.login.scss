@@ -8,7 +8,7 @@
 
 .lunch-page-login {
  	height: 100%;
- 	background-color: $agencycolor;
+ 	background-color: $lunch-color-red;
 
  	
  	
@@ -48,7 +48,7 @@
 		border: {
 			width: 1px;
 			style: solid;
-			color: $agencycolor;
+			color: $lunch-color-red;
 		}
 
 		color: #000;
@@ -129,13 +129,13 @@
 		margin-top: 30px;
 
 		@include transition( all 1000ms );
-		@include hoverrotateStart();
+		@include hoverrotate( $lunch-btn-rotate-start );
 
 		&:hover {
 
 			background-color: #222;
 
-			@include hoverrotate();
+			@include hoverrotate( $lunch-btn-rotate-hover );
 			@include transition( all 200ms );
 		}
 		

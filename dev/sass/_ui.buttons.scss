@@ -1,25 +1,41 @@
 /*
- * Link Bubbles
- * General Styles
+ * Lunchpad. Buttons
+ * @author Joachim Fröstl <jf@19h13.com>
  */
 
 
 
-@mixin hoverrotateStart( ){
-	-moz-transform: rotate(0deg);  /* FF3.5+ */
-       -o-transform: rotate(0deg);  /* Opera 10.5 */
-  -webkit-transform: rotate(0deg);  /* Saf3.1+, Chrome */
-      -ms-transform: rotate(0deg);  /* IE9 */
-          transform: rotate(0deg);  
+
+
+
+
+
+
+/*
+ * Button Variables
+ */
+$lunch-btn-rotate-start: 0deg;
+$lunch-btn-rotate-hover: 360deg;
+
+
+
+
+
+
+
+
+
+/*
+ * Button Mixins
+ */
+@mixin hoverrotate( $rotation ){
+	-moz-transform: rotate($rotation);  /* FF3.5+ */
+       -o-transform: rotate($rotation);  /* Opera 10.5 */
+  -webkit-transform: rotate($rotation);  /* Saf3.1+, Chrome */
+      -ms-transform: rotate($rotation);  /* IE9 */
+          transform: rotate($rotation);  
 }
 
-@mixin hoverrotate( ){
-	-moz-transform: rotate(360deg);  /* FF3.5+ */
-       -o-transform: rotate(360deg);  /* Opera 10.5 */
-  -webkit-transform: rotate(360deg);  /* Saf3.1+, Chrome */
-      -ms-transform: rotate(360deg);  /* IE9 */
-          transform: rotate(360deg);  
-}
 
 
 
@@ -27,160 +43,40 @@
 
 
 
-.lunch-fn-attend, 
-.lunch-fn-quit,
-.lunch-fn-addvenue {
+
+/* 
+ * General Lunch venue Button Styles
+ */
+.lunch-venue-btn {
 	
+	// Box
 	display: block;
+	width: 50px;
+	height: 20px;
+	padding: { 
+		top:22px;
+		bottom: 22px;
+		left: 7px;
+		right: 7px;
+	}
 
+	// Skin
+	color: white;
 	font: {
 		family: Georgia;
 		style: regular;
 	}
-
-	color: white;
-
-	//float: right;
-	width: 50px;
-	height: 20px;
-
-	margin: {
-		left: 20px;
-		right: 0px;
-		top: 40px;
-	}
-
 	text-decoration: none;
 	text-align: center;
-	padding: 22px 7px;
 	border-radius: 34px;
-
-	//@include hoverrotateStart();
-
-	@include transition( all 1000ms );
+	
+	// Effects
+	@include hoverrotate( $lunch-btn-rotate-start );
+	@include transition-property( background-color transform );
+	@include transition-duration( $lunch-time-out );
 
 	&:hover{
-		// @include hoverrotate();
-		@include transition( all 200ms );
-	}
-}
-
-
-
-
-
-
-
-
-
-
-/* Special Attend Styles */
-
-.lunch-fn-attend {
-		
-	float: right;
-
-	background: {
-		color: #00B9E7;
-	}
-
-	&:hover{
-
-		color: #efefef;
-
-		background: {
-			color: #15D0FF;
-		}
-	}
-}
-
-
-
-
-
-
-
-
-
-/* Special Quit Styles */
-
-.lunch-fn-quit {
-	
-	float: right;
-	
-	background: {
-		color: #ff0046;
-	}
-
-	&:hover{
-
-		color: #efefef;
-
-		background: {
-			color: #000;
-		}
-
-	}
-
-}
-
-
-
-/* Mixin for medium screens */
-
-@mixin lunch-venue-interaction-button() {
-
-	.lunch-fn-attend,
-	.lunch-fn-quit {
-
-		float: none;
-
-		position: absolute;
-
-		bottom: $venue-vertical-padding;
-		right: 0;
-	}
-}
-
-
-
-
-
-
-
-
-
-/* Add Venue Button */
-
-.lunch-fn-addvenue {
-	
-
-	@include transition(all 1);
-
-	float: left;
-
-	margin-right: 10px;
-
-	float: right;
-	width: 50px;
-	height: 20px;
-	margin: {
-		left: 20px;
-		right: 0;
-		top: 50px;
-	}
-
-	background: {
-		color: #98D300;
-	}
-	@include transition( all 1000ms );
-	// @include hoverrotateStart();
-
-	&:hover {
-
-		background-color: #ADE61A;
-
-		//@include hoverrotate();
-		@include transition( all 200ms );
+		@include hoverrotate( $lunch-btn-rotate-hover );
+		@include transition-duration( $lunch-time-over );
 	}
 }

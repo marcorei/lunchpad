@@ -1,6 +1,12 @@
 /*
- * App Page
+ * Lunchpad. Appage
+ * @author Joachim Fröstl <jf@19h13.com>
  */
+
+
+
+
+
 
 
 
@@ -18,20 +24,9 @@
 
 
 
-
-
-
 .lunch-inp-notify {
 	margin-right: 5px;
 }
-
-
-
-
-
-
-
-
 
 
 
@@ -83,6 +78,10 @@
 
 
 
+
+
+
+
 // Desktop Second
 
 @mixin lunch-apppage-body-desktop() {
@@ -105,18 +104,7 @@
 
 
 
-
-
-
-
-
-
-
-
-
 // Venue Header
-
-
 
 // Venue Interaction
 
@@ -134,42 +122,6 @@
 		top: 20px;
 	}
 }
-
-
-.lunch-fn-menu {
-	
-	text-decoration: none;
-
-	font: {
-		family: Georgia;
-		style: italic;
-	}
-
-	border: {
-		width: 0px;
-		bottom-width: 1px;
-		style: dashed;
-		color: #ddd;
-	}
-
-	color: #666;
-	right: 0;
-	top: 10px;
-	bottom: 50%;
-
-	@include transition( all 1000ms );
-
-	&:hover{
-		border: {
-			bottom-color: #00BEEE;
-		}
-		color: #00BEEE;
-		@include transition( all 200ms );
-		}
-	
-}
-
-
 
 
 
