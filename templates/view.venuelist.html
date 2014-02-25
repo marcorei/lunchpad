@@ -25,14 +25,13 @@
 		<div ng-repeat="venue in venues | orderBy:['-attending','-users'] | filter:searchInput" class="lunch-venue anim-venue-slide">
 
 			<div class="lunch-venue-body">
-	
-				<h2 class="lunch-venue-title">{{venue.name}}</h2>
-
-				<div class="lunch-venue-header">
+				
+				<header class="lunch-venue-header">
+					<h2 class="lunch-venue-title">{{venue.name}}</h2>
 					<a href="{{venue.url}}" class="lunch-fn-menu" target="blank">View Menu</a>
-				</div>
+				</header>
 
-				<div class="lunch-venue-guests-container" ng-show="venue.users">
+				<div class="lunch-venue-guests" ng-show="venue.users">
 
 					<div class="lunch-venue-guest anim-user-slide" ng-repeat="user in venue.users">
 						<img width="40" height="80" src="..{{user.img}}" alt="" class="lunch-user-image" alt="{{user.name}}">
@@ -43,7 +42,6 @@
 
 				<a ng-hide="venue.attending" href="" class="lunch-fn-attend">Go!</a>
 				<a ng-show="venue.attending" href="" class="lunch-fn-quit">Quit!</a>
-
 			</div>
 
 		</div>
@@ -51,16 +49,4 @@
 	</div>
 
 
-
-	<div class="lunch-venue-create-container">
-		
-		<form action="" class="lunch-venue-create" id="">
-
-			<input type="text" name="venuename" class="venue-title-input" placeholder="New Venue Name">
-			<input type="text" name="venueurl" class="venue-menu-input" placeholder="Link to Menu">
-
-			<a href="javascript:addVenue()" class="lunch-fn-addvenue">Add!</a>
-
-		</form>
-	</div>
 
