@@ -9,11 +9,10 @@
 		<title>19:13 Lunchpad</title>
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width">
-
+		
+		<!-- Style -->
 		<link rel="stylesheet" href="../static/css/app.css">
 		<link rel="icon" href="../static/img/favicon.ico" type="image/x-icon"/>
-
-		<script src="../static/js/vendor/modernizr-2.6.2.min.js"></script>
 
 		<!-- Type kit -->
 		<script type="text/javascript" src="//use.typekit.net/tjo7bse.js"></script>
@@ -22,7 +21,6 @@
 		<!-- angular and socket.io -->
 		<script type="text/javascript" src="../static/js/libraries.js"></script>
 		<script type="text/javascript" src="../static/js/app.js"></script>
-
 	</head>
 
 	<body ng-app="lunchpadApp" class="lunch-page-app">
@@ -31,57 +29,53 @@
 
 		<!-- Header -->
 
-		<header class="lunch-apppage-head">
+		<header class="lunch-header">
 
 
 
 			<!-- Logo -->
-			<div class="lunch-logo-container">
-				<a  href="#" class="lunch-logo">
-					<img src="../static/img/logo.png" alt="">
-				</a>
-			</div>
-
-
-			<div class="lunch-container">
+			<a  href="#" class="lunch-logo">
+				<img src="../static/img/logo.png" alt="">
+			</a>
 
 
 
-				<!-- User -->
+			<!-- Account -->
 
-				<div class="lunch-user" ng-controller="DetailsCtrl">
-					
-
-					<!-- User Name -->
-					<img src="{{details.user.img}}" alt="" class="lunch-user-image">
-					<div class="lunch-user-name">{{details.user.name}}</div>
+			<div class="lunch-account" ng-controller="DetailsCtrl">
 				
-				</div>
-				<nav class="lunch-nav" ng-controller="DetailsCtrl">
-					<!-- Time -->
-					<div class="lunch-nav-elem lunch-timer">It's {{details.day}}</div>
 
-					<!-- Notification Settings -->
-					<!--
-					<div class="lunch-fn-notify">
-						<input type="checkbox" id="notifications" class="lunch-inp-notify">
-						<label for="notifications">I like Emails!</label>
-					</div>
-					-->
-
-					<!-- Settings Mode -->
-
-					<a href="#/settings" class="lunch-nav-elem lunch-fn-settings">Settings</a>
-					<a href="#/venue/1" class="lunch-nav-elem lunch-fn-xx">Detail</a>
-					<a href="#/venues" class="lunch-nav-elem lunch-fn-xx">Ois</a>
-
-					<a href="/logout" class="lunch-nav-elem lunch-fn-logout">Logout</a>
-
-				</nav>
+				<!-- User Name -->
+				<img src="{{details.user.img}}" alt="" class="lunch-account-image">
+				<div class="lunch-account-name">{{details.user.name}}</div>
 			
-
 			</div>
 
+
+
+			<!-- Nav -->
+
+			<nav class="lunch-nav" ng-controller="DetailsCtrl">
+				<!-- Time -->
+				<div class="lunch-nav-elem lunch-timer">It's {{details.day}}</div>
+
+				<!-- Notification Settings -->
+				<!--
+				<div class="lunch-fn-notify">
+					<input type="checkbox" id="notifications" class="lunch-inp-notify">
+					<label for="notifications">I like Emails!</label>
+				</div>
+				-->
+
+				<!-- Settings Mode -->
+
+				<a href="#/settings" class="lunch-nav-elem lunch-fn-settings">Settings</a>
+				<a href="#/venue/1" class="lunch-nav-elem lunch-fn-xx">Detail</a>
+				<a href="#/venues" class="lunch-nav-elem lunch-fn-xx">Ois</a>
+
+				<a href="/logout" class="lunch-nav-elem lunch-fn-logout">Logout</a>
+
+			</nav>
 
 		</header>
 
