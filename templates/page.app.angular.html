@@ -40,24 +40,38 @@
 
 
 
-			<!-- Account -->
 
-			<div class="lunch-account" ng-controller="DetailsCtrl">
-				
-
-				<!-- User Name -->
-				<img src="{{details.user.img}}" alt="" class="lunch-account-image">
-				<div class="lunch-account-name">{{details.user.name}}</div>
-			
-			</div>
 
 
 
 			<!-- Nav -->
 
 			<nav class="lunch-nav" ng-controller="DetailsCtrl">
-				<!-- Time -->
-				<div class="lunch-nav-elem lunch-timer">It's {{details.day}}</div>
+
+
+				<!-- Account -->
+				<div class="lunch-account" ng-controller="DetailsCtrl">
+					<img src="{{details.user.img}}" alt="" class="lunch-account-image">
+					<div class="lunch-account-name">{{details.user.name}}</div>
+				</div>
+
+				<ul class="lunch-nav-list">
+					<li class="lunch-nav-elem lunch-timer">
+						<span>It's {{details.day}}</span>
+					</li>
+					<li class="lunch-nav-elem">
+						<a href="#/settings" class="lunch-fn-settings">Settings</a>
+					</li>
+					<li class="lunch-nav-elem">
+						<a href="#/venue/1" class="lunch-fn-xx">Detail</a>
+					</li>
+					<li class="lunch-nav-elem">
+						<a href="#/venues" class="lunch-fn-xx">Ois</a>
+					</li>
+					<li class="lunch-nav-elem">
+						<a href="/logout" class="lunch-fn-logout">Logout</a>
+					</li>
+				</ul>
 
 				<!-- Notification Settings -->
 				<!--
@@ -66,15 +80,6 @@
 					<label for="notifications">I like Emails!</label>
 				</div>
 				-->
-
-				<!-- Settings Mode -->
-
-				<a href="#/settings" class="lunch-nav-elem lunch-fn-settings">Settings</a>
-				<a href="#/venue/1" class="lunch-nav-elem lunch-fn-xx">Detail</a>
-				<a href="#/venues" class="lunch-nav-elem lunch-fn-xx">Ois</a>
-
-				<a href="/logout" class="lunch-nav-elem lunch-fn-logout">Logout</a>
-
 			</nav>
 
 		</header>

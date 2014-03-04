@@ -1,4 +1,13 @@
-/* Input elements */
+/*
+ * Lunchpad. Input/Elements
+ * @author Joachim Fröstl <jf@19h13.com>
+ */
+
+
+
+
+
+
 
 
 
@@ -7,16 +16,22 @@
  */
 
 .lunch-venue-filter {
-	max-width: 600px;
 
+	// Box
 	margin: {
 		left: auto;
 		right: auto;
 	}
-
 	padding: {
-		left: 30px;
+		top: 15px;
 		right: 30px;
+		bottom: 15px;
+		left: 30px;
+	}
+
+	// Skin
+	background: {
+		color: #efefef;
 	}
 }
 
@@ -24,14 +39,13 @@
 
 /* Mixin for medium screens */
 
-@mixin lunch-venue-filter-screen-m() {
+@mixin lunch-venue-filter-mixin-m() {
 	
 	.lunch-venue-filter {
 
 		margin: {
 			left: 0;
 		}
-
 		padding: {
 			left: 60px;
 			right: 60px;
@@ -53,38 +67,85 @@
  */
 
 .lunch-venue-filter-input {
-
+	
+	// Box
 	display: block;
-
-	//@include box-sizing(border-box);
 	width: 100%;
-
+	max-width: 600px;
 	padding: {
-		top: 15px;
-		left: 10px;
+		top: 5px;
 		right: 10px;
-		bottom: 15px;
+		bottom: 5px;
+		left: 10px;
 	};
-
 	margin:{
 		left: -10px;
+		right: auto;
 	}
-
 	border: {
-		width: 1px;
+		width: 0;
+		bottom-width: 1px;
 		style: dashed;
 		color: #ccc;
 	}
+
+	// Skin
+	background: {
+		color: #eee;
+	}
+	font: {
+		family: Georgia, sans-serif;
+		style: italic;
+	}
+
+	// Effects
+	@include transition-property( background-color );
+	@include transition-duration( 0.5s );
+
+	// States
+	&:focus,
+	&:hover {
+		background: {
+			color: #e5e5e5;
+		}
+	}
 }
 
 
 
-/* Mixin for medium screens */
+/*
+ * Mixin for small screens
+ */
+@mixin lunch-venue-filter-input-mixin-s() {
+	
+	.lunch-venue-filter-input {
+		
+		// Box
+		margin: {
+			left: auto;
+			right: auto;
+		}
+	}
+}
 
-@mixin lunch-venue-filter-input-screen-m() {
+
+
+/* 
+ * Mixin for medium screens 
+ */
+@mixin lunch-venue-filter-input-mixin-m() {
 
 	.lunch-venue-filter-input {
-		margin-left: -10px;
+
+		// Box
+		margin: {
+			left: -10px;
+		}
+		padding: {
+			left: 10px;
+			right: 10px;
+		}
+
 	}
 }
 
@@ -96,18 +157,34 @@
 
 
 
-/* Collect all Medium Screen Styles here */
-
-@mixin lunch-inputs-screen-m-mixin() {
-
-	@include lunch-venue-filter-screen-m;
-	@include lunch-venue-filter-input-screen-m;
+/*
+ * Collect all Small Sceen Styles here
+ */
+@mixin lunch-inputs-mixins-s() {
+	@include lunch-venue-filter-input-mixin-s();
 }
 
-// Apply
-
-@media screen and (min-width: 960px) {
-
-	@include lunch-inputs-screen-m-mixin;
-
+/* 
+ * Collect all Medium Screen Styles here 
+ */
+@mixin lunch-inputs-mixins-m() {
+	@include lunch-venue-filter-mixin-m;
+	@include lunch-venue-filter-input-mixin-m;
 }
+/*
+ * Apply Small
+ */
+@media screen and ( min-width: $lunch-grid-break-s ) {
+	@include lunch-inputs-mixins-s;
+}
+
+/* 
+ * Apply Medium
+ */
+@media screen and ( min-width: $lunch-grid-break-m ) {
+	@include lunch-inputs-mixins-m;
+}
+
+/*
+ * Apply Large
+ */ 

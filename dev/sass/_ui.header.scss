@@ -16,6 +16,10 @@
  */
 .lunch-header {
 	
+	// Box
+	width: 100%;
+	overflow: hidden;
+
 	// Skin
 	background: {
 		color: $lunch-color-red;
@@ -28,12 +32,15 @@
 	.lunch-logo {
 
 		// Box
-		height: 60px; // Overwrite Loginpage Styling
-		margin: {
+		float: left;
+		height: 50px; // Overwrite Loginpage Styling
+		padding: {
+			left: 0;
 			top: 0;
 			bottom: 0;
 		}
-		padding: {
+		margin: {
+			left: 30px;
 			top: 20px;
 			bottom: 20px;
 		}
@@ -86,6 +93,7 @@
 			
 			// Box
 			display: block;
+			float: none;
 			height: 122px;
 			width: auto;
 			padding: {
@@ -95,7 +103,7 @@
 				bottom: 0;
 			}
 			margin: {
-				top: 100px;
+				top: 75px;
 				left: auto;
 				right: 0;
 				bottom: 60px;
@@ -122,8 +130,38 @@
  * Header User styles, mobile first
  */
 .lunch-account {
+
+	// Box
+	height: 50px;
+	width: 50px;
+	margin: {
+		top: 20px;
+		right: 30px;
+		bottom: 20px;
+	}
+	float: right;
+	
+	// Skin
+	background: {
+		color: $lunch-color-red-dark;
+	}
 	text-align: center;
+	overflow: hidden;
+
+	// Effects 
+	@include border-radius( 25px );
+	
 }
+
+
+
+/*
+ * Account Name
+ */
+.lunch-account-name {
+	display: none;
+}
+
 
 
 /* 
@@ -135,13 +173,28 @@
 	.lunch-account {
 
 		// Box
+		width: auto;
+		height: auto;
 		margin: {
 			top: 20px;
+			right: 0;
 			bottom: 15px;
+			left: 0;
 		}
+		float: none;
+		overflow: visible;
 
 		// Position
 		position: relative;
+
+
+		// Skin
+		background: {
+			color: transparent;
+		}
+
+		// Effects
+		@include border-radius( 0px );
 	}
 	
 	// Avatar
@@ -160,6 +213,7 @@
 	.lunch-account-name {
 		
 		// Box
+		display: block;
 		padding: {
 			left: 0;
 			right: 0;
@@ -183,20 +237,24 @@
 
 
 
-
 /* 
- * Nav Elements 
+ * Nav Container 
  */
 .lunch-nav {
+	
+	// Skin
+	text-align: left;
 
-	// Box
-	padding: {
-		top: 20px;
-		bottom: 20px;
+	// States
+	&:hover {
+		.lunch-nav-list {
+			height: 165px;
+			padding: {
+				top: 0px;
+				bottom: 20px;
+			}
+		}
 	}
-
-	// Typo
-	text-align: center;
 }
 
 
@@ -204,11 +262,61 @@
 /*
  * Mixin for medium sized screens 
  */
-@mixin lunch-nav-screen-m() {
+@mixin lunch-nav-mixin-m() {
 
 	.lunch-nav {
 
+		//Skin
+		text-align: right; 
+	}
+}
+
+
+
+
+
+
+
+
+
+/* 
+ * Nav List 
+ */
+.lunch-nav-list {
+
+	// Box
+	height: 0;
+	padding: {
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+	margin: {
+		top: 0;
+		bottom: 0;
+	}
+	clear: left;
+
+	// Skin
+	text-align: left;
+
+	// Effects
+	@include transition-property( height padding );
+	@include transition-duration( 0.5s );
+}
+
+
+
+/*
+ * Mixin for medium sized screens 
+ */
+@mixin lunch-nav-list-mixin-m() {
+
+	.lunch-nav-list {
+
 		// Box
+		height: auto;
 		padding: {
 			top: 0;
 			bottom: 0;
@@ -233,11 +341,7 @@
 .lunch-nav-elem {
 	
 	// Box
-	display: inline;
-	padding: {
-		left: 10px;
-		right: 10px;
-	}
+	display: block;
 	
 	// Skin
 	color: white;
@@ -246,11 +350,56 @@
 		family: Georgia;
 	}
 	
-	@include transition( color 1000ms );
+	// Pseudoselector
+	&:first-child {
+		border: {
+			width: 0px;
+			top-width: 1px;
+			style: solid;
+			color: $lunch-color-red-dark;
+		}
+		padding: {
+			top: 20px;
+		}
+	}
+	
 
+	// States
 	&:hover{
-		color: #000;
-		@include transition( color 200ms );
+
+		a {
+			// Skin
+			color: #000;
+
+			// Effects
+			@include transition-duration( 200ms );
+		}
+	}
+
+	// Children
+	a, span {
+		
+		// Box
+		display: block;
+		padding: {
+			top: 5px;
+			right: 30px;
+			bottom: 5px;
+			left: 30px;
+		}
+
+		// Skin
+		color: white;
+		text-decoration: none;
+
+		// Effects
+		@include transition-property( color );
+		@include transition-duration( 1000ms );
+
+	}
+	span {
+		// Skin
+		cursor: default;
 	}
 }
 
@@ -259,7 +408,7 @@
 /* 
  * Mixin for medium sized screens 
  */
-@mixin lunch-nav-elem-screen-m() {
+@mixin lunch-nav-elem-mixin-m() {
 	
 	.lunch-nav-elem {
 		
@@ -268,8 +417,25 @@
 		padding: {
 			left: 0;
 			right: 0;
-			top: 5px;
-			bottom: 5px;
+		}
+	
+
+		// Pseudoselector
+		&:first-child {
+			border: {
+				width: 0px;
+			}
+			padding: {
+				top: 0;
+			}
+		}
+
+		// Children 
+		a, span {
+			padding: {
+				left: 0;
+				right: 0;
+			}
 		}
 	}
 }
@@ -288,8 +454,8 @@
 @mixin lunch-header-mixins-screen-m() {
 
 	@include lunch-header-screen-m;
-	@include lunch-nav-screen-m;
-	@include lunch-nav-elem-screen-m;
+	@include lunch-nav-list-mixin-m;
+	@include lunch-nav-elem-mixin-m;
 	@include lunch-header-account-screen-m;
 }
 

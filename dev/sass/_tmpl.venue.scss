@@ -42,8 +42,8 @@ $venue-vertical-padding: 50px;
 		right: 0px;
 	}
 	padding: {
-		top: 30px;
-		bottom: 60px;
+		top: 0;
+		bottom: 0;
 		right: 30px;
 		left: 30px;
 	}
@@ -66,8 +66,8 @@ $venue-vertical-padding: 50px;
 		
 		// Box
 		padding: {
-			top: 50px;
-			bottom: 50px;
+			top: 0;
+			bottom: 0;
 			right: 60px;
 			left: 60px;
 		}
@@ -93,7 +93,11 @@ $venue-vertical-padding: 50px;
 		left: auto;
 		right: auto
 	}
-	
+	margin: {
+		top: 40px;
+		bottom: 40px;
+	}
+
 	// Skin
 	position: relative;
 	display: table; // clearfix workaround
@@ -349,7 +353,7 @@ $venue-vertical-padding: 50px;
 		// Position
 		position: absolute;
 		right: 0;
-		bottom: 5px;
+		bottom: 0;
 	}
 }
 

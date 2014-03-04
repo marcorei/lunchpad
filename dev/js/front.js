@@ -212,7 +212,7 @@
 			            {
 			                "name" : "mr@19h13.com",
 			                "img" : "/static/img/mr.png",
-			                "status": "i love angular.js!"
+			                
 			            },
 			            {
 			                "name" : "mk@19h13.com",

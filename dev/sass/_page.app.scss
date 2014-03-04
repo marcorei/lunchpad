@@ -37,8 +37,6 @@
 
 
 .lunch-venue-create-container{
-	//margin-left: 38.2%;
-	//width: 61.8%;
 
 	background-color: #efefef;
 
@@ -65,7 +63,7 @@
 	min-height: 100%;
 	
 	padding: {
-		top: 20px;
+		top: 0;
 		bottom: 0px;
 	}
 
@@ -84,7 +82,7 @@
 
 // Desktop Second
 
-@mixin lunch-apppage-body-desktop() {
+@mixin lunch-apppage-body-sm-mixin() {
 
 	.lunch-apppage-body {
 		
@@ -104,50 +102,28 @@
 
 
 
-// Venue Header
-
-// Venue Interaction
-
-.lunch-venue-interaction {
-
-	clear: left;
-	border: {
-		width: 0px;
-		top-width: 0px;
-		style: solid;
-		color: #efefef;
-	}
-
-	padding:  {
-		top: 20px;
-	}
-}
-
-
-
-
-
-
-
-
-
-
-
-/* Desktop Second */
 
 // Collect all Desktopstyles here
 
-@mixin lunch-apppage-desktop() {
+@mixin lunch-apppage-sm-mixins() {
 
 	//@include lunch-apppage-head-desktop;
-	@include lunch-apppage-body-desktop;
+	@include lunch-apppage-body-sm-mixin;
 
 }
 
-// Apply
+
+
+
+
+
+
+
+
+/* Apply */
 
 @media screen and (min-width: 960px) {
 
-	@include lunch-apppage-desktop;
+	@include lunch-apppage-sm-mixins;
 
 }
