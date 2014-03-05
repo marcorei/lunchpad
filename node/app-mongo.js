@@ -25,11 +25,12 @@ var path = require('path'),
 
 	Validator = require('validator').Validator,
 
-	nodemailer = require('nodemailer'),
+	// own modules?
 
-	VenueProvider = require('./venueprovider-mongo.js').VenueProvider,
-	UserProvider = require('./userprovider-mongo.js').UserProvider,
-	ItemProvider = require('./itemprovider-mongo.js').ItemProvider,
+	venueProvider = require('./provider.venue-mongo.js').venueProvider,
+	userProvider = require('./provider.user-mongo.js').userProvider,
+	itemProvider = require('./provider.item-mongo.js').itemProvider,
+	// wait and see what else we'll need
 
 	config = require('./config.json');
 
@@ -67,11 +68,29 @@ Date.prototype.yyyymmdd = function() {
  */
 
 var lunchHelper = {
+
 	sendFile = function(fileName){
 		return function(req, res){
 			res.sendFile( path.join( __dirname, fileName ));
 		}
+	},
+
+	sendErrorJson = function(msg,code,nolog){
+
+		//return function(){
+			if(!nolog) console.log(msg);
+			code = code || 0;
+
+			res.json({
+				error: {
+					code: 0,
+					msg: msg
+				}
+			});
+		//}
+		
 	}
+
 }
 
 
@@ -304,7 +323,7 @@ app.post( lunchActions.login, passport.authenticate('local-login'), function(req
 	if(req.isAuthenticated())
 		res.json({ error: null });
 	else
-		res.json({ error:{msg:'login failed'} });
+		sendErrorJson('Login failed.')();
 });
 
 app.post( lunchActions.logout, function(req,res){
@@ -322,8 +341,6 @@ app.post( lunchActions.logout, function(req,res){
 /*
  * Socket.io "Routes"
  */
-
-
 
 
 

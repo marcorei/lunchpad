@@ -6,6 +6,9 @@
 
 
 
+var db = require('./module.dbase.js').dBase,
+	cn = 'item';
+
 
 var ItemProvider = function(){};
 
@@ -19,4 +22,4 @@ var ItemProvider = function(){};
 
 
 
-exports.ItemProvider = ItemProvider; 
+exports.itemProvider = new ItemProvider(); 

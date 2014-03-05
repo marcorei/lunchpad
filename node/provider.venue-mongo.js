@@ -6,6 +6,9 @@
 
 
 
+var db = require('./module.dbase.js').dBase,
+	cn = 'venue';
+
 
 var VenueProvider = function(){};
 
@@ -181,4 +184,4 @@ new VenueProvider.saveVenues([
 
 
 
-exports.VenueProvider = VenueProvider; 
+exports.venueProvider = new VenueProvider(); 
