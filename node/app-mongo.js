@@ -21,7 +21,7 @@ var path = require('path'),
 
 	passport = require('passport'),
 	LocalStrategy = require('passport-local').Strategy,
-	passwordHash = require('password-hash'),
+	hash = require('password-hash'),
 
 	Validator = require('validator').Validator,
 
@@ -177,12 +177,12 @@ passport.serializeUser(function(user, done) {
 	done(null, user._id);
 });
 
-passport.deserializeUser(function(_id, done) {
-	//( _id, function (err, user) {
-		//done(err, user);
-	//}); 
-
-	// Find Mongo User
+passport.deserializeUser(function(id, done){
+	userProvider.findUser(id,function(user){
+		done(null,user);
+	},function(error){
+		done(error);
+	})
 });
 
 
@@ -190,33 +190,21 @@ passport.deserializeUser(function(_id, done) {
 // Strategies etc
 
 passport.use('local-login', new LocalStrategy(
-	function( username, password, done ){
-		console.log('starting auth strategie for user: ' + username);
+	function( mail, pass, done ){
+		console.log('starting auth strategie for user: ' + mail);
+		userProvider.findUserByMail( mail, function(user){
 
-		// query for user in db
-		// needs to be ajusted to userprovider
-
-		/*
-		getUserByName( username, function( err, user ){
-
-			if( err ){ 
-				console.log( err );
-				return done( err ); 
-			}
-			if( !user ){ 
-				console.log('user not found: ' + username);
-				return done( null, false, {message:'Incorrect username.'} ); 
-			}
-			if( !passwordHash.verify( password, user.password ) ){ 
-				console.log('password did not match for user: ' + username);
+			if(!hash.verify(pass, user.pass)){
+				console.log('password did not match for user: ' + mail);
 				return done( null, false, {message:'Incorrect password.'} ); 
 			}
-
-			console.log('user authenticated: ' + user.username);
+			console.log('user authenticated: ' + user.nick + ' (' + mail + ')');
 			return done( null, user );
 
-		});
-*/
+		},function(error){
+			console.log(error);
+			return done(error); 
+		});	
 	}
 ));
 
@@ -306,27 +294,27 @@ var lunchActions = {
 
 // Pages. Just get, no data.
 
-app.get( lunchPages.root.route, 		lunchHelper.sendFile( lunchPages.root.tmpl ) );
-app.get( lunchPages.login.route,		lunchHelper.sendFile( lunchPages.login.tmpl ) );
-app.get( lunchPages.manifesto.route,	lunchHelper.sendFile( lunchPages.manifesto.tmpl ) );
+app.get(lunchPages.root.route, 		lunchHelper.sendFile( lunchPages.root.tmpl ) );
+app.get(lunchPages.login.route,		lunchHelper.sendFile( lunchPages.login.tmpl ) );
+app.get(lunchPages.manifesto.route,	lunchHelper.sendFile( lunchPages.manifesto.tmpl ) );
 
-app.get( lunchPages.viewVenuelist.route, 	lunchHelper.sendFile( lunchPages.viewVenuelist.tmpl ) );
-app.get( lunchPages.viewVenueDetail.route, 	lunchHelper.sendFile( lunchPages.viewVenueDetail.tmpl ) );
-app.get( lunchPages.viewNewVenue.route,		lunchHelper.sendFile( lunchPages.viewNewVenue.tmpl ) );
-app.get( lunchPages.viewSettings.route,		lunchHelper.sendFile( lunchPages.viewSettings.tmpl ) );
+app.get(lunchPages.viewVenuelist.route, 	lunchHelper.sendFile( lunchPages.viewVenuelist.tmpl ) );
+app.get(lunchPages.viewVenueDetail.route, 	lunchHelper.sendFile( lunchPages.viewVenueDetail.tmpl ) );
+app.get(lunchPages.viewNewVenue.route,		lunchHelper.sendFile( lunchPages.viewNewVenue.tmpl ) );
+app.get(lunchPages.viewSettings.route,		lunchHelper.sendFile( lunchPages.viewSettings.tmpl ) );
 
 
 
 // Action-Requests not send via socket (login / logout via passport)
 
-app.post( lunchActions.login, passport.authenticate('local-login'), function(req,res){
+app.post(lunchActions.login, passport.authenticate('local-login'), function(req,res){
 	if(req.isAuthenticated())
 		res.json({ error: null });
 	else
 		sendErrorJson('Login failed.')();
 });
 
-app.post( lunchActions.logout, function(req,res){
+app.post(lunchActions.logout, function(req,res){
 	req.logout();
 	res.json({ error: null });
 });
