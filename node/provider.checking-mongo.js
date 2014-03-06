@@ -31,10 +31,21 @@ CheckinProvider.prototype.findAll = function(onSuccess, onError){
  * Find one checkin
  */
 
-CheckinProvider.prototype.findCheckin = function(onSuccess, onError){
+CheckinProvider.prototype.findCheckin = function(id, onSuccess, onError){
 
 }
 
+
+
+
+
+/*
+ * Get a list of all checkins
+ */
+
+CheckinProvider.prototype.findAll = function(onSuccess, onError){
+
+}
 
 
 
