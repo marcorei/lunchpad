@@ -88,7 +88,7 @@ UserProvider.prototype.findUserByMail = function(mail, onSuccess, onError){
 UserProvider.prototype.addItemToInventory = function(id, item, onSuccess, onError){
 	db.gc(cn, function(collection){
 
-		//
+		
 
 	},onError);
 }
@@ -154,40 +154,53 @@ UserProvider.prototype.changeStats = function(id, stats, onSuccess, onError){
  * @param user { mail, nick, pass, ava }
  */
 
-UserProvider.prototype.saveUser = function(user, onSuccess, onError){
+UserProvider.prototype.saveUser = function(users, onSuccess, onError){
 	db.gc(cn, function(collection){
 
+		var i,
+			user;
+
+		if(users.length === 'undefined') users = [users];
+
 		// expected values
-		if( !user.mail ||
-			!user.nick ||
-			!user.role ||
-			!user.pass ||
-			!user.ava ){
-			callback('data incomplete');
-			return;
+
+		for(i=0;i<users.length;i++){
+
+			user = users[i];
+
+			if( !user.mail ||
+				!user.nick ||
+				!user.role ||
+				!user.pass ||
+				!user.ava ){
+				callback('data incomplete');
+				return;
+			}
+
+			// hash passwort
+			user.pass = hash.generate( user.pass );
+
+			// add missing standard values
+			user.item = null; // active item
+			user.inv = []; // inventory (all items)
+
+			user.noti = {
+				remind: true,
+				overv: true
+			};
+			user.stats = {
+				cihs: 0,
+				cis: 0
+			};
+
 		}
+		
 
-		// hash passwort
-		user.pass = hash.generate( user.pass );
-
-		// add missing standard values
-		user.item = null // active item
-		user.inv = []; // inventory (all items)
-
-		user.noti = {
-			remind: true,
-			overv: true
-		}
-		user.stats = {
-			cihs: 0,
-			cis: 0
-		}
-
-		collection.insert(user, function(error,result) {
+		collection.insert(users, function(error,results) {
 			if(error) onError(error);
 			else{
-				console.log('User created: '+user.mail);
-				onSuccess(null,result);
+				console.log('User created: '+users.length);
+				onSuccess(null,results);
 			}
 		});
 
