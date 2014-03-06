@@ -27,7 +27,7 @@ var UserProvider = function(){
  *
  */
 
-UserProvider.prototype.findAll = function(callback){
+UserProvider.prototype.findAll = function(onSuccess, onError){
 
 	// will probably not be used for now
 
@@ -45,8 +45,7 @@ UserProvider.prototype.findUser = function(id, onSuccess, onError){
 
 		collection.findOne({
 			_id: db.oID(id)
-		},{},
-		function(error,result){
+		},{},function(error,result){
 			if(error) onError(error);
 			else if(!result) onError('user not found!');
 			else onSuccess(null,result);
@@ -67,16 +66,47 @@ UserProvider.prototype.findUserByMail = function(mail, onSuccess, onError){
 
 		collection.findOne({
 			mail: mail
-		},{},
-		function(error,result){
+		},{
+			fields:{
+				mail:1,
+				nick:1,
+				pass:1
+			}
+		},function(error,result){
 			if(error) onError(error);
 			else if(!result) onError('user not found!');
-			else onSuccess(null,result);
+			else onSuccess(result);
 		});
 
 	},onError);
 }
 
+
+
+/*
+ * Change the password
+ */
+
+UserProvider.prototype.updatePass = function(id, pass, onSuccess, onError){
+	db.gc(cn, function(collection){
+
+		collection.update({
+			_id: db.oID(id)
+		},{
+			$set:{
+				pass: hash.generate( pass )
+			}
+		},{
+			safe:true,
+			multi:false
+		},function(error,updates){
+			if(error) onError(error);
+			else if(!updates) onError('user not found.');
+			else onSuccess(updates);
+		});
+
+	},onError);	
+}
 
 
 
@@ -85,10 +115,38 @@ UserProvider.prototype.findUserByMail = function(mail, onSuccess, onError){
  * Add an item to the inventory list.
  */
 
-UserProvider.prototype.addItemToInventory = function(id, item, onSuccess, onError){
+UserProvider.prototype.saveItemToInventory = function(id, item, onSuccess, onError){
 	db.gc(cn, function(collection){
 
-		
+		collection.update({
+			_id: db.oID(id)
+		},{
+			$push:{
+				inv: item
+			}
+		},{
+			safe:true,
+			multi:false
+		},function(error,result){
+			if(error) onError(error);
+			if(!result) onError('nothing updated, user not found');
+			else onSuccess(result);
+		});
+
+	},onError);
+}
+
+
+
+
+/*
+ * Remove an item from all inventories.
+ */
+
+UserProvider.prototype.removeItemFromInventories = function(item, onSuccess, onError){
+	db.gc(cn, function(collection){
+
+		// TODO!
 
 	},onError);
 }
@@ -100,10 +158,23 @@ UserProvider.prototype.addItemToInventory = function(id, item, onSuccess, onErro
  * Make item active.
  */
 
-UserProvider.prototype.makeItemActive = function(id, item, onSuccess, onError){
+UserProvider.prototype.updateAktiveItem = function(id, item, onSuccess, onError){
 	db.gc(cn, function(collection){
 
-		// lol
+		collection.update({
+			_id: db.oID(id)
+		},{
+			$set:{
+				item: item
+			}
+		},{
+			safe:true,
+			multi:false
+		},function(error,result){
+			if(error) onError(error);
+			if(!result) onError('nothing updated, user not found');
+			else onSuccess(result);
+		});
 
 	},onError);
 }
@@ -116,10 +187,29 @@ UserProvider.prototype.makeItemActive = function(id, item, onSuccess, onError){
  * Adjust notification settings
  */
 
-UserProvider.prototype.changeNoti = function(id, noti, onSuccess, onError){
+UserProvider.prototype.updateNoti = function(id, noti, onSuccess, onError){
 	db.gc(cn, function(collection){
 
-		// lol
+		if( !noti.remind ||
+			!noti.overv){
+			callback('params invalid');
+			return null;
+		}
+
+		collection.update({
+			_id: db.oID(id)
+		},{
+			$set:{
+				noti: noti
+			}
+		},{
+			safe:true,
+			multi:false
+		},function(error,result){
+			if(error) onError(error);
+			if(!result) onError('nothing updated, user not found');
+			else onSuccess(result);
+		});
 
 	},onError);
 }
@@ -132,10 +222,29 @@ UserProvider.prototype.changeNoti = function(id, noti, onSuccess, onError){
  * Ajust stats
  */
 
-UserProvider.prototype.changeStats = function(id, stats, onSuccess, onError){
+UserProvider.prototype.updateStats = function(id, stats, onSuccess, onError){
 	db.gc(cn, function(collection){
 
-		// lol
+		if( !stats.cihs ||
+			!stats.cis){
+			callback('params invalid');
+			return null;
+		}
+
+		collection.update({
+			_id: db.oID(id)
+		},{
+			$set:{
+				stats: stats
+			}
+		},{
+			safe:true,
+			multi:false
+		},function(error,result){
+			if(error) onError(error);
+			if(!result) onError('nothing updated, user not found');
+			else onSuccess(result);
+		});
 
 	},onError);
 }
@@ -229,7 +338,7 @@ new UserProvider().saveUser([
 		pass: '',
 		ava: ''
 	}
-], function(error, users){});
+], function(users){},function(error){});
 
 
 

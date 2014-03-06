@@ -18,15 +18,26 @@ var VenueProvider = function(){};
 
 
 /*
- * Get a list of all venues, only data of today
+ * Get a list of all venues
  */
 
-VenueProvider.prototype.findAll = function(callback){
+VenueProvider.prototype.findAll = function(onSuccess, onError){
+	db.gc(cn, function(collection){
+	
+		collection.find({},{
+			fields:{
+				name:1,
+				url:1,
+				guests:1,
+				comc:1
+			},
+			sort: [[guest,-1],[name,1]]
+		},function(error,results){
+			if(error) onError(error);
+			else onSuccess(results);
+		});
 
-	// Get a list of all venues
-	// map reduce to:
-	// v_id, name, url, users (name, avatar, item), numcomments
-
+	},onError);
 }
 
 
@@ -35,44 +46,19 @@ VenueProvider.prototype.findAll = function(callback){
  * Get one venue with all details
  */
 
-VenueProvider.prototype.findVenue = function(v_id, callback){
+VenueProvider.prototype.findVenue = function(id, onSuccess, onError){
+	db.gc(cn, function(collection){
+		
+		collection.findOne({
+			_id: db.oID(id)
+		},{},function(error,result){
+			if(error) onError(error);
+			else if(!result) onError('venue not found');
+			else onSuccess(result);
+		});
 
-	// get one venue
-	// reduce to:
-	// v_id, name, url, users(name, avatar, item) !!only from today!!, comments(id, time, text, user(id, name, avatar, item))
-
+	},onError);
 }
-
-
-/*
- * Get top venue for weekday
- */
-
-VenueProvider.prototype.findWeekdayFavVenue = function(wd, callback){
-
-	// map reduce the venues for stats.weekday
-	// return the best!
-
-}
-
-
-/*
- * Save a new venue
- */
-
-VenueProvider.prototype.saveVenues = function(venues, callback){
-
-	// get all the info
-	// (validation will be done up front) ... or not
-	// insert new data
-
-}
-
-
-
-
-
-
 
 
 
@@ -81,35 +67,176 @@ VenueProvider.prototype.saveVenues = function(venues, callback){
  * Add a new user for today
  */
 
-VenueProvider.prototype.addUserToVenue = function(v_id, user, callback){
+VenueProvider.prototype.addUserToVenue = function(id, user, onSuccess, onError){
+	db.gc(cn, function(collection){
+	
+		collection.update({
+			'guests.uid':user._id
+		},{
+			$pull:{
+				guests:{ uid:user._id }
+			}
+		},{
+			multi:true, //only true so that in case of an error multiple entries will be removed
+			save:true
+		},function(error,updates){
+			if(error) onError(error);
+			else{
 
-	this.removeUserFromAll(user);
+				collection.update({
+					_id: oID(id)
+				},{
+					$push: {
+						guests:user
+					}
+				},{
+					multi:false,
+					save: true
+				},function(error,updates){
+					if(error) onError(error);
+					else if(!updates) onError('Could not add user to venue.');
+					else onSuccess(updates);
+				});
 
-	// update new venue
+			}
+		});
 
-	// add to stats?
-	// add to history provider?
+	},onError);
+}
 
+
+
+
+/*
+ * Update comment count
+ */
+
+VenueProvider.prototype.updateCommentCount = function(id, count, onSuccess, onError){
+	db.gc(cn, function(collection){
+
+		collection.update({
+			_id: db.oID(id)
+		},{
+			$set:{
+				comc: count
+			}
+		},{
+			multi: false,
+			save: true
+		},function(error,updates){
+			if(error) onError(error);
+			else if(!updates) onError('venue not found');
+			else onSuccess(updates);
+		});
+
+	},onError);
+}
+
+
+
+
+/*
+ * Update url
+ */
+
+VenueProvider.prototype.updateUrl = function(id, url, onSuccess, onError){
+	db.gc(cn, function(collection){
+
+		collection.update({
+			_id: db.oID(id)
+		},{
+			$set:{
+				url: url
+			}
+		},{
+			multi: false,
+			save: true
+		},function(error,updates){
+			if(error) onError(error);
+			else if(!updates) onError('venue not found');
+			else onSuccess(updates);
+		});
+
+	},onError);
+}
+
+
+
+
+/*
+ * Get venue, that has not been featured yet, venue that have been requested this way once will appear as featured and won't be returned a second time
+ */
+
+VenueProvider.prototype.findUnfeatured = function(onSuccess, onError){
+	db.gc(cn, function(collection){
+
+		collection.findAndModify({
+			featured: false
+		},[
+			[date:-1]
+		],{
+			$set: { 
+				featured: true
+			}
+		},{
+			save:true
+		},function(error,venue){
+			if(error) onError(error);
+			else onSuccess(venue);
+		});
+
+	},onError);
+}
+
+
+
+
+/*
+ * Reset daily data
+ */
+
+VenueProvider.prototype.dailyReset = function(onSuccess, onError){
+	db.gc(cn, function(collection){
+
+		collection.update({},{
+			$set:{
+				guests: [],
+				comc: 0
+			}
+		},{
+			multi: true,
+			save: true
+		},function(error,updates){
+			if(error) onError(error);
+			else if(!updates) onError('nothing to reset');
+			else onSuccess(updates);
+		});
+
+	},onError);
 }
 
 
 
 /*
- * Remove user entry
+ * Delete venue
  */
 
-VenueProvider.prototype.removeUserFromAll = function(user, callback){
+VenueProvider.prototype.deleteVenue = function(id, onSuccess, onError){
+	db.gc(cn, function(collection){
 
-	// search for venue with user
-	// delete user entry from venue
+		collection.remove({
+			_id: db.oID(id)
+		},{
+			save:true
+			single:true
+		},function(error,removed){
+			if(error) onError(error);
+			else if(!removed) onError('nothing to remove');
+			else onSuccess(removed);
+		});
 
-	// remove from stats?
-
+	},onError);
 }
-
-
-
-
 
 
 
@@ -118,43 +245,50 @@ VenueProvider.prototype.removeUserFromAll = function(user, callback){
 
 
 /*
- * Find a comment.
- * For example to check if user is authorized to delete it.
+ * Save a new venue
  */
 
-VenueProvider.prototype.findComment = function(v_id, c_pos, callback){
+VenueProvider.prototype.saveVenues = function(venues, callback){
+	db.gc(cn, function(collection){
 
-	// this.findVenueById(v_id);
-	// get comment
-	// return comment
+		var i,
+			venue;
 
+		if(venues.length === 'undefined') venues = [venues];
+
+		// expected values
+
+		for(i=0;i<venues.length;i++){
+
+			venue = venues[i];
+
+			if( !venue.name ||
+				!venue.url ||
+				!venue.createdBy ){
+				callback('data incomplete');
+				return;
+			}
+
+			// add attrs
+			venue.createdAt = new Date();
+			venue.guests = [];
+			venue.comc = 0; //comment count
+			venue.featured = false; // relevant for info mail
+
+		}
+		
+
+		collection.insert(venues, function(error,results) {
+			if(error) onError(error);
+			else{
+				console.log('Venues created: '+venues.length);
+				onSuccess(null,results);
+			}
+		});
+
+	},onError);
 }
 
-
-
-/*
- * Add comment
- */
-
-VenueProvider.prototype.addComment = function(v_id, comment, callback){
-
-	// user should be provided with comment object
-
-	// update venue and add new comment
-}
-
-
-
-/*
- * Delete comment
- */
-
-VenueProvider.prototype.deleteComment = function(v_id, c_pos, callback){
-
-	// don't actually delete the comment
-	// just replace the values with "deleted" (like reddit)
-
-}
 
 
 
@@ -170,12 +304,7 @@ new VenueProvider.saveVenues([
 	{
 		name: 'Testvenue0',
 		url: 'http://www.alf.de',
-		users: [],
-		comment: [],
-		stats:{
-			wdvs:[0,0,0,0,0,0,0],
-			vs: 0
-		}
+		createdBy: ''
 	}
 ], function(error, venues));
 
