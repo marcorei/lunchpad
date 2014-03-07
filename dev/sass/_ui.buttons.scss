@@ -51,28 +51,28 @@ $lunch-btn-rotate-hover: 360deg;
 	
 	// Box
 	display: block;
-	width: 50px;
-	height: 20px;
-	padding: { 
-		top:22px;
-		bottom: 22px;
-		left: 7px;
-		right: 7px;
+	padding: 10px;
+	border: {
+		width: 2px;
+		style: dashed;
+		color: #555;
 	}
 
 	// Skin
 	color: white;
 	font: {
-		family: Georgia;
+		family: 'lunch-ico';
 		style: regular;
+		size: 30px;
 	}
+	-webkit-font-smoothing: antialiased;
 	text-decoration: none;
 	text-align: center;
 	border-radius: 34px;
 	
 	// Effects
 	@include hoverrotate( $lunch-btn-rotate-start );
-	@include transition-property( background-color transform );
+	@include transition-property( border-color color transform );
 	@include transition-duration( $lunch-time-out );
 
 	&:hover{

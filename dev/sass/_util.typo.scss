@@ -1,5 +1,6 @@
 /* 
- * Main Typo Styles
+ * Lunchpad Main Typo Styles
+ * @author Joachim Fröstl <jf@19h13.com>
  */
 
 h1 {
@@ -8,3 +9,14 @@ h1 {
 		weight: 200;
 	}
 }
+
+
+/*
+ * Iconfont
+ */
+@include font-face( "lunch-ico",
+	font-files(
+		'lunch-ico.woff', woff,
+		'lunch-ico.ttf', ttf,
+		'lunch-ico.svg', svg),
+		'lunch-ico.eot');

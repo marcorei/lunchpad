@@ -14,7 +14,10 @@
 
 
 	<div class="lunch-venue-filter">
-		<input type="text" class="lunch-venue-filter-input" placeholder="Filter Venues" ng-model="searchInput.name">
+		<form class="lunch-venue-filter-form">
+			<input type="text" class="lunch-venue-filter-input" placeholder="Filter Venues" ng-model="searchInput.name">
+			<span class="lunch-venue-filter-btn">S</span>
+		</form>
 	</div>
 
 
@@ -28,6 +31,7 @@
 				
 				<header class="lunch-venue-header">
 					<h2 class="lunch-venue-title">{{venue.name}}</h2>
+					<span ng-show="venue.commentcount" class="lunch-venue-commentcount"><span class="lunch-venue-commentcount-arrow">&nbsp;</span>{{venue.commentcount}} Comments</span>
 					<a href="{{venue.url}}" class="lunch-fn-menu" target="blank">View Menu</a>
 				</header>
 
@@ -40,8 +44,8 @@
 
 				</div>
 
-				<a ng-hide="venue.attending" href="" class="lunch-fn-attend">Go!</a>
-				<a ng-show="venue.attending" href="" class="lunch-fn-quit">Quit!</a>
+				<a ng-hide="venue.attending" href="" class="lunch-fn-attend">Y</a>
+				<a ng-show="venue.attending" href="" class="lunch-fn-quit">N</a>
 			</div>
 
 		</div>

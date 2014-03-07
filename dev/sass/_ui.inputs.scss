@@ -11,6 +11,20 @@
 
 
 
+
+/*
+ * Vars
+ */
+$lunch-color-filter: #d5d5d5;
+$lunch-color-filter-active: #555;
+
+
+
+
+
+
+
+
 /* 
  * Venue List Filter
  */
@@ -33,12 +47,25 @@
 	background: {
 		color: #efefef;
 	}
+
+	// States
+	&:hover {
+		.lunch-venue-filter-input {
+			border: {
+				color: $lunch-color-filter-active;
+			}
+		}
+		.lunch-venue-filter-btn {
+			color: $lunch-color-filter-active;
+		}
+	}
 }
 
 
 
-/* Mixin for medium screens */
-
+/* 
+ * Mixin for medium screens 
+ */
 @mixin lunch-venue-filter-mixin-m() {
 	
 	.lunch-venue-filter {
@@ -61,6 +88,48 @@
 
 
 
+/*
+ * Lunch Venue Filter Form
+ */
+.lunch-venue-filter-form {
+	
+	// Box
+	max-width: 560px;
+	margin: {
+		left: auto;
+		right: auto;
+	}
+	padding: {
+		right: 40px;
+	}
+
+	// Position
+	position: relative;
+
+}
+
+
+
+/*
+ * Mixin for medium screens
+ */
+@mixin lunch-venue-filter-form-mixin-m() {
+	.lunch-venue-filter-form {
+
+		// Box
+		margin: {
+			left: 0;
+		}
+
+	}
+}
+
+
+
+
+
+
+
 /* 
  * Lunch Venue Filter Input
  * Mobile First
@@ -71,7 +140,6 @@
 	// Box
 	display: block;
 	width: 100%;
-	max-width: 600px;
 	padding: {
 		top: 5px;
 		right: 10px;
@@ -84,14 +152,15 @@
 	}
 	border: {
 		width: 0;
-		bottom-width: 1px;
+		bottom-width: 2px;
 		style: dashed;
-		color: #ccc;
+		color: #d5d5d5;
 	}
+	@include box-sizing( border-box );
 
 	// Skin
 	background: {
-		color: #eee;
+		color: transparent;
 	}
 	font: {
 		family: Georgia, sans-serif;
@@ -99,31 +168,17 @@
 	}
 
 	// Effects
-	@include transition-property( background-color );
+	@include transition-property( border-color );
 	@include transition-duration( 0.5s );
 
 	// States
 	&:focus,
 	&:hover {
-		background: {
-			color: #e5e5e5;
+		border: {
+			color: $lunch-color-filter-active;
 		}
-	}
-}
-
-
-
-/*
- * Mixin for small screens
- */
-@mixin lunch-venue-filter-input-mixin-s() {
-	
-	.lunch-venue-filter-input {
-		
-		// Box
-		margin: {
-			left: auto;
-			right: auto;
+		~.lunch-venue-filter-btn{
+			color: $lunch-color-filter-active;
 		}
 	}
 }
@@ -133,7 +188,7 @@
 /* 
  * Mixin for medium screens 
  */
-@mixin lunch-venue-filter-input-mixin-m() {
+@mixin lunch-venue-filter-input-mixin-s() {
 
 	.lunch-venue-filter-input {
 
@@ -158,6 +213,40 @@
 
 
 /*
+ * Lunch Venue Filter Btn
+ */
+
+.lunch-venue-filter-btn {
+	
+	// Box
+	padding: 12px;
+
+	// Position
+	position: absolute;
+	right: 0;
+	top: -12px;
+
+	// Skin
+	font: {
+		family: 'lunch-ico';
+		size: 30px;
+	}
+	color: #ccc;
+
+	// Effects
+	@include transition-property( color );
+	@include transition-duration( 0.5s ); 
+}
+
+
+
+
+
+
+
+
+
+/*
  * Collect all Small Sceen Styles here
  */
 @mixin lunch-inputs-mixins-s() {
@@ -168,8 +257,8 @@
  * Collect all Medium Screen Styles here 
  */
 @mixin lunch-inputs-mixins-m() {
+	@include lunch-venue-filter-form-mixin-m;
 	@include lunch-venue-filter-mixin-m;
-	@include lunch-venue-filter-input-mixin-m;
 }
 /*
  * Apply Small

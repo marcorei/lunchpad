@@ -71,9 +71,12 @@
 
 // slide vertical for venues
 
-.anim-venue-slide.ng-enter, .anim-venue-slide.ng-leave {
+.anim-venue-slide.ng-enter, .anim-venue-slide.ng-leave{
 	@include transition( all .7s ease 0 );
-} 
+}/*
+.anim-venue-slide.ng-move{
+	@include transition( all 4s ease 0 );
+}*/
 
 .anim-venue-slide.ng-enter { 
 	max-height: 0px;
@@ -92,7 +95,18 @@
 .anim-venue-slide.ng-leave-active { 
 	max-height: 0px;
 	opacity: 0;
-} 
+}
+/*
+.anim-venue-slide.ng-move {
+	opacity: 0;
+	max-height: 0px;
+}
+
+.anim-venue-slide.ng-move-active {
+	opacity: 1;
+	max-height: 500px;
+}*/
+
 
 
 
@@ -100,7 +114,8 @@
 // slide horizontal for users
 
 .anim-user-slide.ng-enter, .anim-user-slide.ng-leave {
-	@include transition( all .5 ease 0 );
+	display: block !important;
+	@include transition( all .5s ease 0 );
 }
 
 .anim-user-slide.ng-enter { 

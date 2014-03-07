@@ -257,24 +257,101 @@ $venue-vertical-padding: 50px;
 .lunch-fn-menu {
 	
 	// Box
-	display: block;
+	display: inline-block;
+	padding: {
+		top: 4px;
+		right: 9px;
+		bottom: 4px;
+		left: 9px;
+	}
 
 	// Skin
-	color: #666;
+	background: {
+		color: #eee;
+	}
+	color: #555;
 	text-decoration: none;
 	font: {
+		size: 14px;
 		family: Georgia;
 		style: italic;
 	}
+	@include border-radius( 0 );
 	
 	// Effects
 	@include transition-duration( $lunch-time-out );
-	@include transition-property( color );
+	@include transition-property( background-color color );
 	
 	&:hover{
-		color: #00BEEE;
+		color: #000;
+		background: {
+			color: #00BEEE;
+		}
 		@include transition-duration( $lunch-time-over );
 	}
+}
+
+
+
+
+
+
+
+
+
+/*
+ * Lunch venue comment count
+ */
+.lunch-venue-commentcount {
+	
+	// Box
+	display: inline-block;
+	padding: {
+		top: 4px;
+		right: 9px;
+		bottom: 4px;
+		left: 9px;
+	}
+	
+	// Position
+	position: relative;
+
+	// Skin
+	cursor: default;
+	font: {
+		size: 14px;
+		family: Georgia;
+		style: italic;
+	}
+	color: #ddd;
+	background: {
+		color: #444;
+	}
+}
+
+
+
+
+
+
+
+
+/* 
+ * Lunch venue comment count arrow
+ */
+.lunch-venue-commentcount-arrow {
+	
+	// Box
+	width: 0; 
+	height: 0; 
+	border-left: 7px solid transparent;
+	border-right: 7px solid transparent;
+	border-top: 7px solid #444;
+
+	// Position
+	position: absolute;
+	left: 10px;
+	bottom: -7px;
 }
 
 
@@ -296,7 +373,7 @@ $venue-vertical-padding: 50px;
 	
 	// Box
 	margin: {
-		top:10px;
+		top:15px;
 	}
 
 	// Position
@@ -309,11 +386,14 @@ $venue-vertical-padding: 50px;
 .lunch-fn-attend {
 	
 	// Skin
-	background: {
+	border: {
 		color: $lunch-color-blu;
 	}
+	color: $lunch-color-blu;
+	
 	&:hover {
-		background: {
+		color: $lunch-color-blu-dark;
+		border: {
 			color: $lunch-color-blu-dark;
 		}
 	}
@@ -325,11 +405,14 @@ $venue-vertical-padding: 50px;
 .lunch-fn-quit {
 	
 	// Skin
-	background: {
+	border: {
 		color: $lunch-color-red;
 	}
+	color: $lunch-color-red;
+
 	&:hover {
-		background: {
+		color: $lunch-color-red-dark;
+		border: {
 			color: $lunch-color-red-dark;
 		}
 	}
@@ -353,7 +436,7 @@ $venue-vertical-padding: 50px;
 		// Position
 		position: absolute;
 		right: 0;
-		bottom: 0;
+		bottom: 5px;
 	}
 }
 

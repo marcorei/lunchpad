@@ -194,6 +194,8 @@
 
 		function($scope){
 
+			window.testscope = $scope;
+
 
 			$scope.removeUser = function( userId ){
 				
@@ -206,7 +208,8 @@
 				{
 			    	"id" : "0",
 			    	"attending": "0",
-			        "name": "void",
+			    	"commentcount": "13",
+			        "name": "aoöshgölkjhgkajgföklj",
 			        "url": "http://www.foursquare.com",
 			        "users": [
 			            {
@@ -251,6 +254,7 @@
 			    	"id": "5",
 			    	"attending": "0",
 			        "name": "TestVenue2",
+			        "commentcount": "19",
 			        "url": "http://www.foursquare.com",
 			        "users": [
 			            {
