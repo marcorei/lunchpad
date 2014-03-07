@@ -25,11 +25,10 @@ dev/.sass-cache/*
 .gitshots
 
 # Exclude compiled css because of merging errors.
-static/css/app.css
+static/css/*
 
 # Exclude compiled js
-static/js/libraries.js
-static/js/app.js
+static/js/*
 
 
 
