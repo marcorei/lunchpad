@@ -48,7 +48,7 @@ UserProvider.prototype.findUser = function(id, onSuccess, onError){
 		},{},function(error,result){
 			if(error) onError(error);
 			else if(!result) onError('user not found!');
-			else onSuccess(null,result);
+			else onSuccess(result);
 		});
 
 	},onError);
@@ -146,7 +146,7 @@ UserProvider.prototype.saveItemToInventory = function(id, item, onSuccess, onErr
 UserProvider.prototype.removeItemFromInventories = function(item, onSuccess, onError){
 	db.gc(cn, function(collection){
 
-		// TODO!
+		// TODO later
 
 	},onError);
 }
@@ -309,7 +309,7 @@ UserProvider.prototype.saveUser = function(users, onSuccess, onError){
 			if(error) onError(error);
 			else{
 				console.log('User created: '+users.length);
-				onSuccess(null,results);
+				onSuccess(results);
 			}
 		});
 

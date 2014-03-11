@@ -86,7 +86,7 @@ ItemProvider.prototype.saveItems = function(items, onSuccess, onError){
 			if(error) onError(error);
 			else{
 				console.log('items created: '+items.length);
-				onSuccess(null,results);
+				onSuccess(results);
 			}
 		});
 

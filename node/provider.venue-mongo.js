@@ -32,7 +32,7 @@ VenueProvider.prototype.findAll = function(onSuccess, onError){
 				comc:1
 			},
 			sort: [[guest,-1],[name,1]]
-		},function(error,results){
+		}).toArray(function(error,results){
 			if(error) onError(error);
 			else onSuccess(results);
 		});
@@ -282,7 +282,7 @@ VenueProvider.prototype.saveVenues = function(venues, callback){
 			if(error) onError(error);
 			else{
 				console.log('Venues created: '+venues.length);
-				onSuccess(null,results);
+				onSuccess(results);
 			}
 		});
 

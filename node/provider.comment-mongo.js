@@ -32,7 +32,7 @@ CommentProvider.prototype.findAll = function(onSuccess, onError){
 
 		collection.find({
 			del:false
-		},{},function(error,comments){
+		},{}).toArray(function(error,comments){
 			if(error) onError(error);
 			else onSuccess(comments);
 		})
@@ -74,7 +74,7 @@ CommentProvider.prototype.findWidthVenue = function(vid, onSuccess, onError){
 			del: false
 		},{
 			sort:[[date:1]]
-		},function(error,venues){
+		}).toArray(function(error,venues){
 			if(error) onError(error);
 			else onSuccess(venues);
 		});
@@ -149,7 +149,7 @@ CommentProvider.prototype.saveComment = function(comments, onSuccess, onError){
 			if(error) onError(error);
 			else{
 				console.log('User created: '+comments.length);
-				onSuccess(null,results);
+				onSuccess(results);
 			}
 		});
 
