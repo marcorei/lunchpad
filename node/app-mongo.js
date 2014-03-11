@@ -331,7 +331,14 @@ app.post(lunchActions.logout, function(req,res){
  */
 
 
+io.sockets.on('connection', function (socket) {
 
+
+	socket.on('disconnect', function () {
+
+	});
+
+});
 
 
 
