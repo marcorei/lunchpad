@@ -101,9 +101,13 @@
 
 	// View Controller, watches over changes in the view state
 
-	lunchpadControllers.controller('ViewCtrl', [ '$scope',
+	lunchpadControllers.controller('ViewCtrl', [ '$scope','$location',
 
-		function($scope){
+		function($scope,$location){
+
+			$scope.goto = function(path){
+				$location.path(path);
+			}
 
 			// Custom Animations for different states
 

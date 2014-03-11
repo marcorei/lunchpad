@@ -19,46 +19,105 @@
 	@include transition( all .7s ease 0 );
 }
 
+
+
+/*
+ * Animations on View Container
+ */
 .lunch-view-container.ng-enter {
 	position: fixed;
-	top:0;left:0;
+	top: 0;
+	left:0;
 	margin-left: 100%;
-	width: 61.8%;
+	width: 100%;
 }
 
 .lunch-view-container.ng-enter-active {
-	margin-left: 38.2%;
+	margin-left: 0%;
 }
 
 .lunch-view-container.ng-leave {
-	position:relative;
-	margin-left: 38.2%;
+	position: relative;
+	margin-left: 0;
 }
 
 .lunch-view-container.ng-leave-active {
 	margin-left: -100%;
 }
 
-// backward compatible ;)
+
+
+// Come back 
 
 .back .lunch-view-container.ng-enter {
 	position: fixed;
-	width: 61.8%;
-	top:0;left:0;
+	width: 100%;
+	top: 0;
+	left:0;
 	margin-left: -100%;
 }
 
 .back .lunch-view-container.ng-enter-active {
-	margin-left: 38.2%;
+	margin-left: 0%;
 }
 
 .back .lunch-view-container.ng-leave {
-	position:relative;
-	margin-left: 38.2%;
+	position: relative;
+	margin-left: 0%;
 }
 
 .back .lunch-view-container.ng-leave-active {
 	margin-left: 100%;
+}
+
+
+
+
+@mixin lunch-view-container-animation-mixin-m() {
+
+	.lunch-view-container.ng-enter {
+		position: fixed;
+		top:0;left:0;
+		margin-left: 100%;
+		width: 61.8%;
+	}
+
+	.lunch-view-container.ng-enter-active {
+		margin-left: 38.2%;
+	}
+
+	.lunch-view-container.ng-leave {
+		position:relative;
+		margin-left: 38.2%;
+	}
+
+	.lunch-view-container.ng-leave-active {
+		margin-left: -23.6%;
+	}
+
+
+	// backward compatible ;)
+
+	.back .lunch-view-container.ng-enter {
+		position: fixed;
+		width: 61.8%;
+		top:0;
+		left:0;
+		margin-left: -23.6%;
+	}
+
+	.back .lunch-view-container.ng-enter-active {
+		margin-left: 38.2%;
+	}
+
+	.back .lunch-view-container.ng-leave {
+		position:relative;
+		margin-left: 38.2%;
+	}
+
+	.back .lunch-view-container.ng-leave-active {
+		margin-left: 100%;
+	}
 }
 
 
@@ -170,7 +229,37 @@
 
 
 
+/*
+ * Collect all Small Sceen Styles here
+ */
+@mixin lunch-animation-mixins-s() {
 
+}
+
+/* 
+ * Collect all Medium Screen Styles here 
+ */
+@mixin lunch-animation-mixins-m() {
+	@include lunch-view-container-animation-mixin-m();
+}
+
+/*
+ * Apply Small
+ */
+@media screen and ( min-width: $lunch-grid-break-s ) {
+	@include lunch-animation-mixins-s;
+}
+
+/* 
+ * Apply Medium
+ */
+@media screen and ( min-width: $lunch-grid-break-m ) {
+	@include lunch-animation-mixins-m;
+}
+
+/*
+ * Apply Large
+ */ 
 
 
 

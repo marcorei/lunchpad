@@ -63,7 +63,7 @@
 	min-height: 100%;
 	
 	padding: {
-		top: 0;
+		top: 70px;
 		bottom: 0px;
 	}
 
@@ -86,8 +86,13 @@
 
 	.lunch-apppage-body {
 		
-		margin-left: 38.2%;
-		
+		// Box
+		margin: {
+			left: 38.2%;
+		}
+		padding: {
+			top: 0;
+		}
 		width: 61.8%;
 		
 		// float: left;

@@ -18,15 +18,18 @@
 	
 	// Box
 	width: 100%;
-	overflow: hidden;
 
 	// Skin
 	background: {
 		color: $lunch-color-red;
 	}
 	color: white;
-
-
+	
+	// Position
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1;
 	
 	// Logo
 	.lunch-logo {
@@ -41,8 +44,8 @@
 		}
 		margin: {
 			left: 30px;
-			top: 20px;
-			bottom: 20px;
+			top: 10px;
+			bottom: 10px;
 		}
 		
 		// Childs
@@ -103,7 +106,7 @@
 				bottom: 0;
 			}
 			margin: {
-				top: 75px;
+				top: 60px;
 				left: auto;
 				right: 0;
 				bottom: 60px;
@@ -135,9 +138,9 @@
 	height: 50px;
 	width: 50px;
 	margin: {
-		top: 20px;
+		top: 10px;
 		right: 30px;
-		bottom: 20px;
+		bottom: 10px;
 	}
 	float: right;
 	
@@ -242,6 +245,9 @@
  */
 .lunch-nav {
 	
+	// Box
+	overflow: hidden;
+
 	// Skin
 	text-align: left;
 
@@ -265,8 +271,11 @@
 @mixin lunch-nav-mixin-m() {
 
 	.lunch-nav {
+		
+		// Box
+		overflow: visible;
 
-		//Skin
+		// Skin
 		text-align: right; 
 	}
 }
@@ -286,6 +295,7 @@
 
 	// Box
 	height: 0;
+	width: 100%;
 	padding: {
 		top: 0;
 		right: 0;
@@ -297,9 +307,20 @@
 		bottom: 0;
 	}
 	clear: left;
+	
+	// Position
+	position: absolute;
+	top: 70px;
+	left: 0;
+	z-index: 1;
+
 
 	// Skin
 	text-align: left;
+	overflow: hidden;
+	background: {
+		color: rgba( $lunch-color-red-dark, .95);
+	}
 
 	// Effects
 	@include transition-property( height padding );
@@ -322,7 +343,13 @@
 			bottom: 0;
 		}
 
-		// Typo
+		//Position
+		position: static;
+
+		// Skin
+		background: {
+			color: transparent;
+		}
 		text-align: right;
 	}
 }
@@ -352,12 +379,6 @@
 	
 	// Pseudoselector
 	&:first-child {
-		border: {
-			width: 0px;
-			top-width: 1px;
-			style: solid;
-			color: $lunch-color-red-dark;
-		}
 		padding: {
 			top: 20px;
 		}
@@ -452,7 +473,7 @@
  * Collection of all Medium Screen Style Mixins 
  */
 @mixin lunch-header-mixins-screen-m() {
-
+	@include lunch-nav-mixin-m;
 	@include lunch-header-screen-m;
 	@include lunch-nav-list-mixin-m;
 	@include lunch-nav-elem-mixin-m;
