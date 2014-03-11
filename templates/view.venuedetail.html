@@ -1,4 +1,93 @@
 <div class="lunch-view-venue">
-	<a ng-click="goto('/venues')">back</a>
-	<h1>Test: VenueDetail {{venueId}}</h1>
+	
+	<header class="lunch-venue-header">
+		<a ng-click="goto('/venues')" class="lunch-fn-back">
+			<span class="lunch-icon"><</span>
+			<span class="lunch-label">back to all venues</span>
+		</a>
+
+		<h1 class="lunch-venue-title">Scheidegger</h1>
+	</header>
+
+	<a ng-hide="venue.attending" href="" class="lunch-fn-attend">
+		<span class="lunch-label">Lunch here</span>
+		<span class="lunch-icon">Y</span>
+	</a>
+	<a ng-show="venue.attending" href="" class="lunch-fn-quit">
+		<span class="lunch-label">Cancel</span>
+		<span class="lunch-icon">N</span>
+	</a>
+	
+
+	<div class="lunch-venue-guests" >
+		<div class="lunch-venue-guest anim-user-slide">
+			<img width="40" height="80" src="../static/img/mr.png" alt="" class="lunch-user-image">
+			<p class="anim-status-fade ng-binding ng-hide" ng-show="user.status"></p>
+		</div>
+		<div class="lunch-venue-guest anim-user-slide">
+			<img width="40" height="80" src="../static/img/mr.png" alt="" class="lunch-user-image">
+			<p class="anim-status-fade ng-binding ng-hide" ng-show="user.status"></p>
+		</div>
+		<div class="lunch-venue-guest anim-user-slide">
+			<img width="40" height="80" src="../static/img/mr.png" alt="" class="lunch-user-image">
+			<p class="anim-status-fade ng-binding ng-hide" ng-show="user.status"></p>
+		</div>
+		<div class="lunch-venue-guest anim-user-slide">
+			<img width="40" height="80" src="../static/img/mr.png" alt="" class="lunch-user-image">
+			<p class="anim-status-fade ng-binding ng-hide" ng-show="user.status"></p>
+		</div>
+		<div class="lunch-venue-guest anim-user-slide">
+			<img width="40" height="80" src="../static/img/mr.png" alt="" class="lunch-user-image">
+			<p class="anim-status-fade ng-binding ng-hide" ng-show="user.status"></p>
+		</div>
+		<div class="lunch-venue-guest anim-user-slide">
+			<img width="40" height="80" src="../static/img/mr.png" alt="" class="lunch-user-image">
+			<p class="anim-status-fade ng-binding ng-hide" ng-show="user.status"></p>
+		</div>
+		<div class="lunch-venue-guest anim-user-slide">
+			<img width="40" height="80" src="../static/img/mr.png" alt="" class="lunch-user-image">
+			<p class="anim-status-fade ng-binding ng-hide" ng-show="user.status"></p>
+		</div>
+		<div class="lunch-venue-guest anim-user-slide">
+			<img width="40" height="80" src="../static/img/mr.png" alt="" class="lunch-user-image">
+			<p class="anim-status-fade ng-binding ng-hide" ng-show="user.status"></p>
+		</div>
+		<div class="lunch-venue-guest anim-user-slide">
+			<img width="40" height="80" src="../static/img/mr.png" alt="" class="lunch-user-image">
+			<p class="anim-status-fade ng-binding ng-hide" ng-show="user.status"></p>
+		</div>
+		<div class="lunch-venue-guest anim-user-slide">
+			<img width="40" height="80" src="../static/img/mr.png" alt="" class="lunch-user-image">
+			<p class="anim-status-fade ng-binding ng-hide" ng-show="user.status"></p>
+		</div>
+		<div class="lunch-venue-guest anim-user-slide">
+			<img width="40" height="80" src="../static/img/mk.png" alt="" class="lunch-user-image">
+			<p class="anim-status-fade ng-binding ng-hide" ng-show="user.status"></p>
+		</div>
+		<div class="lunch-venue-guest anim-user-slide">
+			<img width="40" height="80" src="../static/img/mrz.png" alt="" class="lunch-user-image">
+			<p class="anim-status-fade ng-binding ng-hide" ng-show="user.status"></p>
+		</div>
+	</div>
+
+
+	<div class="lunch-comments">
+		
+		<div class="lunch-comments-list">
+			<div class="lunch-comment">
+				<div class="lunch-commentator">
+					<img width="40" height="80" src="../static/img/mk.png" alt="" class="lunch-user-image">
+				</div>
+			</div>
+		</div>
+
+
+		<form action="" class="lunch-comment-input">
+			<div class="lunch-commentator">
+				<img width="40" height="80" src="../static/img/mr.png" alt="" class="lunch-user-image">
+			</div>
+			<input type="text">
+			<button type="submit">Post Comment</button>
+		</form>
+	</div>
 </div>

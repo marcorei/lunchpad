@@ -3,8 +3,107 @@
  * @author Joachim Fröstl <jf@19h13.com>
  */
 
- .lunch-view-venue {
- 	background: {
- 		color: #0f0;
- 	}
- }
+.lunch-view-venue {
+
+	padding: {
+		left: 60px;
+		right: 60px;
+	}
+	max-width: 600px;
+	
+	.lunch-fn-back {
+		
+		// Box
+		display: inline-block;
+		margin: {
+			left: -20px;
+		}
+		padding: {
+			top: 10px;
+			left: 20px;
+			right: 20px;
+			bottom: 10px;
+		}
+		
+		// States
+		&:hover {
+			background: {
+				color: #eee;
+			}
+		}
+	}
+
+	
+	.lunch-venue-header {
+		border: {
+			width: 0px;
+			color: #eee;
+			style: solid;
+			bottom-width: 1px;
+		}
+	}
+	.lunch-venue-title {
+		font: {
+			size: 50px;
+		}
+	}
+
+	.lunch-comments-list {
+		
+		// Box
+		padding: 10px;
+
+		// Skin
+		background: {
+			color: #eee;
+		}
+	}
+
+
+	.lunch-commentator {
+
+		// Box
+		width: 40px;
+		height: 40px;
+		overflow: hidden;
+		
+		// Skin
+		background: {
+			color: #fff;
+		}
+
+		// Effects
+		@include border-radius( 20px );
+	}
+
+	.lunch-comment-input {
+
+		// Box
+		padding: 10px;
+		margin: {
+			top: 10px;
+		}
+
+		// Skin
+		background: {
+			color: $lunch-color-ylw;
+		}
+
+
+		// Children
+		input[type="text"] {
+			
+			// Box
+			border: {
+				style: dashed;
+				color: $lunch-color-ylw-dark;
+				width: 2px;
+			}
+
+			// Skin
+			background: {
+				color: transparent;
+			}
+		}
+	}
+}
