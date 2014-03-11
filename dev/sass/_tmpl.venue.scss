@@ -323,9 +323,39 @@ $venue-vertical-padding: 50px;
 		family: Georgia;
 		style: italic;
 	}
-	color: #ddd;
+	color: #555;
 	background: {
-		color: #444;
+		color: $lunch-color-ylw;
+	}
+	cursor: pointer;
+
+	// Effects
+	@include transition-duration( $lunch-time-out );
+	@include transition-property( background-color color );
+
+	// States 
+	&:hover {
+
+		// Skin
+		color: #000;
+		background: {
+			color: $lunch-color-ylw-dark;
+		}
+		
+		// Effects
+		@include transition-duration( $lunch-time-over );
+
+		// Children
+		.lunch-venue-commentcount-arrow {
+
+			// Box
+			border: {
+				top-color: $lunch-color-ylw-dark;
+			}
+
+			// Effects
+			@include transition-duration( $lunch-time-over );
+		}
 	}
 }
 
@@ -346,12 +376,17 @@ $venue-vertical-padding: 50px;
 	height: 0; 
 	border-left: 7px solid transparent;
 	border-right: 7px solid transparent;
-	border-top: 7px solid #444;
+	border-top: 7px solid  $lunch-color-ylw;
 
 	// Position
 	position: absolute;
 	left: 10px;
 	bottom: -7px;
+
+
+	// Effects
+	@include transition-duration( $lunch-time-out );
+	@include transition-property( border-top-color );
 }
 
 
