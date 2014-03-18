@@ -5,105 +5,148 @@
 
 .lunch-view-venue {
 
-	padding: {
-		left: 60px;
-		right: 60px;
-	}
-	max-width: 600px;
-	
+	// margin: {
+	// 	top: 30px;
+	// 	left: 30px;
+	// 	right: 30px;
+	// }
+
+
 	.lunch-fn-back {
-		
+		// Inherit
+		@extend .lunch-venue-btn;
+
 		// Box
-		display: inline-block;
+		float: left;
 		margin: {
-			left: -20px;
+			top: 5px;
 		}
-		padding: {
-			top: 10px;
-			left: 20px;
-			right: 20px;
-			bottom: 10px;
+		border: {
+			color: #444;
 		}
+
+		// Skin
+		color: #444;
 		
 		// States
 		&:hover {
-			background: {
-				color: #eee;
+
+			// Skin
+			color: #111;
+			border: {
+				color: #111;
 			}
+		}
+	}
+
+	.lunch-fn-attend,
+	.lunch-fn-quit {
+		
+		@include transform(none);
+		
+		// Box
+		float: left;
+
+		// Position
+		position: relative;
+		top: auto;
+		left: auto;
+		right: auto;
+		bottom: auto;
+
+		.lunch-icon {
+			float: left;
+		}
+	}
+
+	.lunch-fn-menu {
+		// Inherit
+		@extend .lunch-venue-btn;
+
+		// Box
+		float: left;
+		padding: 0;
+
+		font: {
+			style: normal;
+		}
+
+		// Children 
+		.lunch-label {
+			color: #444;
+		}
+		.lunch-icon {
+			float: left;
 		}
 	}
 
 	
 	.lunch-venue-header {
-		border: {
-			width: 0px;
-			color: #eee;
-			style: solid;
-			bottom-width: 1px;
-		}
-	}
-	.lunch-venue-title {
-		font: {
-			size: 50px;
-		}
-	}
-
-	.lunch-comments-list {
 		
 		// Box
-		padding: 10px;
-
-		// Skin
-		background: {
-			color: #eee;
-		}
-	}
-
-
-	.lunch-commentator {
-
-		// Box
-		width: 40px;
-		height: 40px;
 		overflow: hidden;
-		
-		// Skin
-		background: {
-			color: #fff;
+		max-width: 600px;
+		padding: {
+			top: 50px;
+			left: 60px;
+			right: 60px;
 		}
-
-		// Effects
-		@include border-radius( 20px );
 	}
 
-	.lunch-comment-input {
+
+
+	.lunch-venue-title {
+		
+		// Box
+		float: left;
+		padding: {
+			left: 10px;
+		}
+
+		// Skin
+		font: {
+			size: 60px;
+		}
+	}
+
+
+
+	.lunch-venue-interaction {
+		// Box
+		max-width: 600px;
+		padding: {
+			top: 10px;
+			left: 60px;
+			right: 60px;
+			bottom: 50px;
+		}
+	
+		overflow: hidden;
+		clear: left;
+
+	}
+
+
+	.lunch-venue-guests {
 
 		// Box
-		padding: 10px;
-		margin: {
-			top: 10px;
+		max-width: 600px;
+		padding: {
+			top: 20px;
+			right: 60px;
+			bottom: 20px;
+			left: 120px;
 		}
+		margin: {
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+		}
+
 
 		// Skin
-		background: {
-			color: $lunch-color-ylw;
-		}
-
-
-		// Children
-		input[type="text"] {
-			
-			// Box
-			border: {
-				style: dashed;
-				color: $lunch-color-ylw-dark;
-				width: 2px;
-			}
-
-			// Skin
-			background: {
-				color: transparent;
-			}
-		}
+		text-align: center;
 	}
+
 }

@@ -5,6 +5,7 @@
 
 h1 {
 	font: {
+		family: 'Cubano Sharp', sans-serif;
 		size: 1em;
 		weight: 200;
 	}
@@ -20,3 +21,21 @@ h1 {
 		'lunch-ico.ttf', ttf,
 		'lunch-ico.svg', svg),
 		'lunch-ico.eot');
+
+
+
+
+
+
+
+/*
+ * Icons
+ */
+
+.lunch-icon {
+	// Skin
+	font: {
+		family: "lunch-ico";
+	}
+	-webkit-font-smoothing: antialiased;
+}

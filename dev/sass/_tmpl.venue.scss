@@ -421,11 +421,14 @@ $venue-vertical-padding: 50px;
 .lunch-fn-attend {
 	
 	// Skin
-	border: {
-		color: $lunch-color-blu;
-	}
 	color: $lunch-color-blu;
 	
+	.lunch-icon{
+		border: {
+			color: $lunch-color-blu;
+		}
+	}
+
 	&:hover {
 		color: $lunch-color-blu-dark;
 		border: {
