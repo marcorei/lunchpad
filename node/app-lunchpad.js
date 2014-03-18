@@ -30,6 +30,8 @@ var path = require('path'),
 	venueProvider = require('./provider.venue-mongo.js').venueProvider,
 	userProvider = require('./provider.user-mongo.js').userProvider,
 	itemProvider = require('./provider.item-mongo.js').itemProvider,
+	checkinProvider = require('./provider.checking-mongo.js').checkinProvider,
+	commentProvider = require('./provider.comment-mongo.js').commentProvider,
 	// wait and see what else we'll need
 
 	config = require('./config.json');
@@ -63,35 +65,72 @@ Date.prototype.yyyymmdd = function() {
 
 
 
+
 /*
  * Helper functions
  */
 
 var lunchHelper = {
 
-	sendFile = function(fileName){
+	sendFile: function(fileName){
 		return function(req, res){
 			res.sendFile( path.join( __dirname, fileName ));
 		}
 	},
 
-	sendErrorJson = function(msg,code,nolog){
+	sendHtml: function(filename){
+		sendFile('../templates/'+filename);
+	}
 
-		//return function(){
-			if(!nolog) console.log(msg);
-			code = code || 0;
+	sendErrorToRes: function(res,msg,code,nolog){
+		if(!nolog) console.log(msg);
+		code = code || 0;
 
-			res.json({
-				error: {
-					code: 0,
-					msg: msg
-				}
-			});
-		//}
-		
+		res.json({
+			error: {
+				code: 0,
+				msg: msg
+			}
+		});
+	}
+
+	sendErrorToSocket: function(socket,msg,code,nolog){
+		if(!nolog) console.log(msg);
+		code = code || 0;
+
+		socket.emit('error',{
+			code: code,
+			msg: msg
+		});
 	}
 
 }
+
+
+var lunchAuth = {
+
+	isUser: function(socket, onSuccess){
+		if(socket.handshake.user.logged_in) onSuccess(socket.handshake.user);
+		else sendErrorToSocket('User not authenticated', 403);
+	},
+
+	isAdmin: function(socket, onSuccess){
+		if(socket.handshake.user.logged_in && socket.handshake.user.role === 'admin') onSuccess(socket.handshake.user);
+		else sendErrorToSocket('Admin rights missing', 403);
+	},
+
+	isOwner: function(socket, uid, onSuccess){
+		if(socket.handshake.user.logged_in && socket.handshake.user._id == uid) onSuccess(socket.handshake.user);
+		else sendErrorToSocket('Owner rights missing', 403);
+	},
+
+	isOwnerOrAdmin: function(socket, uid, onSuccess){
+		if(socket.handshake.user.logged_in && (socket.handshake.user.role === 'admin' || socket.handshake.user._id == uid)) onSuccess(socket.handshake.user);
+		else sendErrorToSocket('Admin or Owner rights missing', 403);
+	}
+
+}
+
 
 
 
@@ -210,25 +249,8 @@ passport.use('local-login', new LocalStrategy(
 
 
 
-// Auth Helper
-// probably do this inside a provider, zb userProvider.isAdmin(uid, callback)
-/*
-var lunchAuth = {
 
-	requireUser = function(){
-		
-	},
 
-	requireGroup = function(groupId){
-		
-	},
-
-	requireOwnerOrAdmin = function(owner_id){
-
-	}
-
-};
-*/
 
 
 
@@ -248,77 +270,30 @@ var lunchAuth = {
  */
 
 
-// Define details to change in one place
-
-var lunchPages = {
-	root: { 
-		route: '/',
-		tmpl: 'page.app.angular.html'
-	}
-	login: {
-		route: '/login',
-		tmpl: 'page.login.html'
-	},
-	manifesto: {
-		route: '/manifesto',
-		tmpl: 'page.manifesto.html'
-	},
-
-
-
-	viewVenuelist: {
-		route: '/view/venuelist',
-		tmpl: 'view.venuelist.html'
-	},
-	viewVenueDetail: {
-		route: '/view/venuedetail',
-		tmpl: 'view.venuedetail.html'
-	},
-	viewNewVenue: {
-		route: '/view/newvenue',
-		tmpl: 'view.newvenue.html'
-	},
-	viewSettings: {
-		route: '/view/settings',
-		tmpl: 'view.settings.html'
-	}
-}
-
-
-var lunchActions = {
-	login: '/action/login',
-	logout: '/action/logout'
-}
-
-
-
 // Pages. Just get, no data.
 
-app.get(lunchPages.root.route, 		lunchHelper.sendFile( lunchPages.root.tmpl ) );
-app.get(lunchPages.login.route,		lunchHelper.sendFile( lunchPages.login.tmpl ) );
-app.get(lunchPages.manifesto.route,	lunchHelper.sendFile( lunchPages.manifesto.tmpl ) );
+app.get('/', lunchHelper.sendHtml('page.app.angular.html'));
+app.get('/login', lunchHelper.sendHtml('page.login.html'));
+app.get('/manifesto', lunchHelper.sendHtml('page.manifesto.html'));
 
-app.get(lunchPages.viewVenuelist.route, 	lunchHelper.sendFile( lunchPages.viewVenuelist.tmpl ) );
-app.get(lunchPages.viewVenueDetail.route, 	lunchHelper.sendFile( lunchPages.viewVenueDetail.tmpl ) );
-app.get(lunchPages.viewNewVenue.route,		lunchHelper.sendFile( lunchPages.viewNewVenue.tmpl ) );
-app.get(lunchPages.viewSettings.route,		lunchHelper.sendFile( lunchPages.viewSettings.tmpl ) );
+app.get('/tmpl/venuelist', lunchHelper.sendHtml('tmpl.venuelist.html'));
+app.get('/tmpl/venuedetail', lunchHelper.sendHtml('tmpl.venuedetail.html'));
+app.get('/tmpl/newvenue', lunchHelper.sendHtml('tmpl.newvenue.html'));
+app.get('/tmpl/settings', lunchHelper.sendHtml('tmpl.settings.html'));
 
 
 
 // Action-Requests not send via socket (login / logout via passport)
 
-app.post(lunchActions.login, passport.authenticate('local-login'), function(req,res){
-	if(req.isAuthenticated())
-		res.json({ error: null });
-	else
-		sendErrorJson('Login failed.')();
+app.post('/auth/login', passport.authenticate('local-login'), function(req,res){
+	if(req.isAuthenticated()) res.json({ error: null });
+	else sendErrorToRes(res,'Login failed.')();
 });
 
-app.post(lunchActions.logout, function(req,res){
+app.post('/auth/logout', function(req,res){
 	req.logout();
 	res.json({ error: null });
 });
-
 
 
 
@@ -333,12 +308,471 @@ app.post(lunchActions.logout, function(req,res){
 
 io.sockets.on('connection', function (socket) {
 
+	// Chat
+
+	socket.on('send chat', function(data){
+		lunchAuth.isUser(socket, function(user){
+			socket.broadcast.emit('chat msg',{
+
+				user: {
+					nick: user.nick
+				},
+				msg: data.msg
+
+			});
+		});
+	});
+
+
+
+
+	// Venue
+
+	socket.on('read venue list', function(data){
+		lunchAuth.isUser(socket, function(user){
+			venueProvider.findAll(function(venues){
+				socket.emit('venue list', {
+
+					venues: venues
+
+				});
+			},function(error){
+				sendErrorToSocket(socket,error);
+			});
+		});
+	});
+
+
+	socket.on('read venue', function(data){
+		lunchAuth.isUser(socket, function(user){
+			venueProvider.findVenue(
+
+			data._id, 
+
+			function(venue){
+				socket.emit('venue',{
+
+					venue: venue
+
+				});
+			},function(error){
+				sendErrorToSocket(socket,error);
+			});
+		});
+	});
+
+
+	socket.on('create venue', function(data){
+		lunchAuth.isUser(socket, function(user){
+			venueProvider.saveVenues({
+
+				name: data.name,
+				url: data.url,
+				createdBy: data.createdBy
+
+			},function(result){
+				socket.broadcast.emit('venue created',{
+
+					result: result
+
+				});
+			},function(error){
+				sendErrorToSocket(socket,error);
+			});			
+		});
+	});
+
+
+	socket.on('update venue name', function(data){
+		lunchAuth.isAdmin(socket, function(user){
+			venueProvider.updateName(
+
+			data._id,
+			data.name,
+
+			function(updates){
+				socket.broadcast.emit('venue name updated',{
+
+					updates: updates
+
+				});
+			},function(error){
+				sendErrorToSocket(socket,error);
+			});
+		});
+	});
+
+
+	socket.on('update venue url', function(data){
+		lunchAuth.isUser(socket, function(user){
+			venueProvider.updateUrl(
+
+			data._id,
+			data.url,
+
+			function(updates){
+				socket.broadcast.emit('venue url updated',{
+
+					updates: updates
+
+				});
+			},function(error){
+				sendErrorToSocket(socket,error);
+			});
+
+		});
+	});
+
+
+	socket.on('delete venue', function(data){
+		lunchAuth.isAdmin(socket, function(user){
+			venueProvider.deleteVenue(
+
+			data._id,
+
+			function(removed){
+				socket.broadcast.emit('venue deleted',{
+
+					removed: removed
+
+				});
+			},function(error){
+				sendErrorToSocket(socket,error);
+			});
+		});
+	});
+
+
+
+
+	// Checking
+
+	socket.on('create checkin', function(data){
+		lunchAuth.isUser(socket, function(user){
+			checkinProvider.delTodayForUid(
+
+			user._id,
+
+			function(numRemoved){
+				venueProvider.delUserForToday(
+
+				user._id,
+
+				function(numRemoved){
+					checkinProvider.save({
+
+						uid: user._id,
+						vid: data._id
+
+					},function(results){
+						var insert = {
+
+							_id: user._id,
+							nick: user.nick,
+							item: user.item,
+							ava: user.ava
+
+						};
+						venueProvider.addUserToVenue(
+
+						data._id,
+						insert,
+
+						function(updates){
+							socket.broadcast.emit('checkin added',{
+
+								_id: data._id,
+								user: insert
+
+							});
+						},function(error){
+							sendErrorToSocket(socket,error);
+						});
+					},function(error){
+						sendErrorToSocket(socket,error);
+					});
+				},function(error){
+					sendErrorToSocket(socket,error);
+				});
+			},function(error){
+				sendErrorToSocket(socket,error);
+			});
+		});
+	});
+
+	socket.on('delete checkin', function(data){
+		lunchAuth.isUser(socket, function(user){
+			checkinProvider.delTodayForUid(
+
+			user._id,
+
+			function(numRemoved){
+				venueProvider.delUserForToday(
+
+				user._id,
+
+				function(numRemoved){
+					socket.broadcast.emit('checkin added',{
+
+						user: {
+							_id: user._id
+						}
+
+					});
+				},function(error){
+					sendErrorToSocket(socket,error);
+				});
+			},function(error){
+				sendErrorToSocket(socket,error);
+			});
+		});
+	});
+
+
+	
+
+
+
+	// Comment
+	
+	socket.on('read comment list', function(data){
+		lunchAuth.isUser(socket, function(user){
+			commentProvider.findWithVenue(
+
+			data._id,
+
+			function(comments){
+				socket.emit('comment list',{
+
+					comments: comments
+
+				});
+			},function(error){
+				sendErrorToSocket(socket,error);
+			});
+		});
+	});
+
+	socket.on('create comment', function(data){
+		lunchAuth.isUser(socket, function(user){
+			var insert = {
+
+				user: {
+					_id: user._id,
+					nick: user.nick,
+					item: user.item,
+					ava: user.ava
+				},
+				vid: data.vid,
+				txt: data.txt
+
+			};
+			commentProvider.saveComment(
+			insert,
+			function(results){
+				commentProvider.countWithVenue(
+
+				data.vid,
+
+				function(count){
+					venueProvider.updateCommentCount(
+
+					data.vid,
+
+					function(updates){
+						socket.broadcast.emit('comment created',{
+
+							comment: updates[0]
+
+						});
+					},function(error){
+						sendErrorToSocket(socket,error);
+					});
+				},function(error){
+					sendErrorToSocket(socket,error);
+				});
+			},function(error){
+				sendErrorToSocket(socket,error);
+			});
+		});
+	});
+
+	socket.on('delete comment', function(data){
+		lunchAuth.isOwnerOrAdmin(socket, data.uid, function(user){
+			commentProvider.deleteComment(
+
+			_id: data._id,
+
+			function(updates){
+				socket.broadcast.emit('comment deleted',{
+
+					_id: data._id
+
+				});
+			},function(error){
+				sendErrorToSocket(socket,error);
+			});
+		});
+	});
+
+
+
+
+	
+
+	// USer
+
+	socket.on('create user', function(data){
+		lunchAuth.isAdmin(socket, function(user){
+			userProvider.save({
+
+				mail: data.mail,
+				nick: data.nick,
+				role: data.role,
+				pass: data.pass,
+				ava: data.ava
+
+			},function(results){
+				socket.emit('user created',{
+
+					_id: results[0]._id,
+					nick: results[0].mail
+
+				});
+			},function(error){
+				sendErrorToSocket(socket,error);
+			});
+		});
+	});
+
+	socket.on('read user list', function(data){
+		lunchAuth.isAdmin(socket, function(user){
+			userProvider.findAll(function(results){
+				socket.emit('user list',{
+
+					users: results
+
+				});
+			},function(error){
+				sendErrorToSocket(socket,error);
+			});
+		});
+	});
+
+	socket.on('read user', function(data){
+		lunchAuth.isOwnerOrAdmin(socket, data._id, function(user){
+			userProvider.findUser(
+
+			data._id
+
+			function(result){
+				result.pass = null;
+				socket.emit('user',{
+
+					users: result
+
+				});
+			},function(error){
+				sendErrorToSocket(socket,error);
+			});
+		});
+	});
+
+	socket.on('update user password', function(data){
+		lunchAuth.isOwnerOrAdmin(socket, data._id, function(user){
+			userProvider.updatePass({
+
+				data._id
+
+			},function(updates){
+				socket.emit('user pass updated',{
+
+					updated: true
+
+				});
+			},function(error){
+				sendErrorToSocket(socket,error);
+			});
+		});
+	});
+
+	socket.on('update user notifications', function(data){
+		lunchAuth.isOwner(socket, function(user){
+			userProvider.updateNoti({
+				// !!!!!!! TODO !!!!!!
+			},function(results){
+
+			},function(error){
+				sendErrorToSocket(socket,error);
+			});
+		});
+	});
+
+	socket.on('update user activeitem', function(data){
+		lunchAuth.isOwner(socket, function(user){
+			userProvider.updateAktiveItem({
+// !!!!!!! TODO !!!!!!
+			},function(results){
+
+			},function(error){
+				sendErrorToSocket(socket,error);
+			});
+		});
+	});
+
+	socket.on('update user inventory', function(data){
+		lunchAuth.isAdmin(socket, function(user){
+			userProvider.save({
+// !!!!!!! TODO !!!!!!
+			},function(results){
+
+			},function(error){
+				sendErrorToSocket(socket,error);
+			});
+		});
+	});
+
+	socket.on('delete user', function(data){
+		lunchAuth.isAdmin(socket, function(user){
+			userProvider.save({
+// !!!!!!! TODO !!!!!!
+			},function(results){
+
+			},function(error){
+				sendErrorToSocket(socket,error);
+			});
+		});
+	});
+
+
+
+
+// !!!!!!! TODO !!!!!!
+// I T E M S
+
+
+
 
 	socket.on('disconnect', function () {
 
 	});
 
+
+
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
