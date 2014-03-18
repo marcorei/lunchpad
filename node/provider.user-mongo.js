@@ -28,9 +28,23 @@ var UserProvider = function(){
  */
 
 UserProvider.prototype.findAll = function(onSuccess, onError){
+	b.gc(cn, function(collection){
 
-	// will probably not be used for now
+		collection.find({},{
+			fields: {
+				_id:1,
+				mail:1,
+				nick:1,
+				ava:1,
+				item:1,
+				role:1
+			}
+		}).toArray(function(error,users){
+			if(error) onError(error);
+			else onSuccess(users);
+		});
 
+	},onError);
 }
 
 
@@ -114,7 +128,7 @@ UserProvider.prototype.updatePass = function(id, pass, onSuccess, onError){
 /*
  * Add an item to the inventory list.
  */
-
+/*
 UserProvider.prototype.saveItemToInventory = function(id, item, onSuccess, onError){
 	db.gc(cn, function(collection){
 
@@ -135,7 +149,11 @@ UserProvider.prototype.saveItemToInventory = function(id, item, onSuccess, onErr
 
 	},onError);
 }
+*/
 
+
+// !!!!!!! TODO !!!!!!
+// UPDATE INVENTORY
 
 
 

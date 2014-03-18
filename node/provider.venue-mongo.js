@@ -71,6 +71,32 @@ VenueProvider.prototype.addUserToVenue = function(id, user, onSuccess, onError){
 	db.gc(cn, function(collection){
 	
 		collection.update({
+			_id: oID(id)
+		},{
+			$push: {
+				guests:user
+			}
+		},{
+			multi:false,
+			save: true
+		},function(error,updates){
+			if(error) onError(error);
+			else if(!updates) onError('Could not add user to venue.');
+			else onSuccess(updates);
+		});
+
+	},onError);
+}
+
+
+/*
+ * Remove a user for today
+ */
+
+VenueProvider.prototype.delUserForToday = function(user, onSuccess, onError){
+	db.gc(cn, function(collection){
+	
+		collection.update({
 			'guests.uid':user._id
 		},{
 			$pull:{
@@ -81,24 +107,7 @@ VenueProvider.prototype.addUserToVenue = function(id, user, onSuccess, onError){
 			save:true
 		},function(error,updates){
 			if(error) onError(error);
-			else{
-
-				collection.update({
-					_id: oID(id)
-				},{
-					$push: {
-						guests:user
-					}
-				},{
-					multi:false,
-					save: true
-				},function(error,updates){
-					if(error) onError(error);
-					else if(!updates) onError('Could not add user to venue.');
-					else onSuccess(updates);
-				});
-
-			}
+			else onSuccess(updates);
 		});
 
 	},onError);
@@ -119,6 +128,34 @@ VenueProvider.prototype.updateCommentCount = function(id, count, onSuccess, onEr
 		},{
 			$set:{
 				comc: count
+			}
+		},{
+			multi: false,
+			save: true
+		},function(error,updates){
+			if(error) onError(error);
+			else if(!updates) onError('venue not found');
+			else onSuccess(updates);
+		});
+
+	},onError);
+}
+
+
+
+
+/*
+ * Update name
+ */
+
+VenueProvider.prototype.updateName = function(id, name, onSuccess, onError){
+	db.gc(cn, function(collection){
+
+		collection.update({
+			_id: db.oID(id)
+		},{
+			$set:{
+				name: name
 			}
 		},{
 			multi: false,
@@ -248,7 +285,7 @@ VenueProvider.prototype.deleteVenue = function(id, onSuccess, onError){
  * Save a new venue
  */
 
-VenueProvider.prototype.saveVenues = function(venues, callback){
+VenueProvider.prototype.saveVenues = function(venues, onSuccess, onError){
 	db.gc(cn, function(collection){
 
 		var i,

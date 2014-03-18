@@ -66,7 +66,7 @@ CommentProvider.prototype.findComment = function(id, onSuccess, onError){
  * Find all comments from a venue id
  */
 
-CommentProvider.prototype.findWidthVenue = function(vid, onSuccess, onError){
+CommentProvider.prototype.findWithVenue = function(vid, onSuccess, onError){
 	db.gc(cn, function(collection){
 
 		collection.find({
@@ -74,9 +74,29 @@ CommentProvider.prototype.findWidthVenue = function(vid, onSuccess, onError){
 			del: false
 		},{
 			sort:[[date:1]]
-		}).toArray(function(error,venues){
+		}).toArray(function(error,comments){
 			if(error) onError(error);
-			else onSuccess(venues);
+			else onSuccess(comments);
+		});
+
+	},onError);
+}
+
+
+
+/*
+ * Count all comments from a venue id
+ */
+
+CommentProvider.prototype.countWithVenue = function(vid, onSuccess, onError){
+	db.gc(cn, function(collection){
+
+		collection.count({
+			vid: vid,
+			del: false
+		},function(error,count){
+			if(error) onError(error);
+			else onSuccess(count);
 		});
 
 	},onError);
@@ -148,7 +168,6 @@ CommentProvider.prototype.saveComment = function(comments, onSuccess, onError){
 		collection.insert(comments, function(error,results) {
 			if(error) onError(error);
 			else{
-				console.log('User created: '+comments.length);
 				onSuccess(results);
 			}
 		});
