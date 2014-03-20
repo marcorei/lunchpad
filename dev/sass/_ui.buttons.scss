@@ -95,7 +95,7 @@ $lunch-btn-rotate-hover: 360deg;
 		// Effects
 		@include border-radius(34px);
 		@include hoverrotate( $lunch-btn-rotate-start );
-		@include transition-property( transform );
+		@include transition-property( transform border-color );
 		@include transition-duration( $lunch-time-out );
 	}
 

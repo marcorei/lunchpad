@@ -14,27 +14,66 @@
 
 	.lunch-fn-back {
 		// Inherit
-		@extend .lunch-venue-btn;
+		//@extend .lunch-venue-btn;
 
 		// Box
-		float: left;
+		//float: left;
+		display: inline-block;
+		overflow: hidden;
 		margin: {
-			top: 5px;
+			top: 10px;
+			left: -15px;
 		}
-		border: {
-			color: #444;
-		}
+		padding: 10px 15px;
+		
 
 		// Skin
-		color: #444;
+		color: #ddd;
+		cursor: pointer;
+		background: {
+			color: #fff;
+		}
+
+
+		// Effects
+		@include border-radius( 25px );
 		
+		// Children
+		.lunch-icon {
+			float: left;
+			font: {
+				size: 30px;
+			}
+			border: {
+				color: #ddd;
+			}
+		}
+		.lunch-label {
+			// Box
+			display: block;
+
+			float: left;
+			padding: {
+				top: 6px;
+				bottom: 6px;
+				left: 5px;
+				right: 10px;
+			}
+		}
+
 		// States
 		&:hover {
 
 			// Skin
-			color: #111;
-			border: {
-				color: #111;
+			color: #555;
+			background: {
+				color: #eee;
+			}
+
+			.lunch-icon {
+				border: {
+					color: #555;
+				}
 			}
 		}
 	}
@@ -87,7 +126,7 @@
 		overflow: hidden;
 		max-width: 600px;
 		padding: {
-			top: 50px;
+			top: 0;
 			left: 60px;
 			right: 60px;
 		}
@@ -98,9 +137,10 @@
 	.lunch-venue-title {
 		
 		// Box
-		float: left;
-		padding: {
-			left: 10px;
+		clear: left;
+		display: block;
+		margin: {
+			top: 30px;
 		}
 
 		// Skin
@@ -132,10 +172,10 @@
 		// Box
 		max-width: 600px;
 		padding: {
-			top: 20px;
+			top: 40px;
 			right: 60px;
-			bottom: 20px;
-			left: 120px;
+			bottom: 40px;
+			left: 60px;
 		}
 		margin: {
 			top: 0;

@@ -3,6 +3,7 @@
 	<header class="lunch-venue-header">
 		<a ng-click="goto('/venues')" class="lunch-fn-back">
 			<span class="lunch-icon">B</span>
+			<span class="lunch-label">back</span>
 		</a>
 
 		<h1 class="lunch-venue-title">Scheidegger</h1>
@@ -100,8 +101,15 @@
 				<div class="lunch-commentator">
 					<img width="40" height="80" src="../static/img/mr.png" alt="" class="lunch-user-image">
 				</div>
-				<textarea type="text" class="lunch-comment-content"></textarea>
-				<!-- <button type="submit">Post Comment</button> -->
+				<div class="lunch-comment-content">
+					<span class="lunch-comment-arrow">&nbsp;</span>
+					<textarea type="text" placeholder="Something to say?"></textarea>
+				
+					<div class="lunch-comment-interaction">
+						<a class="lunch-fn-comment-send">✓</a>
+						<a class="lunch-fn-comment-cancel">x</a>
+					</div>
+				</div>
 			</form>
 		</div>
 	</div>

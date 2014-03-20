@@ -1,109 +1,331 @@
+/*
+ * Styles for venue view
+ * @author Joachim Fröstl <jf@19h13.com>
+ */
+
+
+
+
+
+
+
+
+
+/*
+ * Arrow pointing from Comment body
+ */
+.lunch-comment-arrow{
+	
+	// Box
+	width: 0; 
+	height: 0; 
+	border-top: 7px solid transparent;
+	border-bottom: 7px solid transparent;
+	border-right: 7px solid  #fff;
+
+	// Position
+	position: absolute;
+	left: -7px;
+	top: 12px;
+}
+
+
+
+
+
+
+
+
+
+/*
+ * Container for all comment elements
+ */
+.lunch-comments {
+	
+	// Skin
+	margin: 0 20px;
+	background: {
+		color: #eee;
+	}
+}
+
+
+
+
+
+
+
+
+
+/*
+ * List of all comments
+ */
+.lunch-comments-list {
+	
+	// Box
+	max-width: 600px;
+	padding: {
+		top: 30px;
+		left: 40px;
+		right: 40px;
+		bottom: 30px;
+	}
+	margin: 0;
+}
+
+
+
+
+
+
+
+
+
+/*
+ * Single comment entity
+ */
+.lunch-comment {
+
+	// Box
+	clear: left;
+	padding: {
+		left: 6px;
+	}
+	margin: {
+		top: 2px;
+	}
+
+	overflow: hidden;
+
+	// Children
+	.lunch-comment-content {
+		// Box
+		position: relative;
+		max-width: 450px;
+		margin: 0;
+		margin: {
+			left: 10px;
+		}
+		padding: {
+			left: 10px;
+			top: 10px;
+			bottom: 20px;
+			right: 30px;
+		}
+		float: left;
+
+		// Skin
+		background: {
+			color: white;
+		}
+		font: {
+			family: Georgia;
+			style: italic;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+/*
+ * Contains Image of commentator
+ */
+.lunch-commentator {
+
+	// Box
+	float: left;
+	width: 40px;
+	height: 40px;
+	overflow: hidden;
+	
+	// Skin
+	background: {
+		color: #333;
+	}
+
+	// Effects
+	@include border-radius( 24px );
+}
+
+
+
+
+
+
+
+
+
+/*
+ * Comment input
+ */
+.lunch-comment-input {
+	
+	// Variables
+	$lunch-comment-inp-color: #fff;
+
+	
+
+	// Box
+	margin: {
+		top: 20px;
+	}
+	padding: {
+		// top: 20px;
+	}
+	
+
+
+	// Commentator
+	.lunch-commentator {
+		//background-color: $lunch-color-red-dark;
+	}
+
+
+
+	// States
+	&:hover {
+
+		// Children
+		textarea,
+		.lunch-comment-interaction {
+			background-color: $lunch-color-ylw-ligh;
+		}
+
+		.lunch-comment-arrow {
+			border-right: 7px solid  $lunch-color-ylw-ligh;
+		}
+	}
+
+
+
+	// Children
 	.lunch-comment-arrow{
+	
 		// Box
 		width: 0; 
 		height: 0; 
 		border-top: 7px solid transparent;
 		border-bottom: 7px solid transparent;
-		border-right: 7px solid  #fff;
+		border-right: 7px solid  $lunch-comment-inp-color;
 
 		// Position
 		position: absolute;
 		left: -7px;
 		top: 12px;
 	}
-	
-	.lunch-comments {
-		// Box
-		min-height: 500px;
-		background: {
-			color: #eee;
-		}
-	}
 
-	.lunch-comments-list {
+	.lunch-comment-content {
 		
-
 		// Box
-		max-width: 600px;
-		padding: {
-			top: 20px;
-			left: 60px;
-			right: 60px;
-			bottom: 80px;
+		min-width: 75%;
+		padding: 0;
+		border: {
+			width:0;
+			style: dashed;
+			color: #ccc;
+			bottom-width: 0;
 		}
-		margin: 0;
-	}
-	
-	.lunch-comment {
 
-		// Box
-		clear: left;
-		padding: 5px 6px 5px 0;
-		overflow: hidden;
-
-		// Children
-		.lunch-comment-content {
-			// Box
-			position: relative;
-			max-width: 450px;
-			margin: 0;
-			margin: {
-				left: 10px;
-			}
-			padding: {
-				left: 10px;
-				top: 10px;
-				bottom: 10px;
-				right: 30px;
-			}
-			float: left;
-
-			// Skin
-			background: {
-				color: white;
-			}
-			font: {
-				family: Georgia;
-				style: italic;
-			}
-		}
-	}
-
-
-	.lunch-commentator {
-
-		// Box
-		float: left;
-		width: 40px;
-		height: 40px;
-		overflow: hidden;
-		
 		// Skin
 		background: {
-			color: white;
+			color: transparent;
 		}
-
-		// Effects
-		@include border-radius( 20px );
 	}
 
-	.lunch-comment-input {
+
+	textarea {
+		
+		// Box
+		display: block;
+		width: 100%;
+		border: {
+			width: 0;
+		}
+		padding: {
+			left: 10px;
+			top: 10px;
+			bottom: 10px;
+			right: 30px;
+		}
+		@include box-sizing( border-box );
+
+		// Skin
+		font: {
+			family: Georgia;
+			style: italic;
+		}
+		background: {
+			color: $lunch-comment-inp-color;
+		}
+	}
 
 
-		// Children
-		.lunch-comment-content {
-			
+	.lunch-comment-interaction {
+		// Box
+		padding: 5px 0;
+		overflow: hidden;
+		border: {
+			width: 0;
+			top-width: 2px;
+			color: #eee;
+			style: dashed;
+		}
+
+		// Skin
+		background-color: #fff;
+
+		a {
 			// Box
+			float: right;
+			display: block;
+			width: 20px;
+			height: 20px;
+			padding: 4px;
+			margin: {
+				right: 4px;
+			}
 			border: {
-				width:0;
-				style: dashed;
-				color: #ccc;
-				bottom-width: 0;
+				width: 0px;
+				style: solid;
 			}
 
 			// Skin
-			background: {
-				color: #ddd;
+			text-align: center;
+			cursor: pointer;
+			color: #fff;
+			background-color: $lunch-color-blu;
+
+			// Effects 
+			@include border-radius( 24px );
+			@include transition-property( background-color );
+			@include transition-duration( $lunch-time-out );
+
+
+			// States
+			&:hover {
+				@include transition-duration( $lunch-time-over );
+				background-color: $lunch-color-blu-dark;
 			}
+
+		}
+
+		.lunch-fn-comment-cancel {
+			
+			// Skin
+			background-color: #ccc;
+
+
+			// States 
+			&:hover {
+				background-color: #555;
+			}
+
 		}
 	}
+}
