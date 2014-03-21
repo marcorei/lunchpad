@@ -14,7 +14,7 @@ var db = require('./module.dbase.js').dBase,
 var UserProvider = function(){
 	db.gc(cn, function(collection){
 
-		collection.ensureIndex('mail', function(error,indexName){
+		collection.ensureIndex('mail',{unique:true},function(error,indexName){
 			if(error) console.log(error);
 		});
 
@@ -152,8 +152,30 @@ UserProvider.prototype.saveItemToInventory = function(id, item, onSuccess, onErr
 */
 
 
-// !!!!!!! TODO !!!!!!
-// UPDATE INVENTORY
+
+/*
+ * Update the inventory of a user
+ */
+UserProvider.prototype.updateInventoryById = function(id, inv, onSuccess, onError){
+	db.gc(cn, function(collection){
+
+		collection.update({
+			_id: db.oID(id)
+		},{
+			$set:{
+				inv: inv
+			}
+		},{
+			safe:true,
+			multi:false
+		},function(error,result){
+			if(error) onError(error);
+			if(!result) onError('nothing updated, user not found');
+			else onSuccess(result);
+		});
+
+	},onError);
+}
 
 
 
@@ -161,10 +183,22 @@ UserProvider.prototype.saveItemToInventory = function(id, item, onSuccess, onErr
  * Remove an item from all inventories.
  */
 
-UserProvider.prototype.removeItemFromInventories = function(item, onSuccess, onError){
+UserProvider.prototype.removeItemFromInventories = function(iid, onSuccess, onError){
 	db.gc(cn, function(collection){
 
-		// TODO later
+		collection.update({
+			inv:iid
+		},{
+			$pull:{
+				inv:iid
+			}
+		},{
+			multi:true, //only true so that in case of an error multiple entries will be removed
+			save:true
+		},function(error,updates){
+			if(error) onError(error);
+			else onSuccess(updates);
+		});
 
 	},onError);
 }
@@ -179,19 +213,16 @@ UserProvider.prototype.removeItemFromInventories = function(item, onSuccess, onE
 UserProvider.prototype.updateAktiveItem = function(id, item, onSuccess, onError){
 	db.gc(cn, function(collection){
 
-		collection.update({
-			_id: db.oID(id)
-		},{
-			$set:{
-				item: item
+		collection.update({},{
+			$pull:{
+				inv: _id
 			}
 		},{
 			safe:true,
-			multi:false
-		},function(error,result){
+			multi:true
+		},function(error,results){
 			if(error) onError(error);
-			if(!result) onError('nothing updated, user not found');
-			else onSuccess(result);
+			else onSuccess(results);
 		});
 
 	},onError);
@@ -267,6 +298,31 @@ UserProvider.prototype.updateStats = function(id, stats, onSuccess, onError){
 	},onError);
 }
 
+
+
+
+
+/*
+ * Delete user
+ */
+
+UserProvider.prototype.deleteUser = function(id, onSuccess, onError){
+	db.gc(cn, function(collection){
+
+		collection.remove({
+			_id: id
+		},{
+			safe: true
+		},function(error,numRemoved){
+			if(error) onError(error);
+			else{
+				console.log('User removed: '+numRemoved);
+				onSuccess(numRemoved);
+			}
+		});
+
+	},onError);
+}
 
 
 
