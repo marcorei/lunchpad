@@ -23,7 +23,7 @@ var path = require('path'),
 	LocalStrategy = require('passport-local').Strategy,
 	hash = require('password-hash'),
 
-	Validator = require('validator').Validator,
+	Validate = require('./module.validate.js').Validate,
 
 	// own modules?
 
@@ -80,7 +80,7 @@ var lunchHelper = {
 
 	sendHtml: function(filename){
 		sendFile('../templates/'+filename);
-	}
+	},
 
 	sendErrorToRes: function(res,msg,code,nolog){
 		if(!nolog) console.log(msg);
@@ -92,7 +92,7 @@ var lunchHelper = {
 				msg: msg
 			}
 		});
-	}
+	},
 
 	sendErrorToSocket: function(socket,msg,code,nolog){
 		if(!nolog) console.log(msg);
@@ -102,7 +102,20 @@ var lunchHelper = {
 			code: code,
 			msg: msg
 		});
+	},
+
+	sendErrorToSocketCb: function(fn,msg,code,nolog){
+		if(!nolog) console.log(msg);
+		code = code || 0;
+
+		fn({
+			error:{
+				code: code,
+				msg: msg
+			}
+		});
 	}
+
 
 }
 
@@ -313,12 +326,10 @@ io.sockets.on('connection', function (socket) {
 	socket.on('send chat', function(data){
 		lunchAuth.isUser(socket, function(user){
 			socket.broadcast.emit('chat msg',{
-
 				user: {
 					nick: user.nick
 				},
 				msg: data.msg
-
 			});
 		});
 	});
@@ -328,35 +339,43 @@ io.sockets.on('connection', function (socket) {
 
 	// Venue
 
-	socket.on('read venue list', function(data){
+	socket.on('read venue list', function(data,cb){
 		lunchAuth.isUser(socket, function(user){
 			venueProvider.findAll(function(venues){
-				socket.emit('venue list', {
 
+				cb({
+					error: null,
 					venues: venues
-
 				});
+
 			},function(error){
-				sendErrorToSocket(socket,error);
+				sendErrorToSocketCb(cb,error);
 			});
 		});
 	});
 
 
-	socket.on('read venue', function(data){
+	socket.on('read venue', function(data,cb){
 		lunchAuth.isUser(socket, function(user){
-			venueProvider.findVenue(
 
-			data._id, 
+			var e;
+			if(e = new Validate()
+			.v('isLength',[data._id,24,24],'venue.id')
+			.e()){
+				sendErrorToSocketCb(cd,e);
+				return null;
+			}
 
+			venueProvider.findVenue(data._id, 
 			function(venue){
-				socket.emit('venue',{
 
+				cb({
+					error: null,
 					venue: venue
+				}); 	 
 
-				});
 			},function(error){
-				sendErrorToSocket(socket,error);
+				sendErrorToSocketCb(cb,error);
 			});
 		});
 	});
@@ -364,18 +383,29 @@ io.sockets.on('connection', function (socket) {
 
 	socket.on('create venue', function(data){
 		lunchAuth.isUser(socket, function(user){
-			venueProvider.saveVenues({
 
+			data.name = Validate.s('escape',[data.name]);
+
+			var e;
+			if(e = new Validate()
+			.v('isLength',[data.name,2,100],'venue.name.length')
+			.v('isURL',[data.url,{require_protocol: true},'venue.url')
+			.v('isLength',[data.createdBy,24,24],'venue.id')
+			.e()){
+				sendErrorToSocket(socket,e);
+				return null;
+			}
+
+			venueProvider.saveVenues({
 				name: data.name,
 				url: data.url,
 				createdBy: data.createdBy
-
 			},function(result){
+
 				socket.broadcast.emit('venue created',{
-
 					result: result
-
 				});
+
 			},function(error){
 				sendErrorToSocket(socket,error);
 			});			
@@ -385,17 +415,25 @@ io.sockets.on('connection', function (socket) {
 
 	socket.on('update venue name', function(data){
 		lunchAuth.isAdmin(socket, function(user){
-			venueProvider.updateName(
 
-			data._id,
-			data.name,
+			data.name = Validate.s('escape',[data.name]);
 
+			var e;
+			if(e = new Validate()
+			.v('inLength',[data._id,24,24],'venue.id')
+			.v('isLength',[data.name,2,100],'venue.name.length')
+			.e()){
+				sendErrorToSocket(socket,e);
+				return null;
+			}
+
+			venueProvider.updateName(data._id, data.name,
 			function(updates){
+
 				socket.broadcast.emit('venue name updated',{
-
 					updates: updates
-
 				});
+
 			},function(error){
 				sendErrorToSocket(socket,error);
 			});
@@ -405,17 +443,23 @@ io.sockets.on('connection', function (socket) {
 
 	socket.on('update venue url', function(data){
 		lunchAuth.isUser(socket, function(user){
-			venueProvider.updateUrl(
 
-			data._id,
-			data.url,
+			var e;
+			if(e = new Validate()
+			.v('inLength',[data._id,24,24],'venue.id')
+			.v('isURL',[data.url,{require_protocol: true},'venue.url')
+			.e()){
+				sendErrorToSocket(socket,e);
+				return null;
+			}			
 
+			venueProvider.updateUrl(data._id, data.url,
 			function(updates){
+
 				socket.broadcast.emit('venue url updated',{
-
 					updates: updates
-
 				});
+
 			},function(error){
 				sendErrorToSocket(socket,error);
 			});
@@ -426,16 +470,22 @@ io.sockets.on('connection', function (socket) {
 
 	socket.on('delete venue', function(data){
 		lunchAuth.isAdmin(socket, function(user){
-			venueProvider.deleteVenue(
 
-			data._id,
+			var e;
+			if(e = new Validate()
+			.v('inLength',[data._id,24,24],'venue.id')
+			.e()){
+				sendErrorToSocket(socket,e);
+				return null;
+			}
 
+			venueProvider.deleteVenue(data._id,
 			function(removed){
+
 				socket.broadcast.emit('venue deleted',{
-
 					removed: removed
-
 				});
+
 			},function(error){
 				sendErrorToSocket(socket,error);
 			});
@@ -449,42 +499,40 @@ io.sockets.on('connection', function (socket) {
 
 	socket.on('create checkin', function(data){
 		lunchAuth.isUser(socket, function(user){
-			checkinProvider.delTodayForUid(
 
-			user._id,
+			var e;
+			if(e = new Validate()
+			.v('inLength',[data._id,24,24],'checkin.id')
+			.e()){
+				sendErrorToSocket(socket,e);
+				return null;
+			}
 
+			checkinProvider.delTodayForUid(user._id,
 			function(numRemoved){
-				venueProvider.delUserForToday(
-
-				user._id,
-
+				venueProvider.delUserForToday(user._id,
 				function(numRemoved){
+					
 					checkinProvider.save({
-
 						uid: user._id,
 						vid: data._id
-
 					},function(results){
+						
 						var insert = {
-
 							_id: user._id,
 							nick: user.nick,
 							item: user.item,
 							ava: user.ava
-
 						};
-						venueProvider.addUserToVenue(
 
-						data._id,
-						insert,
-
+						venueProvider.addUserToVenue(data._id, insert,
 						function(updates){
-							socket.broadcast.emit('checkin added',{
 
+							socket.broadcast.emit('checkin added',{
 								_id: data._id,
 								user: insert
-
 							});
+
 						},function(error){
 							sendErrorToSocket(socket,error);
 						});
@@ -502,23 +550,17 @@ io.sockets.on('connection', function (socket) {
 
 	socket.on('delete checkin', function(data){
 		lunchAuth.isUser(socket, function(user){
-			checkinProvider.delTodayForUid(
-
-			user._id,
-
+			checkinProvider.delTodayForUid(user._id,
 			function(numRemoved){
-				venueProvider.delUserForToday(
-
-				user._id,
-
+				venueProvider.delUserForToday(user._id,
 				function(numRemoved){
-					socket.broadcast.emit('checkin added',{
 
+					socket.broadcast.emit('checkin added',{
 						user: {
 							_id: user._id
 						}
-
 					});
+
 				},function(error){
 					sendErrorToSocket(socket,error);
 				});
@@ -531,32 +573,48 @@ io.sockets.on('connection', function (socket) {
 
 	
 
-
-
 	// Comment
 	
-	socket.on('read comment list', function(data){
+	socket.on('read comment list', function(data,cb){
 		lunchAuth.isUser(socket, function(user){
-			commentProvider.findWithVenue(
 
-			data._id,
+			var e;
+			if(e = new Validate()
+			.v('inLength',[data._id,24,24],'venue.id')
+			.e()){
+				sendErrorToSocket(socket,e);
+				return null;
+			}
 
+			commentProvider.findWithVenue(data._id,
 			function(comments){
-				socket.emit('comment list',{
 
+				cb({
+					error: null,
 					comments: comments
-
 				});
+
 			},function(error){
-				sendErrorToSocket(socket,error);
+				sendErrorToSocketCb(cb,error);
 			});
 		});
 	});
 
 	socket.on('create comment', function(data){
 		lunchAuth.isUser(socket, function(user){
-			var insert = {
 
+			data.txt = Validate.s('escape',[data.txt]);
+
+			var e; 
+			if(e = new Validate()
+			.v('inLength',[data.vid,24,24],'venue.id')
+			.v('isLength',[data.name,1,140],'comment.txt.length')
+			.e()){
+				sendErrorToSocket(socket,e);
+				return null;
+			}
+
+			var insert = {
 				user: {
 					_id: user._id,
 					nick: user.nick,
@@ -565,26 +623,19 @@ io.sockets.on('connection', function (socket) {
 				},
 				vid: data.vid,
 				txt: data.txt
-
 			};
-			commentProvider.saveComment(
-			insert,
+
+			commentProvider.saveComment(insert,
 			function(results){
-				commentProvider.countWithVenue(
-
-				data.vid,
-
+				commentProvider.countWithVenue(data.vid,
 				function(count){
-					venueProvider.updateCommentCount(
-
-					data.vid,
-
+					venueProvider.updateCommentCount(data.vid,
 					function(updates){
+
 						socket.broadcast.emit('comment created',{
-
 							comment: updates[0]
-
 						});
+
 					},function(error){
 						sendErrorToSocket(socket,error);
 					});
@@ -598,17 +649,23 @@ io.sockets.on('connection', function (socket) {
 	});
 
 	socket.on('delete comment', function(data){
-		lunchAuth.isOwnerOrAdmin(socket, data.uid, function(user){
-			commentProvider.deleteComment(
+		lunchAuth.isOwnerOrAdmin(socket, data._id, function(user){
 
-			_id: data._id,
+			var e;
+			if(e = new Validate
+			.v('inLength',[data._id,24,24],'comment.id')
+			.e()){
+				sendErrorToSocket(socket,e);
+				return null;
+			}
 
+			commentProvider.deleteComment( _id: data._id,
 			function(updates){
+
 				socket.broadcast.emit('comment deleted',{
-
 					_id: data._id
-
 				});
+
 			},function(error){
 				sendErrorToSocket(socket,error);
 			});
@@ -620,76 +677,105 @@ io.sockets.on('connection', function (socket) {
 
 	
 
-	// USer
+	// User
 
 	socket.on('create user', function(data){
 		lunchAuth.isAdmin(socket, function(user){
-			userProvider.save({
 
+			data.nick = Validate.s('escape',[data.nick]);
+
+			var e;
+			if(e = new Validate
+			.v('isEmail',[data.mail],'user.mail')
+			.v('isAlphanumeric',[data.nick],'user.nick.alphanumeric')
+			.v('isLength',[data.nick,3,15],'user.nick.length')
+			.v('isIn',[data.role,['user','admin']],'user.role')
+			.v('isLength',[data.pass,5],'user.pass')
+			.v('isURL',[data.ava,{require_protocol: true}],'user.ava')
+			.e()){
+				sendErrorToSocket(socket,e);
+				return null;
+			}
+
+			userProvider.save({
 				mail: data.mail,
 				nick: data.nick,
 				role: data.role,
 				pass: data.pass,
 				ava: data.ava
-
 			},function(results){
+
 				socket.emit('user created',{
-
 					_id: results[0]._id,
-					nick: results[0].mail
-
+					nick: results[0].nick
 				});
+
 			},function(error){
 				sendErrorToSocket(socket,error);
 			});
 		});
 	});
 
-	socket.on('read user list', function(data){
+	socket.on('read user list', function(data,cb){
 		lunchAuth.isAdmin(socket, function(user){
 			userProvider.findAll(function(results){
-				socket.emit('user list',{
 
+				cb({
+					error: null,
 					users: results
-
 				});
+
 			},function(error){
-				sendErrorToSocket(socket,error);
+				sendErrorToSocketCb(cb,error);
 			});
 		});
 	});
 
-	socket.on('read user', function(data){
+	socket.on('read user', function(data,cb){
 		lunchAuth.isOwnerOrAdmin(socket, data._id, function(user){
-			userProvider.findUser(
 
-			data._id
+			var e;
+			if(e = new Validate
+			.v('inLength',[data._id,24,24],'user.id')
+			.e()){
+				sendErrorToSocketCb(cb,e);
+				return null;
+			}
 
+			userProvider.findUser( data._id
 			function(result){
 				result.pass = null;
-				socket.emit('user',{
 
+				cb({
+					error: null,
 					users: result
-
 				});
+
 			},function(error){
-				sendErrorToSocket(socket,error);
+				sendErrorToSocketCb(cb,error);
 			});
 		});
 	});
 
 	socket.on('update user password', function(data){
 		lunchAuth.isOwnerOrAdmin(socket, data._id, function(user){
-			userProvider.updatePass({
 
-				data._id
+			var e;
+			if(e = new Validate
+			.v('inLength',[data._id,24,24],'user.id')
+			.v('isLength',[data.pass,5],'user.pass')
+			.e()){
+				sendErrorToSocket(socket,e);
+				return null;
+			}
 
-			},function(updates){
+			userProvider.updatePass( data._id, data.pass,
+			function(updates){
+
 				socket.emit('user pass updated',{
-
 					updated: true
-
 				});
+
 			},function(error){
 				sendErrorToSocket(socket,error);
 			});
@@ -698,9 +784,19 @@ io.sockets.on('connection', function (socket) {
 
 	socket.on('update user notifications', function(data){
 		lunchAuth.isOwner(socket, function(user){
-			userProvider.updateNoti({
-				// !!!!!!! TODO !!!!!!
-			},function(results){
+
+			data.remind = Validate.s('toBoolean',[data.remind,true]);
+			data.overv = Validate.s('toBoolean',[data.overv,true]);
+
+			userProvider.updateNoti( user._id, {
+				remind: data.remind,
+				overv: data.overv
+			},
+			function(results){
+
+				socket.emit('user noti updated',{
+					updated: true
+				});
 
 			},function(error){
 				sendErrorToSocket(socket,error);
@@ -710,10 +806,32 @@ io.sockets.on('connection', function (socket) {
 
 	socket.on('update user activeitem', function(data){
 		lunchAuth.isOwner(socket, function(user){
-			userProvider.updateAktiveItem({
-// !!!!!!! TODO !!!!!!
-			},function(results){
 
+			var e;
+			if(e = new Validate
+			.v('inLength',[data._id,24,24],'user.id')
+			.e()){
+				sendErrorToSocket(socket,e);
+				return null;
+			}
+
+			// -------------
+			//	Currently, there is nothing to prevent users to set items active, which are not in there inventory.
+			//  TODO: Add check, if item is indeed in the invetory of the user.
+			// -------------
+
+			itemProvider.findItem(data._id,
+			function(item){
+				userProvider.updateAktiveItem( user._id, item,
+				function(results){
+
+					socket.emit('user active item updated',{
+						updated: true
+					});
+
+				},function(error){
+					sendErrorToSocket(socket,error);
+				});
 			},function(error){
 				sendErrorToSocket(socket,error);
 			});
@@ -722,9 +840,26 @@ io.sockets.on('connection', function (socket) {
 
 	socket.on('update user inventory', function(data){
 		lunchAuth.isAdmin(socket, function(user){
-			userProvider.save({
-// !!!!!!! TODO !!!!!!
-			},function(results){
+
+			var e;
+			if(e = new Validate
+			.v('inLength',[data._id,24,24],'user.id')
+			.e()){
+				sendErrorToSocket(socket,e);
+				return null;
+			}
+
+			if( !Array.isArray(data.inv) ){
+				sendErrorToSocket(socket,new Validate().msgs['user.inv']);
+				return null;
+			}
+
+			userProvider.updateInventoryById( data._id, data.inv,
+			function(results){
+
+				socket.emit('user inventory updated',{
+					updated: true
+				});
 
 			},function(error){
 				sendErrorToSocket(socket,error);
@@ -734,9 +869,20 @@ io.sockets.on('connection', function (socket) {
 
 	socket.on('delete user', function(data){
 		lunchAuth.isAdmin(socket, function(user){
-			userProvider.save({
-// !!!!!!! TODO !!!!!!
-			},function(results){
+
+			var e;
+			if(e = new Validate()
+			.v('inLength',[data._id,24,24],'user.id')
+			.e()){
+				sendErrorToSocket(socket,e);
+			}
+
+			userProvider.deleteUser( data._id,
+			function(results){
+
+				socket.emit('user deleted',{
+					_id: data._id
+				});
 
 			},function(error){
 				sendErrorToSocket(socket,error);
@@ -747,14 +893,141 @@ io.sockets.on('connection', function (socket) {
 
 
 
-// !!!!!!! TODO !!!!!!
-// I T E M S
+	// Items
+
+	socket.on('create item', function(data){
+		lunchAuth.isAdmin(socket, function(user){
+
+			// -------------
+			//	No validation 'cause Admind
+			//  TODO: Add validation
+			// -------------
+
+			itemProvider.saveItems({
+				name: data.name,
+				url: data.url,
+				type: data.type,
+				front: data.front
+			},function(results){
+
+				socket.emit('item created',{
+					results: results
+				});
+
+			},function(error){
+				sendErrorToSocket(socket,error);
+			});
+		});
+	});
+
+	socket.on('read item', function(data,cb){
+		lunchAuth.isUser(socket, function(user){
+
+			var e;
+			if(e = new Validate()
+			.v('inLength',[data._id,24,24],'item.id')
+			.e()){
+				sendErrorToSocketCb(cb,e);
+				return null;
+			}
+
+			itemProvider.findItem( data._id,
+			function(item){
+
+				cb({
+					error: null,
+					item: item
+				});
+
+			},function(error){
+				sendErrorToSocketCb(cb,error);
+			});
+		});
+	});
+
+	socket.on('read items', function(data,cb){
+		lunchAuth.isAdmin(socket, function(user){
+
+			var v = new Validate(),
+				e,
+				i;
+
+			if( !Array.isArray(data.ids) ){
+				sendErrorToSocketCb(cb,v.msgs['item.id']);
+				return null;
+			}
+
+			for(i=0; i<data.ids.length; i++){
+				v.v('inLength',[data.ids[i],24,24],'item.id')
+			}
+			if(e = v.e()){
+				sendErrorToSocketCb(cb,e);
+				return null;
+			}
+
+			itemProvider.findItems( data.ids,
+			function(results){
+
+				cb({
+					error: null,
+					items: items
+				});
+
+			},function(error){
+				sendErrorToSocketCb(cb,error);
+			});
+		});
+	});
+
+	socket.on('read item list', function(data,cb){
+		lunchAuth.isAdmin(socket, function(user){
+			itemProvider.findAll(function(results){
+
+				cb({
+					error: null,
+					items: items
+				});
+
+			},function(error){
+				sendErrorToSocketCb(cb,error);
+			});
+		});
+	});
+
+	socket.on('delete item', function(data){
+		lunchAuth.isAdmin(socket, function(user){
+
+			var e;
+			if(e = new Validate()
+			.v('inLength',[data._id,24,24],'item.id')
+			.e()){
+				sendErrorToSocketCb(cb,e);
+				return null;
+			}
+			
+			userProvider.removeItemFromInventories(	data._id,
+			function(updates){
+				itemProvider.deleteItem( data._id
+				function(results){
+
+					socket.emti('item deleted',{
+						_id: data._id
+					});
+
+				},function(error){
+					sendErrorToSocket(socket,error);
+				});
+			},function(error){
+				sendErrorToSocket(socket,error);
+			});
+		});
+	});
 
 
 
 
-	socket.on('disconnect', function () {
 
+	socket.on('disconnect', function(){
 	});
 
 
