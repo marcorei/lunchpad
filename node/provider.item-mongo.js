@@ -53,6 +53,55 @@ ItemProvider.prototype.findItem = function(id, onSuccess, onError){
 
 
 
+/*
+ * Get multiple items
+ */
+
+ItemProvider.prototype.findItems = function(ids, onSuccess, onError){
+	db.gc(cn, function(collection){
+
+		collection.find({
+			_id: {
+				$in: ids
+			}
+		},{}).toArray(function(error,items){
+			if(!error) onError(error);
+			else if(!items) onError('no items found');
+			else onSuccess(items);
+		})
+
+	},onError);
+}
+
+
+
+
+/*
+ * Delete item
+ */
+
+ItemProvider.prototype.deleteItem = function(id, onSuccess, onError){
+	db.gc(cn, function(collection){
+
+		collection.remove({
+			_id: id
+		},{
+			safe: true
+		},function(error,numRemoved){
+			if(error) onError(error);
+			else{
+				console.log('Item removed: '+numRemoved);
+				onSuccess(numRemoved);
+			}
+		});
+
+	},onError);
+}
+
+
+
+
+
 
 /*
  * Save items
