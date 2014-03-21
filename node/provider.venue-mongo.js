@@ -10,7 +10,15 @@ var db = require('./module.dbase.js').dBase,
 	cn = 'venue';
 
 
-var VenueProvider = function(){};
+var VenueProvider = function(){
+	db.gc(cn, function(collection){
+
+		collection.ensureIndex('name',{unique:true},function(error,indexName){
+			if(error) console.log(error);
+		});
+
+	},onError);
+};
 
 
 
