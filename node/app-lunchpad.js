@@ -30,7 +30,7 @@ var path = require('path'),
 	venueProvider = require('./provider.venue-mongo.js').venueProvider,
 	userProvider = require('./provider.user-mongo.js').userProvider,
 	itemProvider = require('./provider.item-mongo.js').itemProvider,
-	checkinProvider = require('./provider.checking-mongo.js').checkinProvider,
+	checkinProvider = require('./provider.checkin-mongo.js').checkinProvider,
 	commentProvider = require('./provider.comment-mongo.js').commentProvider,
 	// wait and see what else we'll need
 
@@ -209,6 +209,7 @@ app.use( passport.session() );
 // Static content
 
 app.use('/static', express.static(__dirname + '/../static'));
+app.use('/templates', express.static(__dirname + '/../templates'));
 
 
 
@@ -289,12 +290,6 @@ app.get('/', lunchHelper.sendHtml('page.app.angular.html'));
 app.get('/login', lunchHelper.sendHtml('page.login.html'));
 app.get('/manifesto', lunchHelper.sendHtml('page.manifesto.html'));
 
-app.get('/tmpl/venuelist', lunchHelper.sendHtml('tmpl.venuelist.html'));
-app.get('/tmpl/venuedetail', lunchHelper.sendHtml('tmpl.venuedetail.html'));
-app.get('/tmpl/newvenue', lunchHelper.sendHtml('tmpl.newvenue.html'));
-app.get('/tmpl/settings', lunchHelper.sendHtml('tmpl.settings.html'));
-
-
 
 // Action-Requests not send via socket (login / logout via passport)
 
@@ -315,7 +310,7 @@ app.post('/auth/logout', function(req,res){
 
 
 /*
- * Socket.io "Routes"
+ * Socket.io Events
  */
 
 
@@ -323,9 +318,9 @@ io.sockets.on('connection', function (socket) {
 
 	// Chat
 
-	socket.on('send chat', function(data){
+	socket.on('chat send', function(data){
 		lunchAuth.isUser(socket, function(user){
-			socket.broadcast.emit('chat msg',{
+			socket.broadcast.emit('chat message',{
 				user: {
 					nick: user.nick
 				},
@@ -339,7 +334,7 @@ io.sockets.on('connection', function (socket) {
 
 	// Venue
 
-	socket.on('read venue list', function(data,cb){
+	socket.on('venue read list', function(data,cb){
 		lunchAuth.isUser(socket, function(user){
 			venueProvider.findAll(function(venues){
 
@@ -355,7 +350,7 @@ io.sockets.on('connection', function (socket) {
 	});
 
 
-	socket.on('read venue', function(data,cb){
+	socket.on('venue read one', function(data,cb){
 		lunchAuth.isUser(socket, function(user){
 
 			var e;
@@ -381,7 +376,7 @@ io.sockets.on('connection', function (socket) {
 	});
 
 
-	socket.on('create venue', function(data){
+	socket.on('venue create', function(data){
 		lunchAuth.isUser(socket, function(user){
 
 			data.name = Validate.s('escape',[data.name]);
@@ -402,7 +397,7 @@ io.sockets.on('connection', function (socket) {
 				createdBy: data.createdBy
 			},function(result){
 
-				socket.broadcast.emit('venue created',{
+				socket.broadcast.emit('venue create done',{
 					result: result
 				});
 
@@ -413,7 +408,7 @@ io.sockets.on('connection', function (socket) {
 	});
 
 
-	socket.on('update venue name', function(data){
+	socket.on('venue update name', function(data){
 		lunchAuth.isAdmin(socket, function(user){
 
 			data.name = Validate.s('escape',[data.name]);
@@ -430,7 +425,7 @@ io.sockets.on('connection', function (socket) {
 			venueProvider.updateName(data._id, data.name,
 			function(updates){
 
-				socket.broadcast.emit('venue name updated',{
+				socket.broadcast.emit('venue name update done',{
 					updates: updates
 				});
 
@@ -441,7 +436,7 @@ io.sockets.on('connection', function (socket) {
 	});
 
 
-	socket.on('update venue url', function(data){
+	socket.on('venue update url', function(data){
 		lunchAuth.isUser(socket, function(user){
 
 			var e;
@@ -456,7 +451,7 @@ io.sockets.on('connection', function (socket) {
 			venueProvider.updateUrl(data._id, data.url,
 			function(updates){
 
-				socket.broadcast.emit('venue url updated',{
+				socket.broadcast.emit('venue url update done',{
 					updates: updates
 				});
 
@@ -468,7 +463,7 @@ io.sockets.on('connection', function (socket) {
 	});
 
 
-	socket.on('delete venue', function(data){
+	socket.on('venue delete', function(data){
 		lunchAuth.isAdmin(socket, function(user){
 
 			var e;
@@ -482,7 +477,7 @@ io.sockets.on('connection', function (socket) {
 			venueProvider.deleteVenue(data._id,
 			function(removed){
 
-				socket.broadcast.emit('venue deleted',{
+				socket.broadcast.emit('venue delete done',{
 					removed: removed
 				});
 
@@ -497,7 +492,7 @@ io.sockets.on('connection', function (socket) {
 
 	// Checking
 
-	socket.on('create checkin', function(data){
+	socket.on('checkin create', function(data){
 		lunchAuth.isUser(socket, function(user){
 
 			var e;
@@ -528,7 +523,7 @@ io.sockets.on('connection', function (socket) {
 						venueProvider.addUserToVenue(data._id, insert,
 						function(updates){
 
-							socket.broadcast.emit('checkin added',{
+							socket.broadcast.emit('checkin create done',{
 								_id: data._id,
 								user: insert
 							});
@@ -548,14 +543,14 @@ io.sockets.on('connection', function (socket) {
 		});
 	});
 
-	socket.on('delete checkin', function(data){
+	socket.on('checkin delete', function(data){
 		lunchAuth.isUser(socket, function(user){
 			checkinProvider.delTodayForUid(user._id,
 			function(numRemoved){
 				venueProvider.delUserForToday(user._id,
 				function(numRemoved){
 
-					socket.broadcast.emit('checkin added',{
+					socket.broadcast.emit('checkin delete done',{
 						user: {
 							_id: user._id
 						}
@@ -575,7 +570,7 @@ io.sockets.on('connection', function (socket) {
 
 	// Comment
 	
-	socket.on('read comment list', function(data,cb){
+	socket.on('comment read list', function(data,cb){
 		lunchAuth.isUser(socket, function(user){
 
 			var e;
@@ -600,7 +595,7 @@ io.sockets.on('connection', function (socket) {
 		});
 	});
 
-	socket.on('create comment', function(data){
+	socket.on('comment create', function(data){
 		lunchAuth.isUser(socket, function(user){
 
 			data.txt = Validate.s('escape',[data.txt]);
@@ -632,7 +627,7 @@ io.sockets.on('connection', function (socket) {
 					venueProvider.updateCommentCount(data.vid,
 					function(updates){
 
-						socket.broadcast.emit('comment created',{
+						socket.broadcast.emit('comment create done',{
 							comment: updates[0]
 						});
 
@@ -648,7 +643,7 @@ io.sockets.on('connection', function (socket) {
 		});
 	});
 
-	socket.on('delete comment', function(data){
+	socket.on('comment delete', function(data){
 		lunchAuth.isOwnerOrAdmin(socket, data._id, function(user){
 
 			var e;
@@ -662,7 +657,7 @@ io.sockets.on('connection', function (socket) {
 			commentProvider.deleteComment( _id: data._id,
 			function(updates){
 
-				socket.broadcast.emit('comment deleted',{
+				socket.broadcast.emit('comment delete done',{
 					_id: data._id
 				});
 
@@ -679,7 +674,7 @@ io.sockets.on('connection', function (socket) {
 
 	// User
 
-	socket.on('create user', function(data){
+	socket.on('user create', function(data){
 		lunchAuth.isAdmin(socket, function(user){
 
 			data.nick = Validate.s('escape',[data.nick]);
@@ -705,7 +700,7 @@ io.sockets.on('connection', function (socket) {
 				ava: data.ava
 			},function(results){
 
-				socket.emit('user created',{
+				socket.emit('user create done',{
 					_id: results[0]._id,
 					nick: results[0].nick
 				});
@@ -716,7 +711,7 @@ io.sockets.on('connection', function (socket) {
 		});
 	});
 
-	socket.on('read user list', function(data,cb){
+	socket.on('user read list', function(data,cb){
 		lunchAuth.isAdmin(socket, function(user){
 			userProvider.findAll(function(results){
 
@@ -731,7 +726,7 @@ io.sockets.on('connection', function (socket) {
 		});
 	});
 
-	socket.on('read user', function(data,cb){
+	socket.on('user read one', function(data,cb){
 		lunchAuth.isOwnerOrAdmin(socket, data._id, function(user){
 
 			var e;
@@ -757,7 +752,7 @@ io.sockets.on('connection', function (socket) {
 		});
 	});
 
-	socket.on('update user password', function(data){
+	socket.on('user update password', function(data){
 		lunchAuth.isOwnerOrAdmin(socket, data._id, function(user){
 
 			var e;
@@ -772,7 +767,7 @@ io.sockets.on('connection', function (socket) {
 			userProvider.updatePass( data._id, data.pass,
 			function(updates){
 
-				socket.emit('user pass updated',{
+				socket.emit('user update password done',{
 					updated: true
 				});
 
@@ -782,7 +777,7 @@ io.sockets.on('connection', function (socket) {
 		});
 	});
 
-	socket.on('update user notifications', function(data){
+	socket.on('user update notifications', function(data){
 		lunchAuth.isOwner(socket, function(user){
 
 			data.remind = Validate.s('toBoolean',[data.remind,true]);
@@ -794,7 +789,7 @@ io.sockets.on('connection', function (socket) {
 			},
 			function(results){
 
-				socket.emit('user noti updated',{
+				socket.emit('user update notifications done',{
 					updated: true
 				});
 
@@ -804,7 +799,7 @@ io.sockets.on('connection', function (socket) {
 		});
 	});
 
-	socket.on('update user activeitem', function(data){
+	socket.on('user update activeitem', function(data){
 		lunchAuth.isOwner(socket, function(user){
 
 			var e;
@@ -825,7 +820,7 @@ io.sockets.on('connection', function (socket) {
 				userProvider.updateAktiveItem( user._id, item,
 				function(results){
 
-					socket.emit('user active item updated',{
+					socket.emit('user update active item done',{
 						updated: true
 					});
 
@@ -838,7 +833,7 @@ io.sockets.on('connection', function (socket) {
 		});
 	});
 
-	socket.on('update user inventory', function(data){
+	socket.on('user update inventory', function(data){
 		lunchAuth.isAdmin(socket, function(user){
 
 			var e;
@@ -857,7 +852,7 @@ io.sockets.on('connection', function (socket) {
 			userProvider.updateInventoryById( data._id, data.inv,
 			function(results){
 
-				socket.emit('user inventory updated',{
+				socket.emit('user update invetory done',{
 					updated: true
 				});
 
@@ -867,7 +862,7 @@ io.sockets.on('connection', function (socket) {
 		});
 	});
 
-	socket.on('delete user', function(data){
+	socket.on('user delete', function(data){
 		lunchAuth.isAdmin(socket, function(user){
 
 			var e;
@@ -880,7 +875,7 @@ io.sockets.on('connection', function (socket) {
 			userProvider.deleteUser( data._id,
 			function(results){
 
-				socket.emit('user deleted',{
+				socket.emit('user delete done',{
 					_id: data._id
 				});
 
@@ -895,7 +890,7 @@ io.sockets.on('connection', function (socket) {
 
 	// Items
 
-	socket.on('create item', function(data){
+	socket.on('item create', function(data){
 		lunchAuth.isAdmin(socket, function(user){
 
 			// -------------
@@ -910,7 +905,7 @@ io.sockets.on('connection', function (socket) {
 				front: data.front
 			},function(results){
 
-				socket.emit('item created',{
+				socket.emit('item create done',{
 					results: results
 				});
 
@@ -920,7 +915,7 @@ io.sockets.on('connection', function (socket) {
 		});
 	});
 
-	socket.on('read item', function(data,cb){
+	socket.on('item read one', function(data,cb){
 		lunchAuth.isUser(socket, function(user){
 
 			var e;
@@ -945,7 +940,7 @@ io.sockets.on('connection', function (socket) {
 		});
 	});
 
-	socket.on('read items', function(data,cb){
+	socket.on('item read multiple', function(data,cb){
 		lunchAuth.isAdmin(socket, function(user){
 
 			var v = new Validate(),
@@ -979,7 +974,7 @@ io.sockets.on('connection', function (socket) {
 		});
 	});
 
-	socket.on('read item list', function(data,cb){
+	socket.on('item read list', function(data,cb){
 		lunchAuth.isAdmin(socket, function(user){
 			itemProvider.findAll(function(results){
 
@@ -994,7 +989,7 @@ io.sockets.on('connection', function (socket) {
 		});
 	});
 
-	socket.on('delete item', function(data){
+	socket.on('item delete', function(data){
 		lunchAuth.isAdmin(socket, function(user){
 
 			var e;
@@ -1010,7 +1005,7 @@ io.sockets.on('connection', function (socket) {
 				itemProvider.deleteItem( data._id
 				function(results){
 
-					socket.emti('item deleted',{
+					socket.emti('item delete done',{
 						_id: data._id
 					});
 
