@@ -4,7 +4,7 @@
  * New Version for socket.io and mongo based express app.
  * Rewrite everything! Yay!
  *
- * @author Markus Riegel <riegel.markius@googlemail.com>
+ * @author Markus Riegel <riegel.markus@googlemail.com>
  */
 
 

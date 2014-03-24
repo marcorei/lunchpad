@@ -3,10 +3,13 @@
  * You can either use it directly: inject, add listeners with on and remove them with off.
  * Or: generate a manager that removes sockets automaticly as the scope gets destroyed.
  *
- * @author Markus Riegel <riegel.markius@googlemail.com>
+ * @author Markus Riegel <riegel.markus@googlemail.com>
  */
 
-angular.factory('Socket',[
+angular.module('socket',[
+])
+
+.factory('Socket',[
 '$rootScope',
 function($rootScope){
 

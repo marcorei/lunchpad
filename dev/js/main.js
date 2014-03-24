@@ -3,7 +3,7 @@
  *
  * New Version for socket.io and angular
  *
- * @author Markus Riegel <riegel.markius@googlemail.com>
+ * @author Markus Riegel <riegel.markus@googlemail.com>
  */
 
 

@@ -1,7 +1,7 @@
 /*
  * Controller for the venue list view.
  *
- * @author Markus Riegel <riegel.markius@googlemail.com>
+ * @author Markus Riegel <riegel.markus@googlemail.com>
  */
 
 angular.module('viewVenuesController',[

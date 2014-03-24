@@ -1,11 +1,14 @@
 /*
  * Config for lunchpad frontend
  *
- * @author Markus Riegel <riegel.markius@googlemail.com>
+ * @author Markus Riegel <riegel.markus@googlemail.com>
  */
 
 
-angular.factory('LpConfig',[
+angular.module('lpConfig',[
+])
+
+.factory('LpConfig',[
 function(){
 
 	var server = {
