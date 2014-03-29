@@ -423,10 +423,10 @@ io.sockets.on('connection', function (socket) {
 			}
 
 			venueProvider.updateName(data._id, data.name,
-			function(updates){
+			function(updated){
 
 				socket.broadcast.emit('venue name update done',{
-					updates: updates
+					venue: updated
 				});
 
 			},function(error){
@@ -449,10 +449,10 @@ io.sockets.on('connection', function (socket) {
 			}			
 
 			venueProvider.updateUrl(data._id, data.url,
-			function(updates){
+			function(updated){
 
 				socket.broadcast.emit('venue url update done',{
-					updates: updates
+					venue: updated
 				});
 
 			},function(error){
@@ -524,7 +524,7 @@ io.sockets.on('connection', function (socket) {
 						function(updates){
 
 							socket.broadcast.emit('checkin create done',{
-								_id: data._id,
+								vid: data._id,
 								user: insert
 							});
 
@@ -621,14 +621,15 @@ io.sockets.on('connection', function (socket) {
 			};
 
 			commentProvider.saveComment(insert,
-			function(results){
+			function(comment){
 				commentProvider.countWithVenue(data.vid,
 				function(count){
-					venueProvider.updateCommentCount(data.vid,
-					function(updates){
+					venueProvider.updateCommentCount(data.vid,count,
+					function(venue){
 
 						socket.broadcast.emit('comment create done',{
-							comment: updates[0]
+							count: count,
+							comment: comment
 						});
 
 					},function(error){
@@ -655,12 +656,23 @@ io.sockets.on('connection', function (socket) {
 			}
 
 			commentProvider.deleteComment( _id: data._id,
-			function(updates){
+			function(comment){
+				commentProvider.countWithVenue(comment.vid,
+				function(count){
+					venueProvider.updateCommentCount(comment.vid,count,
+					function(venue){
 
-				socket.broadcast.emit('comment delete done',{
-					_id: data._id
+						socket.broadcast.emit('comment delete done',{
+							count: count,
+							comment: comment
+						});
+
+					},function(error){
+						sendErrorToSocket(socket,error);
+					});
+				},function(error){
+					sendErrorToSocket(socket,error);
 				});
-
 			},function(error){
 				sendErrorToSocket(socket,error);
 			});
