@@ -112,20 +112,20 @@ CommentProvider.prototype.countWithVenue = function(vid, onSuccess, onError){
 CommentProvider.prototype.deleteComment = function(id, onSuccess, onError){
 	db.gc(cn, function(collection){
 
-		collection.update({
+		collection.findAndModify({
 			_id: db.oID(id),
 			del: false
-		},{
+		},[],{
 			$set:{
 				del: true
 			}
 		},{
 			save: true,
 			multi: false
-		},function(error,updates){
+		},function(error,comment){
 			if(error) onError(error);
-			else if(!updates) onError('comment not found.');
-			else onSuccess(updates);
+			else if(!comment) onError('comment not found.');
+			else onSuccess(comment);
 		});
 
 	},onError);

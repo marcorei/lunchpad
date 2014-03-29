@@ -78,19 +78,19 @@ VenueProvider.prototype.findVenue = function(id, onSuccess, onError){
 VenueProvider.prototype.addUserToVenue = function(id, user, onSuccess, onError){
 	db.gc(cn, function(collection){
 	
-		collection.update({
+		collection.findAndModify({
 			_id: oID(id)
-		},{
+		},[],{
 			$push: {
 				guests:user
 			}
 		},{
 			multi:false,
 			save: true
-		},function(error,updates){
+		},function(error,venue){
 			if(error) onError(error);
-			else if(!updates) onError('Could not add user to venue.');
-			else onSuccess(updates);
+			else if(!venue) onError('Could not add user to venue.');
+			else onSuccess(venue);
 		});
 
 	},onError);
@@ -131,19 +131,19 @@ VenueProvider.prototype.delUserForToday = function(user, onSuccess, onError){
 VenueProvider.prototype.updateCommentCount = function(id, count, onSuccess, onError){
 	db.gc(cn, function(collection){
 
-		collection.update({
+		collection.findAndModify({
 			_id: db.oID(id)
-		},{
+		},[],{
 			$set:{
 				comc: count
 			}
 		},{
 			multi: false,
 			save: true
-		},function(error,updates){
+		},function(error,venue){
 			if(error) onError(error);
-			else if(!updates) onError('venue not found');
-			else onSuccess(updates);
+			else if(!venue) onError('venue not found');
+			else onSuccess(venue);
 		});
 
 	},onError);
@@ -159,19 +159,19 @@ VenueProvider.prototype.updateCommentCount = function(id, count, onSuccess, onEr
 VenueProvider.prototype.updateName = function(id, name, onSuccess, onError){
 	db.gc(cn, function(collection){
 
-		collection.update({
+		collection.findAndModify({
 			_id: db.oID(id)
-		},{
+		},[],{
 			$set:{
 				name: name
 			}
 		},{
 			multi: false,
 			save: true
-		},function(error,updates){
+		},function(error,venue){
 			if(error) onError(error);
-			else if(!updates) onError('venue not found');
-			else onSuccess(updates);
+			else if(!venue) onError('venue not found');
+			else onSuccess(venue);
 		});
 
 	},onError);
@@ -187,19 +187,19 @@ VenueProvider.prototype.updateName = function(id, name, onSuccess, onError){
 VenueProvider.prototype.updateUrl = function(id, url, onSuccess, onError){
 	db.gc(cn, function(collection){
 
-		collection.update({
+		collection.findAndModify({
 			_id: db.oID(id)
-		},{
+		},[],{
 			$set:{
 				url: url
 			}
 		},{
 			multi: false,
 			save: true
-		},function(error,updates){
+		},function(error,venue){
 			if(error) onError(error);
-			else if(!updates) onError('venue not found');
-			else onSuccess(updates);
+			else if(!venue) onError('venue not found');
+			else onSuccess(venue);
 		});
 
 	},onError);
