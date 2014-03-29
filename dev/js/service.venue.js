@@ -168,8 +168,7 @@ function(Socket,LpConfig,LpError){
 		venues[index].comc = data.count;
 	};
 
-	// init:load venues
-		// subscribe to events
+
 
 
 	loadVenues(function(){
