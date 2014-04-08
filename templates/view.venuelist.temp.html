@@ -1,0 +1,60 @@
+
+
+<div class="lunch-flash" ng-controller="ErrorCtrl" ng-show="errors">
+
+	<div class="lunch-flash-container">
+
+		<a href="javascript:closeError()" class="lunch-flash-close">X</a>
+		<ul>
+			<li ng-repeat="error in errors">{{error.msg}}</li>
+		</ul>
+
+	</div>
+</div>
+
+
+<div class="lunch-venue-filter">
+	<form class="lunch-venue-filter-form">
+		<input type="text" class="lunch-venue-filter-input" id="lunch-venue-filter-input" placeholder="Filter Venues" ng-model="searchInput.name">
+		<label for="lunch-venue-filter-input" class="lunch-venue-filter-btn">S</label>
+	</form>
+</div>
+
+
+
+
+<div ng-controller="VenueListCtrl" class="lunch-venues">
+
+	<div ng-repeat="venue in venues | orderBy:['-attending','-users'] | filter:searchInput" class="lunch-venue anim-venue-slide">
+
+		<div class="lunch-venue-body">
+			
+			<header class="lunch-venue-header">
+				<h2 class="lunch-venue-title" ng-click="goto('/venue/1')">{{venue.name}}</h2>
+				<span ng-show="venue.commentcount" class="lunch-venue-commentcount"><span class="lunch-venue-commentcount-arrow">&nbsp;</span>{{venue.commentcount}} Comments</span>
+				<a href="{{venue.url}}" class="lunch-fn-menu" target="blank">View Menu</a>
+			</header>
+
+			<div class="lunch-venue-guests" ng-show="venue.users">
+
+				<div class="lunch-venue-guest anim-user-slide" ng-repeat="user in venue.users">
+					<img width="40" height="80" src="..{{user.img}}" alt="" class="lunch-user-image" alt="{{user.name}}">
+					<p class="anim-status-fade" ng-show="user.status">{{user.status}}</p>
+				</div>
+
+			</div>
+
+			<a ng-hide="venue.attending" href="" class="lunch-fn-attend">
+				<span class="lunch-icon">Y</span>
+			</a>
+			<a ng-show="venue.attending" href="" class="lunch-fn-quit">
+				<span class="lunch-icon">N</span>
+			</a>
+		</div>
+
+	</div>
+
+</div>
+
+
+
