@@ -14,7 +14,9 @@ angular.module('lunchpad',[
 
 	'viewVenuesController',
 	'viewVenueDetailController',
-	'viewSettingsController'
+	'viewSettingsController',
+
+	'lpError'
 ])
 
 .config(['$routeProvider',

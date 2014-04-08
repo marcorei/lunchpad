@@ -84,11 +84,11 @@ var lunchHelper = {
 
 	sendErrorToRes: function(res,msg,code,nolog){
 		if(!nolog) console.log(msg);
-		code = code || 0;
+		code = code || 8000;
 
 		res.json({
 			error: {
-				code: 0,
+				code: code,
 				msg: msg
 			}
 		});
@@ -96,7 +96,7 @@ var lunchHelper = {
 
 	sendErrorToSocket: function(socket,msg,code,nolog){
 		if(!nolog) console.log(msg);
-		code = code || 0;
+		code = code || 8000;
 
 		socket.emit('error',{
 			code: code,
@@ -106,7 +106,7 @@ var lunchHelper = {
 
 	sendErrorToSocketCb: function(fn,msg,code,nolog){
 		if(!nolog) console.log(msg);
-		code = code || 0;
+		code = code || 8000;
 
 		fn({
 			error:{

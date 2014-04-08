@@ -27,7 +27,9 @@ function(){
 	var templates = {
 		'view.venues': 'view.venuelist.html',
 		'view.venuedetail': 'view.venuedetail.html',
-		'view.settings': 'view.settings.html'
+		'view.settings': 'view.settings.html',
+
+		'tmpl.erroralert': 'tmpl.erroralert.html'
 	}
 
 	var routes = {
