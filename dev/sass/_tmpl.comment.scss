@@ -105,11 +105,28 @@ $lunch-comment-body-col: #eee;
 
 	// Box
 	clear: left;
-	margin: {
-		top: 2px;
+	min-height: 20px;
+	padding: {
+		top: 15px;
+		bottom: 15px;
+		left: 60px;
 	}
-
+	border: {
+		width: 0;
+		bottom-width: 2px;
+		style: dashed;
+		color: white;
+	}
+	margin: 0;
 	overflow: hidden;
+	
+	// Position
+	position: relative;
+
+	// Skin
+	background: {
+		color: $lunch-comment-body-col;
+	}
 
 	// Children
 	.lunch-comment-content {
@@ -117,21 +134,10 @@ $lunch-comment-body-col: #eee;
 		position: relative;
 		max-width: 450px;
 		margin: 0;
-		margin: {
-			left: 10px;
-		}
-		padding: {
-			left: 10px;
-			top: 10px;
-			bottom: 20px;
-			right: 30px;
-		}
+		padding: 0;
 		float: left;
 
 		// Skin
-		background: {
-			color: $lunch-comment-body-col;
-		}
 		font: {
 			family: Georgia;
 			style: italic;
@@ -153,13 +159,19 @@ $lunch-comment-body-col: #eee;
 .lunch-commentator {
 
 	// Box
-	width: 50px;
-	height: 50px;
+	width: 40px;
+	height: 40px;
 	overflow: hidden;
+	
+	// Position
+	position: absolute;
+	left: 5px;
+	top: 5px;
+
 	
 	// Skin
 	background: {
-		color: #333;
+		color: #fff;
 	}
 
 	// Effects
@@ -186,10 +198,7 @@ $lunch-comment-body-col: #eee;
 
 	
 
-	// Box
-	margin: {
-		top: 20px;
-	}
+
 	padding: {
 		// top: 20px;
 	}

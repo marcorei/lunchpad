@@ -25,8 +25,7 @@ module.exports = function (grunt) {
 
 			dev: {
 				src: [
-					//'js/**/*.js'
-					'js/front.js'
+					'js/**/*.js'
 				],
 				dest: '../static/js/app.js'
 			},
