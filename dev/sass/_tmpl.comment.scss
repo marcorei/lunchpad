@@ -12,6 +12,18 @@
 
 
 /*
+ * Comment Variables
+ */
+$lunch-comment-body-col: #eee;
+
+
+
+
+
+
+
+
+/*
  * Arrow pointing from Comment body
  */
 .lunch-comment-arrow{
@@ -21,7 +33,7 @@
 	height: 0; 
 	border-top: 7px solid transparent;
 	border-bottom: 7px solid transparent;
-	border-right: 7px solid  #fff;
+	border-right: 7px solid  $lunch-comment-body-col;
 
 	// Position
 	position: absolute;
@@ -41,12 +53,17 @@
  * Container for all comment elements
  */
 .lunch-comments {
-	
-	// Skin
+	// Box
 	margin: 0 20px;
-	background: {
+	border: {
+		width: 0;
+		top-width: 2px;
+		style: solid;
 		color: #eee;
 	}
+
+	// Skin
+
 }
 
 
@@ -88,9 +105,6 @@
 
 	// Box
 	clear: left;
-	padding: {
-		left: 6px;
-	}
 	margin: {
 		top: 2px;
 	}
@@ -116,7 +130,7 @@
 
 		// Skin
 		background: {
-			color: white;
+			color: $lunch-comment-body-col;
 		}
 		font: {
 			family: Georgia;
@@ -140,8 +154,8 @@
 
 	// Box
 	float: left;
-	width: 40px;
-	height: 40px;
+	width: 50px;
+	height: 50px;
 	overflow: hidden;
 	
 	// Skin
@@ -150,7 +164,9 @@
 	}
 
 	// Effects
-	@include border-radius( 24px );
+	@include border-radius( 25px );
+
+
 }
 
 

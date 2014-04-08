@@ -100,11 +100,29 @@ $lunch-color-filter-active: #555;
 		right: auto;
 	}
 	padding: {
-		right: 40px;
+		top: 10px;
+		right: 60px;
+		bottom: 10px;
+		left: 20px;
 	}
 
 	// Position
 	position: relative;
+
+
+	// Effects
+	@include border-radius( 25px );
+
+
+	// States
+	&:hover{
+
+		// Skin
+		color: #555;
+		background: {
+			color: #eee;
+		}
+	}
 
 }
 
@@ -118,7 +136,7 @@ $lunch-color-filter-active: #555;
 
 		// Box
 		margin: {
-			left: 0;
+			left: -20px;
 		}
 
 	}
@@ -143,11 +161,11 @@ $lunch-color-filter-active: #555;
 	padding: {
 		top: 5px;
 		right: 10px;
-		bottom: 5px;
+		bottom: 4px;
 		left: 10px;
 	};
 	margin:{
-		left: -10px;
+		left: 0;
 		right: auto;
 	}
 	border: {
@@ -194,10 +212,10 @@ $lunch-color-filter-active: #555;
 
 		// Box
 		margin: {
-			left: -10px;
+			left: 0;
 		}
 		padding: {
-			left: 10px;
+			left: 0;
 			right: 10px;
 		}
 	}
@@ -218,12 +236,12 @@ $lunch-color-filter-active: #555;
 .lunch-venue-filter-btn {
 	
 	// Box
-	padding: 12px;
+	padding: 10px;
 
 	// Position
 	position: absolute;
 	right: 0;
-	top: -12px;
+	top: 0;
 
 	// Skin
 	font: {
