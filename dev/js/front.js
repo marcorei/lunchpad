@@ -30,19 +30,19 @@
 			$routeProvider.
 				when('/venues', {
 
-					templateUrl: './view.venuelist.html',
+					templateUrl: './view.venuelist.temp.html',
 					controller: 'VenueListCtrl'
 
 				}).
 				when('/venue/:venueId', {
 
-					templateUrl: './view.venuedetail.html',
+					templateUrl: './view.venuedetail.temp.html',
 					controller: 'VenueCtrl'
 
 				}).
 				when('/settings', {
 
-					templateUrl: './view.settings.html',
+					templateUrl: './view.settings.temp.html',
 					controller: 'SettingsCtrl'
 
 				}).
