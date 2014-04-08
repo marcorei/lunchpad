@@ -7,7 +7,17 @@
 		</a>
 
 		<h1 class="lunch-venue-title">Scheidegger</h1>
-	</header>
+		<!-- <div class="lunch-venue-interaction"> -->
+	<div>
+		<a class="lunch-fn-menu">
+			<span class="lunch-icon">N</span>
+			<span href="" class="lunch-label">View Menu</span>
+		</a>
+		<a class="lunch-fn-invite">
+			<span class="lunch-icon">N</span>
+			<span href="" class="lunch-label">Invite</span>
+		</a>
+	</div>
 
 
 	<div class="lunch-venue-guests" >
@@ -60,24 +70,19 @@
 			<img width="40" height="80" src="../static/img/mrz.png" alt="" class="lunch-user-image">
 			<p class="anim-status-fade ng-binding ng-hide" ng-show="user.status"></p>
 		</div>
-	</div>
-
-	<div class="lunch-venue-interaction">
-		<a class="lunch-fn-menu">
-			<span class="lunch-icon">N</span>
-			<span href="" class="lunch-label">View Menu</span>
-		</a>
-
-		<div ng-hide="venue.attending" class="lunch-fn-attend">
-			<!-- <span class="lunch-label">Lunch here</span> -->
+		<a ng-hide="venue.attending" class="lunch-fn-attend">
 			<span class="lunch-icon">Y</span>
-			<span class="lunch-label">Go for Lunch here</span>
-		</div>
+		</a>
 		<a ng-show="venue.attending" href="" class="lunch-fn-quit">
 			<!-- <span class="lunch-label">Cancel</span> -->
 			<span class="lunch-icon">N</span>
 		</a>
 	</div>
+
+
+
+		</header>
+	<!-- </div> -->
 	<div class="lunch-comments">
 		
 		<div class="lunch-comments-list">
@@ -100,15 +105,14 @@
 				<div class="lunch-commentator">
 					<img width="40" height="80" src="../static/img/mr.png" alt="" class="lunch-user-image">
 				</div>
-				<div class="lunch-comment-content">
-					<span class="lunch-comment-arrow">&nbsp;</span>
 					<textarea type="text" placeholder="Something to say?"></textarea>
 				
 					<div class="lunch-comment-interaction">
-						<a class="lunch-fn-comment-send">✓</a>
-						<a class="lunch-fn-comment-cancel">x</a>
+						<a class="lunch-fn-comment-send">
+							<span class="lunch-icon">✓</span>
+							<span class="lunch-label">Post Comment</span>
+						</a>
 					</div>
-				</div>
 			</form>
 		</div>
 	</div>

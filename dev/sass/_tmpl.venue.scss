@@ -267,12 +267,17 @@ $venue-vertical-padding: 50px;
 		bottom: 4px;
 		left: 9px;
 	}
+	border: {
+		width: 2px;
+		style: solid;
+		color: #aaa;
+	}
 
 	// Skin
 	background: {
-		color: #eee;
+		color: transparent;
 	}
-	color: #555;
+	color: #aaa;
 	text-decoration: none;
 	font: {
 		size: 14px;
@@ -283,11 +288,11 @@ $venue-vertical-padding: 50px;
 	
 	// Effects
 	@include transition-duration( $lunch-time-out );
-	@include transition-property( background-color color );
+	@include transition-property( border-color color );
 	
 	&:hover{
-		color: #000;
-		background: {
+		color: #00BEEE;
+		border: {
 			color: #00BEEE;
 		}
 		@include transition-duration( $lunch-time-over );
@@ -315,6 +320,11 @@ $venue-vertical-padding: 50px;
 		bottom: 4px;
 		left: 9px;
 	}
+	border: {
+		width: 2px;
+		style: solid;
+		color: #aaa;
+	}
 	
 	// Position
 	position: relative;
@@ -326,22 +336,22 @@ $venue-vertical-padding: 50px;
 		family: Georgia;
 		style: italic;
 	}
-	color: #555;
+	color: #aaa;
 	background: {
-		color: #eee;
+		color: transparent;
 	}
 	cursor: pointer;
 
 	// Effects
 	@include transition-duration( $lunch-time-out );
-	@include transition-property( background-color color );
+	@include transition-property( border-color color );
 
 	// States 
 	&:hover {
 
 		// Skin
-		color: #000;
-		background: {
+		color: $lunch-color-ylw-dark;
+		border: {
 			color: $lunch-color-ylw-dark;
 		}
 		
@@ -379,7 +389,7 @@ $venue-vertical-padding: 50px;
 	height: 0; 
 	border-left: 7px solid transparent;
 	border-right: 7px solid transparent;
-	border-top: 7px solid  #eee;
+	border-top: 7px solid  #aaa;
 
 	// Position
 	position: absolute;

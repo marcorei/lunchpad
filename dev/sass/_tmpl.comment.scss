@@ -54,12 +54,23 @@ $lunch-comment-body-col: #eee;
  */
 .lunch-comments {
 	// Box
-	margin: 0 20px;
+	margin: {
+		top: 30px;
+		left: 20px;
+		right: 20px;
+		bottom: 0;
+	}
+	padding: {
+		top: 60px;
+		right: 40px;
+		bottom: 20px;
+		left: 40px;
+	}
 	border: {
 		width: 0;
-		top-width: 2px;
+		//top-width: 2px;
 		style: solid;
-		color: #eee;
+		//color: $lunch-color-ylw;
 	}
 
 	// Skin
@@ -82,12 +93,12 @@ $lunch-comment-body-col: #eee;
 	// Box
 	max-width: 600px;
 	padding: {
-		top: 30px;
-		left: 40px;
-		right: 40px;
-		bottom: 30px;
+		left: 0;
+		right: 0;
 	}
 	margin: 0;
+	overflow: hidden;
+	clear: left;
 }
 
 
@@ -104,20 +115,24 @@ $lunch-comment-body-col: #eee;
 .lunch-comment {
 
 	// Box
+	float: left;
 	clear: left;
 	min-height: 20px;
 	padding: {
 		top: 15px;
 		bottom: 15px;
 		left: 60px;
+		right: 30px;
 	}
 	border: {
 		width: 0;
-		bottom-width: 2px;
+		//bottom-width: 2px;
 		style: dashed;
 		color: white;
 	}
-	margin: 0;
+	margin: {
+		top: 2px;
+	};
 	overflow: hidden;
 	
 	// Position
@@ -194,89 +209,59 @@ $lunch-comment-body-col: #eee;
 .lunch-comment-input {
 	
 	// Variables
-	$lunch-comment-inp-color: #fff;
+	$lunch-comment-inp-color: #ddd;
 
 	
-
-
-	padding: {
-		// top: 20px;
+	// Box
+	border: none;
+	padding: 0;
+	margin: {
+		top: 20px;
 	}
-	
+	max-width: 600px;
+	overflow:hidden;
 
 
-	// Commentator
+	// Skin
+	background: {
+		color: transparent;
+	}
+
+
+
+	// Lunch Commentator
 	.lunch-commentator {
-		//background-color: $lunch-color-red-dark;
-	}
 
-
-
-	// States
-	&:hover {
-
-		// Children
-		textarea,
-		.lunch-comment-interaction {
-			background-color: $lunch-color-ylw-ligh;
-		}
-
-		.lunch-comment-arrow {
-			border-right: 7px solid  $lunch-color-ylw-ligh;
+		// Skin
+		background: {
+			color: #eee;
 		}
 	}
 
 
 
 	// Children
-	.lunch-comment-arrow{
-	
-		// Box
-		width: 0; 
-		height: 0; 
-		border-top: 7px solid transparent;
-		border-bottom: 7px solid transparent;
-		border-right: 7px solid  $lunch-comment-inp-color;
-
-		// Position
-		position: absolute;
-		left: -7px;
-		top: 12px;
-	}
-
-	.lunch-comment-content {
-		
-		// Box
-		min-width: 75%;
-		padding: 0;
-		border: {
-			width:0;
-			style: dashed;
-			color: #ccc;
-			bottom-width: 0;
-		}
-
-		// Skin
-		background: {
-			color: transparent;
-		}
-	}
-
 
 	textarea {
 		
 		// Box
 		display: block;
-		width: 100%;
 		border: {
 			width: 0;
 		}
 		padding: {
-			left: 10px;
-			top: 10px;
-			bottom: 10px;
-			right: 30px;
+			left: 0;
+			top: 15px;
+			bottom: 8px;
+			right: 28px;
 		}
+		margin: {
+			left: 60px;
+		}
+		min-width: 400px;
+		max-width: 540px;
+		height: 45px;
+		min-height: 45px;
 		@include box-sizing( border-box );
 
 		// Skin
@@ -284,59 +269,71 @@ $lunch-comment-body-col: #eee;
 			family: Georgia;
 			style: italic;
 		}
-		background: {
-			color: $lunch-comment-inp-color;
+		border: {
+			width: 0;
+			bottom-width: 2px;
+			style: dashed;
+			color: #ccc;
 		}
+
+
+		// States
+		&:hover {
+
+			// Skin
+			border: {
+				color: #aaa;
+			}
+			background: {
+				color: #eee;
+			}
+		}
+
 	}
 
 
 	.lunch-comment-interaction {
 		// Box
-		padding: 5px 0;
+		margin: {
+			top: 5px;
+		};
 		overflow: hidden;
-		border: {
-			width: 0;
-			top-width: 2px;
-			color: #eee;
-			style: dashed;
-		}
 
-		// Skin
-		background-color: #fff;
 
+		// Position
 		a {
 			// Box
 			float: right;
 			display: block;
-			width: 20px;
-			height: 20px;
-			padding: 4px;
-			margin: {
-				right: 4px;
-			}
+			padding: 7px 14px;
 			border: {
-				width: 0px;
+				width: 2px;
 				style: solid;
+				color: $lunch-color-blu;
 			}
 
 			// Skin
 			text-align: center;
 			cursor: pointer;
-			color: #fff;
-			background-color: $lunch-color-blu;
+			color: $lunch-color-blu;
+			background-color: transparent;
+			font: {
+				family: Georgia, serif;
+				size: 14px;
+				style: italic;
+			}
 
 			// Effects 
-			@include border-radius( 24px );
-			@include transition-property( background-color );
+			@include transition-property( border-color color );
 			@include transition-duration( $lunch-time-out );
 
 
 			// States
 			&:hover {
 				@include transition-duration( $lunch-time-over );
-				background-color: $lunch-color-blu-dark;
+				border-color: $lunch-color-blu-dark;
+				color: $lunch-color-blu-dark;
 			}
-
 		}
 
 		.lunch-fn-comment-cancel {
@@ -349,7 +346,6 @@ $lunch-comment-body-col: #eee;
 			&:hover {
 				background-color: #555;
 			}
-
 		}
 	}
 }
