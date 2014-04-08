@@ -83,17 +83,7 @@
 
 		<!-- Error -->
 
-		<div class="lunch-flash" ng-controller="ErrorCtrl" ng-show="errors">
-
-			<div class="lunch-flash-container">
-
-				<a href="javascript:closeError()" class="lunch-flash-close">X</a>
-				<ul>
-					<li ng-repeat="error in errors">{{error.msg}}</li>
-				</ul>
-
-			</div>
-		</div>
+		<div lp-erroralert></div>
 		
 
 

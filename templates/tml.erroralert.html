@@ -1,8 +1,13 @@
-<div>
+<div class="lunch-flash">
 
-	<div ng-repeat="message in messages">
-		<p ng-bind="message"></p>
-		<button ng-click="close($index)">X</button>
+	<div class="lunch-flash-container">
+
+		<button ng-click="closeAll()" class="lunch-flash-close">X</button>
+
+		<ul>
+			<li ng-repeat="message in messages" ng-bind="message"></li>
+		</ul>
+
 	</div>
 
 </div>

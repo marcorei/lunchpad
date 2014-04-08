@@ -33,18 +33,17 @@ function(){
 'LpError',
 function(LpError){
 
-	$scope.messages = [];
-	$scope.dump = LpError.dumb;
+	$scope.messages = LpError.dumb;
 
 	$scope.close = function(index){
 		$scope.messages.splice(index,1);
 	}
 
-	$scope.$watch('dump',function(){
-		while($scope.dump.length > 0){
-			$scope.messages.push($scope.dump.pop());
+	$scope.closeAll = function(){
+		while($scope.messages.length > 0){
+			$scope.messages.pop();
 		}
-	});
+	}
 
 }])
 
