@@ -5,10 +5,15 @@
  */
 
 angular.module('viewVenueDetailController',[
+'lpVenueService'
 ])
 
 .controller('ViewVenueDetailController',[
-function(){
+'LpVenueService',
+function(LpVenueService){
 
+	$scope.venues = LpVenueService.venues;
+
+	
 
 }]);

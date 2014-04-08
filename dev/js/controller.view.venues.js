@@ -5,10 +5,13 @@
  */
 
 angular.module('viewVenuesController',[
+'lpVenueService'
 ])
 
 .controller('ViewVenuesController',[
-function(){
+'LpVenueService'
+function(LpVenueService){
+
 
 
 }]);

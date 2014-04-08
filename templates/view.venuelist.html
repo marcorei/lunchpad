@@ -5,22 +5,24 @@
 	</form>
 </div>
 
-<div ng-controller="VenueListCtrl" class="lunch-venues">
+<div class="lunch-venues">
 
-	<div ng-repeat="venue in venues | orderBy:['-attending','-users'] | filter:searchInput" class="lunch-venue anim-venue-slide">
+	<div ng-repeat="venue in venues | filter:searchInput" class="lunch-venue anim-venue-slide">
 
 		<div class="lunch-venue-body">
 			
 			<header class="lunch-venue-header">
 				<h2 class="lunch-venue-title" ng-click="goto('/venue/1')">{{venue.name}}</h2>
-				<span ng-show="venue.commentcount" class="lunch-venue-commentcount"><span class="lunch-venue-commentcount-arrow">&nbsp;</span>{{venue.commentcount}} Comments</span>
+				<span ng-show="venue.commentcount" class="lunch-venue-commentcount">
+					<span class="lunch-venue-commentcount-arrow">&nbsp;</span>{{venue.comc}} Comments
+				</span>
 				<a href="{{venue.url}}" class="lunch-fn-menu" target="blank">View Menu</a>
 			</header>
 
-			<div class="lunch-venue-guests" ng-show="venue.users">
+			<div class="lunch-venue-guests" ng-show="venue.guests">
 
-				<div class="lunch-venue-guest anim-user-slide" ng-repeat="user in venue.users">
-					<img width="40" height="80" src="..{{user.img}}" alt="" class="lunch-user-image" alt="{{user.name}}">
+				<div class="lunch-venue-guest anim-user-slide" ng-repeat="user in venue.guests">
+					<img width="40" height="80" src="{{user.ava}}" alt="" class="lunch-user-image" alt="{{user.nick}}">
 					<p class="anim-status-fade" ng-show="user.status">{{user.status}}</p>
 				</div>
 

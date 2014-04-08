@@ -43,6 +43,10 @@ function($rootScope){
 		var listeners = [];
 		this.listeners = listeners;
 
+		if(!scope){
+			scope = $rootScope;
+		}
+
 		scope.$on('$destroy',function(){
 			var i;
 			for(i=0;i<listeners.length;i++){

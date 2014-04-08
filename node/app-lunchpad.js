@@ -124,7 +124,7 @@ var lunchAuth = {
 
 	isUser: function(socket, onSuccess){
 		if(socket.handshake.user.logged_in) onSuccess(socket.handshake.user);
-		else sendErrorToSocket('User not authenticated', 403);
+		else sendErrorToSocket('Not logged in!', 666);
 	},
 
 	isAdmin: function(socket, onSuccess){
@@ -288,6 +288,7 @@ passport.use('local-login', new LocalStrategy(
 
 app.get('/', lunchHelper.sendHtml('page.app.angular.html'));
 app.get('/login', lunchHelper.sendHtml('page.login.html'));
+app.get('/logout', lunchHelper.sendHtml('page.logout.html'));
 app.get('/manifesto', lunchHelper.sendHtml('page.manifesto.html'));
 
 
@@ -737,6 +738,19 @@ io.sockets.on('connection', function (socket) {
 			});
 		});
 	});
+
+	socket.on('user read own id', function(data,cb){
+		lunchAuth.isUser(socket, function(user){
+
+			cb({
+				error: null,
+				user:{
+					_id: user._id
+				}
+			});
+
+		});
+	})
 
 	socket.on('user read one', function(data,cb){
 		lunchAuth.isOwnerOrAdmin(socket, data._id, function(user){

@@ -21,6 +21,7 @@ function(){
 	var pages = {
 		'root': '/',
 		'login': '/login',
+		'logout': '/logout',
 		'manifesto': '/manifesto'
 	}
 
@@ -66,6 +67,7 @@ function(){
 		'comment.delete.done': 'comment delete done',
 
 		'user.read.list': 'user read list',
+		'user.read.own.id': 'user read own id'
 		'user.read.one': 'user read one',
 		'user.create': 'user create',
 		'user.create.done': 'user create done',

@@ -6,26 +6,43 @@
 
 
 angular.module('lpError',[
-	'lpConfig'
+	'lpConfig',
+	'socket'
 ])
 
 .factory('LpError',[
-function(){
+'$window','Socket','LpConfig',
+function($window,Socket,LpConfig){
 
 	var messages = {
 		'e8000' : 'Something went wrong on the server.'
 	};
 
-	var dump = [];
+	var dump = [],
+		socketManager = Socket.generateManager(null);
+
+	var throwError = function(msg){
+		dump.push(msg);
+	}
+
+	var getMsg = function(errorCode){
+		return messages['e'+errorCode] || errorCode;
+	}
+
+	socketManager.on(LpConfig.getEvent('error'),function(data){
+		console.log('Error: '+data.error.code+' - '+data.error.msg);
+
+		if(data.error.code === 666){
+			$window.location.href = LpConfig.getPage('logout');
+		}else{
+			throwError(getMsg(data.error.code));
+		}
+	});
 
 	return {
 		dump: dump,
-		throw: function(msg){
-			dump.push(msg);
-		},
-		getMsg: function(errorCode){
-			return messages['e'+errorCode] || errorCode;
-		}
+		throw: throwError,
+		getMsg: getMsg
 	}
 }])
 

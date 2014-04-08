@@ -8,17 +8,18 @@
 angular.module('lpVenueService',[
 	'socket',
 	'lpConfig',
-	'lpError'
+	'lpError',
+	'lpUserIdService'
 ])
 
 .factory('LpVenueService',[
-'Socket','LpConfig','LpError',
-function(Socket,LpConfig,LpError){
+'Socket','LpConfig','LpError','LpUserIdService'
+function(Socket,LpConfig,LpError,LpUserIdService){
 
 	var venues = [],
 		queue = [],
 		loaded = false,
-		socketManager = Socket.generateManager();
+		socketManager = Socket.generateManager(null);
 
 	var getVenueById = function(id, callback){
 		if(loaded){
@@ -31,9 +32,14 @@ function(Socket,LpConfig,LpError){
 	var loadVenues = function(callback){
 		socketManager.emit(LpConfig.getEvent('venue.read.list'),{},function(data){
 			if(!data.error){
-				venues = data.venues;
-				loaded = true;
-				if(callback) callback();
+				LpUserIdService.getId(function(userId){
+					venues = data.venues;
+
+					// CHECK FOR ATTENDED!
+
+					loaded = true;
+					if(callback) callback();
+				});
 			}else{
 				LpError.throw(LpError.getMsg(data.error.code) || data.error.msg);
 			}
@@ -191,8 +197,8 @@ function(Socket,LpConfig,LpError){
 
 
 	return {
-		venues = venues, // bind to this
-		getVenueById = getVenueById // shortcut with queuing and callback
+		venues: venues, // bind to this
+		getVenueById: getVenueById // shortcut with queuing and callback
 	};
 
 }]);
