@@ -53,7 +53,26 @@ angular.module('lunchpad',[
 		function scroll() {}
 		return scroll;
 	}];
-});
+})
+
+.controller('ViewController',[
+'$scope', '$location',
+function($scope, $location){
+
+	$scope.$on('$locationChangeStart', function(event, targetRoute, currentRoute){
+		// get relevant route from route
+		var naviName = targetRoute.split('#')[1].split('/')[1];
+		console.log(naviName);
+		if( naviName === 'venues'){
+			console.log('back!');
+			$scope.stateAnimClass = 'back';
+		} else {
+			console.log('front!');
+			$scope.stateAnimClass = '';
+		}
+	});
+
+}]);
 
 
 
