@@ -62,8 +62,8 @@ function($rootScope){
 
 	SocketManager.prototype.emit = emit;
 
-	var generateManager = function(){
-		return new SocketManager();
+	var generateManager = function(scope){
+		return new SocketManager(scope);
 	}
 
 

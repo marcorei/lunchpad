@@ -47,8 +47,8 @@ function($window,Socket,LpConfig){
 }])
 
 .controller('LpErroralertController',[
-'LpError',
-function(LpError){
+'$scope','LpError',
+function($scope,LpError){
 
 	$scope.messages = LpError.dumb;
 

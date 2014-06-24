@@ -14,7 +14,8 @@ angular.module('lpUserIdService',[
 function(Socket,LpConfig){
 
 	var id = null,
-		queue = [];
+		queue = [],
+		socketManager = Socket.generateManager(null);
 
 	var getId = function(callback){
 		if(id !== null){
