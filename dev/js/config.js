@@ -67,7 +67,7 @@ function(){
 		'comment.delete.done': 'comment delete done',
 
 		'user.read.list': 'user read list',
-		'user.read.own.id': 'user read own id'
+		'user.read.own.id': 'user read own id',
 		'user.read.one': 'user read one',
 		'user.create': 'user create',
 		'user.create.done': 'user create done',
@@ -97,7 +97,7 @@ function(){
 			else throw 'Server Key not defined';
 		},
 		getTemplate: function(templateKey){
-			if(templates[templateKey]) 
+			if(templates[templateKey])
 				return server.templates + templates[templateKey];
 			else throw 'Template not defined';
 		},

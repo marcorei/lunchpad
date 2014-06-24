@@ -13,7 +13,7 @@ angular.module('lpVenueService',[
 ])
 
 .factory('LpVenueService',[
-'Socket','LpConfig','LpError','LpUserIdService'
+'Socket','LpConfig','LpError','LpUserIdService',
 function(Socket,LpConfig,LpError,LpUserIdService){
 
 	var venues = [],
@@ -63,7 +63,7 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 			tc,
 			i,
 			span;
-		
+
 		span = index;
 		for(i = 0; i < span; i++){
 			d = venues[index - (1 + i)].guests.length;
@@ -146,7 +146,8 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 			return null;
 		}
 		venues[index].name = data.venue.name;
-	index
+	};
+
 	var onVenueUpdateUrlDone = function(data){
 		var index = findVenueIndexById(data.venue._id);
 		if(index < 0){
@@ -183,7 +184,7 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 			queueItem = queue.pop();
 			queueItem[0].apply(this,queueItem[1]);
 		}
-		
+
 		socketManager.on(LpConfig.getEvent('checkin.create.done'),onCheckinCreateDone);
 		socketManager.on(LpConfig.getEvent('checkin.delete.done'),onCheckinDeleteDone);
 		socketManager.on(LpConfig.getEvent('venue.update.name.done'),onVenueUpdateNameDone);

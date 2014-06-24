@@ -28,7 +28,7 @@ function($rootScope){
 		socket.removeListener(event, callback);
 	}
 
-	var emit = function(event, data, callback)){
+	var emit = function(event, data, callback){
 		socket.emit(event, data, function(){
 			var args = arguments;
 			$rootScope.$apply(function(){

@@ -41,7 +41,7 @@ function(Socket,LpConfig){
 
 
 	return {
-		getId : getId;
+		getId : getId
 	};
 
 }]);

@@ -9,7 +9,7 @@ angular.module('viewVenuesController',[
 ])
 
 .controller('ViewVenuesController',[
-'LpVenueService'
+'LpVenueService',
 function(LpVenueService){
 
 
