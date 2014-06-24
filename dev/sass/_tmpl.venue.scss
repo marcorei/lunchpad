@@ -30,16 +30,16 @@ $venue-vertical-padding: 50px;
 
 	// Box
 	padding: {
-		top: 40px;
-		bottom: 40px;
+		top: 0;
+		bottom: 0;
 		right: 30px;
 		left: 30px;
 	}
 	border: {
 		width: 0px;
-		top-width: 1px;
+		top-width: 2px;
 		style: solid;
-		color: #f0f0f0;
+		color: #f7f7f7;
 	}
 	margin: {
 		top: 0px;
@@ -79,10 +79,10 @@ $venue-vertical-padding: 50px;
 		// Box
 		padding: {
 			right: 80px;
-			left: 40px;
+			left: 0;
 		}
 		margin: {
-			left: 20px;
+			left: 60px;
 			right: 20px;
 		}
 	}
@@ -99,21 +99,15 @@ $venue-vertical-padding: 50px;
 /*
  * Venue Body Mobile First
  */
-.lunch-venue-body {
+.lunch-venue-wrapper {
 
 	// Box
-	max-width: 600px;
-	margin: {
-		left: auto;
-		right: auto
-	}
 	margin: {
 		top: 40px;
 		bottom: 40px;
 	}
 
 	// Skin
-	position: relative;
 	display: table; // clearfix workaround
 	width: 100%;
 }

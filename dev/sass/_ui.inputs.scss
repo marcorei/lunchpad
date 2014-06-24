@@ -34,13 +34,14 @@ $lunch-color-filter-active: #555;
 	// Box
 	max-width: 700px;
 	margin: {
+		top: 15px;
 		left: auto;
 		right: auto;
 	}
 	padding: {
-		top: 15px;
+		top: 0;
 		right: 30px;
-		bottom: 15px;
+		bottom: 0;
 		left: 30px;
 	}
 	@include box-sizing(border-box);
@@ -56,11 +57,13 @@ $lunch-color-filter-active: #555;
 	// States
 	&:hover {
 		.lunch-venue-filter-input {
+			@include transition-duration(100ms);
 			border: {
 				color: $lunch-color-filter-active;
 			}
 		}
 		.lunch-venue-filter-btn {
+			@include transition-duration(100ms);
 			color: $lunch-color-filter-active;
 		}
 	}
@@ -91,66 +94,6 @@ $lunch-color-filter-active: #555;
 
 
 
-
-/*
- * Lunch Venue Filter Form
- */
-.lunch-venue-filter-form {
-
-	// Box
-	margin: {
-		left: auto;
-		right: auto;
-	}
-	padding: {
-		top: 10px;
-		right: 60px;
-		bottom: 10px;
-		left: 20px;
-	}
-
-	// Position
-	position: relative;
-
-
-	// Effects
-	//@include border-radius( 25px );
-
-
-	// States
-	&:hover{
-
-		// Skin
-		color: #555;
-		background: {
-			color: #eee;
-		}
-	}
-
-}
-
-
-
-/*
- * Mixin for medium screens
- */
-@mixin lunch-venue-filter-form-mixin-m() {
-	.lunch-venue-filter-form {
-
-		// Box
-		margin: {
-			left: -20px;
-		}
-
-	}
-}
-
-
-
-
-
-
-
 /*
  * Lunch Venue Filter Input
  * Mobile First
@@ -165,15 +108,15 @@ $lunch-color-filter-active: #555;
 		top: 10px;
 		right: 10px;
 		bottom: 10px;
-		left: 10px;
+		left: 40px;
 	};
 	margin:{
-		left: -10px;
+		left: 0;
 		right: auto;
 	}
 	border: {
-		width: 2px;
-		//bottom-width: 2px;
+		width: 0px;
+		bottom-width: 2px;
 		style: dashed;
 		color: #d5d5d5;
 	}
@@ -186,12 +129,12 @@ $lunch-color-filter-active: #555;
 	font: {
 		size: 18px;
 		family: Georgia, sans-serif;
-		style: italic;
+		style: normal;
 	}
 
 	// Effects
 	@include transition-property( border-color );
-	@include transition-duration( 0.5s );
+	@include transition-duration( 200ms );
 
 	// States
 	&:focus,
@@ -232,12 +175,12 @@ $lunch-color-filter-active: #555;
 .lunch-venue-filter-btn {
 
 	// Box
-	padding: 10px;
+	padding: 0;
 
 	// Position
 	position: absolute;
-	right: 0;
-	top: 0;
+	left: 30px;
+	top: 6px;
 
 	// Skin
 	font: {
@@ -249,9 +192,19 @@ $lunch-color-filter-active: #555;
 	// Effects
 	@include transition-property( color );
 	@include transition-duration( 0.5s );
+
+
+	// States
+	&:hover {
+		cursor: text;
+	}
 }
 
-
+@mixin lunch-venue-filter-btn-mixin-s() {
+	.lunch-venue-filter-btn {
+		left: 60px;
+	}
+}
 
 
 
@@ -264,13 +217,13 @@ $lunch-color-filter-active: #555;
  */
 @mixin lunch-inputs-mixins-s() {
 	@include lunch-venue-filter-input-mixin-s();
+	@include lunch-venue-filter-btn-mixin-s();
 }
 
 /*
  * Collect all Medium Screen Styles here
  */
 @mixin lunch-inputs-mixins-m() {
-	@include lunch-venue-filter-form-mixin-m;
 	@include lunch-venue-filter-mixin-m;
 }
 /*
