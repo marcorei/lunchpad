@@ -13,7 +13,7 @@ function(){
 
 	var server = {
 		'pages': '',
-		'templates': '',
+		'templates': './',
 		'routes': '',
 		'socket': ''
 	}
