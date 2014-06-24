@@ -25,14 +25,16 @@ module.exports = function (grunt) {
 
 			dev: {
 				src: [
-					'js/**/*.js'
+					'js/**/*.js',
+					'!js/front.js'
 				],
 				dest: '../static/js/app.js'
 			},
 
 			build: {
 				src: [
-					'js/**/*.js'
+					'js/**/*.js',
+					'!js/front.js'
 				],
 				dest: '../static/js/app.js'
 			}
@@ -83,7 +85,7 @@ module.exports = function (grunt) {
 					relativeAssets: true
 				}
 			}
-		}, 
+		},
 
 
 
@@ -119,8 +121,8 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-compass');
 	grunt.loadNpmTasks('grunt-concurrent');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
-	
-	
+
+
 
 	// Register Tasks
 
