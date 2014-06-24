@@ -44,11 +44,11 @@
 
 			<!-- Nav -->
 
-			<nav class="lunch-nav" ng-controller="DetailsCtrl">
+			<nav class="lunch-nav">
 
 
-				<!-- Account -->
-				<div class="lunch-account" ng-controller="DetailsCtrl">
+				<!-- Account (Add ctrl somewhere, or directive)-->
+				<div class="lunch-account">
 					<img src="{{details.user.img}}" alt="" class="lunch-account-image">
 					<div class="lunch-account-name">{{details.user.name}}</div>
 				</div>
@@ -90,7 +90,7 @@
 
 		<!-- Content -->
 
-		<div ng-controller="ViewCtrl" ng-class="stateAnimClass">
+		<div ng-controller="ViewController" ng-class="stateAnimClass">
 			<div ng-view class="lunch-view-container lunch-apppage-body"></div>
 		</div>
 
