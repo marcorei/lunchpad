@@ -23,15 +23,21 @@ $venue-vertical-padding: 50px;
 
 
 
-/* 
+/*
  * Venues Mobile First
  */
 .lunch-venue {
 
 	// Box
+	padding: {
+		top: 40px;
+		bottom: 40px;
+		right: 30px;
+		left: 30px;
+	}
 	border: {
 		width: 0px;
-		bottom-width: 2px;
+		top-width: 1px;
 		style: solid;
 		color: #f0f0f0;
 	}
@@ -41,34 +47,38 @@ $venue-vertical-padding: 50px;
 		left: 0px;
 		right: 0px;
 	}
-	padding: {
-		top: 0;
-		bottom: 0;
-		right: 30px;
-		left: 30px;
-	}
+	overflow: hidden;
 	@include box-sizing(border-box);
+
+	// Pos
+	position: relative;
 
 	// Skin
 	background: {
 		color: white;
 	}
+
+
+	// Pseudo
+	&:first-child {
+		border: {
+			top-width: 0px;
+		}
+	}
 }
 
 
 
-/* 
- * Mixin for medium screens 
+/*
+ * Mixin for medium screens
  */
 @mixin lunch-venue-screen-m() {
 
 	.lunch-venue {
-		
+
 		// Box
 		padding: {
-			top: 0;
-			bottom: 0;
-			right: 40px;
+			right: 80px;
 			left: 40px;
 		}
 		margin: {
@@ -86,11 +96,11 @@ $venue-vertical-padding: 50px;
 
 
 
-/* 
+/*
  * Venue Body Mobile First
  */
 .lunch-venue-body {
-	
+
 	// Box
 	max-width: 600px;
 	margin: {
@@ -110,13 +120,13 @@ $venue-vertical-padding: 50px;
 
 
 
-/* 
- * Mixin for medium screens 
+/*
+ * Mixin for medium screens
  */
 @mixin lunch-venue-body-screen-m() {
-	
+
 	.lunch-venue-body {
-		
+
 		margin: {
 			left: 0;
 			right: auto;
@@ -133,11 +143,11 @@ $venue-vertical-padding: 50px;
 
 
 
-/* 
+/*
  * Venue Guests Mobile First
  */
 .lunch-venue-guests {
-	
+
 	// box
 	display: inline;
 	margin: {
@@ -149,9 +159,9 @@ $venue-vertical-padding: 50px;
 /* Mixin for medium screens */
 
 @mixin lunch-venue-guests-screen-m() {
-	
+
 	.lunch-venue-guests {
-		
+
 		display: block;
 	}
 }
@@ -191,7 +201,7 @@ $venue-vertical-padding: 50px;
  * Lunch Venue Header
  */
 .lunch-venue-header {
-	
+
 	// Box
 	margin: {
 		bottom: 20px;
@@ -199,7 +209,7 @@ $venue-vertical-padding: 50px;
 
 	// Position
 	float: left;
-	
+
 }
 
 
@@ -214,7 +224,7 @@ $venue-vertical-padding: 50px;
 		margin: {
 			bottom: 0;
 		}
-	
+
 		// Position
 		float: none;
 	}
@@ -228,21 +238,26 @@ $venue-vertical-padding: 50px;
 
 
 
-/* 
+/*
  * Venue Name/Title
  */
 .lunch-venue-title {
-	
+
 	// Box
 	margin: {
 		top: 0;
 		bottom: 0;
 	}
 	display: block;
-	
+
 	// Skin
 	font: {
 		size: 2.4em;
+	}
+
+	// States
+	&:hover {
+		cursor: pointer;
 	}
 }
 
@@ -254,11 +269,11 @@ $venue-vertical-padding: 50px;
 
 
 
-/* 
+/*
  * Link to Venue Menu
  */
 .lunch-fn-menu {
-	
+
 	// Box
 	display: inline-block;
 	padding: {
@@ -269,8 +284,8 @@ $venue-vertical-padding: 50px;
 	}
 	border: {
 		width: 2px;
-		style: solid;
 		color: #aaa;
+		style: solid;
 	}
 
 	// Skin
@@ -285,11 +300,11 @@ $venue-vertical-padding: 50px;
 		style: italic;
 	}
 	@include border-radius( 0 );
-	
+
 	// Effects
 	@include transition-duration( $lunch-time-out );
 	@include transition-property( border-color color );
-	
+
 	&:hover{
 		color: #00BEEE;
 		border: {
@@ -311,7 +326,7 @@ $venue-vertical-padding: 50px;
  * Lunch venue comment count
  */
 .lunch-venue-commentcount {
-	
+
 	// Box
 	display: inline-block;
 	padding: {
@@ -322,10 +337,10 @@ $venue-vertical-padding: 50px;
 	}
 	border: {
 		width: 2px;
-		style: solid;
 		color: #aaa;
+		style: solid;
 	}
-	
+
 	// Position
 	position: relative;
 
@@ -346,7 +361,7 @@ $venue-vertical-padding: 50px;
 	@include transition-duration( $lunch-time-out );
 	@include transition-property( border-color color );
 
-	// States 
+	// States
 	&:hover {
 
 		// Skin
@@ -354,7 +369,7 @@ $venue-vertical-padding: 50px;
 		border: {
 			color: $lunch-color-ylw-dark;
 		}
-		
+
 		// Effects
 		@include transition-duration( $lunch-time-over );
 
@@ -379,14 +394,14 @@ $venue-vertical-padding: 50px;
 
 
 
-/* 
+/*
  * Lunch venue comment count arrow
  */
 .lunch-venue-commentcount-arrow {
-	
+
 	// Box
-	width: 0; 
-	height: 0; 
+	width: 0;
+	height: 0;
 	border-left: 7px solid transparent;
 	border-right: 7px solid transparent;
 	border-top: 7px solid  #aaa;
@@ -418,7 +433,7 @@ $venue-vertical-padding: 50px;
 
 	// import
 	@extend .lunch-venue-btn;
-	
+
 	// Box
 	margin: {
 		top:15px;
@@ -432,7 +447,7 @@ $venue-vertical-padding: 50px;
 
 // Attend Lunch at venue
 .lunch-fn-attend {
-	
+
 	// Skin
 	color: $lunch-color-blu;
 	.lunch-icon{
@@ -442,9 +457,8 @@ $venue-vertical-padding: 50px;
 	}
 
 	&:hover {
-
-
 		color: $lunch-color-blu-dark;
+
 		.lunch-icon{
 			border: {
 				color: $lunch-color-blu-dark;
@@ -457,7 +471,7 @@ $venue-vertical-padding: 50px;
 
 // Opt out of lunch at venue
 .lunch-fn-quit {
-	
+
 	// Skin
 	color: $lunch-color-red;
 	.lunch-icon{
@@ -483,19 +497,19 @@ $venue-vertical-padding: 50px;
  * Mixin for medium screens
  */
 @mixin lunch-venue-button-screen-m() {
-	
+
 	.lunch-fn-attend,
 	.lunch-fn-quit {
-		
-		// Box 
+
+		// Box
 		margin: {
 			top: 0;
 		}
 
 		// Position
 		position: absolute;
-		right: 0;
-		bottom: 5px;
+		right: 20px;
+		bottom: 50px;
 	}
 }
 

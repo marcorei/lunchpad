@@ -1,4 +1,4 @@
-/*
+/**
  * Lunchpad. Input/Elements
  * @author Joachim Fröstl <jf@19h13.com>
  */
@@ -25,13 +25,14 @@ $lunch-color-filter-active: #555;
 
 
 
-/* 
+/*
  * Venue List Filter
  */
 
 .lunch-venue-filter {
 
 	// Box
+	max-width: 700px;
 	margin: {
 		left: auto;
 		right: auto;
@@ -42,6 +43,10 @@ $lunch-color-filter-active: #555;
 		bottom: 15px;
 		left: 30px;
 	}
+	@include box-sizing(border-box);
+
+	// Pos
+	position: relative;
 
 	// Skin
 	background: {
@@ -63,11 +68,11 @@ $lunch-color-filter-active: #555;
 
 
 
-/* 
- * Mixin for medium screens 
+/*
+ * Mixin for medium screens
  */
 @mixin lunch-venue-filter-mixin-m() {
-	
+
 	.lunch-venue-filter {
 
 		margin: {
@@ -75,7 +80,6 @@ $lunch-color-filter-active: #555;
 		}
 		padding: {
 			left: 60px;
-			right: 60px;
 		}
 	}
 }
@@ -92,9 +96,8 @@ $lunch-color-filter-active: #555;
  * Lunch Venue Filter Form
  */
 .lunch-venue-filter-form {
-	
+
 	// Box
-	max-width: 560px;
 	margin: {
 		left: auto;
 		right: auto;
@@ -148,29 +151,29 @@ $lunch-color-filter-active: #555;
 
 
 
-/* 
+/*
  * Lunch Venue Filter Input
  * Mobile First
  */
 
 .lunch-venue-filter-input {
-	
+
 	// Box
 	display: block;
 	width: 100%;
 	padding: {
-		top: 5px;
+		top: 10px;
 		right: 10px;
-		bottom: 4px;
+		bottom: 10px;
 		left: 10px;
 	};
 	margin:{
-		left: 0;
+		left: -10px;
 		right: auto;
 	}
 	border: {
-		width: 0;
-		bottom-width: 2px;
+		width: 2px;
+		//bottom-width: 2px;
 		style: dashed;
 		color: #d5d5d5;
 	}
@@ -181,6 +184,7 @@ $lunch-color-filter-active: #555;
 		color: transparent;
 	}
 	font: {
+		size: 18px;
 		family: Georgia, sans-serif;
 		style: italic;
 	}
@@ -203,21 +207,13 @@ $lunch-color-filter-active: #555;
 
 
 
-/* 
- * Mixin for medium screens 
+/*
+ * Mixin for medium screens
  */
 @mixin lunch-venue-filter-input-mixin-s() {
 
 	.lunch-venue-filter-input {
 
-		// Box
-		margin: {
-			left: 0;
-		}
-		padding: {
-			left: 0;
-			right: 10px;
-		}
 	}
 }
 
@@ -234,7 +230,7 @@ $lunch-color-filter-active: #555;
  */
 
 .lunch-venue-filter-btn {
-	
+
 	// Box
 	padding: 10px;
 
@@ -252,7 +248,7 @@ $lunch-color-filter-active: #555;
 
 	// Effects
 	@include transition-property( color );
-	@include transition-duration( 0.5s ); 
+	@include transition-duration( 0.5s );
 }
 
 
@@ -270,8 +266,8 @@ $lunch-color-filter-active: #555;
 	@include lunch-venue-filter-input-mixin-s();
 }
 
-/* 
- * Collect all Medium Screen Styles here 
+/*
+ * Collect all Medium Screen Styles here
  */
 @mixin lunch-inputs-mixins-m() {
 	@include lunch-venue-filter-form-mixin-m;
@@ -284,7 +280,7 @@ $lunch-color-filter-active: #555;
 	@include lunch-inputs-mixins-s;
 }
 
-/* 
+/*
  * Apply Medium
  */
 @media screen and ( min-width: $lunch-grid-break-m ) {
@@ -293,4 +289,4 @@ $lunch-color-filter-active: #555;
 
 /*
  * Apply Large
- */ 
+ */

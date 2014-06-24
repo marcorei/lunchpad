@@ -1,4 +1,4 @@
-/*
+/**
  * Lunchpad. Appage
  * @author Joachim Fröstl <jf@19h13.com>
  */
@@ -57,11 +57,11 @@
 // Mobile First
 
 .lunch-apppage-body {
-	
+
 	position: relative;
 
 	min-height: 100%;
-	
+
 	padding: {
 		top: 70px;
 		bottom: 0px;
@@ -85,7 +85,7 @@
 @mixin lunch-apppage-body-sm-mixin() {
 
 	.lunch-apppage-body {
-		
+
 		// Box
 		margin: {
 			left: 38.2%;
@@ -94,9 +94,14 @@
 			top: 0;
 		}
 		width: 61.8%;
-		
+
 		// float: left;
 	}
+
+	.lunch-venues {
+		max-width: 700px;
+	}
+
 }
 
 
