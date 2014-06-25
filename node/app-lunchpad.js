@@ -15,7 +15,7 @@ var path = require('path'),
 	app = express(),
 	server = require('http').createServer(app),
 
-	io = require('socket.io')(server),
+	io = require('socket.io').listen(server),
 	MongoStore = require('connect-mongo')(express),
 	passportSocketIo = require('passport.socketio'),
 
@@ -50,15 +50,15 @@ var path = require('path'),
  * Thank you http://blog.justin.kelly.org.au/!
  */
 
-Date.prototype.yyyymmdd = function() {         
-                                
-    var yyyy = this.getFullYear().toString(),                                    
-    	mm = (this.getMonth()+1).toString(),      
-    	dd  = this.getDate().toString();             
-                        
+Date.prototype.yyyymmdd = function() {
+
+    var yyyy = this.getFullYear().toString(),
+    	mm = (this.getMonth()+1).toString(),
+    	dd  = this.getDate().toString();
+
     return yyyy + '-' + (mm[1]?mm:"0"+mm[0]) + '-' + (dd[1]?dd:"0"+dd[0]);
 
-}; 
+};
 
 
 
@@ -197,7 +197,7 @@ io.set('authorization', passportSocketIo.authorize({
 
 app.use( express.cookieParser() );
 app.use( express.bodyParser() );
-app.use( express.session({ 
+app.use( express.session({
 	store: MongoStore,
 	secret: config.secret,
 	key: config.cookie.key
@@ -249,15 +249,15 @@ passport.use('local-login', new LocalStrategy(
 
 			if(!hash.verify(pass, user.pass)){
 				console.log('password did not match for user: ' + mail);
-				return done( null, false, {message:'Incorrect password.'} ); 
+				return done( null, false, {message:'Incorrect password.'} );
 			}
 			console.log('user authenticated: ' + user.nick + ' (' + mail + ')');
 			return done( null, user );
 
 		},function(error){
 			console.log(error);
-			return done(error); 
-		});	
+			return done(error);
+		});
 	}
 ));
 
@@ -362,13 +362,13 @@ io.sockets.on('connection', function (socket) {
 				return null;
 			}
 
-			venueProvider.findVenue(data._id, 
+			venueProvider.findVenue(data._id,
 			function(venue){
 
 				cb({
 					error: null,
 					venue: venue
-				}); 	 
+				});
 
 			},function(error){
 				sendErrorToSocketCb(cb,error);
@@ -385,7 +385,7 @@ io.sockets.on('connection', function (socket) {
 			var e;
 			if(e = new Validate()
 			.v('isLength',[data.name,2,100],'venue.name.length')
-			.v('isURL',[data.url,{require_protocol: true},'venue.url')
+			.v('isURL',[data.url,{require_protocol: true}],'venue.url')
 			.v('isLength',[data.createdBy,24,24],'venue.id')
 			.e()){
 				sendErrorToSocket(socket,e);
@@ -404,7 +404,7 @@ io.sockets.on('connection', function (socket) {
 
 			},function(error){
 				sendErrorToSocket(socket,error);
-			});			
+			});
 		});
 	});
 
@@ -443,11 +443,11 @@ io.sockets.on('connection', function (socket) {
 			var e;
 			if(e = new Validate()
 			.v('inLength',[data._id,24,24],'venue.id')
-			.v('isURL',[data.url,{require_protocol: true},'venue.url')
+			.v('isURL',[data.url,{require_protocol: true}],'venue.url')
 			.e()){
 				sendErrorToSocket(socket,e);
 				return null;
-			}			
+			}
 
 			venueProvider.updateUrl(data._id, data.url,
 			function(updated){
@@ -508,12 +508,12 @@ io.sockets.on('connection', function (socket) {
 			function(numRemoved){
 				venueProvider.delUserForToday(user._id,
 				function(numRemoved){
-					
+
 					checkinProvider.save({
 						uid: user._id,
 						vid: data._id
 					},function(results){
-						
+
 						var insert = {
 							_id: user._id,
 							nick: user.nick,
@@ -567,10 +567,10 @@ io.sockets.on('connection', function (socket) {
 	});
 
 
-	
+
 
 	// Comment
-	
+
 	socket.on('comment read list', function(data,cb){
 		lunchAuth.isUser(socket, function(user){
 
@@ -601,7 +601,7 @@ io.sockets.on('connection', function (socket) {
 
 			data.txt = Validate.s('escape',[data.txt]);
 
-			var e; 
+			var e;
 			if(e = new Validate()
 			.v('inLength',[data.vid,24,24],'venue.id')
 			.v('isLength',[data.name,1,140],'comment.txt.length')
@@ -656,7 +656,7 @@ io.sockets.on('connection', function (socket) {
 				return null;
 			}
 
-			commentProvider.deleteComment( _id: data._id,
+			commentProvider.deleteComment( data._id,
 			function(comment){
 				commentProvider.countWithVenue(comment.vid,
 				function(count){
@@ -683,7 +683,7 @@ io.sockets.on('connection', function (socket) {
 
 
 
-	
+
 
 	// User
 
@@ -763,7 +763,7 @@ io.sockets.on('connection', function (socket) {
 				return null;
 			}
 
-			userProvider.findUser( data._id
+			userProvider.findUser( data._id,
 			function(result){
 				result.pass = null;
 
@@ -1025,10 +1025,10 @@ io.sockets.on('connection', function (socket) {
 				sendErrorToSocketCb(cb,e);
 				return null;
 			}
-			
-			userProvider.removeItemFromInventories(	data._id,
+
+			userProvider.removeItemFromInventories( data._id,
 			function(updates){
-				itemProvider.deleteItem( data._id
+				itemProvider.deleteItem( data._id,
 				function(results){
 
 					socket.emti('item delete done',{
@@ -1054,22 +1054,3 @@ io.sockets.on('connection', function (socket) {
 
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

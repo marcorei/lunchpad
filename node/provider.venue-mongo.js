@@ -31,7 +31,7 @@ var VenueProvider = function(){
 
 VenueProvider.prototype.findAll = function(onSuccess, onError){
 	db.gc(cn, function(collection){
-	
+
 		collection.find({},{
 			fields:{
 				name:1,
@@ -56,7 +56,7 @@ VenueProvider.prototype.findAll = function(onSuccess, onError){
 
 VenueProvider.prototype.findVenue = function(id, onSuccess, onError){
 	db.gc(cn, function(collection){
-		
+
 		collection.findOne({
 			_id: db.oID(id)
 		},{},function(error,result){
@@ -77,7 +77,7 @@ VenueProvider.prototype.findVenue = function(id, onSuccess, onError){
 
 VenueProvider.prototype.addUserToVenue = function(id, user, onSuccess, onError){
 	db.gc(cn, function(collection){
-	
+
 		collection.findAndModify({
 			_id: oID(id)
 		},[],{
@@ -103,7 +103,7 @@ VenueProvider.prototype.addUserToVenue = function(id, user, onSuccess, onError){
 
 VenueProvider.prototype.delUserForToday = function(user, onSuccess, onError){
 	db.gc(cn, function(collection){
-	
+
 		collection.update({
 			'guests.uid':user._id
 		},{
@@ -218,9 +218,9 @@ VenueProvider.prototype.findUnfeatured = function(onSuccess, onError){
 		collection.findAndModify({
 			featured: false
 		},[
-			[date:-1]
+			{date:-1}
 		],{
-			$set: { 
+			$set: {
 				featured: true
 			}
 		},{
@@ -272,7 +272,7 @@ VenueProvider.prototype.deleteVenue = function(id, onSuccess, onError){
 		collection.remove({
 			_id: db.oID(id)
 		},{
-			save:true
+			save:true,
 			single:true
 		},function(error,removed){
 			if(error) onError(error);
@@ -321,7 +321,7 @@ VenueProvider.prototype.saveVenues = function(venues, onSuccess, onError){
 			venue.featured = false; // relevant for info mail
 
 		}
-		
+
 
 		collection.insert(venues, function(error,results) {
 			if(error) onError(error);
@@ -345,17 +345,17 @@ VenueProvider.prototype.saveVenues = function(venues, onSuccess, onError){
 
 // Dummy data
 
-new VenueProvider.saveVenues([
-	{
-		name: 'Testvenue0',
-		url: 'http://www.alf.de',
-		createdBy: ''
-	}
-], function(error, venues));
+// new VenueProvider.saveVenues([
+// 	{
+// 		name: 'Testvenue0',
+// 		url: 'http://www.alf.de',
+// 		createdBy: ''
+// 	}
+// ], function(error, venues));
 
 
 
 
 
 
-exports.venueProvider = new VenueProvider(); 
+exports.venueProvider = new VenueProvider();
