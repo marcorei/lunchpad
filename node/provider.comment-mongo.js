@@ -8,7 +8,7 @@
 
 var db = require('./module.dbase.js').dBase,
 	cn = 'comment';
-	
+
 
 var CommentProvider = function(){
 	db.gc(cn, function(collection){
@@ -73,7 +73,7 @@ CommentProvider.prototype.findWithVenue = function(vid, onSuccess, onError){
 			vid: vid,
 			del: false
 		},{
-			sort:[[date:1]]
+			sort:[{date:1}]
 		}).toArray(function(error,comments){
 			if(error) onError(error);
 			else onSuccess(comments);
@@ -153,7 +153,7 @@ CommentProvider.prototype.saveComment = function(comments, onSuccess, onError){
 			comment = comments[i];
 
 			if( !comment.user ||
-				!comment.txt || 
+				!comment.txt ||
 				!comment.vid ){
 				callback('data incomplete');
 				return;
@@ -163,7 +163,7 @@ CommentProvider.prototype.saveComment = function(comments, onSuccess, onError){
 			comment.date = new Date();
 			comment.del = false;
 		}
-		
+
 
 		collection.insert(comments, function(error,results) {
 			if(error) onError(error);
@@ -180,4 +180,4 @@ CommentProvider.prototype.saveComment = function(comments, onSuccess, onError){
 
 
 
-exports.commentProvider = new CommentProvider(); 
+exports.commentProvider = new CommentProvider();

@@ -17,7 +17,9 @@ var VenueProvider = function(){
 			if(error) console.log(error);
 		});
 
-	},onError);
+	},function(error){
+		console.log(error);
+	});
 };
 
 

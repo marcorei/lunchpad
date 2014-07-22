@@ -119,7 +119,7 @@ UserProvider.prototype.updatePass = function(id, pass, onSuccess, onError){
 			else onSuccess(updates);
 		});
 
-	},onError);	
+	},onError);
 }
 
 
@@ -356,7 +356,7 @@ UserProvider.prototype.saveUser = function(users, onSuccess, onError){
 				!user.role ||
 				!user.pass ||
 				!user.ava ){
-				callback('data incomplete');
+				onError('data incomplete');
 				return;
 			}
 
@@ -377,7 +377,7 @@ UserProvider.prototype.saveUser = function(users, onSuccess, onError){
 			};
 
 		}
-		
+
 
 		collection.insert(users, function(error,results) {
 			if(error) onError(error);
@@ -408,7 +408,7 @@ new UserProvider().saveUser([
 	{
 		mail: '',
 		nick: '',
-		role: '', // 'admin' or 'user' 
+		role: '', // 'admin' or 'user'
 		pass: '',
 		ava: ''
 	}
@@ -417,4 +417,4 @@ new UserProvider().saveUser([
 
 
 
-exports.userProvider = new UserProvider(); 
+exports.userProvider = new UserProvider();

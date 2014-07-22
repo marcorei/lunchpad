@@ -13,7 +13,7 @@ Quando.prototype.today = function(){
 }
 
 Quando.prototype.min15 = function(){
-	var now = new Date(),
+	var now = new Date();
 	now.setMinutes(now.getMinutes()-15);
 	return now;
 }

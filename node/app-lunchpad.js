@@ -74,12 +74,12 @@ var lunchHelper = {
 
 	sendFile: function(fileName){
 		return function(req, res){
-			res.sendFile( path.join( __dirname, fileName ));
+			res.sendfile( path.join( __dirname, fileName ));
 		}
 	},
 
 	sendHtml: function(filename){
-		sendFile('../templates/'+filename);
+		return lunchHelper.sendFile('../templates/'+filename);
 	},
 
 	sendErrorToRes: function(res,msg,code,nolog){
@@ -155,9 +155,9 @@ var lunchAuth = {
  */
 
 var mongoStore = new MongoStore({
-	host: config.mongo.host,
-	port: config.mongo.port,
-	db: config.mongo.db
+	host: config.mongodb.host,
+	port: config.mongodb.port,
+	db: config.mongodb.db
 	// stringify: true
 });
 
@@ -173,7 +173,7 @@ var mongoStore = new MongoStore({
 io.set('authorization', passportSocketIo.authorize({
 	cookieParser: express.cookieParser,
 	key:         config.cookie.key,
-	secret:      config.secret,
+	secret:      config.cookie.secret,
 	store:       mongoStore
 	//success:     onAuthorizeSuccess,
 	//fail:        onAuthorizeFail
@@ -198,8 +198,8 @@ io.set('authorization', passportSocketIo.authorize({
 app.use( express.cookieParser() );
 app.use( express.bodyParser() );
 app.use( express.session({
-	store: MongoStore,
-	secret: config.secret,
+	store: mongoStore,
+	secret: config.cookie.secret,
 	key: config.cookie.key
 }));
 app.use( passport.initialize() );
@@ -1054,3 +1054,7 @@ io.sockets.on('connection', function (socket) {
 
 
 });
+
+
+
+app.listen(1986);

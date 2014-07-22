@@ -40,7 +40,7 @@ DBase.prototype.oID = function(id){
 	if(typeof id !== 'string' || id.length !== 24){
 		id = '000000000000000000000000';
 		console.log('Trying to generate OnjectID: Invalid id');
-	} 
+	}
 	return ObjectID(id);
 };
 
