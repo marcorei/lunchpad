@@ -1057,4 +1057,6 @@ io.sockets.on('connection', function (socket) {
 
 
 
-app.listen(1986);
+server.listen(1986,function(){
+	console.log('listening on 1986');
+});

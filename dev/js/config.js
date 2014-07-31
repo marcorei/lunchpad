@@ -8,12 +8,11 @@
 angular.module('lpConfig',[
 ])
 
-.factory('LpConfig',[
-function(){
+.provider('LpConfig',function(){
 
 	var server = {
 		'pages': '',
-		'templates': './',
+		'templates': './templates/',
 		'routes': '',
 		'socket': ''
 	}
@@ -90,33 +89,35 @@ function(){
 		'item.delete.done': 'item delete done'
 	}
 
-	return {
-		getServer: function(serverKey){
-			if(server[serverKey])
-				return server[serverKey];
-			else throw 'Server Key not defined';
-		},
-		getTemplate: function(templateKey){
-			if(templates[templateKey])
-				return server.templates + templates[templateKey];
-			else throw 'Template not defined';
-		},
-		getPage: function(pageKey){
-			if(pages[pageKey])
-				return server.pages + pages[pageKey];
-			else throw 'Page not defined';
-		},
-		getRoute: function(routeKey){
-			if(routes[routeKey])
-				return server.routes + routes[routeKey];
-			else throw 'Route not defined';
-		},
-		getEvent: function(eventKey){
-			if(events[eventKey])
-				return events[eventKey];
-			else throw 'Event not defined';
+	this.$get = function(){
+		return {
+			getServer: function(serverKey){
+				if(server[serverKey])
+					return server[serverKey];
+				else throw 'Server Key not defined';
+			},
+			getTemplate: function(templateKey){
+				if(templates[templateKey])
+					return server.templates + templates[templateKey];
+				else throw 'Template not defined';
+			},
+			getPage: function(pageKey){
+				if(pages[pageKey])
+					return server.pages + pages[pageKey];
+				else throw 'Page not defined';
+			},
+			getRoute: function(routeKey){
+				if(routes[routeKey])
+					return server.routes + routes[routeKey];
+				else throw 'Route not defined';
+			},
+			getEvent: function(eventKey){
+				if(events[eventKey])
+					return events[eventKey];
+				else throw 'Event not defined';
+			}
 		}
-	}
+	};
 
 
-}]);
+});

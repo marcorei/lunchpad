@@ -16,27 +16,30 @@ angular.module('lunchpad',[
 	'viewVenueDetailController',
 	'viewSettingsController',
 
+	'lpConfig',
 	'lpError'
 ])
 
-.config(['$routeProvider',
-	function($routeProvider){
+.config(['$routeProvider','LpConfigProvider',
+	function($routeProvider,LpConfigProvider){
+		var LpConfig = LpConfigProvider.$get();
+		
 		$routeProvider.
 			when('/venues', {
 
-				templateUrl: './view.venuelist.html',
+				templateUrl: LpConfig.getTemplate('view.venues'),
 				controller: 'ViewVenuesController'
 
 			}).
 			when('/venue/:venueId', {
 
-				templateUrl: './view.venuedetail.html',
+				templateUrl: LpConfig.getTemplate('view.venuedetail'),
 				controller: 'ViewVenuesDetailController'
 
 			}).
 			when('/settings', {
 
-				templateUrl: './view.settings.html',
+				templateUrl: LpConfig.getTemplate('view.settings'),
 				controller: 'ViewSettingsController'
 
 			}).
@@ -73,9 +76,3 @@ function($scope, $location){
 	});
 
 }]);
-
-
-
-
-
-
