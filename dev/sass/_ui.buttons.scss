@@ -33,7 +33,7 @@ $lunch-btn-rotate-hover: 360deg;
        -o-transform: rotate($rotation);  /* Opera 10.5 */
   -webkit-transform: rotate($rotation);  /* Saf3.1+, Chrome */
       -ms-transform: rotate($rotation);  /* IE9 */
-          transform: rotate($rotation);  
+          transform: rotate($rotation);
 }
 
 
@@ -44,14 +44,14 @@ $lunch-btn-rotate-hover: 360deg;
 
 
 
-/* 
+/*
  * General Lunch venue Button Styles
  */
 .lunch-venue-btn {
-	
+
 	// Box
 	display: block;
-	
+
 
 	overflow: hidden;
 
@@ -69,15 +69,15 @@ $lunch-btn-rotate-hover: 360deg;
 	// Effects
 	@include transition-property( background-color border-color color );
 	@include transition-duration( $lunch-time-out );
-	
+
 
 	// Children
 	.lunch-icon {
-				
+
 		// Box
 		padding: 10px;
 		border: {
-			width: 2px;
+			width: 0;
 			style: solid;
 			color: #555;
 		}
@@ -95,21 +95,21 @@ $lunch-btn-rotate-hover: 360deg;
 		// Effects
 		@include border-radius(34px);
 		@include hoverrotate( $lunch-btn-rotate-start );
-		@include transition-property( transform border-color );
+		@include transition-property( transform border-color background-color );
 		@include transition-duration( $lunch-time-out );
 	}
 
 	.lunch-label {
-		
+
 		// Box
 		display: block;
 		float: left;
 		height: 16px;
 		padding: {
-			top: 17px;
-			bottom: 17px;
-			right: 10px;
-			left: 10px;
+			top: 19px;
+			bottom: 19px;
+			right: 12px;
+			left: 12px;
 		}
 
 		// Skin
@@ -123,7 +123,7 @@ $lunch-btn-rotate-hover: 360deg;
 
 	// States
 	&:hover{
-		
+
 		// Skin
 		background: {
 			color: transparent;
@@ -131,7 +131,7 @@ $lunch-btn-rotate-hover: 360deg;
 
 		// Effects
 		@include transition-duration( $lunch-time-over );
-		
+
 		// Children
 		.lunch-icon {
 			@include hoverrotate( $lunch-btn-rotate-hover );

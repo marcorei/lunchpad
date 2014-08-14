@@ -145,7 +145,7 @@ $venue-vertical-padding: 50px;
 	// box
 	display: inline;
 	margin: {
-		top: 30px;
+		top: 15px;
 	}
 	overflow: hidden;
 }
@@ -271,37 +271,37 @@ $venue-vertical-padding: 50px;
 	// Box
 	display: inline-block;
 	padding: {
-		top: 4px;
-		right: 9px;
-		bottom: 4px;
-		left: 9px;
+		top: 8px;
+		right: 14px;
+		bottom: 8px;
+		left: 14px;
 	}
 	border: {
-		width: 2px;
-		color: #aaa;
+		width: 0px;
+		color: #eee;
 		style: solid;
 	}
 
 	// Skin
 	background: {
-		color: transparent;
+		color: #eee;
 	}
 	color: #aaa;
 	text-decoration: none;
 	font: {
-		size: 14px;
-		family: Georgia;
-		style: italic;
+		size: 12px;
+		family: $lunch-typo-copy;
+		style: normal;
 	}
-	@include border-radius( 0 );
+	@include border-radius( 2px );
 
 	// Effects
 	@include transition-duration( $lunch-time-out );
-	@include transition-property( border-color color );
+	@include transition-property( background-color border-color color );
 
 	&:hover{
-		color: #00BEEE;
-		border: {
+		color: $lunch-color-white;
+		background: {
 			color: #00BEEE;
 		}
 		@include transition-duration( $lunch-time-over );
@@ -324,14 +324,15 @@ $venue-vertical-padding: 50px;
 	// Box
 	display: inline-block;
 	padding: {
-		top: 4px;
-		right: 9px;
-		bottom: 4px;
-		left: 9px;
+		top: 8px;
+		right: 14px;
+		bottom: 8px;
+		left: 14px;
 	}
 	border: {
-		width: 2px;
-		color: #aaa;
+		width: 0px;
+		// bottom-width: 2px;
+		color: #eee;
 		style: solid;
 	}
 
@@ -341,26 +342,28 @@ $venue-vertical-padding: 50px;
 	// Skin
 	cursor: default;
 	font: {
-		size: 14px;
-		family: Georgia;
-		style: italic;
+		size: 12px;
+		family: $lunch-typo-copy;
+		style: normal;
 	}
 	color: #aaa;
 	background: {
-		color: transparent;
+		color: #eee;
 	}
 	cursor: pointer;
+	@include border-radius( 2px );
+
 
 	// Effects
 	@include transition-duration( $lunch-time-out );
-	@include transition-property( border-color color );
+	@include transition-property( background-color border-color color );
 
 	// States
 	&:hover {
 
 		// Skin
-		color: $lunch-color-ylw-dark;
-		border: {
+		color: $lunch-color-white;
+		background: {
 			color: $lunch-color-ylw-dark;
 		}
 
@@ -398,7 +401,7 @@ $venue-vertical-padding: 50px;
 	height: 0;
 	border-left: 7px solid transparent;
 	border-right: 7px solid transparent;
-	border-top: 7px solid  #aaa;
+	border-top: 7px solid  #eee;
 
 	// Position
 	position: absolute;
@@ -443,18 +446,17 @@ $venue-vertical-padding: 50px;
 .lunch-fn-attend {
 
 	// Skin
-	color: $lunch-color-blu;
+	color: $lunch-color-white;
 	.lunch-icon{
-		border: {
+		background: {
 			color: $lunch-color-blu;
 		}
 	}
 
 	&:hover {
-		color: $lunch-color-blu-dark;
 
 		.lunch-icon{
-			border: {
+			background: {
 				color: $lunch-color-blu-dark;
 			}
 		}
@@ -467,18 +469,17 @@ $venue-vertical-padding: 50px;
 .lunch-fn-quit {
 
 	// Skin
-	color: $lunch-color-red;
+	color: $lunch-color-white;
 	.lunch-icon{
-		border: {
+		background: {
 			color: $lunch-color-red;
 		}
 	}
 
 	&:hover {
 
-		color: $lunch-color-red-dark;
 		.lunch-icon {
-			border: {
+			background: {
 				color: $lunch-color-red-dark;
 			}
 		}
@@ -503,7 +504,7 @@ $venue-vertical-padding: 50px;
 		// Position
 		position: absolute;
 		right: 20px;
-		bottom: 50px;
+		top: 54px;
 	}
 }
 

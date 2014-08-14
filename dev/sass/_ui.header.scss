@@ -11,11 +11,11 @@
 
 
 
-/* 
- * Mobile first 
+/*
+ * Mobile first
  */
 .lunch-header {
-	
+
 	// Box
 	width: 100%;
 
@@ -24,13 +24,13 @@
 		color: $lunch-color-red;
 	}
 	color: white;
-	
+
 	// Position
 	position: fixed;
 	top: 0;
 	left: 0;
 	z-index: 1;
-	
+
 	// Logo
 	.lunch-logo {
 
@@ -47,7 +47,7 @@
 			top: 10px;
 			bottom: 10px;
 		}
-		
+
 		// Childs
 		img {
 			height: 100%;
@@ -57,20 +57,20 @@
 
 
 
-/* 
- * Medium sized Screens 
+/*
+ * Medium sized Screens
  */
 @mixin lunch-header-screen-m() {
 
 	.lunch-header {
-		
+
 		// Box
 		width: 38.2%;
 		padding: {
-			right: 80px;
+			right: 60px;
 		}
 		@include box-sizing(border-box);
-		
+
 		// Position
 		position: fixed;
 		top: 0;
@@ -78,22 +78,22 @@
 		left: 0;
 		z-index: 99;
 
-		// Typography		
+		// Typography
 		text-align: right;
 
 
-		
+
 		// Navigation Container
 		.lunch-nav-container {
 			float: right;
 			width: 300px;
 		}
-		
+
 
 
 		// Logo
 		.lunch-logo {
-			
+
 			// Box
 			display: block;
 			float: none;
@@ -137,13 +137,15 @@
 	// Box
 	height: 50px;
 	width: 50px;
+	max-width: 200px;
 	margin: {
-		top: 10px;
-		right: 30px;
-		bottom: 10px;
-	}
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	};
 	float: right;
-	
+
 	// Skin
 	background: {
 		color: $lunch-color-red-dark;
@@ -151,9 +153,9 @@
 	text-align: center;
 	overflow: hidden;
 
-	// Effects 
+	// Effects
 	@include border-radius( 25px );
-	
+
 }
 
 
@@ -167,23 +169,24 @@
 
 
 
-/* 
+/*
  * Medium sized screens
  */
-@mixin lunch-header-account-screen-m() {	
-	
+@mixin lunch-header-account-screen-m() {
+
 	// Account/User
 	.lunch-account {
 
 		// Box
 		width: auto;
 		height: auto;
+		max-width: 200px;
 		margin: {
-			top: 20px;
+			top: 0;
 			right: 0;
-			bottom: 15px;
-			left: 0;
-		}
+			bottom: 0;
+			left: auto;
+		};
 		float: none;
 		overflow: visible;
 
@@ -192,6 +195,7 @@
 
 
 		// Skin
+		text-align: right;
 		background: {
 			color: transparent;
 		}
@@ -199,7 +203,7 @@
 		// Effects
 		@include border-radius( 0px );
 	}
-	
+
 	// Avatar
 	.lunch-account-image {
 
@@ -208,20 +212,28 @@
 
 		// Position
 		position: absolute;
-		bottom: -10px;
-		right: -55px;
+		bottom: 5px;
+		right: 0;
 	}
-	
+
 	// Name of account
 	.lunch-account-name {
-		
+
 		// Box
-		display: block;
+		display: inline-block;
 		padding: {
-			left: 0;
-			right: 0;
+			top: 12px;
+			right: 50px;
+			bottom: 8px;
+			left: 20px;
 		}
-		
+
+		// Skin
+		background: {
+			color: $lunch-color-red-dark;
+		}
+		@include border-radius(2px);
+
 		// Typo
 		font: {
 			size: 1.8em;
@@ -240,11 +252,11 @@
 
 
 
-/* 
- * Nav Container 
+/*
+ * Nav Container
  */
 .lunch-nav {
-	
+
 	// Box
 	overflow: hidden;
 
@@ -266,17 +278,17 @@
 
 
 /*
- * Mixin for medium sized screens 
+ * Mixin for medium sized screens
  */
 @mixin lunch-nav-mixin-m() {
 
 	.lunch-nav {
-		
+
 		// Box
 		overflow: visible;
 
 		// Skin
-		text-align: right; 
+		text-align: right;
 	}
 }
 
@@ -288,8 +300,8 @@
 
 
 
-/* 
- * Nav List 
+/*
+ * Nav List
  */
 .lunch-nav-list {
 
@@ -307,7 +319,7 @@
 		bottom: 0;
 	}
 	clear: left;
-	
+
 	// Position
 	position: absolute;
 	top: 70px;
@@ -330,7 +342,7 @@
 
 
 /*
- * Mixin for medium sized screens 
+ * Mixin for medium sized screens
  */
 @mixin lunch-nav-list-mixin-m() {
 
@@ -362,28 +374,28 @@
 
 
 
-/* 
- * Single Nav Element 
+/*
+ * Single Nav Element
  */
 .lunch-nav-elem {
-	
+
 	// Box
 	display: block;
-	
+	overflow: hidden;
+
 	// Skin
-	color: white;
 	text-decoration: none;
 	font: {
-		family: Georgia;
+		family: $lunch-typo-copy;
 	}
-	
+
 	// Pseudoselector
 	&:first-child {
 		padding: {
 			top: 20px;
 		}
 	}
-	
+
 
 	// States
 	&:hover{
@@ -399,64 +411,70 @@
 
 	// Children
 	a, span {
-		
+
 		// Box
-		display: block;
+		display: inline-block;
 		padding: {
-			top: 5px;
-			right: 30px;
-			bottom: 5px;
-			left: 30px;
+			top: 8px;
+			right: 16px;
+			bottom: 8px;
+			left: 16px;
 		}
 
 		// Skin
-		color: white;
+		background: {
+			color: $lunch-color-red-dark;
+		}
+		color: $lunch-color-white;
 		text-decoration: none;
+		@include border-radius(2px);
+		-webkit-font-smoothing: antialiased;
 
 		// Effects
 		@include transition-property( color );
 		@include transition-duration( 1000ms );
 
 	}
-	span {
+
+	/*
+	* New Venue Button
+	*/
+	.lunch-fn-new{
 		// Skin
-		cursor: default;
+		color: $lunch-color-red-dark;
+		background: {
+			color: white;
+		}
 	}
 }
 
 
 
-/* 
- * Mixin for medium sized screens 
+/*
+ * Mixin for medium sized screens
  */
 @mixin lunch-nav-elem-mixin-m() {
-	
+
 	.lunch-nav-elem {
-		
+
 		// Box
 		display: block;
-		padding: {
-			left: 0;
-			right: 0;
+		margin: {
+			top: 2px;
 		}
-	
 
 		// Pseudoselector
 		&:first-child {
-			border: {
-				width: 0px;
-			}
 			padding: {
 				top: 0;
 			}
+			border: {
+				width: 0px;
+			}
 		}
 
-		// Children 
+		// Children
 		a, span {
-			padding: {
-				left: 0;
-				right: 0;
-			}
 		}
 	}
 }
@@ -469,8 +487,10 @@
 
 
 
-/* 
- * Collection of all Medium Screen Style Mixins 
+
+
+/*
+ * Collection of all Medium Screen Style Mixins
  */
 @mixin lunch-header-mixins-screen-m() {
 	@include lunch-nav-mixin-m;
@@ -480,7 +500,7 @@
 	@include lunch-header-account-screen-m;
 }
 
-/* 
+/*
  * Apply Mediaquery Mixins
  */
 @media screen and (min-width: 960px) {
@@ -488,14 +508,14 @@
 	@include lunch-header-mixins-screen-m;
 }
 
-/* 
- * IE fixes 
+/*
+ * IE fixes
  */
 .lt-ie9 {
 	@include lunch-header-mixins-screen-m;
 }
 
-/* 
- * No JS 
+/*
+ * No JS
  */
 .no-js {}
