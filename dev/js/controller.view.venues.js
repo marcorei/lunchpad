@@ -12,6 +12,7 @@ angular.module('viewVenuesController',[
 '$scope','LpVenueService',
 function($scope,LpVenueService){
 
+    // Bind to Model
     $scope.venues = LpVenueService.venues;
 
 }]);
