@@ -337,13 +337,13 @@ UserProvider.prototype.deleteUser = function(id, onSuccess, onError){
  * @param user { mail, nick, pass, ava }
  */
 
-UserProvider.prototype.saveUser = function(users, onSuccess, onError){
+UserProvider.prototype.save = function(users, onSuccess, onError){
 	db.gc(cn, function(collection){
 
 		var i,
 			user;
 
-		if(users.length === 'undefined') users = [users];
+		if(users.length === undefined) users = [users];
 
 		// expected values
 
@@ -362,6 +362,7 @@ UserProvider.prototype.saveUser = function(users, onSuccess, onError){
 
 			// hash passwort
 			user.pass = hash.generate( user.pass );
+			console.log('generated hash');
 
 			// add missing standard values
 			user.item = null; // active item
@@ -377,6 +378,8 @@ UserProvider.prototype.saveUser = function(users, onSuccess, onError){
 			};
 
 		}
+
+		console.log('for queue completed. users.lenth: '+users.length);
 
 
 		collection.insert(users, function(error,results) {
@@ -404,7 +407,7 @@ UserProvider.prototype.saveUser = function(users, onSuccess, onError){
 
 // Dummy Data
 
-new UserProvider().saveUser([
+new UserProvider().save([
 	{
 		mail: '',
 		nick: '',

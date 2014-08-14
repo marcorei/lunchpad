@@ -30,13 +30,16 @@ function($window,Socket,LpConfig){
 	}
 
 	socketManager.on(LpConfig.getEvent('error'),function(data){
-		console.log('Error: '+data.error.code+' - '+data.error.msg);
+		console.log('Error: '+data);
 
+		
+		/*
 		if(data.error.code === 666){
 			$window.location.href = LpConfig.getPage('logout');
 		}else{
 			throwError(getMsg(data.error.code));
 		}
+		*/
 	});
 
 	return {

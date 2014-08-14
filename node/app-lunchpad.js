@@ -171,6 +171,7 @@ var mongoStore = new MongoStore({
  */
 
 io.set('authorization', passportSocketIo.authorize({
+	passport: 	 passport,
 	cookieParser: express.cookieParser,
 	key:         config.cookie.key,
 	secret:      config.cookie.secret,
@@ -227,7 +228,7 @@ app.use('/templates', express.static(__dirname + '/../templates'));
 // Serialization
 
 passport.serializeUser(function(user, done) {
-	done(null, user._id);
+	return done(null,user._id);
 });
 
 passport.deserializeUser(function(id, done){
@@ -249,10 +250,12 @@ passport.use('local-login', new LocalStrategy(
 
 			if(!hash.verify(pass, user.pass)){
 				console.log('password did not match for user: ' + mail);
+				console.log('pass:      '+pass);
+				console.log('user.pass: '+user.pass);
 				return done( null, false, {message:'Incorrect password.'} );
 			}
 			console.log('user authenticated: ' + user.nick + ' (' + mail + ')');
-			return done( null, user );
+			return done(null, user);
 
 		},function(error){
 			console.log(error);
@@ -286,8 +289,20 @@ passport.use('local-login', new LocalStrategy(
 
 // Pages. Just get, no data.
 
-app.get('/', lunchHelper.sendHtml('page.app.angular.html'));
-app.get('/login', lunchHelper.sendHtml('page.login.html'));
+app.get('/', function(req,res){
+	if(req.isAuthenticated()){
+		lunchHelper.sendHtml('page.app.angular.html')(req,res);
+	}else{
+		res.redirect('/login');
+	}
+});
+app.get('/login', function(req,res){
+	if(req.isAuthenticated()){
+		res.redirect('/');
+	}else{
+		lunchHelper.sendHtml('page.login.html')(req,res);
+	}
+});
 app.get('/logout', lunchHelper.sendHtml('page.logout.html'));
 app.get('/manifesto', lunchHelper.sendHtml('page.manifesto.html'));
 
@@ -295,13 +310,42 @@ app.get('/manifesto', lunchHelper.sendHtml('page.manifesto.html'));
 // Action-Requests not send via socket (login / logout via passport)
 
 app.post('/auth/login', passport.authenticate('local-login'), function(req,res){
-	if(req.isAuthenticated()) res.json({ error: null });
-	else sendErrorToRes(res,'Login failed.')();
+	if(req.isAuthenticated()){
+		// res.json({ error: null });
+		res.redirect('/');
+	}else{
+		// sendErrorToRes(res,'Login failed.')();
+		res.redirect('/login#error=403');
+	}
 });
 
 app.post('/auth/logout', function(req,res){
 	req.logout();
-	res.json({ error: null });
+	//res.json({ error: null });
+	res.redirect('/login#hint=403');
+});
+
+
+
+
+
+
+/*
+ * Temporary routes for testing
+ */
+
+app.get('/createTestUser',function(req,res){
+	userProvider.save({
+		mail: 'mr@19h13.com',
+		nick: 'tester',
+		role: 'admin',
+		pass: 'testlogin',
+		ava: 'ava.jpg'
+	},function(results){
+		res.send('testuser created');
+	},function(error){
+		sendErrorToRes(res,error,666,false);
+	});
 });
 
 
