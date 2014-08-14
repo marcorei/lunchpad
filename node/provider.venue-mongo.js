@@ -41,7 +41,7 @@ VenueProvider.prototype.findAll = function(onSuccess, onError){
 				guests:1,
 				comc:1
 			},
-			sort: [[guest,-1],[name,1]]
+			sort: [['guest',-1],['name',1]]
 		}).toArray(function(error,results){
 			if(error) onError(error);
 			else onSuccess(results);
@@ -295,7 +295,7 @@ VenueProvider.prototype.deleteVenue = function(id, onSuccess, onError){
  * Save a new venue
  */
 
-VenueProvider.prototype.saveVenues = function(venues, onSuccess, onError){
+VenueProvider.prototype.save = function(venues, onSuccess, onError){
 	db.gc(cn, function(collection){
 
 		var i,
@@ -328,7 +328,7 @@ VenueProvider.prototype.saveVenues = function(venues, onSuccess, onError){
 		collection.insert(venues, function(error,results) {
 			if(error) onError(error);
 			else{
-				console.log('Venues created: '+venues.length);
+				console.log('Venues created: '+venues);
 				onSuccess(results);
 			}
 		});

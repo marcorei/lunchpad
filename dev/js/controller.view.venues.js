@@ -9,9 +9,9 @@ angular.module('viewVenuesController',[
 ])
 
 .controller('ViewVenuesController',[
-'LpVenueService',
-function(LpVenueService){
+'$scope','LpVenueService',
+function($scope,LpVenueService){
 
-
+    $scope.venues = LpVenueService.venues;
 
 }]);

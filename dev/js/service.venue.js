@@ -33,9 +33,13 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 		socketManager.emit(LpConfig.getEvent('venue.read.list'),{},function(data){
 			if(!data.error){
 				LpUserIdService.getId(function(userId){
-					venues = data.venues;
 
-					// CHECK FOR ATTENDED!
+					// need to push so that the array object, that controllers bind to won't change.
+					for(var i=0; i<data.venues.length; i++){
+						venues.push(data.venues[i]);
+					}
+
+					// TODO: CHECK FOR ATTENDED!
 
 					loaded = true;
 					if(callback) callback();

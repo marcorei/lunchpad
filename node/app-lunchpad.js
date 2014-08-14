@@ -348,6 +348,21 @@ app.get('/createTestUser',function(req,res){
 	});
 });
 
+app.get('/createTestVenues',function(req,res){
+	venueProvider.save([{
+		name: 'Trololo',
+		url: 'www.lol.com',
+		createdBy: 'me'
+	},{
+		name: 'Büro',
+		url: 'www.bureau.com',
+		createdBy: 'you'
+	}],function(results){
+		res.send('testvenues created');
+	},function(error){
+		sendErrorToRes(res,error,666,false);
+	});
+});
 
 
 
@@ -389,7 +404,7 @@ io.sockets.on('connection', function (socket) {
 				});
 
 			},function(error){
-				sendErrorToSocketCb(cb,error);
+				lunchHelper.sendErrorToSocketCb(cb,error);
 			});
 		});
 	});

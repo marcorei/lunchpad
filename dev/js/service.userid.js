@@ -26,7 +26,7 @@ function(Socket,LpConfig){
 	}
 
 	var loadId = function(callback){
-		socketManager.emit(LpConfig.getEvent('venue.read.list'),{},function(data){
+		socketManager.emit(LpConfig.getEvent('user.read.own.id'),{},function(data){
 			id = data.user.id;
 			if(callback) callback();
 		});
