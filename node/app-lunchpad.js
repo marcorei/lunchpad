@@ -557,7 +557,7 @@ io.sockets.on('connection', function (socket) {
 
 			var e;
 			if(e = new Validate()
-			.v('inLength',[data._id,24,24],'checkin.id')
+			.v('isLength',[data._id,24,24],'checkin.id')
 			.e()){
 				sendErrorToSocket(socket,e);
 				return null;
@@ -582,8 +582,8 @@ io.sockets.on('connection', function (socket) {
 
 						venueProvider.addUserToVenue(data._id, insert,
 						function(updates){
-
-							socket.broadcast.emit('checkin create done',{
+							console.log('emitting checkin create done')
+							io.sockets.emit('checkin create done',{
 								vid: data._id,
 								user: insert
 							});

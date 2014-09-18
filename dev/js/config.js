@@ -55,7 +55,7 @@ angular.module('lpConfig',[
 		'venue.delete.done': 'venue delete done',
 
 		'checkin.create': 'checkin create',
-		'checkin.create.done': 'checking create done',
+		'checkin.create.done': 'checkin create done',
 		'checkin.delete': 'checkin delete',
 		'checkin.delete.done': 'checkin delete done',
 

@@ -147,7 +147,7 @@ CheckinProvider.prototype.aggrRisingVid = function(onSuccess, onError){
 			else if(!results1 || results1.length === 0) onError('nothing to aggregate');
 			else {
 
-				// aggregate last 4 weeks 
+				// aggregate last 4 weeks
 
 				collection.aggregate([
 					{$match:{
@@ -188,7 +188,7 @@ CheckinProvider.prototype.aggrRisingVid = function(onSuccess, onError){
 							vid = results1[i]._id;
 							tmpLast4WeekAvg = (mapped35[vid] - results1[i].num) / 4;
 
-							// calcuate 
+							// calcuate
 
 							if(tmpLast4WeekAvg > 0){
 								tmpPercent = (100 / tmpLast4WeekAvg) * (results1[i].num - tmpLast4WeekAvg);
@@ -200,7 +200,7 @@ CheckinProvider.prototype.aggrRisingVid = function(onSuccess, onError){
 							}
 
 							// compare
-							
+
 							if(high.percent < tmpPercent || (high.percent === tmpPercent && high.num < results1[i].num)){
 								high.percent = tmpPercent;
 								high.vid = vid;
@@ -270,8 +270,8 @@ CheckinProvider.prototype.delTodayForUid = function(uid, onSuccess, onError){
 
 		collection.remove({
 			uid: uid,
-			date: { $gte: quando.today() }	
-		},{},function(error,numRemoved){
+			date: { $gte: quando.today() }
+		},function(error,numRemoved){
 			if(error) onError(error);
 			else{
 				console.log('Checkins removed: '+numRemoved);
@@ -295,7 +295,7 @@ CheckinProvider.prototype.save = function(checkins, onSuccess, onError){
 		var i,
 			checkin;
 
-		if(checkins.length === 'undefined') checkins = [checkins];
+		if(checkins.length === undefined) checkins = [checkins];
 
 		// expected values
 
@@ -313,7 +313,7 @@ CheckinProvider.prototype.save = function(checkins, onSuccess, onError){
 			checkin.date = new Date();
 			checkin.wd = quando.weekday();
 		}
-		
+
 
 		collection.insert(checkins, function(error,results) {
 			if(error) onError(error);

@@ -72,6 +72,7 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 	};
 
 	var checkPositionForIndex = function(index){
+		console.log('checking position for index: '+ index);
 		var c = venues[index].guests.length,
 			d,
 			tc,
@@ -92,7 +93,7 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 
 		span = venues.length - index;
 		for(i = 0; i < span; i++){
-			d = venue[index + (i + 1)].guest.length;
+			d = venues[index + (i + 1)].guests.length;
 			if(c > d){
 				tc = index + (i + 1);
 			}else{
@@ -123,6 +124,8 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 	};
 
 	var onCheckinCreateDone = function(data){
+		console.log('checkin create done');
+		console.log(data);
 		var index = findVenueIndexById(data.vid);
 		if(index < 0){
 			onUnhandeltModify;

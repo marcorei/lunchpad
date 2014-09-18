@@ -11,7 +11,7 @@
 		<div class="lunch-venue-wrapper">
 
 			<header class="lunch-venue-header">
-				<h2 class="lunch-venue-title" ng-click="goto('/venue/1')">{{venue.name}}</h2>
+				<h2 class="lunch-venue-title" ng-click="showDetail(venue._id)">{{venue.name}}</h2>
 				<span ng-show="venue.commentcount" class="lunch-venue-commentcount">
 					<span class="lunch-venue-commentcount-arrow">&nbsp;</span>{{venue.comc}} Comments
 				</span>
@@ -24,10 +24,10 @@
 				</div>
 			</div>
 
-			<a ng-hide="venue.attending" href="" class="lunch-fn-attend">
+			<a ng-hide="venue.attending" ng-click="checkIn(venue._id)" class="lunch-fn-attend">
 				<span class="lunch-icon">Y</span>
 			</a>
-			<a ng-show="venue.attending" href="" class="lunch-fn-quit">
+			<a ng-show="venue.attending" ng-click="checkOut(venue._id)" class="lunch-fn-quit">
 				<span class="lunch-icon">N</span>
 			</a>
 

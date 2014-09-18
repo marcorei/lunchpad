@@ -81,7 +81,7 @@ VenueProvider.prototype.addUserToVenue = function(id, user, onSuccess, onError){
 	db.gc(cn, function(collection){
 
 		collection.findAndModify({
-			_id: oID(id)
+			_id: db.oID(id)
 		},[],{
 			$push: {
 				guests:user
