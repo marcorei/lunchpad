@@ -29,6 +29,16 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 		}
 	};
 
+	var checkIn = function(id){
+		socketManager.emit(LpConfig.getEvent('checkin.create'),{
+			_id:id
+		});
+	};
+
+	var checkOut = function(id){
+		socketManager.emit(LpConfig.getEvent('checkin.delete'),{});
+	};
+
 	var loadVenues = function(callback){
 		socketManager.emit(LpConfig.getEvent('venue.read.list'),{},function(data){
 			if(!data.error){
@@ -203,7 +213,9 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 
 	return {
 		venues: venues, // bind to this
-		getVenueById: getVenueById // shortcut with queuing and callback
+		getVenueById: getVenueById, // shortcut with queuing and callback
+		checkIn: checkIn,
+		checkOut: checkOut
 	};
 
 }]);

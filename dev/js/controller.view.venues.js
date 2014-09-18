@@ -9,10 +9,23 @@ angular.module('viewVenuesController',[
 ])
 
 .controller('ViewVenuesController',[
-'$scope','LpVenueService',
-function($scope,LpVenueService){
+'$scope','$location','LpVenueService',
+function($scope,$location,LpVenueService){
 
     // Bind to Model
     $scope.venues = LpVenueService.venues;
+
+    // Interact
+    $scope.checkIn = function(id){
+        LpVenueService.checkIn(id);
+    }
+
+    $scope.checkOut = function(id){
+        LpVenueService.checkOut(id);
+    }
+
+    $scope.showDetail = function(id){
+        $location.path('/venue/'+id);
+    }
 
 }]);
