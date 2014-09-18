@@ -92,10 +92,10 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 		if(tc){	return tc; }
 
 		span = venues.length - index;
-		for(i = 0; i < span; i++){
-			d = venues[index + (i + 1)].guests.length;
+		for(i = 1; i < span; i++){
+			d = venues[index + (i)].guests.length;
 			if(c > d){
-				tc = index + (i + 1);
+				tc = index + (i);
 			}else{
 				break;
 			}
@@ -124,14 +124,16 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 	};
 
 	var onCheckinCreateDone = function(data){
-		console.log('checkin create done');
-		console.log(data);
+		// delete the user
+		onCheckinDeleteDone(data);
+		// put in the new one
 		var index = findVenueIndexById(data.vid);
 		if(index < 0){
 			onUnhandeltModify;
 			return null;
 		}
 		venues[index].guests.push(data.user);
+		console.log('rearranging after inserting');
 		rearrangeVenue(index);
 	};
 
@@ -149,11 +151,12 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 					break;
 				}
 			}
-			if(index !== 'undefined'){
+			if(index !== undefined){
+				console.log('rearranging after deletion');
+				rearrangeVenue(index);
 				break;
 			}
 		}
-		rearrangeVenue(index);
 	};
 
 	var onVenueUpdateNameDone = function(data){

@@ -4,6 +4,7 @@
  * @author Markus Riegel <riegel.markus@googlemail.com>
  */
 
+
 angular.module('viewVenuesController',[
 'lpVenueService'
 ])

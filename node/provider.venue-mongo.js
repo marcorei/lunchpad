@@ -41,7 +41,7 @@ VenueProvider.prototype.findAll = function(onSuccess, onError){
 				guests:1,
 				comc:1
 			},
-			sort: [['guest',-1],['name',1]]
+			sort: [['guests',-1],['name',1]]
 		}).toArray(function(error,results){
 			if(error) onError(error);
 			else onSuccess(results);

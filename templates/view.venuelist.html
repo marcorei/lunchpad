@@ -18,7 +18,7 @@
 				<a href="{{venue.url}}" class="lunch-fn-menu" target="blank">View Menu</a>
 			</header>
 
-			<div class="lunch-venue-guests" ng-show="venue.guests">
+			<div class="lunch-venue-guests" ng-show="venue.guests.length">
 				<div class="lunch-venue-guest anim-user-slide" ng-repeat="user in venue.guests">
 					<img src="{{user.ava}}" alt="" class="lunch-user-image" alt="{{user.nick}}">
 				</div>
