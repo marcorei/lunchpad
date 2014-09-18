@@ -13,19 +13,10 @@
 
 
 	.lunch-fn-back {
-		// Inherit
-		//@extend .lunch-venue-btn;
 
 		// Box
-		//float: left;
-		display: inline-block;
-		overflow: hidden;
-		margin: {
-			top: 10px;
-			left: -15px;
-		}
-		padding: 10px 15px;
-		
+		display: block;
+		float: left;
 
 		// Skin
 		color: #aaa;
@@ -37,7 +28,7 @@
 
 		// Effects
 		//@include border-radius( 25px );
-		
+
 		// Children
 		.lunch-icon {
 			float: left;
@@ -50,7 +41,7 @@
 		}
 		.lunch-label {
 			// Box
-			display: block;
+			display: none;
 
 			float: left;
 			padding: {
@@ -80,9 +71,9 @@
 
 
 	.lunch-fn-quit {
-		
+
 		@include transform(none);
-		
+
 		// Box
 		float: left;
 
@@ -99,8 +90,8 @@
 			float: left;
 		}
 	}
-	
-	.lunch-fn-menu, 
+
+	.lunch-fn-menu,
 	.lunch-fn-invite {
 
 		// Box
@@ -127,11 +118,11 @@
 		background: {
 			color: transparent;
 		}
-		
-		// Children 
+
+		// Children
 
 		.lunch-label {
-			
+
 			padding: {
 				left: 5px;
 				right: 5px;
@@ -156,9 +147,9 @@
 		}
 	}
 
-	
+
 	.lunch-venue-header {
-		
+
 		// Box
 		display: table;
 		width: 100%;
@@ -173,7 +164,7 @@
 
 
 	.lunch-venue-title {
-		
+
 		// Box
 		clear: left;
 		display: block;
@@ -198,7 +189,7 @@
 			right: 60px;
 			bottom: 50px;
 		}
-	
+
 		overflow: hidden;
 		clear: left;
 
@@ -218,7 +209,7 @@
 		}
 
 
-		
+
 		// Position
 		position: relative;
 
