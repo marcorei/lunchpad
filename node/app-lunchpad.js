@@ -303,7 +303,12 @@ app.get('/login', function(req,res){
 		lunchHelper.sendHtml('page.login.html')(req,res);
 	}
 });
-app.get('/logout', lunchHelper.sendHtml('page.logout.html'));
+//app.get('/logout', lunchHelper.sendHtml('page.logout.html'));
+app.get('/logout', function(req,res){
+	req.logout();
+	//res.json({ error: null });
+	res.redirect('/login#hint=loggedout');
+});
 app.get('/manifesto', lunchHelper.sendHtml('page.manifesto.html'));
 
 
@@ -322,7 +327,7 @@ app.post('/auth/login', passport.authenticate('local-login'), function(req,res){
 app.post('/auth/logout', function(req,res){
 	req.logout();
 	//res.json({ error: null });
-	res.redirect('/login#hint=403');
+	res.redirect('/login#hint=loggedout');
 });
 
 
@@ -335,13 +340,25 @@ app.post('/auth/logout', function(req,res){
  */
 
 app.get('/createTestUser',function(req,res){
-	userProvider.save({
+	userProvider.save([{
 		mail: 'mr@19h13.com',
 		nick: 'tester',
 		role: 'admin',
 		pass: 'testlogin',
 		ava: 'ava.jpg'
-	},function(results){
+	},{
+		mail: 'jf@19h13.com',
+		nick: 'alf',
+		role: 'admin',
+		pass: 'testlogin',
+		ava: 'ava.jpg'
+	},{
+		mail: 'mrz@19h13.com',
+		nick: 'MMRZ',
+		role: 'admin',
+		pass: 'testlogin',
+		ava: 'ava.jpg'
+	}],function(results){
 		res.send('testuser created');
 	},function(error){
 		sendErrorToRes(res,error,666,false);

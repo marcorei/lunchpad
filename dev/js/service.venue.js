@@ -75,33 +75,48 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 		console.log('checking position for index: '+ index);
 		var c = venues[index].guests.length,
 			d,
-			tc,
-			i,
-			span;
+			tc = -1,
+			i;
+		console.log('c == '+c);
 
-		span = index;
-		for(i = 0; i < span; i++){
-			d = venues[index - (1 + i)].guests.length;
-			if(c < d){
-				tc = index - (1 + i);
-			}else{
-				break;
-			}
-		}
-
-		if(tc){	return tc; }
-
-		span = venues.length - index;
-		for(i = 1; i < span; i++){
-			d = venues[index + (i)].guests.length;
+		for(i = index -1; i >= 0; i--){
+			console.log('starting iteration for up, comparing to index: '+i);
+			d = venues[i].guests.length;
+			console.log('d == '+d);
 			if(c > d){
-				tc = index + (i);
+				console.log('saving upwards movement');
+				tc = i;
 			}else{
+				console.log('breaking up');
 				break;
 			}
 		}
 
-		return tc || index;
+		if(tc != -1){
+			console.log('going up! new index: '+tc);
+			return tc;
+		}
+
+		for(i = index+1; i < venues.length; i++){
+			console.log('starting iteration for down, comparing to index: '+i);
+			d = venues[i].guests.length;
+			console.log('d == '+d);
+			if(c < d){
+				console.log('saving downwards movement');
+				tc = i;
+			}else{
+				console.log('breaking up');
+				break;
+			}
+		}
+
+		if(tc != -1){
+			console.log('going down! new index: '+tc);
+			return tc;
+		}else{
+			console.log('staying at index: '+index);
+			return index;
+		}
 	}
 
 	var rearrangeVenue = function(index){
