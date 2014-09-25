@@ -243,6 +243,7 @@ $venue-vertical-padding: 50px;
 		bottom: 0;
 	}
 	display: block;
+	float: left;
 
 	// Skin
 	font: {
@@ -313,7 +314,9 @@ $venue-vertical-padding: 50px;
 
 
 
-
+.lunch-venue-info {
+	clear: left;
+}
 
 
 /*
