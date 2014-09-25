@@ -1,7 +1,7 @@
 // Lunch Flash
 
 .lunch-flash {
-
+	display: none;
 	position: fixed;
 	z-index: 5;
 	top: 0;
@@ -12,7 +12,7 @@
 	font: {
 		family: Georgia;
 	}
-	
+
 	padding: {
 		top:20px;
 		left: 60px;
