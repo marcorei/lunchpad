@@ -30,44 +30,59 @@ $lunch-color-filter-active: #555;
  */
 
 .lunch-venue-filter {
-
-	// Box
-	max-width: 700px;
+	width: auto;
+	max-width: 620px;
 	margin: {
-		top: 15px;
+		top: 20px;
 		left: auto;
-		right: auto;
+		right: 20px;
 	}
-	padding: {
-		top: 0;
-		right: 30px;
-		bottom: 0;
-		left: 30px;
-	}
-	@include box-sizing(border-box);
-
-	// Pos
+	padding: 0;
 	position: relative;
-
-	// Skin
 	background: {
 		color: transparent;
 	}
+}
+
+
+/*
+ * Text Input Styles
+ */
+textarea,
+input[type="text"] {
+	padding: {
+		top: 12px;
+		bottom: 12px;
+		right: 10px;
+		left: 10px;
+	}
+	border: {
+		width: 2px;
+		style: solid;
+		color: $lunch-clr-grey-xlgt;
+	}
+	@include box-sizing( border-box );
+	@include border-radius(2px);
+	@include transition-property(border, background);
+	@include transition-duration($lunch-time-out);
 
 	// States
-	&:hover {
-		.lunch-venue-filter-input {
-			@include transition-duration(100ms);
-			border: {
-				color: $lunch-color-filter-active;
-			}
+	&:hover,
+	&:focus {
+		// Skin
+		border: {
+			color: $lunch-clr-grey-lgt;
 		}
-		.lunch-venue-filter-btn {
-			@include transition-duration(100ms);
-			color: $lunch-color-filter-active;
+		background: {
+			color:$lunch-clr-grey-xxlgt;
 		}
+		@include transition-duration($lunch-time-over);
 	}
 }
+textarea {
+	resize: vertical;
+}
+
 
 
 
@@ -78,11 +93,13 @@ $lunch-color-filter-active: #555;
 
 	.lunch-venue-filter {
 
+		width: 600px;
 		margin: {
-			left: 0;
+			right: 20px;
+			left: 60px;
 		}
 		padding: {
-			left: 60px;
+			right: 20px;
 		}
 	}
 }
@@ -128,7 +145,7 @@ $lunch-color-filter-active: #555;
 	}
 	font: {
 		size: 18px;
-		family: Georgia, sans-serif;
+		family: $lunch-typo-copy;
 		style: normal;
 	}
 
@@ -179,8 +196,8 @@ $lunch-color-filter-active: #555;
 
 	// Position
 	position: absolute;
-	left: 30px;
-	top: 6px;
+	right: 36px;
+	top: 10px;
 
 	// Skin
 	font: {
@@ -200,11 +217,6 @@ $lunch-color-filter-active: #555;
 	}
 }
 
-@mixin lunch-venue-filter-btn-mixin-s() {
-	.lunch-venue-filter-btn {
-		left: 60px;
-	}
-}
 
 
 
@@ -217,7 +229,6 @@ $lunch-color-filter-active: #555;
  */
 @mixin lunch-inputs-mixins-s() {
 	@include lunch-venue-filter-input-mixin-s();
-	@include lunch-venue-filter-btn-mixin-s();
 }
 
 /*
