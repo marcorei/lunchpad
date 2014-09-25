@@ -345,19 +345,19 @@ app.get('/createTestUser',function(req,res){
 		nick: 'tester',
 		role: 'admin',
 		pass: 'testlogin',
-		ava: 'ava.jpg'
+		ava: 'http://lunchpad.19h13.com/static/img/mr.png'
 	},{
 		mail: 'jf@19h13.com',
 		nick: 'alf',
 		role: 'admin',
 		pass: 'testlogin',
-		ava: 'ava.jpg'
+		ava: 'http://lunchpad.19h13.com/static/img/jf.png'
 	},{
 		mail: 'mrz@19h13.com',
 		nick: 'MMRZ',
 		role: 'admin',
 		pass: 'testlogin',
-		ava: 'ava.jpg'
+		ava: 'http://lunchpad.19h13.com/static/img/mrz.png'
 	}],function(results){
 		res.send('testuser created');
 	},function(error){
@@ -372,6 +372,22 @@ app.get('/createTestVenues',function(req,res){
 		createdBy: 'me'
 	},{
 		name: 'Büro',
+		url: 'www.bureau.com',
+		createdBy: 'you'
+	},{
+		name: 'Scheidegger',
+		url: 'www.bureau.com',
+		createdBy: 'you'
+	},{
+		name: 'Grenzstein',
+		url: 'www.bureau.com',
+		createdBy: 'you'
+	},{
+		name: 'Ingress',
+		url: 'www.bureau.com',
+		createdBy: 'you'
+	},{
+		name: 'Fleischboutique',
 		url: 'www.bureau.com',
 		createdBy: 'you'
 	}],function(results){
@@ -627,7 +643,7 @@ io.sockets.on('connection', function (socket) {
 				venueProvider.delUserForToday(user._id,
 				function(numRemoved){
 
-					socket.broadcast.emit('checkin delete done',{
+					io.sockets.emit('checkin delete done',{
 						user: {
 							_id: user._id
 						}

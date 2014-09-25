@@ -27,7 +27,9 @@ function(Socket,LpConfig){
 
 	var loadId = function(callback){
 		socketManager.emit(LpConfig.getEvent('user.read.own.id'),{},function(data){
-			id = data.user.id;
+			//console.log('own id read, data following');
+			//console.log(data);
+			id = data.user._id;
 			if(callback) callback();
 		});
 	}

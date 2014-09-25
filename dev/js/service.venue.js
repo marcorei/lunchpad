@@ -33,9 +33,11 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 		socketManager.emit(LpConfig.getEvent('checkin.create'),{
 			_id:id
 		});
+
 	};
 
 	var checkOut = function(id){
+		console.log('logging out');
 		socketManager.emit(LpConfig.getEvent('checkin.delete'),{});
 	};
 
@@ -46,6 +48,17 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 
 					// need to push so that the array object, that controllers bind to won't change.
 					for(var i=0; i<data.venues.length; i++){
+						//check for every guest, check if it's the current user
+						for(var j=0; j<data.venues[i].guests.length; j++)
+						{
+							//console.log('checking if loggend in at: '+i+','+j);
+							//console.log('ze user id ist: '+data.venues[i].guests[j]._id+' -- my user id ist: '+userId);
+							if(data.venues[i].guests[j]._id == userId){
+								//console.log('yes! i am here! at: '+i+','+j);
+								data.venues[i].attending = true;
+								break;
+							}
+						}
 						venues.push(data.venues[i]);
 					}
 
@@ -72,49 +85,49 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 	};
 
 	var checkPositionForIndex = function(index){
-		console.log('checking position for index: '+ index);
+		//console.log('checking position for index: '+ index);
 		var c = venues[index].guests.length,
 			d,
 			tc = -1,
 			i;
-		console.log('c == '+c);
+		//console.log('c == '+c);
 
 		for(i = index -1; i >= 0; i--){
-			console.log('starting iteration for up, comparing to index: '+i);
+			//console.log('starting iteration for up, comparing to index: '+i);
 			d = venues[i].guests.length;
-			console.log('d == '+d);
+			//console.log('d == '+d);
 			if(c > d){
-				console.log('saving upwards movement');
+				//console.log('saving upwards movement');
 				tc = i;
 			}else{
-				console.log('breaking up');
+				//console.log('breaking up');
 				break;
 			}
 		}
 
 		if(tc != -1){
-			console.log('going up! new index: '+tc);
+			//console.log('going up! new index: '+tc);
 			return tc;
 		}
 
 		for(i = index+1; i < venues.length; i++){
-			console.log('starting iteration for down, comparing to index: '+i);
+			//console.log('starting iteration for down, comparing to index: '+i);
 			d = venues[i].guests.length;
-			console.log('d == '+d);
+			//console.log('d == '+d);
 			if(c < d){
-				console.log('saving downwards movement');
+				//console.log('saving downwards movement');
 				tc = i;
 			}else{
-				console.log('breaking up');
+				//console.log('breaking up');
 				break;
 			}
 		}
 
 		if(tc != -1){
-			console.log('going down! new index: '+tc);
+			//console.log('going down! new index: '+tc);
 			return tc;
 		}else{
-			console.log('staying at index: '+index);
+			//console.log('staying at index: '+index);
 			return index;
 		}
 	}
@@ -147,31 +160,45 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 			onUnhandeltModify;
 			return null;
 		}
-		venues[index].guests.push(data.user);
-		console.log('rearranging after inserting');
-		rearrangeVenue(index);
+
+		LpUserIdService.getId(function(userId){
+			venues[index].guests.push(data.user);
+			// attending or not, here i come
+			if(data.user._id == userId){
+				venues[index].attending = true;
+			}
+			//console.log('rearranging after inserting');
+			rearrangeVenue(index);
+		});
 	};
 
 	var onCheckinDeleteDone = function(data){
-		var index,
-			venue,
-			i,
-			j;
-		for(i = 0; i < venues.length; i++){
-			guests = venues[i].guests;
-			for(j = 0; j < guests.length; j++){
-				if(guests[j]._id === data.user._id){
-					index = i;
-					guests.splice(j,1);
+		console.log('registering delete done');
+		LpUserIdService.getId(function(userId){
+			var index,
+				venue,
+				i,
+				j;
+			for(i = 0; i < venues.length; i++){
+				guests = venues[i].guests;
+				for(j = 0; j < guests.length; j++){
+					if(guests[j]._id === data.user._id){
+						index = i;
+						guests.splice(j,1);
+						// attending or not, here i leave
+						if(data.user._id == userId){
+							venues[i].attending = false;
+						}
+						break;
+					}
+				}
+				if(index !== undefined){
+					//console.log('rearranging after deletion');
+					rearrangeVenue(index);
 					break;
 				}
 			}
-			if(index !== undefined){
-				console.log('rearranging after deletion');
-				rearrangeVenue(index);
-				break;
-			}
-		}
+		});
 	};
 
 	var onVenueUpdateNameDone = function(data){

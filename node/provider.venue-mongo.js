@@ -103,18 +103,19 @@ VenueProvider.prototype.addUserToVenue = function(id, user, onSuccess, onError){
  * Remove a user for today
  */
 
-VenueProvider.prototype.delUserForToday = function(user, onSuccess, onError){
+VenueProvider.prototype.delUserForToday = function(userId, onSuccess, onError){
 	db.gc(cn, function(collection){
-
 		collection.update({
-			'guests.uid':user._id
+			'guests._id':userId
 		},{
 			$pull:{
-				guests:{ uid:user._id }
+				'guests':{ _id:userId }
 			}
 		},{
-			multi:true, //only true so that in case of an error multiple entries will be removed
-			save:true
+			//multi:true, //only true so that in case of an error multiple entries will be removed
+			//save:true
+			w: 1,
+			multi: true
 		},function(error,updates){
 			if(error) onError(error);
 			else onSuccess(updates);
