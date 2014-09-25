@@ -31,11 +31,10 @@ $lunch-color-filter-active: #555;
 
 .lunch-venue-filter {
 	width: auto;
-	max-width: 620px;
 	margin: {
 		top: 20px;
-		left: auto;
-		right: 20px;
+		left: 30px;
+		right: 30px;
 	}
 	padding: 0;
 	position: relative;
@@ -93,13 +92,10 @@ textarea {
 
 	.lunch-venue-filter {
 
-		width: 600px;
+		max-width: 600px;
 		margin: {
-			right: 20px;
+			right: 40px;
 			left: 60px;
-		}
-		padding: {
-			right: 20px;
 		}
 	}
 }
@@ -196,7 +192,7 @@ textarea {
 
 	// Position
 	position: absolute;
-	right: 36px;
+	right: 20px;
 	top: 10px;
 
 	// Skin

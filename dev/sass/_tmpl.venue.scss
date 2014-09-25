@@ -198,7 +198,7 @@ $venue-vertical-padding: 50px;
 
 	// Box
 	margin: {
-		bottom: 20px;
+		bottom: 0;
 	}
 
 	// Position
@@ -213,12 +213,6 @@ $venue-vertical-padding: 50px;
  */
 @mixin lunch-venue-header-screen-m() {
 	.lunch-venue-header {
-
-		// Box
-		margin: {
-			bottom: 0;
-		}
-
 		// Position
 		float: none;
 	}

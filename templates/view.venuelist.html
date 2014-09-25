@@ -12,10 +12,12 @@
 
 			<header class="lunch-venue-header">
 				<h2 class="lunch-venue-title" ng-click="showDetail(venue._id)">{{venue.name}}</h2>
-				<span ng-show="venue.commentcount" class="lunch-venue-commentcount">
-					<span class="lunch-venue-commentcount-arrow">&nbsp;</span>{{venue.comc}} Comments
-				</span>
-				<a href="{{venue.url}}" class="lunch-fn-menu" target="blank">View Menu</a>
+				<div class="lunch-venue-info">
+					<span ng-show="venue.commentcount" class="lunch-venue-commentcount">
+						<span class="lunch-venue-commentcount-arrow">&nbsp;</span>{{venue.comc}} Comments
+					</span>
+					<a href="{{venue.url}}" class="lunch-fn-menu" target="blank">View Menu</a>
+				</div>
 			</header>
 
 			<div class="lunch-venue-guests" ng-show="venue.guests.length">

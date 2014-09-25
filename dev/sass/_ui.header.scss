@@ -58,6 +58,72 @@
 
 
 /*
+* Medium sized Screens
+*/
+@mixin lunch-header-screen-s() {
+
+	.lunch-header {
+
+		// Box
+		width: 200px;
+		padding: {
+			right: 20px;
+		}
+		@include box-sizing(border-box);
+
+		// Position
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 99;
+
+		// Typography
+		text-align: right;
+
+
+
+		// Navigation Container
+		.lunch-nav-container {
+			float: right;
+			width: 300px;
+		}
+
+
+
+		// Logo
+		.lunch-logo {
+
+			// Box
+			display: block;
+			float: none;
+			height: 122px;
+			width: auto;
+			padding: {
+				right: 0;
+				left: 0;
+				top: 0;
+				bottom: 0;
+			}
+			margin: {
+				top: 60px;
+				left: auto;
+				right: 0;
+				bottom: 60px;
+			}
+
+			// Childs
+			text-align: right;
+			img {
+				height: auto;
+			}
+		}
+	}
+}
+
+
+
+/*
  * Medium sized Screens
  */
 @mixin lunch-header-screen-m() {
@@ -487,6 +553,9 @@
 
 
 
+@mixin lunch-header-mixins-screen-s() {
+	@include lunch-header-screen-s;
+}
 
 
 /*
@@ -503,8 +572,10 @@
 /*
  * Apply Mediaquery Mixins
  */
+@media screen and (min-width: 620px) {
+	@include lunch-header-mixins-screen-s;
+}
 @media screen and (min-width: 960px) {
-
 	@include lunch-header-mixins-screen-m;
 }
 
