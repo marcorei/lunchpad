@@ -23,7 +23,7 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 
 	var getVenueById = function(id, callback){
 		if(loaded){
-			callback(venues[findVenueById(id)]);
+			callback(venues[findVenueIndexById(id)]);
 		}else{
 			queue.push([getVenueById,[id,callback]]);
 		}
@@ -79,8 +79,14 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 			length = venues.length;
 		for(i = 0; i < venues.length; i++){
 			venue = venues[i];
-			if(venue._id === id) return i;
+			//console.log('matching vnue ids: '+venue._id+' - '+id);
+			//console.log(id);
+			if(venue._id === id){
+				//console.log('found venue id: '+i);
+				return i;
+			} 
 		}
+		//console.log('venue id not found');
 		return -1;
 	};
 

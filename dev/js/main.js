@@ -34,7 +34,7 @@ angular.module('lunchpad',[
 			when('/venue/:venueId', {
 
 				templateUrl: LpConfig.getTemplate('view.venuedetail'),
-				controller: 'ViewVenuesDetailController'
+				controller: 'ViewVenueDetailController'
 
 			}).
 			when('/settings', {

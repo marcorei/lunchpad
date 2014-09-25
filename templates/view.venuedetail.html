@@ -1,15 +1,15 @@
 <article class="lunch-view-venue">
 
 	<header>
-		<a ng-click="goto('/venues')" class="lunch-fn-back">
+		<a ng-click="back()" class="lunch-fn-back">
 			<span class="lunch-icon">B</span>
 			<span class="lunch-label">back</span>
 		</a>
-		<a ng-click="goto('/edit')" class="lunch-fn-edit">
+		<a ng-click="edit(venue._id)" class="lunch-fn-edit">
 			<span class="lunch-icon">E</span>
 			<span class="lunch-label">edit</span>
 		</a>
-		<h1>Scheidegger</h1>
+		<h1>{{venue.name}}</h1>
 	</header>
 
 	<section class="lunch-venue-reception">
@@ -18,11 +18,11 @@
 				<span class="lunch-icon">M</span>
 				<span class="lunch-label">View Menu</span>
 			</a>
-			<a ng-hide="venue.attending" class="lunch-fn-attend">
+			<a ng-hide="venue.attending" class="lunch-fn-attend" ng-click="checkIn(venue._id)">
 				<span class="lunch-icon">Y</span>
 				<span class="lunch-label">lunch here</span>
 			</a>
-			<a ng-show="venue.attending" href="" class="lunch-fn-quit">
+			<a ng-show="venue.attending" class="lunch-fn-quit" ng-click="checkOut(venue._id)">
 				<span class="lunch-icon">N</span>
 				<span class="lunch-label">Cancel</span>
 			</a>
@@ -32,6 +32,14 @@
 			</a>
 		</div>
 
+
+		<div class="lunch-venue-guests" ng-show="venue.guests.length">
+			<div class="lunch-venue-guest anim-user-slide" ng-repeat="user in venue.guests">
+				<img src="{{user.ava}}" class="lunch-user-image" alt="{{user.nick}}">
+			</div>
+		</div>
+
+		<!--
 		<div class="lunch-venue-guests" >
 			<div class="lunch-venue-guest anim-user-slide">
 				<img src="../static/img/mr.png" alt="" class="lunch-user-image">
@@ -82,6 +90,7 @@
 				<p class="anim-status-fade ng-binding ng-hide" ng-show="user.status"></p>
 			</div>
 		</div>
+		-->
 	</section>
 
 	<section class="lunch-comments">

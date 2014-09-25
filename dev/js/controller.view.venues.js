@@ -13,20 +13,20 @@ angular.module('viewVenuesController',[
 '$scope','$location','LpVenueService',
 function($scope,$location,LpVenueService){
 
-    // Bind to Model
-    $scope.venues = LpVenueService.venues;
+	// Bind to Model
+	$scope.venues = LpVenueService.venues;
 
-    // Interact
-    $scope.checkIn = function(id){
-        LpVenueService.checkIn(id);
-    }
+	// Interact
+	$scope.checkIn = function(id){
+		LpVenueService.checkIn(id);
+	}
 
-    $scope.checkOut = function(id){
-        LpVenueService.checkOut(id);
-    }
+	$scope.checkOut = function(id){
+		LpVenueService.checkOut(id);
+	}
 
-    $scope.showDetail = function(id){
-        $location.path('/venue/'+id);
-    }
+	$scope.showDetail = function(id){
+		$location.path('/venue/'+id);
+	}
 
 }]);
