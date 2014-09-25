@@ -236,22 +236,21 @@ $venue-vertical-padding: 50px;
  * Venue Name/Title
  */
 .lunch-venue-title {
-
-	// Box
 	margin: {
 		top: 0;
 		bottom: 0;
 	}
 	display: block;
 	float: left;
-
-	// Skin
 	font: {
 		size: 2.4em;
 	}
+	@include transition-property(color);
+	@include transition-duration($lunch-time-out);
 
-	// States
 	&:hover {
+		@include transition-duration($lunch-time-over);
+		color: $lunch-clr-grey-drk;
 		cursor: pointer;
 	}
 }
@@ -313,7 +312,9 @@ $venue-vertical-padding: 50px;
 
 
 
-
+/*
+* Lunch venue Info (Menu, Comment Count)
+*/
 .lunch-venue-info {
 	clear: left;
 }
