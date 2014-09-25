@@ -42,6 +42,111 @@ $lunch-btn-rotate-hover: 360deg;
 
 
 
+/*
+* Abstract round Button Styles
+*/
+%lunch-round-btn {
+
+	// Box
+	display: inline-block;
+	overflow: hidden;
+	padding: 0;
+	color: white;
+	background: {
+		color: transparent;
+	}
+	-webkit-font-smoothing: antialiased;
+	text-decoration: none;
+	text-align: center;
+	cursor: pointer;
+	@include transition-property( background-color border-color color );
+	@include transition-duration( $lunch-time-out );
+
+	// Children
+	.lunch-icon {
+		padding: 10px;
+		display: block;
+		float: left;
+		font: {
+			family: 'lunch-ico';
+			style: regular;
+			size: 30px;
+		}
+		background: {
+			color: $lunch-clr-grey-lgt;
+		}
+		@include border-radius(34px);
+		@include hoverrotate( $lunch-btn-rotate-start );
+		@include transition-property( transform border-color background-color );
+		@include transition-duration( $lunch-time-out );
+	}
+
+	// Label
+	.lunch-label {
+		position: absolute;
+		display: none;
+	}
+
+	// States
+	&:hover{
+		@include transition-duration( $lunch-time-over );
+		background: {
+			color: transparent;
+		}
+		// Children
+		.lunch-icon {
+			@include hoverrotate( $lunch-btn-rotate-hover );
+			@include transition-duration( $lunch-time-over );
+			background: {
+				color: $lunch-clr-grey;
+			}
+		}
+	}
+}
+
+
+// abstract btn styles
+%lunch-venue-head-btn {
+	display: block;
+	padding: 10px;
+	color: #aaa;
+	cursor: pointer;
+	background: {
+		color: #fff;
+	}
+	@include border-radius(2px);
+	.lunch-icon {
+		font: {
+			size: 30px;
+		}
+	}
+	.lunch-label {
+		// Box
+		display: none;
+
+		float: left;
+		padding: {
+			top: 6px;
+			bottom: 6px;
+			left: 5px;
+			right: 10px;
+		}
+	}
+	&:hover {
+		color: #555;
+		background: {
+			color: #eee;
+		}
+		.lunch-icon {
+			border: {
+				color: #555;
+			}
+		}
+	}
+}
+
+
+
 
 
 /*
@@ -83,6 +188,7 @@ $lunch-btn-rotate-hover: 360deg;
 		}
 		display: block;
 		float: left;
+		position: relative;
 
 		// Skin
 		font: {
@@ -98,6 +204,7 @@ $lunch-btn-rotate-hover: 360deg;
 		@include transition-property( transform border-color background-color );
 		@include transition-duration( $lunch-time-out );
 	}
+
 
 	.lunch-label {
 

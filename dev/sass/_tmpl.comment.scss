@@ -54,26 +54,17 @@ $lunch-comment-body-col: #eee;
  */
 .lunch-comments {
 	// Box
+	max-width: 620px;
 	margin: {
-		top: 30px;
-		left: 20px;
+		left: 60px;
 		right: 20px;
-		bottom: 0;
 	}
 	padding: {
-		top: 60px;
-		right: 40px;
-		bottom: 20px;
-		left: 40px;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
 	}
-	border: {
-		width: 0;
-		//top-width: 2px;
-		style: solid;
-		//color: $lunch-color-ylw;
-	}
-
-	// Skin
 
 }
 
@@ -90,15 +81,6 @@ $lunch-comment-body-col: #eee;
  */
 .lunch-comments-list {
 
-	// Box
-	max-width: 600px;
-	padding: {
-		left: 0;
-		right: 0;
-	}
-	margin: 0;
-	overflow: hidden;
-	clear: left;
 }
 
 
@@ -124,7 +106,7 @@ $lunch-comment-body-col: #eee;
 	}
 	border: {
 		width: 0;
-		bottom-width: 2px;
+		top-width: 2px;
 		style: solid;
 		color: $lunch-clr-grey-xxlgt;
 	}
@@ -135,10 +117,18 @@ $lunch-comment-body-col: #eee;
 	position: relative;
 	font: {
 		family: $lunch-typo-copy;
-		weight: 300;
+		weight: 400;
 	}
+	-webkit-font-smoothing: antialiased;
 	line: {
 		height: 1.4em;
+	}
+
+	// Pseudoelements
+	&:first-child {
+		border-top: {
+			width: 0;
+		}
 	}
 
 	// Children
@@ -178,7 +168,7 @@ $lunch-comment-body-col: #eee;
 		font: {
 			family: $lunch-typo-copy;
 			size: 1em;
-			weight: 300;
+			weight: 400;
 		}
 	}
 
@@ -262,10 +252,12 @@ $lunch-comment-body-col: #eee;
 		}
 		@include box-sizing( border-box );
 		@include border-radius(2px);
+		@include transition-property(border, background);
+		@include transition-duration($lunch-time-out);
 
 		// States
-		&:hover {
-
+		&:hover,
+		&:focus {
 			// Skin
 			border: {
 				color: $lunch-clr-grey-lgt;
@@ -273,6 +265,7 @@ $lunch-comment-body-col: #eee;
 			background: {
 				color:$lunch-clr-grey-xxlgt;
 			}
+			@include transition-duration($lunch-time-over);
 		}
 	}
 
@@ -283,33 +276,41 @@ $lunch-comment-body-col: #eee;
 			top: 10px;
 		}
 		padding: {
-			top: 10px;
-			bottom: 10px;
-			left: 16px;
-			right: 16px;
+			top: 18px;
+			bottom: 16px;
+			left: 20px;
+			right: 20px;
 		}
 		border: {
 			width: 0;
 		}
-		text-align: center;
+		text: {
+			transform: uppercase;
+			align: center;
+		}
+		font: {
+			size: 11px;
+		}
+		line: {
+			height: 1em;
+		}
+
+
 		cursor: pointer;
 		color: white;
 		background: {
 			color: $lunch-clr-blue;
 		}
-		font: {
-			size: 14px;
-		}
 		@include border-radius(2px);
 
 		// Effects
-		@include transition-property( background-color );
-		@include transition-duration( $lunch-time-out );
+		@include transition-property(background);
+		@include transition-duration($lunch-time-out);
 
 
 		// States
 		&:hover {
-			@include transition-duration( $lunch-time-over );
+			@include transition-duration($lunch-time-over);
 			background-color: $lunch-color-blu-dark;
 		}
 	}

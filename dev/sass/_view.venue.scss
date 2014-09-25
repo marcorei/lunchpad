@@ -5,217 +5,136 @@
 
 .lunch-view-venue {
 
-	// margin: {
-	// 	top: 30px;
-	// 	left: 30px;
-	// 	right: 30px;
-	// }
+	/*
+	 * Header: Contains Title, Back and Edit
+	 */
 
+	// Container
+	header {
+		max-width: 620px;
+		margin: {
+			left: 60px;
+			right: 20px;
+		}
+		padding: {
+			top: 60px;
+			bottom: 30px;
+		}
+		border: {
+			width: 0;
+			bottom-width: 2px;
+			color: $lunch-clr-grey-xxlgt;
+			style: solid;
+		}
+	}
 
-	.lunch-fn-back {
-
-		// Box
+	// headline
+	h1 {
 		display: block;
+		text: {
+			align: center;
+		}
+		font: {
+			size: 60px;
+		}
+		margin: 0;
+	}
+
+	// back btn
+	.lunch-fn-back {
+		margin: {
+			top: 5px;
+		}
+		@extend %lunch-venue-head-btn;
 		float: left;
+	}
 
-		// Skin
-		color: #aaa;
-		cursor: pointer;
-		background: {
-			color: #fff;
+	// edit btn
+	.lunch-fn-edit {
+		margin: {
+			top: 5px;
 		}
+		@extend %lunch-venue-head-btn;
+		float: right;
+	}
 
+	/*
+	 * Reception: Contains Guests and Interaction
+	 */
+	.lunch-venue-reception {
+		max-width: 620px;
+		margin: {
+			top: -26px;
+			left: 60px;
+			right: 20px;
+		}
+	}
 
-		// Effects
-		//@include border-radius( 25px );
+	// Guests
+	.lunch-venue-guests {
+		padding: {
+			top: 20px;
+			bottom: 40px;
+		}
+		text: {
+			align: center;
+		}
+	}
+	.lunch-venue-guest {
+		display: inline;
+		float: none;
+	}
 
-		// Children
+	// Container of interaction elements
+	.lunch-venue-interaction {
+		margin: {
+			top: 0;
+			bottom: 0;
+		}
+		text: {
+			align: center;
+		}
+	}
+
+	// Buttons
+	.lunch-fn-invite,
+	.lunch-fn-menu,
+	.lunch-fn-attend,
+	.lunch-fn-quit {
+		float: none;
+		position: static;
+		@extend %lunch-round-btn;
+	}
+
+	.lunch-fn-attend {
 		.lunch-icon {
-			float: left;
-			font: {
-				size: 30px;
-			}
-			border: {
-				color: #ddd;
-			}
-		}
-		.lunch-label {
-			// Box
-			display: none;
-
-			float: left;
-			padding: {
-				top: 6px;
-				bottom: 6px;
-				left: 5px;
-				right: 10px;
-			}
-		}
-
-		// States
-		&:hover {
-
-			// Skin
-			color: #555;
+			color: white;
 			background: {
-				color: #eee;
+				color: $lunch-clr-blue;
 			}
-
+		}
+		&:hover {
 			.lunch-icon {
-				border: {
-					color: #555;
+				background: {
+					color: $lunch-clr-blue-drk;
 				}
 			}
 		}
 	}
 
-
 	.lunch-fn-quit {
-
-		@include transform(none);
-
-		// Box
-		float: left;
-
-		// Position
-		position: relative;
-		top: auto;
-		left: auto;
-		right: auto;
-		bottom: auto;
-
 		.lunch-icon {
-			padding: 0;
-			border: none;
-			float: left;
-		}
-	}
-
-	.lunch-fn-menu,
-	.lunch-fn-invite {
-
-		// Box
-		display: inline-block;
-		margin: 0;
-		padding: 7px 14px;
-		border: {
-			width: 2px;
-			color: #aaa;
-			style: solid;
-		}
-		vertical-align: top;
-
-		// Position
-		position: relative;
-		left: auto;
-		bottom: auto;
-		right: auto;
-		top: auto;
-
-
-		// Skin
-		color: #aaa;
-		background: {
-			color: transparent;
-		}
-
-		// Children
-
-		.lunch-label {
-
-			padding: {
-				left: 5px;
-				right: 5px;
+			color: white;
+			background: {
+				color: $lunch-clr-red;
 			}
-			font: {
-				family: Georgia, serif;
-				style: italic;
-				size: 14px;
+		}
+		&:hover {
+			.lunch-icon {
+				background: {
+					color: $lunch-clr-red-drk;
+				}
 			}
-			color: #aaa;
-
-		}
-		.lunch-icon {
-
-			font: {
-				style: normal;
-				size: 18px;
-			}
-			color: #aaa;
-			border: none;
-			float: left;
 		}
 	}
-
-
-	.lunch-venue-header {
-
-		// Box
-		display: table;
-		width: 100%;
-		max-width: 600px;
-		margin: {
-			top: 0;
-			left: 60px;
-			right: 60px;
-		}
-	}
-
-
-
-	.lunch-venue-title {
-
-		// Box
-		clear: left;
-		display: block;
-		margin: {
-			top: 30px;
-		}
-
-		// Skin
-		font: {
-			size: 60px;
-		}
-	}
-
-
-
-	.lunch-venue-interaction {
-		// Box
-		max-width: 600px;
-		padding: {
-			top: 10px;
-			left: 60px;
-			right: 60px;
-			bottom: 50px;
-		}
-
-		overflow: hidden;
-		clear: left;
-
-	}
-
-
-	.lunch-venue-guests {
-
-		// Box
-		max-width: 600px;
-		padding: 0;
-		margin: {
-			top: 20px;
-			left: 0;
-			right: 0;
-			bottom: 20px;
-		}
-
-
-
-		// Position
-		position: relative;
-
-
-		// Skin
-		text-align: center;
-	}
-
 }
