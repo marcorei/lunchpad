@@ -1,4 +1,4 @@
-<article class="lunch-view-venue">
+<article class="lunch-view-venue lunch-animate">
 
 	<header>
 		<a ng-click="back()" class="lunch-fn-back">
@@ -33,64 +33,11 @@
 		</div>
 
 
-		<div class="lunch-venue-guests" ng-show="venue.guests.length">
+		<div class="lunch-venue-guests lunch-animate" ng-show="venue.guests.length">
 			<div class="lunch-venue-guest lunch-animate" ng-repeat="user in venue.guests">
 				<img src="{{user.ava}}" class="lunch-user-image" alt="{{user.nick}}">
 			</div>
 		</div>
-
-		<!--
-		<div class="lunch-venue-guests" >
-			<div class="lunch-venue-guest anim-user-slide">
-				<img src="../static/img/mr.png" alt="" class="lunch-user-image">
-				<p class="anim-status-fade ng-binding ng-hide" ng-show="user.status"></p>
-			</div>
-			<div class="lunch-venue-guest anim-user-slide">
-				<img src="../static/img/mr.png" alt="" class="lunch-user-image">
-				<p class="anim-status-fade ng-binding ng-hide" ng-show="user.status"></p>
-			</div>
-			<div class="lunch-venue-guest anim-user-slide">
-				<img src="../static/img/mr.png" alt="" class="lunch-user-image">
-				<p class="anim-status-fade ng-binding ng-hide" ng-show="user.status"></p>
-			</div>
-			<div class="lunch-venue-guest anim-user-slide">
-				<img src="../static/img/mr.png" alt="" class="lunch-user-image">
-				<p class="anim-status-fade ng-binding ng-hide" ng-show="user.status"></p>
-			</div>
-			<div class="lunch-venue-guest anim-user-slide">
-				<img src="../static/img/mr.png" alt="" class="lunch-user-image">
-				<p class="anim-status-fade ng-binding ng-hide" ng-show="user.status"></p>
-			</div>
-			<div class="lunch-venue-guest anim-user-slide">
-				<img src="../static/img/mr.png" alt="" class="lunch-user-image">
-				<p class="anim-status-fade ng-binding ng-hide" ng-show="user.status"></p>
-			</div>
-			<div class="lunch-venue-guest anim-user-slide">
-				<img src="../static/img/mr.png" alt="" class="lunch-user-image">
-				<p class="anim-status-fade ng-binding ng-hide" ng-show="user.status"></p>
-			</div>
-			<div class="lunch-venue-guest anim-user-slide">
-				<img src="../static/img/mr.png" alt="" class="lunch-user-image">
-				<p class="anim-status-fade ng-binding ng-hide" ng-show="user.status"></p>
-			</div>
-			<div class="lunch-venue-guest anim-user-slide">
-				<img src="../static/img/mr.png" alt="" class="lunch-user-image">
-				<p class="anim-status-fade ng-binding ng-hide" ng-show="user.status"></p>
-			</div>
-			<div class="lunch-venue-guest anim-user-slide">
-				<img src="../static/img/mr.png" alt="" class="lunch-user-image">
-				<p class="anim-status-fade ng-binding ng-hide" ng-show="user.status"></p>
-			</div>
-			<div class="lunch-venue-guest anim-user-slide">
-				<img src="../static/img/mk.png" alt="" class="lunch-user-image">
-				<p class="anim-status-fade ng-binding ng-hide" ng-show="user.status"></p>
-			</div>
-			<div class="lunch-venue-guest anim-user-slide">
-				<img src="../static/img/mrz.png" alt="" class="lunch-user-image">
-				<p class="anim-status-fade ng-binding ng-hide" ng-show="user.status"></p>
-			</div>
-		</div>
-		-->
 	</section>
 
 	<section class="lunch-comments">

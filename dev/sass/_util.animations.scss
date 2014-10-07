@@ -12,9 +12,7 @@
 
 
 
-
 // state change animation
-
 .lunch-view-container.ng-enter, .lunch-view-container.ng-leave {
 	@include transition( all .7s ease );
 }
@@ -47,8 +45,9 @@
 
 
 
-// Come back
-
+/*
+ * Come back
+ */
 .back .lunch-view-container.ng-enter {
 	position: fixed;
 	width: 100%;
@@ -158,9 +157,34 @@
 
 
 
+/*
+ * Guest Container
+ */
+.lunch-venue-guests.ng-enter, .lunch-venue-guests.ng-leave {
+	@include transition( all .7s ease );
+}
 
-// slide horizontal for users
+.lunch-venue-guests.ng-enter {
+	max-height: 0px;
+}
 
+.lunch-venue-guests.ng-enter-active {
+	max-height: 300px;
+}
+
+.lunch-venue-guests.ng-leave {
+	max-height: 300px;
+}
+
+.lunch-venue-guests.ng-leave-active {
+	max-height: 0px;
+}
+
+
+
+/*
+ * Guest Animation
+ */
 .lunch-venue-guest.ng-enter, .lunch-venue-guest.ng-leave {
 	display: block;
 	@include transition( all .25s ease );

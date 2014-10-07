@@ -11,8 +11,8 @@
  	height: 100%;
  	background-color: $lunch-color-red;
 
- 	
- 	
+
+
  }
 
 .lunch-logo {
@@ -41,7 +41,7 @@
 		}
 		padding: 10px;
 
-		
+
 
 		display: block;
 		//background-color: white;
@@ -84,7 +84,7 @@
 	.lunch-fn-login {
 
 		border: 0;
-		
+
 		display: block;
 
 		//float: left;
@@ -92,12 +92,12 @@
 		//margin-right: 10px;
 
 		text-align: right;
-		
+
 		padding: 10px 20px;
 		//width: 150px;
 
 		text-decoration: none;
-		
+
 		font: {
 			family: Georgia;
 			//style: italic;
@@ -128,18 +128,14 @@
 
 		margin: auto;
 		margin-top: 30px;
-
 		@include transition( all 1000ms );
-		@include hoverrotate( $lunch-btn-rotate-start );
 
 		&:hover {
 
 			background-color: #222;
-
-			@include hoverrotate( $lunch-btn-rotate-hover );
 			@include transition( all 200ms );
 		}
-		
+
 
 	}
 
@@ -184,7 +180,7 @@
 			weight: normal;
 			size: 16px;
 		}
-	}	
+	}
 	a{
 		text-decoration: none;
 		color: #fff;
@@ -196,7 +192,7 @@
 			@include transition( color 200ms );
 		}
 	}
-	
+
 
 
 	position: absolute;
