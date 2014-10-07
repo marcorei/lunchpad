@@ -13,7 +13,18 @@ angular.module('lpCommentService',[
 'Socket','LpConfig',
 function(Socket,LpConfig){
 
-	
+	var comments = [],
+		loaded = false,
+		socketManager = Socket.generateManager(null);
+
+
+	var loadComments = function(venueId){
+
+	};
+
+	var clearComments = function(){
+
+	};
 
 	return {
 
