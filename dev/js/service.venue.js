@@ -13,14 +13,14 @@ angular.module('lpVenueService',[
 ])
 
 .factory('LpVenueService',[
-'Socket','LpConfig','LpError','LpUserIdService',
-function(Socket,LpConfig,LpError,LpUserIdService){
+'Socket','LpConfig','LpError','LpUserIdService','$timeout',
+function(Socket,LpConfig,LpError,LpUserIdService,$timeout){
 
 	var venues = [],
 		queue = [],
 		loaded = false,
 		socketManager = Socket.generateManager(null);
-
+		
 	var getVenueById = function(id, callback){
 		if(loaded){
 			callback(venues[findVenueIndexById(id)]);
@@ -84,7 +84,7 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 			if(venue._id === id){
 				//console.log('found venue id: '+i);
 				return i;
-			} 
+			}
 		}
 		//console.log('venue id not found');
 		return -1;
@@ -141,7 +141,10 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 	var rearrangeVenue = function(index){
 		var tc = checkPositionForIndex(index);
 		if(tc != index){
-			venues.splice(tc,0,venues.splice(index,1)[0]);
+			var tempVenue = venues.splice(index,1)[0];
+			$timeout(function(){
+				venues.splice(tc,0,tempVenue);
+			},0);
 		}
 	}
 
