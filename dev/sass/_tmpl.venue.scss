@@ -172,10 +172,16 @@ $venue-vertical-padding: 50px;
  * Guest
  */
 .lunch-venue-guest{
+
+	// box
 	margin: {
 		top: 0;
 	}
 	float: left;
+
+	// pos
+	position: relative;
+	z-index: 1;
 
 	&:first-child {
 		clear: left;

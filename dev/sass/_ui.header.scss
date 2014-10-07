@@ -505,11 +505,13 @@
 	/*
 	* New Venue Button
 	*/
-	.lunch-fn-new{
-		// Skin
-		color: $lunch-color-red-dark;
-		background: {
-			color: white;
+	&.active{
+		.lunch-fn-new{
+			// Skin
+			color: $lunch-color-red-dark;
+			background: {
+				color: white;
+			}
 		}
 	}
 }

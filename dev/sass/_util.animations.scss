@@ -47,7 +47,7 @@
 
 
 
-// Come back 
+// Come back
 
 .back .lunch-view-container.ng-enter {
 	position: fixed;
@@ -137,35 +137,24 @@
 	@include transition( all 4s ease 0 );
 }*/
 
-.anim-venue-slide.ng-enter { 
+.anim-venue-slide.ng-enter {
 	max-height: 0px;
 	overflow: hidden;
 	opacity: 0;
-}       
-.anim-venue-slide.ng-enter-active { 
+}
+.anim-venue-slide.ng-enter-active {
 	max-height: 500px;
 	opacity: 1;
-} 
-.anim-venue-slide.ng-leave { 
+}
+.anim-venue-slide.ng-leave {
 	max-height: 500px;
 	overflow: hidden;
 	opacity: 1;
-}        
-.anim-venue-slide.ng-leave-active { 
+}
+.anim-venue-slide.ng-leave-active {
 	max-height: 0px;
 	opacity: 0;
 }
-/*
-.anim-venue-slide.ng-move {
-	opacity: 0;
-	max-height: 0px;
-}
-
-.anim-venue-slide.ng-move-active {
-	opacity: 1;
-	max-height: 500px;
-}*/
-
 
 
 
@@ -173,29 +162,33 @@
 // slide horizontal for users
 
 .anim-user-slide.ng-enter, .anim-user-slide.ng-leave {
-	display: block !important;
-	@include transition( all .5s ease 0 );
+	display: block;
+	@include transition( all .25s ease 0 );
 }
 
-.anim-user-slide.ng-enter { 
+.anim-user-slide.ng-enter {
+	left: 40px;
 	width: 0px;
-	overflow: hidden;
+	overflow: visible;
 	opacity: 0;
 }
 
-.anim-user-slide.ng-enter-active { 
+.anim-user-slide.ng-enter-active {
 	width: 40px;
+	left: 0px;
 	opacity: 1;
 }
 
-.anim-user-slide.ng-leave { 
+.anim-user-slide.ng-leave {
 	width: 40px;
-	overflow: hidden;
+	left: 0;
+	overflow: visible;
 	opacity:1;
 }
 
-.anim-user-slide.ng-leave-active { 
+.anim-user-slide.ng-leave-active {
 	width: 0px;
+	left: -40px;
 	opacity: 0;
 }
 
@@ -208,19 +201,19 @@
 	@include transition( all .5 ease 0 );
 }
 
-.anim-status-fade.ng-enter { 
+.anim-status-fade.ng-enter {
 	opacity: 0;
 }
 
-.anim-status-fade.ng-enter-active { 
+.anim-status-fade.ng-enter-active {
 	opacity: 1;
 }
 
-.anim-status-fade.ng-leave { 
+.anim-status-fade.ng-leave {
 	opacity:1;
 }
 
-.anim-status-fade.ng-leave-active { 
+.anim-status-fade.ng-leave-active {
 	opacity: 0;
 }
 
@@ -236,8 +229,8 @@
 
 }
 
-/* 
- * Collect all Medium Screen Styles here 
+/*
+ * Collect all Medium Screen Styles here
  */
 @mixin lunch-animation-mixins-m() {
 	@include lunch-view-container-animation-mixin-m();
@@ -250,7 +243,7 @@
 	@include lunch-animation-mixins-s;
 }
 
-/* 
+/*
  * Apply Medium
  */
 @media screen and ( min-width: $lunch-grid-break-m ) {
@@ -259,10 +252,4 @@
 
 /*
  * Apply Large
- */ 
-
-
-
-
-
-
+ */
