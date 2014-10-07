@@ -130,28 +130,28 @@
 
 // slide vertical for venues
 
-.anim-venue-slide.ng-enter, .anim-venue-slide.ng-leave{
+.lunch-venue.ng-enter, .lunch-venue.ng-leave{
 	@include transition( all .7s ease 0 );
 }/*
 .anim-venue-slide.ng-move{
 	@include transition( all 4s ease 0 );
 }*/
 
-.anim-venue-slide.ng-enter {
+.lunch-venue.ng-enter {
 	max-height: 0px;
 	overflow: hidden;
 	opacity: 0;
 }
-.anim-venue-slide.ng-enter-active {
+.lunch-venue.ng-enter-active {
 	max-height: 500px;
 	opacity: 1;
 }
-.anim-venue-slide.ng-leave {
+.lunch-venue.ng-leave {
 	max-height: 500px;
 	overflow: hidden;
 	opacity: 1;
 }
-.anim-venue-slide.ng-leave-active {
+.lunch-venue.ng-leave-active {
 	max-height: 0px;
 	opacity: 0;
 }
@@ -161,32 +161,32 @@
 
 // slide horizontal for users
 
-.anim-user-slide.ng-enter, .anim-user-slide.ng-leave {
+.lunch-venue-guest.ng-enter, .lunch-venue-guest.ng-leave {
 	display: block;
 	@include transition( all .25s ease 0 );
 }
 
-.anim-user-slide.ng-enter {
+.lunch-venue-guest.ng-enter {
 	left: 40px;
 	width: 0px;
 	overflow: visible;
 	opacity: 0;
 }
 
-.anim-user-slide.ng-enter-active {
+.lunch-venue-guest.ng-enter-active {
 	width: 40px;
 	left: 0px;
 	opacity: 1;
 }
 
-.anim-user-slide.ng-leave {
+.lunch-venue-guest.ng-leave {
 	width: 40px;
 	left: 0;
 	overflow: visible;
 	opacity:1;
 }
 
-.anim-user-slide.ng-leave-active {
+.lunch-venue-guest.ng-leave-active {
 	width: 0px;
 	left: -40px;
 	opacity: 0;

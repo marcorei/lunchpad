@@ -6,7 +6,7 @@
 
 <div class="lunch-venues">
 
-	<div ng-repeat="venue in venues | filter:searchInput" class="lunch-venue anim-venue-slide">
+	<div ng-repeat="venue in venues | filter:searchInput" class="lunch-venue lunch-animate">
 
 		<div class="lunch-venue-wrapper">
 
@@ -21,7 +21,7 @@
 			</header>
 
 			<div class="lunch-venue-guests" ng-show="venue.guests.length">
-				<div class="lunch-venue-guest anim-user-slide" ng-repeat="user in venue.guests">
+				<div class="lunch-venue-guest lunch-animate" ng-repeat="user in venue.guests">
 					<img src="{{user.ava}}" class="lunch-user-image" alt="{{user.nick}}">
 				</div>
 			</div>
