@@ -20,10 +20,10 @@ angular.module('lunchpad',[
 	'lpError'
 ])
 
-.config(['$routeProvider','LpConfigProvider',
-	function($routeProvider,LpConfigProvider){
+.config(['$routeProvider','LpConfigProvider','$animateProvider',
+	function($routeProvider,LpConfigProvider,$animateProvider){
 		var LpConfig = LpConfigProvider.$get();
-		
+
 		$routeProvider.
 			when('/venues', {
 
@@ -48,6 +48,8 @@ angular.module('lunchpad',[
 				redirectTo: '/venues'
 
 			});
+
+		$animateProvider.classNameFilter(/lunch-animate/);
 	}
 ])
 
