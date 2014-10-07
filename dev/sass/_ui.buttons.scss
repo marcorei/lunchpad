@@ -47,26 +47,32 @@ $lunch-btn-rotate-hover: 360deg;
 */
 %lunch-round-btn {
 
-	// Box
+	// box
 	display: inline-block;
 	overflow: hidden;
 	padding: 0;
+
+	// skin
 	color: white;
 	background: {
 		color: transparent;
 	}
+	-moz-osx-font-smoothing: grayscale;
 	-webkit-font-smoothing: antialiased;
 	text-decoration: none;
 	text-align: center;
 	cursor: pointer;
-	@include transition-property( background-color border-color color );
+	@include transition-property( background-color color );
 	@include transition-duration( $lunch-time-out );
 
-	// Children
+	// child: icon
 	.lunch-icon {
+		// box
 		padding: 10px;
 		display: block;
 		float: left;
+
+		// color
 		font: {
 			family: 'lunch-ico';
 			style: regular;
@@ -75,28 +81,29 @@ $lunch-btn-rotate-hover: 360deg;
 		background: {
 			color: $lunch-clr-grey-lgt;
 		}
+
 		@include border-radius(34px);
 		@include hoverrotate( $lunch-btn-rotate-start );
-		@include transition-property( transform border-color background-color );
+		@include transition-property( transform background-color );
 		@include transition-duration( $lunch-time-out );
 	}
 
-	// Label
+	// child: label
 	.lunch-label {
 		position: absolute;
 		display: none;
 	}
 
-	// States
+	// states
 	&:hover{
-		@include transition-duration( \$lunch-time-over );
+		@include transition-duration( $lunch-time-over );
 		background: {
 			color: transparent;
 		}
-		// Children
+		// child: icon
 		.lunch-icon {
-			@include hoverrotate( \$lunch-btn-rotate-hover );
-			@include transition-duration( \$lunch-time-over );
+			@include hoverrotate( $lunch-btn-rotate-hover );
+			@include transition-duration( $lunch-time-over );
 			background: {
 				color: $lunch-clr-grey;
 			}
@@ -105,25 +112,33 @@ $lunch-btn-rotate-hover: 360deg;
 }
 
 
+
 // abstract btn styles
 %lunch-venue-head-btn {
+
+	// box
 	display: block;
 	padding: 10px;
+
+	// skin
 	color: #aaa;
 	cursor: pointer;
 	background: {
 		color: #fff;
 	}
 	@include border-radius(2px);
+
+	// child: button icon
 	.lunch-icon {
 		font: {
 			size: 30px;
 		}
 	}
+
+	// child: button label
 	.lunch-label {
 		// Box
 		display: none;
-
 		float: left;
 		padding: {
 			top: 6px;
@@ -132,6 +147,8 @@ $lunch-btn-rotate-hover: 360deg;
 			right: 10px;
 		}
 	}
+
+	// states
 	&:hover {
 		color: #555;
 		background: {
@@ -156,8 +173,6 @@ $lunch-btn-rotate-hover: 360deg;
 
 	// Box
 	display: block;
-
-
 	overflow: hidden;
 
 	// Skin
@@ -172,8 +187,8 @@ $lunch-btn-rotate-hover: 360deg;
 
 
 	// Effects
-	@include transition-property( background-color border-color color );
-	@include transition-duration( \$lunch-time-out );
+	@include transition-property( background-color color );
+	@include transition-duration( $lunch-time-out );
 
 
 	// Children
@@ -200,14 +215,13 @@ $lunch-btn-rotate-hover: 360deg;
 
 		// Effects
 		@include border-radius(34px);
-/* 		@include hoverrotate( \$lunch-btn-rotate-start );
-@include transition-property( transform border-color background-color );
-@include transition-duration( \$lunch-time-out ); */
+		@include hoverrotate( $lunch-btn-rotate-start );
+		@include transition-property( transform background-color );
+		@include transition-duration( $lunch-time-out );
 	}
 
 
 	.lunch-label {
-
 		// Box
 		display: block;
 		float: left;
@@ -237,12 +251,12 @@ $lunch-btn-rotate-hover: 360deg;
 		}
 
 		// Effects
-/* 		@include transition-duration( \$lunch-time-over ); */
+		@include transition-duration( $lunch-time-over );
 
 		// Children
 		.lunch-icon {
-/* 			@include hoverrotate( \$lunch-btn-rotate-hover ); */
-/* 			@include transition-duration( \$lunch-time-over ); */
+			@include hoverrotate( $lunch-btn-rotate-hover );
+			@include transition-duration( $lunch-time-over );
 		}
 	}
 }

@@ -16,7 +16,7 @@
 // state change animation
 
 .lunch-view-container.ng-enter, .lunch-view-container.ng-leave {
-	@include transition( all .7s ease 0 );
+	@include transition( all .7s ease );
 }
 
 
@@ -131,7 +131,7 @@
 // slide vertical for venues
 
 .lunch-venue.ng-enter, .lunch-venue.ng-leave{
-	@include transition( all .7s ease 0 );
+	@include transition( all .7s ease );
 }/*
 .anim-venue-slide.ng-move{
 	@include transition( all 4s ease 0 );
@@ -163,7 +163,7 @@
 
 .lunch-venue-guest.ng-enter, .lunch-venue-guest.ng-leave {
 	display: block;
-	@include transition( all .25s ease 0 );
+	@include transition( all .25s ease );
 }
 
 .lunch-venue-guest.ng-enter {
@@ -188,7 +188,7 @@
 
 .lunch-venue-guest.ng-leave-active {
 	width: 0px;
-	left: -40px;
+	left: 10px;
 	opacity: 0;
 }
 
@@ -198,7 +198,7 @@
 // fade stati in and out
 
 .anim-status-fade.ng-enter, .anim-status-fade.ng-leave {
-	@include transition( all .5 ease 0 );
+	@include transition( all .5 ease );
 }
 
 .anim-status-fade.ng-enter {
