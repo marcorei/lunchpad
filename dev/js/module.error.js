@@ -1,5 +1,6 @@
 /*
- * Error module. cotaining error service and directive
+ * Error module. cotaining error service and directive.
+ * Please configure hints and the corresponding message codes in the sevirces.
  *
  * @author Markus Riegel <riegel.markus@googlemail.com>
  */
@@ -22,17 +23,31 @@ function($window,Socket,LpConfig){
 		socketManager = Socket.generateManager(null);
 
 	var throwError = function(msg){
-		dump.push(msg);
+		dump.push({
+			msg: msg,
+			type: 'error'
+		});
+	};
+
+	var throwHint = function(msg){
+		dump.push({
+			msg: msg,
+			type: 'hint'
+		});
 	}
 
 	var getMsg = function(errorCode){
 		return messages['e'+errorCode] || errorCode;
-	}
+	};
+
+	var setMsg = function(errorCode, msg){
+		messages[errorCode] = msg;
+	};
 
 	socketManager.on(LpConfig.getEvent('error'),function(data){
 		console.log('Error: '+data);
+		throwError(data.error.code);
 
-		
 		/*
 		if(data.error.code === 666){
 			$window.location.href = LpConfig.getPage('logout');
@@ -44,8 +59,10 @@ function($window,Socket,LpConfig){
 
 	return {
 		dump: dump,
-		throw: throwError,
-		getMsg: getMsg
+		throwError: throwError,
+		throwHint: throwHint,
+		getMsg: getMsg,
+		setMsg: setMsg
 	}
 }])
 
