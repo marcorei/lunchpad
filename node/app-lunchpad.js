@@ -741,7 +741,7 @@ io.sockets.on('connection', function (socket) {
 		lunchAuth.isOwnerOrAdmin(socket, data._id, function(user){
 
 			var e;
-			if(e = new Validate
+			if(e = new Validate()
 			.v('inLength',[data._id,24,24],'comment.id')
 			.e()){
 				sendErrorToSocket(socket,e);
@@ -785,7 +785,7 @@ io.sockets.on('connection', function (socket) {
 			data.nick = Validate.s('escape',[data.nick]);
 
 			var e;
-			if(e = new Validate
+			if(e = new Validate()
 			.v('isEmail',[data.mail],'user.mail')
 			.v('isAlphanumeric',[data.nick],'user.nick.alphanumeric')
 			.v('isLength',[data.nick,3,15],'user.nick.length')
@@ -848,7 +848,7 @@ io.sockets.on('connection', function (socket) {
 		lunchAuth.isOwnerOrAdmin(socket, data._id, function(user){
 
 			var e;
-			if(e = new Validate
+			if(e = new Validate()
 			.v('inLength',[data._id,24,24],'user.id')
 			.e()){
 				sendErrorToSocketCb(cb,e);
@@ -861,7 +861,7 @@ io.sockets.on('connection', function (socket) {
 
 				cb({
 					error: null,
-					users: result
+					user: result
 				});
 
 			},function(error){
@@ -874,7 +874,7 @@ io.sockets.on('connection', function (socket) {
 		lunchAuth.isOwnerOrAdmin(socket, data._id, function(user){
 
 			var e;
-			if(e = new Validate
+			if(e = new Validate()
 			.v('inLength',[data._id,24,24],'user.id')
 			.v('isLength',[data.pass,5],'user.pass')
 			.e()){
@@ -921,7 +921,7 @@ io.sockets.on('connection', function (socket) {
 		lunchAuth.isOwner(socket, function(user){
 
 			var e;
-			if(e = new Validate
+			if(e = new Validate()
 			.v('inLength',[data._id,24,24],'user.id')
 			.e()){
 				sendErrorToSocket(socket,e);
@@ -955,7 +955,7 @@ io.sockets.on('connection', function (socket) {
 		lunchAuth.isAdmin(socket, function(user){
 
 			var e;
-			if(e = new Validate
+			if(e = new Validate()
 			.v('inLength',[data._id,24,24],'user.id')
 			.e()){
 				sendErrorToSocket(socket,e);
