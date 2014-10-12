@@ -1,5 +1,7 @@
 /*
- * Service to request and cache a comment thread
+ * Service to request and cache a comment thread.
+ * You can use the service directly to create or delete comments.
+ * Or you can generate a Manager to load a thread and do the above.
  *
  * @author Markus Riegel <riegel.markus@googlemail.com>
  */
@@ -13,64 +15,69 @@ angular.module('lpCommentService',[
 'Socket','LpConfig','LpError','LpUserIdService',
 function(Socket,LpConfig,LpError,LpUserIdService){
 
-	var comments = [],
-		currentVenueId = -1,
-		socketManager = Socket.generateManager(null);
 
-
-	var loadComments = function(venueId, callback){
+	var loadComments = function(venueId, callback, manager){
 		socketManager.emit(LpConfig.getEvent('comment.read.list'),{
 			_id: venueId
 		},function(data){
 			for(var i=0; i<data.comments.length; i++){
-				comments.push(data.comments[i]);
+				manager.comments.push(data.comments[i]);
 			}
 
-			currentVenueId = venueId;
-			addListeners();
+			manager.venueId = venueId;
 			if(callback) callback();
 		})
 	};
 
-	var clearComments = function(){
-		currentVenueId = -1;
-		removeListeners();
+	var clearComments = function(manager){
+		manager.venueId = -1;
 		comments.splice(0,comments.length);
 	};
 
 	var createComment = function(txt){
-		socketManager.emit(LpConfig.getEvent('comment.create'),{
+		Socket.emit(LpConfig.getEvent('comment.create'),{
 			vid: currentVenueId,
 			txt: txt
 		});
 	}
 
-	var onCommentCreateDone = function(comment){
-		comments.push(comment);
-	};
+	var deleteComment = function(commentId){
+		Socket.emit(LpConfig.getEvent('comment.delete'),{
+			_id: commentId
+		});
+	}
 
-	var onCommentDeleteDone = function(comment){
-		var index = findCommentIndexById(comment._id);
-		comments[index].deleted = true;
-	};
-
-	var onUnhandeltModify = function(){
-		if(loaded){
-			loaded = false;
-			clearComments();
-			if(currentVenueId >= 0)
-			{
-				loadComments(currentVenueId);
-			}
+	var createCommentDone = function(data, manager){
+		if(data.comment.vid == manager.venueId ){
+			manager.comments.push(data.comment);
 		}
 	};
 
+	var deleteCommentDone = function(data, manager){
+		if(data.comment.vid == manager.venueId ){
+			var index = findCommentIndexById(data.comment._id, manager);
+			if(index !== -1){
+				manager.comments[index].deleted = true;
+			}else{
+				fixUnhandledModify(manager);
+			}
+		}
 
-	var findCommentIndexById = function(id){
+	};
+
+	var fixUnhandledModify = function(manager){
+		clearComments(manager);
+		if(manager.venueId !== -1)
+		{
+			loadComments(manager.venueId, manager);
+		}
+	};
+
+	var findCommentIndexById = function(id, manager){
 		var i,
 			comment;
-		for(i = 0; i < comments.length; i++){
-			comment = comments[i];
+		for(i = 0; i < manager.comments.length; i++){
+			comment = manager.comments[i];
 			if(comment._id === id){
 				return i;
 			}
@@ -78,20 +85,48 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 		return -1;
 	};
 
-	var addListeners = function(){
-		socketManager.on(LpConfig.getEvent('comment.create.done'),onCheckinCreateDone);
-		socketManager.on(LpConfig.getEvent('comment.delete.done'),onCheckinDeleteDone);
-	};
 
-	var removeListeners = function(){
-		socketManager.off(LpConfig.getEvent('comment.create.done'),onCheckinCreateDone);
-		socketManager.off(LpConfig.getEvent('comment.delete.done'),onCheckinDeleteDone);
-	};
+
+	var CommentsManager = function(scope){
+		var comments = [],
+			socketManager,
+			self = this;
+		this.comments = comments;
+		this.venueId = -1;
+
+		var onCommentCreateDone = function(data){
+			createCommentDone(data, self);
+		}
+
+		var onCommentDeleteDone = function(data){
+			deleteCommentDone(data, self);
+		}
+
+		if(scope == undefined){
+			throw 'scope not defined. CommentsManager can not work with rootScope';
+		}
+		socketManager = Socket.generateManager(scope);
+		socketManager.on(LpConfig.getEvent('comment.create.done'),onCommentCreateDone);
+		socketManager.on(LpConfig.getEvent('comment.delete.done'),onCommentDeleteDone);
+
+		// API
+
+		this.loadComments = function(venueId, callback){
+			loadComments(venueId, callback, self);
+		}
+
+		this.createComment = createComment;
+		this.deleteComment = deleteComment;
+	}
+
+	var generateManager = function(scope){
+		return new CommentsManager(scope);
+	}
 
 	return {
-		comments: comments,
-		loadComments: loadComments,
-		clearComments: clearComments
+		generateManager: generateManager,
+		createComment: createComment,
+		deleteComment: deleteComment
 	};
 
 }]);
