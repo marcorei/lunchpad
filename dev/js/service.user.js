@@ -48,11 +48,12 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 		});
 	};
 
-	var updatePassword = function(password, id){
+	var updatePassword = function(password, oldpassword, id){
 		// When id is undefined, get own id.
 		socketManager.emit(LpConfig.getEvent('user.update.password'),{
 			_id: id,
-			pass: password
+			pass: password,
+			oldpass: oldpassword
 		});
 	};
 

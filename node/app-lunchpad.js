@@ -882,6 +882,8 @@ io.sockets.on('connection', function (socket) {
 				return null;
 			}
 
+			// TODO: check if old pass is matching
+
 			userProvider.updatePass( data._id, data.pass,
 			function(updates){
 
