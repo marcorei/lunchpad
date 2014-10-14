@@ -73,7 +73,7 @@ CommentProvider.prototype.findWithVenue = function(vid, onSuccess, onError){
 			vid: vid,
 			del: false
 		},{
-			sort:[{date:1}]
+			sort:[['date',1]]
 		}).toArray(function(error,comments){
 			if(error) onError(error);
 			else onSuccess(comments);
