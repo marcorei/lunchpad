@@ -668,7 +668,7 @@ io.sockets.on('connection', function (socket) {
 
 			var e;
 			if(e = new Validate()
-			.v('inLength',[data._id,24,24],'venue.id')
+			.v('isLength',[data._id,24,24],'venue.id')
 			.e()){
 				sendErrorToSocket(socket,e);
 				return null;
@@ -683,7 +683,7 @@ io.sockets.on('connection', function (socket) {
 				});
 
 			},function(error){
-				sendErrorToSocketCb(cb,error);
+				lunchHelper.sendErrorToSocketCb(cb,error);
 			});
 		});
 	});
@@ -695,11 +695,11 @@ io.sockets.on('connection', function (socket) {
 
 			var e;
 			if(e = new Validate()
-			.v('inLength',[data.vid,24,24],'venue.id')
+			.v('isLength',[data.vid,24,24],'venue.id')
 			//.v('isLength',[data.name,1,140],'comment.txt.length')
 			.s('toString',[data.txt])
 			.e()){
-				sendErrorToSocket(socket,e);
+				lunchHelper.sendErrorToSocket(socket,e);
 				return null;
 			}
 

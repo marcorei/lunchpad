@@ -40,6 +40,34 @@
 		</div>
 	</section>
 
+
+
+
+	<section class="lunch-comments">
+		<div class="lunch-comment" ng-repeat="comment in comments">
+			<div class="lunch-comment-info">
+				<div class="lunch-commentator-img">
+					<img src="{{comment.user.ava}}" alt="">
+				</div>
+				<time>{{comment.data}}</time>
+				<h3>{{comment.user.nick}}</h3>
+			</div>
+			<p>{{comment.txt}}</p>
+		</div>
+
+
+		<form action="" class="lunch-comment lunch-comment-input">
+			<div class="lunch-commentator-img">
+				<img src="../static/img/mr.png" alt="" class="lunch-user-image">
+			</div>
+				<textarea type="text" placeholder="Got something to say?" ng-model="formInputTxt"></textarea>
+				<button class="lunch-fn-comment-send" ng-click="sendComment()">
+					<span class="lunch-label">Post Comment</span>
+				</button>
+		</form>
+	</section>
+
+	<!--
 	<section class="lunch-comments">
 		<div class="lunch-comment">
 			<div class="lunch-comment-info">
@@ -83,4 +111,5 @@
 				</button>
 		</form>
 	</section>
+	-->
 </article>

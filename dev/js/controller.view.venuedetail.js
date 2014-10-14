@@ -5,15 +5,22 @@
  */
 
 angular.module('viewVenueDetailController',[
-'lpVenueService'
+'lpVenueService',
+'lpCommentService'
 ])
 
 .controller('ViewVenueDetailController',[
-'$scope','$location','$routeParams','LpVenueService',
-function($scope,$location,$routeParams,LpVenueService){
+'$scope','$location','$routeParams','LpVenueService','LpCommentService',
+function($scope,$location,$routeParams,LpVenueService,LpCommentService){
+
+	var commentsManager = LpCommentService.generateManager($scope);
 
 	// Model
 	$scope.venue = {};
+	$scope.comments = commentsManager.comments;
+	$scope.formInputTxt;
+	$scope.formSending = false;
+
 
 	// Interact
 	$scope.checkIn = function(id){
@@ -32,6 +39,19 @@ function($scope,$location,$routeParams,LpVenueService){
 		alert('edit my ass!');
 	}
 
+	$scope.sendComment = function(){
+		alert('checking...');
+		if($scope.formInputTxt.length > 0){
+			alert('sending!');
+			LpCommentServices.createComment($scope.formInputTxt);
+		}
+		// TODO: implement error message
+	}
+
+	$scope.deleteComment = function(id){
+		LpCommentServices.deleteComment(id);
+	}
+
 
 	// Startup
 	if($routeParams.venueId !== 'undefined'){
@@ -40,6 +60,9 @@ function($scope,$location,$routeParams,LpVenueService){
 				$location.path('/venues');
 			}else{
 				$scope.venue = venue;
+
+				//load comments
+				commentsManager.loadComments(venue._id);
 			}
 		});
 
@@ -49,5 +72,8 @@ function($scope,$location,$routeParams,LpVenueService){
 	}else{
 		$location.path('/venues');
 	}
+
+
+	// TODO: watch for changes in the comments array and reset sending
 
 }]);

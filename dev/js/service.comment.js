@@ -17,10 +17,13 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 
 
 	var loadComments = function(venueId, callback, manager){
-		socketManager.emit(LpConfig.getEvent('comment.read.list'),{
+		manager.socketManager.emit(LpConfig.getEvent('comment.read.list'),{
 			_id: venueId
 		},function(data){
 			for(var i=0; i<data.comments.length; i++){
+
+				// TODO: have to check if own comments or not.
+
 				manager.comments.push(data.comments[i]);
 			}
 
@@ -89,10 +92,9 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 
 	var CommentsManager = function(scope){
 		var comments = [],
-			socketManager,
 			self = this;
-		this.comments = comments;
 		this.venueId = -1;
+		this.socketManager;
 
 		var onCommentCreateDone = function(data){
 			createCommentDone(data, self);
@@ -105,9 +107,9 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 		if(scope == undefined){
 			throw 'scope not defined. CommentsManager can not work with rootScope';
 		}
-		socketManager = Socket.generateManager(scope);
-		socketManager.on(LpConfig.getEvent('comment.create.done'),onCommentCreateDone);
-		socketManager.on(LpConfig.getEvent('comment.delete.done'),onCommentDeleteDone);
+		this.socketManager = Socket.generateManager(scope);
+		this.socketManager.on(LpConfig.getEvent('comment.create.done'),onCommentCreateDone);
+		this.socketManager.on(LpConfig.getEvent('comment.delete.done'),onCommentDeleteDone);
 
 		// API
 
@@ -117,6 +119,7 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 
 		this.createComment = createComment;
 		this.deleteComment = deleteComment;
+		this.comments = comments;
 	}
 
 	var generateManager = function(scope){
