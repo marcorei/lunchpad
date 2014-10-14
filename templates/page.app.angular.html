@@ -26,27 +26,16 @@
 
 	<body ng-app="lunchpad" class="lunch-page-app">
 
-
-
 		<!-- Header -->
-
 		<header class="lunch-header">
-
-
 
 			<!-- Logo -->
 			<a  href="#" class="lunch-logo">
 				<img src="../static/img/logo.png" alt="">
 			</a>
 
-
-
-
-
 			<!-- Nav -->
-
 			<nav class="lunch-nav">
-
 
 				<!-- Account (Add ctrl somewhere, or directive)-->
 				<div class="lunch-account">
@@ -59,35 +48,26 @@
 						<a href="#/venues" class="lunch-fn-xx">Venues</a>
 					</li>
 					<li class="lunch-nav-elem">
-						<a href="#/settings" class="lunch-fn-new">New Venue</a>
+						<a href="#/" class="lunch-fn-new">New Venue</a>
 					</li>
 					<li class="lunch-nav-elem">
 						<a href="#/settings" class="lunch-fn-settings">Profile</a>
 					</li>
+					<li class="lunch-nav-elem" ng-show="user.admin">
+						<a href="#/admin" class="lunch-fn-settings">Admin Panel</a>
+					</li>
 				</ul>
-
 			</nav>
-
 		</header>
 
-
-
 		<!-- Error -->
-
 		<div lp-erroralert></div>
-
-
-
 
 		<!-- Content -->
 
 		<div ng-controller="ViewController" ng-class="stateAnimClass">
 			<div ng-view class="lunch-animate lunch-view-container lunch-apppage-body"></div>
 		</div>
-
-
-
-
 
 	</body>
 </html>
