@@ -144,10 +144,26 @@ $venue-vertical-padding: 50px;
 
 	// box
 	display: inline;
-	margin: {
-		top: 15px;
-	}
 	overflow: hidden;
+	max-height: 100px;
+
+	@include transition-property(max-height);
+	@include transition-duration( 200ms );
+
+	ul {
+		overflow: hidden;
+		padding: 0;
+		margin: {
+			top: 15px;
+			right: 0;
+			bottom: 0;
+			left: 0;
+		}
+	}
+
+	&.empty {
+		max-height: 0px;
+	}
 }
 
 /* Mixin for medium screens */
@@ -178,6 +194,9 @@ $venue-vertical-padding: 50px;
 		top: 0;
 	}
 	float: left;
+
+	// skin
+	list-style-type: none;
 
 	// pos
 	position: relative;

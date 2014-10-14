@@ -95,7 +95,7 @@
 	}
 
 
-	// backward compatible ;)
+	// backwards compatible ;)
 
 	.back .lunch-view-container.ng-enter {
 		position: fixed;
@@ -160,25 +160,25 @@
 /*
  * Guest Container
  */
-.lunch-venue-guests.ng-enter, .lunch-venue-guests.ng-leave {
+/* .lunch-venue-guests.ng-add, .lunch-venue-guests.ng-remove {
 	@include transition( all .7s ease );
 }
 
-.lunch-venue-guests.ng-enter {
+.lunch-venue-guests.ng-add {
 	max-height: 0px;
 }
 
-.lunch-venue-guests.ng-enter-active {
+.lunch-venue-guests.ng-add-active {
 	max-height: 300px;
 }
 
-.lunch-venue-guests.ng-leave {
+.lunch-venue-guests.ng-remove {
 	max-height: 300px;
 }
 
-.lunch-venue-guests.ng-leave-active {
+.lunch-venue-guests.ng-remove-active {
 	max-height: 0px;
-}
+} */
 
 
 

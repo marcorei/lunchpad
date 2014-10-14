@@ -20,10 +20,12 @@
 				</div>
 			</header>
 
-			<div class="lunch-venue-guests" ng-show="venue.guests.length">
-				<div class="lunch-venue-guest lunch-animate" ng-repeat="user in venue.guests">
-					<img src="{{user.ava}}" class="lunch-user-image" alt="{{user.nick}}">
-				</div>
+			<div class="lunch-venue-guests lunch-animate" ng-class="{empty: venue.guests.length == 0}">
+				<ul>
+					<li class="lunch-venue-guest lunch-animate" ng-repeat="user in venue.guests">
+						<img src="{{user.ava}}" class="lunch-user-image" alt="{{user.nick}}">
+					</li>
+				</ul>
 			</div>
 
 			<a ng-hide="venue.attending" ng-click="checkIn(venue._id)" class="lunch-fn-attend">
