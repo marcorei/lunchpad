@@ -20,7 +20,7 @@ function(Socket,LpConfig,LpError,LpUserIdService,$timeout){
 		queue = [],
 		loaded = false,
 		socketManager = Socket.generateManager(null);
-		
+
 	var getVenueById = function(id, callback){
 		if(loaded){
 			callback(venues[findVenueIndexById(id)]);
@@ -46,6 +46,9 @@ function(Socket,LpConfig,LpError,LpUserIdService,$timeout){
 			if(!data.error){
 				LpUserIdService.getId(function(userId){
 
+					// clear the venues
+					venues.splice(0,venues.length);
+
 					// need to push so that the array object, that controllers bind to won't change.
 					for(var i=0; i<data.venues.length; i++){
 						//check for every guest, check if it's the current user
@@ -61,8 +64,6 @@ function(Socket,LpConfig,LpError,LpUserIdService,$timeout){
 						}
 						venues.push(data.venues[i]);
 					}
-
-					// TODO: CHECK FOR ATTENDED!
 
 					loaded = true;
 					if(callback) callback();
@@ -263,8 +264,8 @@ function(Socket,LpConfig,LpError,LpUserIdService,$timeout){
 		socketManager.on(LpConfig.getEvent('comment.create.done'),onCommentCreateDone);
 		socketManager.on(LpConfig.getEvent('comment.delete.done'),onCommentDeleteDone);
 
-		socketManager.on(LpConfig.getEvent('venue.create'),onUnhandeltModify);
-		socketManager.on(LpConfig.getEvent('venue.delete'),onUnhandeltModify);
+		socketManager.on(LpConfig.getEvent('venue.create.done'),onUnhandeltModify);
+		socketManager.on(LpConfig.getEvent('venue.delete.done'),onUnhandeltModify);
 	});
 
 
