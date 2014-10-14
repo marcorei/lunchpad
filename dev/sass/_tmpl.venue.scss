@@ -70,9 +70,9 @@ $venue-vertical-padding: 50px;
 
 
 /*
- * Mixin for medium screens
+ * Mixin for small screens
  */
-@mixin lunch-venue-screen-m() {
+@mixin lunch-venue-screen-s() {
 
 	.lunch-venue {
 
@@ -115,9 +115,9 @@ $venue-vertical-padding: 50px;
 
 
 /*
- * Mixin for medium screens
+ * Mixin for small screens
  */
-@mixin lunch-venue-body-screen-m() {
+@mixin lunch-venue-body-screen-s() {
 
 	.lunch-venue-body {
 
@@ -145,10 +145,13 @@ $venue-vertical-padding: 50px;
 	// box
 	display: inline;
 	overflow: hidden;
-	max-height: 100px;
+	max-height: 500px;
+
+	// skin
+	line-height: 0;
 
 	@include transition-property(max-height);
-	@include transition-duration( 200ms );
+	@include transition-duration( 0.5s );
 
 	ul {
 		overflow: hidden;
@@ -159,16 +162,17 @@ $venue-vertical-padding: 50px;
 			bottom: 0;
 			left: 0;
 		}
+		min-height: 80px;
 	}
 
-	&.empty {
+	&.lunch-guests-empty {
 		max-height: 0px;
 	}
 }
 
-/* Mixin for medium screens */
+/* Mixin for small screens */
 
-@mixin lunch-venue-guests-screen-m() {
+@mixin lunch-venue-guests-screen-s() {
 
 	.lunch-venue-guests {
 
@@ -234,9 +238,9 @@ $venue-vertical-padding: 50px;
 
 
 /*
- * Mixin for medium screens
+ * Mixin for small screens
  */
-@mixin lunch-venue-header-screen-m() {
+@mixin lunch-venue-header-screen-s() {
 	.lunch-venue-header {
 		// Position
 		float: none;
@@ -510,9 +514,9 @@ $venue-vertical-padding: 50px;
 
 
 /*
- * Mixin for medium screens
+ * Mixin for small screens
  */
-@mixin lunch-venue-button-screen-m() {
+@mixin lunch-venue-button-screen-s() {
 
 	.lunch-fn-attend,
 	.lunch-fn-quit {
@@ -538,19 +542,19 @@ $venue-vertical-padding: 50px;
 
 /* Collect all Medium Screen Styles here */
 
-@mixin lunch-venue-screen-m-mixin() {
+@mixin lunch-venue-screen-s-mixin() {
 
-	@include lunch-venue-screen-m;
-	@include lunch-venue-body-screen-m;
-	@include lunch-venue-guests-screen-m;
-	@include lunch-venue-button-screen-m;
-	@include lunch-venue-header-screen-m;
+	@include lunch-venue-screen-s;
+	@include lunch-venue-body-screen-s;
+	@include lunch-venue-guests-screen-s;
+	@include lunch-venue-button-screen-s;
+	@include lunch-venue-header-screen-s;
 }
 
 // Apply
 
-@media screen and (min-width: 960px) {
+@media screen and (min-width: $lunch-grid-break-s) {
 
-	@include lunch-venue-screen-m-mixin;
+	@include lunch-venue-screen-s-mixin;
 
 }

@@ -74,66 +74,93 @@
 
 
 
-
-
-
-
-
-
-// Desktop Second
-
-@mixin lunch-apppage-body-sm-mixin() {
+/*
+ * Appage Body Medium sized Screens
+ */
+@mixin lunch-apppage-body-s() {
 
 	.lunch-apppage-body {
 
-		// Box
-		margin: {
-			left: 38.2%;
+		// box
+		padding: {
+			left: 200px;
 		}
 		padding: {
 			top: 0;
 		}
-		width: 61.8%;
-
-		// float: left;
+		width: 100%;
+		@include box-sizing (border-box);
 	}
 
 	.lunch-venues {
 		max-width: 700px;
 	}
+}
 
+
+/*
+ * Appage Body Medium sized Screens
+ */
+@mixin lunch-apppage-body-m() {
+
+	.lunch-apppage-body {
+
+		// box
+		margin: {
+			left: 38.2%;
+		}
+		padding: {
+			left: 0;
+			top: 0;
+		}
+		width: 61.8%;
+		@include box-sizing(content-box);
+	}
+
+	.lunch-venues {
+		max-width: 700px;
+	}
 }
 
 
 
 
-
-
-
-
-
-
-// Collect all Desktopstyles here
-
-@mixin lunch-apppage-sm-mixins() {
-
-	//@include lunch-apppage-head-desktop;
-	@include lunch-apppage-body-sm-mixin;
-
+/*
+* Collection of all Small Screen Style Mixins
+*/
+@mixin lunch-apppage-body-mixins-screen-s() {
+	@include lunch-apppage-body-s;
 }
 
 
 
-
-
-
-
-
-
-/* Apply */
-
-@media screen and (min-width: 960px) {
-
-	@include lunch-apppage-sm-mixins;
-
+/*
+* Collection of all Medium Screen Style Mixins
+*/
+@mixin lunch-apppage-body-mixins-screen-m() {
+	@include lunch-apppage-body-m;
 }
+
+
+
+/*
+* Apply Mediaquery Mixins
+*/
+@media screen and (min-width: $lunch-grid-break-s) {
+	@include lunch-apppage-body-mixins-screen-s;
+}
+@media screen and (min-width: $lunch-grid-break-m) {
+	@include lunch-apppage-body-mixins-screen-m;
+}
+
+/*
+* IE fixes
+*/
+.lt-ie9 {
+	@include lunch-apppage-body-mixins-screen-m;
+}
+
+/*
+* No JS
+*/
+.no-js {}
