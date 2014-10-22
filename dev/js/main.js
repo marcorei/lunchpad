@@ -53,14 +53,14 @@ angular.module('lunchpad',[
 		$animateProvider.classNameFilter(/lunch-animate/);
 	}
 ])
-
+/*
 .provider('$anchorScroll',function() {
 	this.$get = ['$window', '$location', '$rootScope', function($window, $location, $rootScope) {
 		function scroll() {}
 		return scroll;
 	}];
 })
-
+*/
 .controller('ViewController',[
 '$scope', '$location',
 function($scope, $location){
