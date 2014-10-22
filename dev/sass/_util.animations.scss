@@ -198,7 +198,8 @@
 }
 
 .lunch-venue-guest.ng-enter {
-	left: 40px;
+	@include transform(translateX(40px));
+	//left: 40px;
 	width: 0px;
 	overflow: visible;
 	opacity: 0;
@@ -206,20 +207,20 @@
 
 .lunch-venue-guest.ng-enter-active {
 	width: 40px;
-	left: 0px;
+	@include transform(translateX(0px));
 	opacity: 1;
 }
 
 .lunch-venue-guest.ng-leave {
 	width: 40px;
-	left: 0;
+	@include transform(translateX(0px));
 	overflow: visible;
 	opacity:1;
 }
 
 .lunch-venue-guest.ng-leave-active {
 	width: 0px;
-	left: 10px;
+	@include transform(translateX(10px));
 	opacity: 0;
 }
 

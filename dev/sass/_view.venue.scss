@@ -12,7 +12,7 @@
 	// Container
 	header {
 		padding: {
-			top: 60px;
+			top: 30px;
 			bottom: 30px;
 		}
 		border: {
@@ -38,7 +38,7 @@
 	// back btn
 	.lunch-fn-back {
 		margin: {
-			top: 5px;
+			top: 0px;
 		}
 		@extend %lunch-venue-head-btn;
 		float: left;
@@ -47,7 +47,7 @@
 	// edit btn
 	.lunch-fn-edit {
 		margin: {
-			top: 5px;
+			top: 0px;
 		}
 		@extend %lunch-venue-head-btn;
 		float: right;
@@ -132,9 +132,28 @@
  */
 @mixin lunch-view-venue-screen-s() {
 	.lunch-view-venue {
+		// Container
+		header {
+			padding: {
+				top: 60px;
+			}
+		}
 		h1 {
 			font: {
 				size: 60px;
+			}
+		}
+		// back btn
+		.lunch-fn-back {
+			margin: {
+				top: 5px;
+			}
+		}
+
+		// edit btn
+		.lunch-fn-edit {
+			margin: {
+				top: 5px;
 			}
 		}
 	}

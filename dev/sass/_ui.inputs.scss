@@ -58,6 +58,7 @@ input[type="text"] {
 		style: solid;
 		color: $lunch-clr-grey-xlgt;
 	}
+	-webkit-appearance:none;
 	@include box-sizing( border-box );
 	@include border-radius(2px);
 	@include transition-property(border, background);
