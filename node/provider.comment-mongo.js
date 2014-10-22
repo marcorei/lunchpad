@@ -144,7 +144,7 @@ CommentProvider.prototype.saveComment = function(comments, onSuccess, onError){
 		var i,
 			comment;
 
-		if(comments.length === 'undefined') comments = [comments];
+		if(comments.length === undefined) comments = [comments];
 
 		// expected values
 

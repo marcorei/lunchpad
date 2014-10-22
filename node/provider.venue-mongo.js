@@ -302,7 +302,7 @@ VenueProvider.prototype.save = function(venues, onSuccess, onError){
 		var i,
 			venue;
 
-		if(venues.length === 'undefined') venues = [venues];
+		if(venues.length === undefined) venues = [venues];
 
 		// expected values
 

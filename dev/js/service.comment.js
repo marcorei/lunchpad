@@ -20,15 +20,18 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 		manager.socketManager.emit(LpConfig.getEvent('comment.read.list'),{
 			_id: venueId
 		},function(data){
-			for(var i=0; i<data.comments.length; i++){
+			LpUserIdService.getId(function(userId){
+				for(var i=0; i<data.comments.length; i++){
+					if(data.comments[i].user._id == userId){
+						data.comments[i].owner = true;
+					}
+					manager.comments.push(data.comments[i]);
+				}
 
-				// TODO: have to check if own comments or not.
+				manager.venueId = venueId;
+				if(callback) callback();
+			});
 
-				manager.comments.push(data.comments[i]);
-			}
-
-			manager.venueId = venueId;
-			if(callback) callback();
 		})
 	};
 
@@ -37,9 +40,9 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 		comments.splice(0,comments.length);
 	};
 
-	var createComment = function(txt){
+	var createComment = function(txt, venueId){
 		Socket.emit(LpConfig.getEvent('comment.create'),{
-			vid: currentVenueId,
+			vid: venueId,
 			txt: txt
 		});
 	}
@@ -117,7 +120,10 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 			loadComments(venueId, callback, self);
 		}
 
-		this.createComment = createComment;
+		this.createComment = function(txt){
+			createComment(txt, self.venueId);
+		}
+
 		this.deleteComment = deleteComment;
 		this.comments = comments;
 	}

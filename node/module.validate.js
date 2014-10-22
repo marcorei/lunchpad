@@ -24,7 +24,7 @@ Validate.prototype.v = function(valFnName,params,errorKey){
 		this.errors.push(errorMsg);
 	}
 
-		
+
 	return this;
 }
 

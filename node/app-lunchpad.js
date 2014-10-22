@@ -676,7 +676,7 @@ io.sockets.on('connection', function (socket) {
 
 			commentProvider.findWithVenue(data._id,
 			function(comments){
-
+				console.log('comments found');
 				cb({
 					error: null,
 					comments: comments
@@ -691,13 +691,14 @@ io.sockets.on('connection', function (socket) {
 	socket.on('comment create', function(data){
 		lunchAuth.isUser(socket, function(user){
 
+			console.log('creating comment');
+
 			data.txt = Validate.s('escape',[data.txt]);
 
 			var e;
 			if(e = new Validate()
 			.v('isLength',[data.vid,24,24],'venue.id')
 			//.v('isLength',[data.name,1,140],'comment.txt.length')
-			.s('toString',[data.txt])
 			.e()){
 				lunchHelper.sendErrorToSocket(socket,e);
 				return null;
@@ -722,7 +723,7 @@ io.sockets.on('connection', function (socket) {
 
 						io.sockets.emit('comment create done',{
 							count: count,
-							comment: comment
+							comment: comment[0]
 						});
 
 					},function(error){
