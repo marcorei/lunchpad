@@ -26,21 +26,25 @@
 	position: fixed;
 	top: 0;
 	left:0;
-	margin-left: 100%;
+	opacity: 0;
+	@include transform(translateX(100%));
 	width: 100%;
 }
 
 .lunch-view-container.ng-enter-active {
-	margin-left: 0%;
+	opacity: 1;
+	@include transform(translateX(0%));
 }
 
 .lunch-view-container.ng-leave {
 	position: relative;
-	margin-left: 0;
+	opacity: 1;
+	@include transform(translateX(0%));
 }
 
 .lunch-view-container.ng-leave-active {
-	margin-left: -100%;
+	opacity: 1;
+	@include transform(translateX(-100%));
 }
 
 
@@ -53,20 +57,24 @@
 	width: 100%;
 	top: 0;
 	left:0;
-	margin-left: -100%;
+	opacity: 0;
+	@include transform(translateX(-100%));
 }
 
 .back .lunch-view-container.ng-enter-active {
-	margin-left: 0%;
+	opacity: 1;
+	@include transform(translateX(0%));
 }
 
 .back .lunch-view-container.ng-leave {
 	position: relative;
-	margin-left: 0%;
+	opacity: 1;
+	@include transform(translateX(0%));
 }
 
 .back .lunch-view-container.ng-leave-active {
-	margin-left: 100%;
+	opacity: 0;
+	@include transform(translateX(100%));
 }
 
 
@@ -77,21 +85,20 @@
 	.lunch-view-container.ng-enter {
 		position: fixed;
 		top:0;left:0;
-		margin-left: 100%;
-		width: 61.8%;
+		@include transform(translateX(100%));
 	}
 
 	.lunch-view-container.ng-enter-active {
-		margin-left: 38.2%;
+		@include transform(translateX(0%));
 	}
 
 	.lunch-view-container.ng-leave {
 		position:relative;
-		margin-left: 38.2%;
+		@include transform(translateX(0%));
 	}
 
 	.lunch-view-container.ng-leave-active {
-		margin-left: -23.6%;
+		@include transform(translateX(-100%));
 	}
 
 
@@ -102,20 +109,20 @@
 		width: 61.8%;
 		top:0;
 		left:0;
-		margin-left: -23.6%;
+		@include transform(translateX(-100%));
 	}
 
 	.back .lunch-view-container.ng-enter-active {
-		margin-left: 38.2%;
+		@include transform(translateX(0%));
 	}
 
 	.back .lunch-view-container.ng-leave {
 		position:relative;
-		margin-left: 38.2%;
+		@include transform(translateX(0%));
 	}
 
 	.back .lunch-view-container.ng-leave-active {
-		margin-left: 100%;
+		@include transform(translateX(100%));
 	}
 }
 
