@@ -16,10 +16,10 @@
 @import "vendor.clearfix";
 
 // Utilities
-@import "util.grid";
 @import "util.vars";
 @import "util.typo";
 @import "util.animations";
+@import "util.grid";
 
 // UI Elements
 @import "ui.header";
@@ -37,6 +37,7 @@
 @import "page.manifesto";
 
 // Views
+@import "view.venues";
 @import "view.settings";
 @import "view.venue";
 @import "view.addvenue";

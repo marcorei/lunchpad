@@ -1,4 +1,4 @@
-<article class="lunch-view-venue lunch-animate">
+<main class="lunch-view-venue lunch-animate">
 
 	<header>
 		<a ng-click="back()" class="lunch-fn-back">
@@ -33,10 +33,12 @@
 		</div>
 
 
-		<div class="lunch-venue-guests lunch-animate" ng-show="venue.guests.length">
-			<div class="lunch-venue-guest lunch-animate" ng-repeat="user in venue.guests">
-				<img src="{{user.ava}}" class="lunch-user-image" alt="{{user.nick}}">
-			</div>
+		<div class="lunch-venue-guests" ng-class="{'lunch-guests-empty': venue.guests.length == 0}">
+			<ul>
+				<li class="lunch-venue-guest lunch-animate" ng-repeat="user in venue.guests">
+					<img src="{{user.ava}}" class="lunch-user-image" alt="{{user.nick}}">
+				</li>
+			</ul>
 		</div>
 	</section>
 
@@ -112,4 +114,4 @@
 		</form>
 	</section>
 	-->
-</article>
+</main>

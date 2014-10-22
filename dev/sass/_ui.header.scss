@@ -64,34 +64,30 @@
 
 	.lunch-header {
 
-		// Box
+		// box
 		width: 200px;
 		padding: {
 			right: 20px;
 		}
 		@include box-sizing(border-box);
 
-		// Position
+		// pos
 		position: fixed;
 		top: 0;
 		bottom: 0;
 		left: 0;
 		z-index: 99;
 
-		// Typography
+		// typo
 		text-align: right;
 
-
-
-		// Navigation Container
+		// child: nav contain
 		.lunch-nav-container {
 			float: right;
 			width: 300px;
 		}
 
-
-
-		// Logo
+		// child: logo
 		.lunch-logo {
 
 			// Box
@@ -130,68 +126,13 @@
 
 	.lunch-header {
 
-		// Box
+		// box
 		width: 38.2%;
 		padding: {
 			right: 60px;
 		}
-		@include box-sizing(border-box);
-
-		// Position
-		position: fixed;
-		top: 0;
-		bottom: 0;
-		left: 0;
-		z-index: 99;
-
-		// Typography
-		text-align: right;
-
-
-
-		// Navigation Container
-		.lunch-nav-container {
-			float: right;
-			width: 300px;
-		}
-
-
-
-		// Logo
-		.lunch-logo {
-
-			// Box
-			display: block;
-			float: none;
-			height: 122px;
-			width: auto;
-			padding: {
-				right: 0;
-				left: 0;
-				top: 0;
-				bottom: 0;
-			}
-			margin: {
-				top: 60px;
-				left: auto;
-				right: 0;
-				bottom: 60px;
-			}
-
-			// Childs
-			text-align: right;
-			img {
-				height: auto;
-			}
-		}
 	}
 }
-
-
-
-
-
-
 
 
 
@@ -238,7 +179,7 @@
 /*
  * Medium sized screens
  */
-@mixin lunch-header-account-screen-m() {
+@mixin lunch-header-account-screen-s() {
 
 	// Account/User
 	.lunch-account {
@@ -312,12 +253,6 @@
 
 
 
-
-
-
-
-
-
 /*
  * Nav Container
  */
@@ -341,28 +276,29 @@
 	}
 }
 
-
+/*
+ * Mixin for small screens
+ */
+@mixin lunch-nav-mixin-s() {
+	.lunch-nav {
+		// box
+		overflow: visible;
+		// skin
+		text-align: right;
+	}
+}
 
 /*
  * Mixin for medium sized screens
  */
 @mixin lunch-nav-mixin-m() {
-
 	.lunch-nav {
-
-		// Box
+		// box
 		overflow: visible;
-
-		// Skin
+		// skin
 		text-align: right;
 	}
 }
-
-
-
-
-
-
 
 
 
@@ -405,38 +341,28 @@
 	@include transition-duration( 0.5s );
 }
 
-
-
 /*
- * Mixin for medium sized screens
+ * Mixin for small screens
  */
-@mixin lunch-nav-list-mixin-m() {
-
+@mixin lunch-nav-list-mixin-s() {
 	.lunch-nav-list {
-
-		// Box
+		// box
 		height: auto;
 		padding: {
 			top: 0;
 			bottom: 0;
 		}
 
-		//Position
+		// pos
 		position: static;
 
-		// Skin
+		// skin
 		background: {
 			color: transparent;
 		}
 		text-align: right;
 	}
 }
-
-
-
-
-
-
 
 
 
@@ -462,14 +388,11 @@
 		}
 	}
 
-
 	// States
 	&:hover{
-
 		a {
 			// Skin
 			color: #000;
-
 			// Effects
 			@include transition-duration( 200ms );
 		}
@@ -519,19 +442,18 @@
 
 
 /*
- * Mixin for medium sized screens
+ * Mixin for small screens
  */
-@mixin lunch-nav-elem-mixin-m() {
+@mixin lunch-nav-elem-mixin-s() {
 
 	.lunch-nav-elem {
 
-		// Box
+		// box
 		display: block;
 		margin: {
 			top: 2px;
 		}
 
-		// Pseudoselector
 		&:first-child {
 			padding: {
 				top: 0;
@@ -540,24 +462,22 @@
 				width: 0px;
 			}
 		}
-
-		// Children
-		a, span {
-		}
 	}
 }
 
 
 
-
-
-
-
-
-
+/*
+* Collection of all Small Screen Style Mixins
+*/
 @mixin lunch-header-mixins-screen-s() {
 	@include lunch-header-screen-s;
+	@include lunch-header-account-screen-s;
+	@include lunch-nav-mixin-s;
+	@include lunch-nav-list-mixin-s;
+	@include lunch-nav-elem-mixin-s;
 }
+
 
 
 /*
@@ -566,18 +486,17 @@
 @mixin lunch-header-mixins-screen-m() {
 	@include lunch-nav-mixin-m;
 	@include lunch-header-screen-m;
-	@include lunch-nav-list-mixin-m;
-	@include lunch-nav-elem-mixin-m;
-	@include lunch-header-account-screen-m;
 }
+
+
 
 /*
  * Apply Mediaquery Mixins
  */
-@media screen and (min-width: 620px) {
+@media screen and (min-width: $lunch-grid-break-s) {
 	@include lunch-header-mixins-screen-s;
 }
-@media screen and (min-width: 960px) {
+@media screen and (min-width: $lunch-grid-break-m) {
 	@include lunch-header-mixins-screen-m;
 }
 
