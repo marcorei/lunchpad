@@ -11,11 +11,6 @@
 
 	// Container
 	header {
-		max-width: 620px;
-		margin: {
-			left: 60px;
-			right: 20px;
-		}
 		padding: {
 			top: 60px;
 			bottom: 30px;
@@ -35,7 +30,7 @@
 			align: center;
 		}
 		font: {
-			size: 60px;
+			size: 40px;
 		}
 		margin: 0;
 	}
@@ -62,11 +57,8 @@
 	 * Reception: Contains Guests and Interaction
 	 */
 	.lunch-venue-reception {
-		max-width: 620px;
 		margin: {
 			top: -26px;
-			left: 60px;
-			right: 20px;
 		}
 	}
 
@@ -133,4 +125,34 @@
 			}
 		}
 	}
+}
+
+/*
+ * Mixin for small+ Screens
+ */
+@mixin lunch-view-venue-screen-s() {
+	.lunch-view-venue {
+		h1 {
+			font: {
+				size: 60px;
+			}
+		}
+	}
+}
+
+
+/* Collect all Medium Screen Styles here */
+
+@mixin lunch-view-venue-screen-s-mixin() {
+
+	@include lunch-view-venue-screen-s();
+
+}
+
+// Apply
+
+@media screen and (min-width: $lunch-grid-break-s) {
+
+	@include lunch-view-venue-screen-s-mixin;
+
 }

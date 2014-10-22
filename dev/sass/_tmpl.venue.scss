@@ -32,8 +32,8 @@ $venue-vertical-padding: 50px;
 	padding: {
 		top: 0;
 		bottom: 0;
-		right: 30px;
-		left: 30px;
+		right: 0;
+		left: 0;
 	}
 	border: {
 		width: 0px;
@@ -81,10 +81,6 @@ $venue-vertical-padding: 50px;
 			right: 80px;
 			left: 0;
 		}
-		margin: {
-			left: 60px;
-			right: 20px;
-		}
 	}
 }
 
@@ -114,6 +110,15 @@ $venue-vertical-padding: 50px;
 
 
 
+
+
+.lunch-venue-body {
+
+	margin: {
+		left: 0;
+		right: auto;
+	}
+}
 /*
  * Mixin for small screens
  */
@@ -143,7 +148,7 @@ $venue-vertical-padding: 50px;
 .lunch-venue-guests {
 
 	// box
-	display: inline;
+	display: block;
 	overflow: hidden;
 	max-height: 500px;
 
@@ -173,11 +178,6 @@ $venue-vertical-padding: 50px;
 /* Mixin for small screens */
 
 @mixin lunch-venue-guests-screen-s() {
-
-	.lunch-venue-guests {
-
-		display: block;
-	}
 }
 
 
@@ -191,7 +191,7 @@ $venue-vertical-padding: 50px;
 /*
  * Guest
  */
-.lunch-venue-guest{
+.lunch-venue-guest {
 
 	// box
 	margin: {
@@ -226,12 +226,15 @@ $venue-vertical-padding: 50px;
 .lunch-venue-header {
 
 	// Box
+	padding: {
+		right: 50px;
+	}
 	margin: {
 		bottom: 0;
 	}
 
 	// Position
-	float: left;
+	float: none;
 
 }
 
@@ -242,8 +245,9 @@ $venue-vertical-padding: 50px;
  */
 @mixin lunch-venue-header-screen-s() {
 	.lunch-venue-header {
-		// Position
-		float: none;
+		padding: {
+			right: 0;
+		}
 	}
 }
 
@@ -259,15 +263,24 @@ $venue-vertical-padding: 50px;
  * Venue Name/Title
  */
 .lunch-venue-title {
+
+	// box
 	margin: {
 		top: 0;
-		bottom: 0;
+		bottom: 4px;
 	}
 	display: block;
 	float: left;
+
+	// typo
 	font: {
-		size: 2.4em;
+		size: 2.2em;
 	}
+	line: {
+		height: 1em;
+	}
+
+	// skin
 	@include transition-property(color);
 	@include transition-duration($lunch-time-out);
 
@@ -278,7 +291,16 @@ $venue-vertical-padding: 50px;
 	}
 }
 
-
+/*
+ * Mixin for small screens
+ */
+@mixin lunch-venue-title-screen-s() {
+	.lunch-venue-title {
+		font: {
+			size: 2.4em;
+		}
+	}
+}
 
 
 
@@ -460,11 +482,13 @@ $venue-vertical-padding: 50px;
 
 	// Box
 	margin: {
-		top:15px;
+		top: 0;
 	}
 
 	// Position
-	float: right;
+	position: absolute;
+	right: 0px;
+	top: 54px;
 }
 
 
@@ -520,16 +544,8 @@ $venue-vertical-padding: 50px;
 
 	.lunch-fn-attend,
 	.lunch-fn-quit {
-
-		// Box
-		margin: {
-			top: 0;
-		}
-
-		// Position
-		position: absolute;
 		right: 20px;
-		top: 54px;
+
 	}
 }
 
@@ -549,6 +565,7 @@ $venue-vertical-padding: 50px;
 	@include lunch-venue-guests-screen-s;
 	@include lunch-venue-button-screen-s;
 	@include lunch-venue-header-screen-s;
+	@include lunch-venue-title-screen-s;
 }
 
 // Apply
