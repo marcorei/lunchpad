@@ -21,14 +21,12 @@ function(Socket,LpConfig){
 		if(id !== null){
 			callback(id);
 		}else{
-			queue.push(getId,[callback]);
+			queue.push([getId,[callback]]);
 		}
 	}
 
 	var loadId = function(callback){
 		socketManager.emit(LpConfig.getEvent('user.read.own.id'),{},function(data){
-			//console.log('own id read, data following');
-			//console.log(data);
 			id = data.user._id;
 			if(callback) callback();
 		});

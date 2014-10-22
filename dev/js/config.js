@@ -29,7 +29,8 @@ angular.module('lpConfig',[
 		'view.venuedetail': 'view.venuedetail.html',
 		'view.settings': 'view.settings.html',
 
-		'tmpl.erroralert': 'tmpl.erroralert.html'
+		'tmpl.erroralert': 'tmpl.erroralert.html',
+		'tmpl.navi': 'tmpl.navi.html'
 	}
 
 	var routes = {

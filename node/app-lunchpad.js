@@ -484,7 +484,7 @@ io.sockets.on('connection', function (socket) {
 				return null;
 			}
 
-			venueProvider.saveVenues({
+			venueProvider.save({
 				name: data.name,
 				url: data.url,
 				createdBy: data.createdBy
@@ -691,8 +691,6 @@ io.sockets.on('connection', function (socket) {
 	socket.on('comment create', function(data){
 		lunchAuth.isUser(socket, function(user){
 
-			console.log('creating comment');
-
 			data.txt = Validate.s('escape',[data.txt]);
 
 			var e;
@@ -727,13 +725,13 @@ io.sockets.on('connection', function (socket) {
 						});
 
 					},function(error){
-						sendErrorToSocket(socket,error);
+						lunchHelper.sendErrorToSocket(socket,error);
 					});
 				},function(error){
-					sendErrorToSocket(socket,error);
+					lunchHelper.sendErrorToSocket(socket,error);
 				});
 			},function(error){
-				sendErrorToSocket(socket,error);
+				lunchHelper.sendErrorToSocket(socket,error);
 			});
 		});
 	});
@@ -850,9 +848,9 @@ io.sockets.on('connection', function (socket) {
 
 			var e;
 			if(e = new Validate()
-			.v('inLength',[data._id,24,24],'user.id')
+			.v('isLength',[data._id,24,24],'user.id')
 			.e()){
-				sendErrorToSocketCb(cb,e);
+				lunchHelper.sendErrorToSocketCb(cb,e);
 				return null;
 			}
 
@@ -866,7 +864,7 @@ io.sockets.on('connection', function (socket) {
 				});
 
 			},function(error){
-				sendErrorToSocketCb(cb,error);
+				lunchHelper.sendErrorToSocketCb(cb,error);
 			});
 		});
 	});

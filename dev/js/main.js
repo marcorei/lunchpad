@@ -17,7 +17,8 @@ angular.module('lunchpad',[
 	'viewSettingsController',
 
 	'lpConfig',
-	'lpError'
+	'lpError',
+	'lpNavi'
 ])
 
 .config(['$routeProvider','LpConfigProvider','$animateProvider',

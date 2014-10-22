@@ -13,6 +13,8 @@ angular.module('lpUserService',[
 'Socket','LpConfig','LpError','LpUserIdService',
 function(Socket,LpConfig,LpError,LpUserIdService){
 
+	var socketManager = Socket.generateManager(null);
+
 	// No need for a manager because we won't update any of this at real time.
 
 	var createUser = function(user){
@@ -41,6 +43,7 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 	};
 
 	var readUser = function(id, callback){
+		console.log('loading user with id: '+id);
 		socketManager.emit(LpConfig.getEvent('user.read.one'),{
 			_id: id
 		},function(data){
@@ -79,14 +82,14 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 	};
 
 
-	Socket.on(LpConfig.getEvent('user.create.done'),function(data){
+	socketManager.on(LpConfig.getEvent('user.create.done'),function(data){
 		LpError.throwHint('user '+data.nick+' ('+data._id+')'+' created.');
 	});
-	Socket.on(LpConfig.getEvent('user.delete.done'),function(data){
+	socketManager.on(LpConfig.getEvent('user.delete.done'),function(data){
 		LpError.throwHint('user '+data._id+' deleted.');
 	});
 	// since the password is updated by pressing a button, we will show a notificytion
-	Socket.on(LpConfig.getEvent('user.update.password.done'),function(data){
+	socketManager.on(LpConfig.getEvent('user.update.password.done'),function(data){
 		LpError.throwHint('password updated.');
 	});
 	// We will skip further notifications because they will most likely come across as spam.
@@ -94,11 +97,11 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 
 	return {
 		createUser: createUser,
-		deleteUser: delteUser,
+		deleteUser: deleteUser,
 		readUserList: readUserList,
 		readUser: readUser,
 		updatePassword: updatePassword,
-		updateNotification: updateNotification,
+		updateNotifications: updateNotifications,
 		updateActiveItem: updateActiveItem,
 		updateInventory: updateInventory
 	};

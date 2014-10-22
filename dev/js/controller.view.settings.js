@@ -8,7 +8,8 @@ angular.module('viewSettingsController',[
 ])
 
 .controller('ViewSettingsController',[
-function(){
+'$scope','LpUserService',
+function($scope,LpUserService){
 
-
+	$scope.user = {};
 }]);
