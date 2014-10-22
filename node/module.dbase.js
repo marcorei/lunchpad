@@ -22,7 +22,7 @@ var db;
 
 var DBase = function(){
 
-	db = new Db(config.mongodb.db, new Server(config.mongodb.host, config.mongodb.port, {auto_reconnect: true}, {w:1, safe:true}));
+	db = new Db(config.mongodb.db, new Server(config.mongodb.host, config.mongodb.port, {auto_reconnect: true}),{w:1});
 	db.open(function(){});
 
 };
