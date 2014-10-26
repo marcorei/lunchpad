@@ -11,7 +11,7 @@ var path = require('path'),
 	emailTemplates = require('email-templates'),
 	// require templating engine
 	config = require('./config.json'),
-	from = 'Lunchpad <no-reply.lunchpad@19h13.com>';
+	from = config.mailer.from;
 
 
 
