@@ -223,6 +223,10 @@ CheckinProvider.prototype.aggrRisingVid = function(onSuccess, onError){
 CheckinProvider.prototype.aggrBabo = function(onSuccess, onError){
 	db.gc(cn, function(collection){
 
+		// TODO: Da stimmt noch was mit der Gruppirtung nicht
+		// Alle User mit der höchsten Punktzahl müssten erfasst werden.
+		// Denen wird dann die Dankes-Mail geschickt
+
 		collection.aggregate([
 			{$match:{
 				date: { $gte: quando.l30d() }
