@@ -32,6 +32,8 @@ var path = require('path'),
 	itemProvider = require('./provider.item-mongo.js').itemProvider,
 	checkinProvider = require('./provider.checkin-mongo.js').checkinProvider,
 	commentProvider = require('./provider.comment-mongo.js').commentProvider,
+	cronTasks = require('./module.crontasks.js').cronTasks,
+	mailer = require('./module.mailer.js').mailer,
 	// wait and see what else we'll need
 
 	config = require('./config.json');
@@ -269,6 +271,32 @@ passport.use('local-login', new LocalStrategy(
 
 
 
+
+
+/*
+ * CronTasks
+ */
+
+cronTasks.setupTasks([
+	{
+		time: '00 00 00 * * 1-7',
+		fn: function(){
+			// clean checkins
+		}
+	},
+	{
+		time: '00 00 11 * * 1-5',
+		fn: function(){
+			// send reminder
+		}
+	},
+	{
+		time: '00 */5 9-18 * * 1-5',
+		fn: function(){
+			// send overview
+		}
+	}
+]);
 
 
 
