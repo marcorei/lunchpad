@@ -14,6 +14,7 @@ angular.module('lunchpad',[
 
 	'viewVenuesController',
 	'viewVenueDetailController',
+	'viewVenueEditController',
 	'viewSettingsController',
 	'viewAdminController',
 
@@ -37,6 +38,12 @@ angular.module('lunchpad',[
 
 				templateUrl: LpConfig.getTemplate('view.venuedetail'),
 				controller: 'ViewVenueDetailController'
+
+			}).
+			when('/edit/:venueId', {
+
+				templateUrl: LpConfig.getTemplate('view.venueedit'),
+				controller: 'ViewVenueEditController'
 
 			}).
 			when('/settings/:userId', {

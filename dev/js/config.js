@@ -27,6 +27,7 @@ angular.module('lpConfig',[
 	var templates = {
 		'view.venues': 'view.venuelist.html',
 		'view.venuedetail': 'view.venuedetail.html',
+		'view.venueedit': 'view.venueedit.html',
 		'view.settings': 'view.settings.html',
 		'view.admin': 'view.admin.html',
 
