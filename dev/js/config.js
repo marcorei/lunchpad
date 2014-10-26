@@ -28,6 +28,7 @@ angular.module('lpConfig',[
 		'view.venues': 'view.venuelist.html',
 		'view.venuedetail': 'view.venuedetail.html',
 		'view.settings': 'view.settings.html',
+		'view.admin': 'view.admin.html',
 
 		'tmpl.erroralert': 'tmpl.erroralert.html',
 		'tmpl.navi': 'tmpl.navi.html'

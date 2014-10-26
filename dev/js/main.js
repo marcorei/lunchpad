@@ -44,6 +44,12 @@ angular.module('lunchpad',[
 				controller: 'ViewSettingsController'
 
 			}).
+			when('/admin', {
+
+				templateUrl: LpConfig.getTemplate('view.admin'),
+				controller: 'ViewAdminController'
+				
+			}).
 			otherwise({
 
 				redirectTo: '/venues'
