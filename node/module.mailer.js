@@ -6,20 +6,80 @@
 
 
 
-var nodemailer = require('nodemailer'),
-	// require mailer-templates
+var path = require('path'),
+	nodemailer = require('nodemailer'),
+	emailTemplates = require('email-templates'),
 	// require templating engine
-	config = require('./config.json');
+	config = require('./config.json'),
+	from = 'Lunchpad <no-reply.lunchpad@19h13.com>';
 
 
 
-var Mailer = function(){};
+var Mailer = function(){
+	this.templatesDir = path.join(__dirname,config.mailer.templatedir); // TODO: add template Path from config
+	this.transport = nodemailer.createTransport('SMTP', {
+		host: config.mailer.smtp.host,
+		auth: {
+			user: config.mailer.smtp.user,
+			pass: config.mailer.smtp.pass
+		}
+	});
+};
 
 
 // TODO: consider sending via dedicated SMTP Service later on.
 // with queuing and stuff.
 
-// TODO: write wrapper for node-mailer-templates and nodemailer
+// TODO:
+// - write wrapper for node-mailer-templates and nodemailer
 // as well as batch-sending loop
+// - add template Dir to config
+
+Mailer.prototype.sendMail(templateName, subject, locals, users){
+	emailTemplates(this.templatesDir, function(err, template){
+		if(err){
+			console.log(err);
+		}else{
+			var i,
+				tmpLocals,
+				user;
+			for(i = 0; i < users.length; i++){
+				user = users[i];
+				tmpLocals = copyObj(locals);
+				tmpLocals.user = users[i];
+				template(templateName, locals, function(err, html, txt){
+					if(err){
+						console.log(err);
+					}else{
+						this.transport.sendMail({
+							from: from,
+							to: user.mail,
+							subject: subject,
+							html: html,
+							txt: txt
+						}, function(err, response){
+							if(err){
+								console.log(err);
+							}else{
+								console.log('message sent: ' + response.message);
+							}
+						})
+					}
+				});
+			}
+		}
+	});
+};
+
+var copyObj = function(sourceObj){
+	var copy = {},
+		key;
+	for(key in sourceObj){
+		if(sourceObj.hasOwnProperty(key)){
+			copy[key] = sourceObj[key];
+		}
+	}
+	return copy;
+}
 
 exports.mailer = new Mailer();
