@@ -15,6 +15,7 @@ angular.module('lunchpad',[
 	'viewVenuesController',
 	'viewVenueDetailController',
 	'viewSettingsController',
+	'viewAdminController',
 
 	'lpConfig',
 	'lpError',
@@ -48,7 +49,7 @@ angular.module('lunchpad',[
 
 				templateUrl: LpConfig.getTemplate('view.admin'),
 				controller: 'ViewAdminController'
-				
+
 			}).
 			otherwise({
 
