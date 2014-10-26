@@ -31,8 +31,6 @@ var Mailer = function(){
 // with queuing and stuff.
 
 // TODO:
-// - write wrapper for node-mailer-templates and nodemailer
-// as well as batch-sending loop
 // - add template Dir to config
 
 Mailer.prototype.sendMail(templateName, subject, locals, users){
