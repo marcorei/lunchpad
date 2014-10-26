@@ -396,28 +396,4 @@ UserProvider.prototype.save = function(users, onSuccess, onError){
 
 
 
-
-
-// functions zum Update aller möglichen Eigenschaften.
-
-
-
-
-
-
-// Dummy Data
-
-new UserProvider().save([
-	{
-		mail: '',
-		nick: '',
-		role: '', // 'admin' or 'user'
-		pass: '',
-		ava: ''
-	}
-], function(users){},function(error){});
-
-
-
-
 exports.userProvider = new UserProvider();
