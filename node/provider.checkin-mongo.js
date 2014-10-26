@@ -48,15 +48,6 @@ CheckinProvider.prototype.findCheckin = function(id, onSuccess, onError){
 
 
 
-/*
- * Get a list of all checkins
- */
-
-CheckinProvider.prototype.findAll = function(onSuccess, onError){
-
-}
-
-
 
 
 
