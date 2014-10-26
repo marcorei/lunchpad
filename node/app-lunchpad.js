@@ -277,24 +277,34 @@ passport.use('local-login', new LocalStrategy(
  * CronTasks
  */
 
+lunchTasks = {
+
+	cleanCheckins: function(){
+
+	},
+
+	sendRemindes: function(){
+
+	},
+
+	sendOverview: function(){
+
+	}
+
+};
+
 cronTasks.setupTasks([
 	{
 		time: '00 00 00 * * 1-7',
-		fn: function(){
-			// clean checkins
-		}
+		fn: lunchTasks.cleanCheckins
 	},
 	{
 		time: '00 00 11 * * 1-5',
-		fn: function(){
-			// send reminder
-		}
+		fn: lunchTasks.sendReminder
 	},
 	{
 		time: '00 */5 9-18 * * 1-5',
-		fn: function(){
-			// send overview
-		}
+		fn: lunchTaks.sendOverview
 	}
 ]);
 
