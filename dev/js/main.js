@@ -39,7 +39,7 @@ angular.module('lunchpad',[
 				controller: 'ViewVenueDetailController'
 
 			}).
-			when('/settings', {
+			when('/settings/:userId', {
 
 				templateUrl: LpConfig.getTemplate('view.settings'),
 				controller: 'ViewSettingsController'
