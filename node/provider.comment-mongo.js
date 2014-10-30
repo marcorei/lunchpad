@@ -7,6 +7,7 @@
 
 
 var db = require('./module.dbase.js').dBase,
+	quando = require('./module.quando.js').quando,
 	cn = 'comment';
 
 
