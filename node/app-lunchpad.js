@@ -442,16 +442,16 @@ app.get('/createTestVenues',function(req,res){
 	});
 });
 
-app.get('/sendReminder', function(req,res){
+app.get('/sendreminder', function(req,res){
 	lunchTasks.sendReminder();
 });
 
-app.get('/sendOverview', function(req,res){
-	lunchTaks.sendOverview();
+app.get('/sendoverview', function(req,res){
+	lunchTasks.sendOverview();
 });
 
 app.get('/cleancheckins', function(req,res){
-	lunchTakscleanCheckins();
+	lunchTasks.cleanCheckins();
 });
 
 
