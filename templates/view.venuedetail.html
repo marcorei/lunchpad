@@ -51,7 +51,8 @@
 				<div class="lunch-commentator-img">
 					<img src="{{comment.user.ava}}" alt="">
 				</div>
-				<time>{{comment.date | date: 'HH:mm'}}</time>
+				<!-- <time>{{comment.date | date: 'HH:mm'}}</time> -->
+				<time am-time-ago="comment.date"></time>
 				<h3>{{comment.user.nick}}</h3>
 			</div>
 			<p>{{comment.txt}}</p>
