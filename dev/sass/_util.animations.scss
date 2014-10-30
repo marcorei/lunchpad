@@ -15,7 +15,7 @@
 // state change animation
 .lunch-view-container.ng-enter, .lunch-view-container.ng-leave {
 	@include transition-property( transform, opacity );
-	@include transition-duration( .7s );
+	@include transition-duration( 700ms );
 }
 
 
@@ -27,7 +27,7 @@
 	position: fixed;
 	top: 0;
 	left:0;
-	opacity: 1;
+	opacity: 0;
 	@include transform(translateX(100%));
 	//width: 100%;
 }
@@ -44,18 +44,16 @@
 }
 
 .lunch-view-container.ng-leave-active {
-	opacity: 1;
+	opacity: 0;
 	@include transform(translateX(-100%));
 }
-
-
 
 /*
  * Come back
  */
 .back .lunch-view-container.ng-enter {
 	position: fixed;
-	width: 100%;
+	// width: 100%;
 	top: 0;
 	left:0;
 	opacity: 0;
@@ -80,57 +78,23 @@
 
 
 
-
-@mixin lunch-view-container-animation-mixin-m() {
-
-	.lunch-view-container.ng-enter {
-		position: fixed;
-		width: 61.8%;
-		top:0;
-		left:0;
-		@include transform(translateX(100%));
-	}
-
-	.lunch-view-container.ng-enter-active {
-		@include transform(translateX(0%));
-	}
-
-	.lunch-view-container.ng-leave {
-		position:relative;
-		@include transform(translateX(0%));
-	}
-
-	.lunch-view-container.ng-leave-active {
-		@include transform(translateX(-100%));
-	}
-
-
-	// backwards compatible ;)
-
-	.back .lunch-view-container.ng-enter {
-		position: fixed;
-		width: 61.8%;
-		top:0;
-		left:0;
-		@include transform(translateX(-100%));
-	}
-
-	.back .lunch-view-container.ng-enter-active {
-		@include transform(translateX(0%));
-	}
-
-	.back .lunch-view-container.ng-leave {
-		position:relative;
-		@include transform(translateX(0%));
-	}
-
-	.back .lunch-view-container.ng-leave-active {
-		@include transform(translateX(100%));
-	}
+/*
+ * Comments
+ */
+.lunch-comment.ng-enter, .lunch-comment.ng-leave {
+	@include transition-property( transform, max-height );
+	@include transition-duration( 500ms );
 }
 
-
-
+.lunch-comment.ng-enter {
+	max-height: 0;
+	overflow: visible;
+	@include transform(scale( 1.1, 1.1) rotate(3deg));
+}
+.lunch-comment.ng-enter-active {
+	max-height: 500px;
+	@include transform(scale( 1, 1) rotate(0deg));
+}
 
 
 
@@ -240,7 +204,7 @@
  * Collect all Medium Screen Styles here
  */
 @mixin lunch-animation-mixins-m() {
-	@include lunch-view-container-animation-mixin-m();
+	// @include lunch-view-container-animation-mixin-m();
 }
 
 /*

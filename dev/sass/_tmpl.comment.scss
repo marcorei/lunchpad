@@ -92,7 +92,6 @@ $lunch-comment-body-col: #eee;
 .lunch-comment {
 	$lunch-comment-padding: 20px;
 
-	min-height: 20px;
 	padding: {
 		top: 0;
 		bottom: 0;
@@ -105,10 +104,8 @@ $lunch-comment-body-col: #eee;
 		style: solid;
 		color: $lunch-clr-grey-xxlgt;
 	}
-	margin: {
-		top: 2px;
-	};
 	overflow: hidden;
+	@include box-sizing(border-box);
 	position: relative;
 	font: {
 		family: $lunch-typo-copy;
@@ -133,21 +130,25 @@ $lunch-comment-body-col: #eee;
 			top: 0;
 			left: 0;
 			right: 0;
-			bottom: $lunch-comment-padding;
+			bottom: 0;
 		}
 		padding: {
 			right: 50px;
+			bottom: $lunch-comment-padding;
 		}
 	}
 
 	// Info
 	.lunch-comment-info {
 		margin: {
-			top: 	$lunch-comment-padding;
+			top: 0;
 			left: 0;
 			right: 0;
 			bottom:0;
-		};
+		}
+		padding: {
+			top: $lunch-comment-padding;
+		}
 	}
 
 	// Timestamp
@@ -174,7 +175,7 @@ $lunch-comment-body-col: #eee;
 		overflow: hidden;
 		position: absolute;
 		left: 0;
-		top: $lunch-comment-padding;
+		top: ($lunch-comment-padding - 2px);
 		background: {
 			color: $lunch-clr-grey-lgt;
 		}
