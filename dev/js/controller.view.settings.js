@@ -42,7 +42,7 @@ function($scope,$routeParams,lpUserIdService,LpUserService){
 	};
 
 	// Startup
-	if($routeParams.userId === 'undefined'){
+	if($routeParams.userId === 'self'){
 		loadUserData($routeParams.userId);
 	}else{
 		LpUserIdService.getId(function(id){
