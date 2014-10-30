@@ -6,17 +6,29 @@
 	</div>
 
 	<ul class="lunch-nav-list">
-		<li class="lunch-nav-elem">
-			<a href="#/venues" class="lunch-fn-xx">Venues</a>
+		<li class="lunch-nav-elem lunch-fn-venues">
+			<a href="#/venues">
+				<span class="lunch-icon">L</span>
+				<span class="lunch-label">Venues</span>
+			</a>
 		</li>
-		<li class="lunch-nav-elem">
-			<a href="#/" class="lunch-fn-new">New Venue</a>
+		<li class="lunch-nav-elem lunch-fn-new">
+			<a href="#/edit/new">
+				<span class="lunch-icon">+</span>
+				<span class="lunch-label">New Venue</span>
+			</a>
 		</li>
-		<li class="lunch-nav-elem">
-			<a href="#/settings/self" class="lunch-fn-settings">Profile</a>
+		<li class="lunch-nav-elem lunch-fn-settings">
+			<a href="#/settings/self">
+				<span class="lunch-icon">P</span>
+				<span class="lunch-label">Profile</span>
+			</a>
 		</li>
-		<li class="lunch-nav-elem" ng-show="user.role == 'admin'">
-			<a href="#/admin" class="lunch-fn-settings">Admin Panel</a>
+		<li class="lunch-nav-elem lunch-fn-admin" ng-show="user.role == 'admin'">
+			<a href="#/admin">
+				<span class="lunch-icon">A</span>
+				<span class="lunch-label">Admin Panel</span>
+			</a>
 		</li>
 	</ul>
 </nav>

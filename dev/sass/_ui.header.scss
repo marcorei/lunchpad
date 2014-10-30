@@ -35,6 +35,7 @@
 	.lunch-logo {
 
 		// Box
+		display: none;
 		float: left;
 		height: 50px; // Overwrite Loginpage Styling
 		padding: {
@@ -142,6 +143,7 @@
 .lunch-account {
 
 	// Box
+	display: none;
 	height: 50px;
 	width: 50px;
 	max-width: 200px;
@@ -185,6 +187,7 @@
 	.lunch-account {
 
 		// Box
+		display: block;
 		width: auto;
 		height: auto;
 		max-width: 200px;
@@ -256,25 +259,7 @@
 /*
  * Nav Container
  */
-.lunch-nav {
 
-	// Box
-	overflow: hidden;
-
-	// Skin
-	text-align: left;
-
-	// States
-	&:hover {
-		.lunch-nav-list {
-			height: 165px;
-			padding: {
-				top: 0px;
-				bottom: 20px;
-			}
-		}
-	}
-}
 
 /*
  * Mixin for small screens
@@ -308,33 +293,25 @@
 .lunch-nav-list {
 
 	// Box
-	height: 0;
+	//height: 0;
 	width: 100%;
 	padding: {
 		top: 0;
-		right: 0;
+		right: 10px;
 		bottom: 0;
-		left: 0;
+		left: 10px;
 	}
 	margin: {
 		top: 0;
 		bottom: 0;
 	}
 	clear: left;
-
-	// Position
-	position: absolute;
-	top: 70px;
-	left: 0;
-	z-index: 1;
+	@include box-sizing(border-box);
 
 
 	// Skin
 	text-align: left;
 	overflow: hidden;
-	background: {
-		color: rgba( $lunch-color-red-dark, .95);
-	}
 
 	// Effects
 	@include transition-property( height padding );
@@ -351,7 +328,10 @@
 		padding: {
 			top: 0;
 			bottom: 0;
+			left: 0;
+			right: 0;
 		}
+		@include box-sizing(content-box);
 
 		// pos
 		position: static;
@@ -374,6 +354,7 @@
 	// Box
 	display: block;
 	overflow: hidden;
+	float: left;
 
 	// Skin
 	text-decoration: none;
@@ -381,12 +362,7 @@
 		family: $lunch-typo-copy;
 	}
 
-	// Pseudoselector
-	&:first-child {
-		padding: {
-			top: 20px;
-		}
-	}
+
 
 	// States
 	&:hover{
@@ -399,44 +375,47 @@
 	}
 
 	// Children
-	a, span {
-
-		// Box
-		display: inline-block;
-		padding: {
-			top: 8px;
-			right: 16px;
-			bottom: 8px;
-			left: 16px;
-		}
-
+	a {
 		// Skin
-		background: {
-			color: $lunch-color-red-dark;
-		}
+		text-align: center;
 		color: $lunch-color-white;
 		text-decoration: none;
-		@include border-radius(2px);
 		-webkit-font-smoothing: antialiased;
-
-		// Effects
-		@include transition-property( color );
-		@include transition-duration( 1000ms );
-
 	}
 
-	/*
-	* New Venue Button
-	*/
-	&.active{
-		.lunch-fn-new{
-			// Skin
-			color: $lunch-color-red-dark;
-			background: {
-				color: white;
-			}
+	.lunch-label {
+		display: none;
+	}
+
+	.lunch-icon {
+		display: block;
+		font: {
+			size: 40px;
 		}
+		padding: {
+			top: 10px;
+			right: 10px;
+			bottom: 10px;
+			left: 10px;
+		}
+		margin: 0 auto;
 	}
+}
+
+
+.lunch-fn-venues {
+	float: left;
+}
+
+.lunch-fn-new {
+	margin: {
+		left: auto;
+	}
+}
+.lunch-fn-new,
+.lunch-fn-settings,
+.lunch-fn-admin {
+	float: right;
 }
 
 
@@ -449,10 +428,12 @@
 	.lunch-nav-elem {
 
 		// box
+		width: auto;
 		display: block;
 		margin: {
 			top: 2px;
 		}
+		float: none;
 
 		&:first-child {
 			padding: {
@@ -461,6 +442,39 @@
 			border: {
 				width: 0px;
 			}
+		}
+
+
+		// child
+		.lunch-icon {
+			display: none;
+		}
+		.lunch-label {
+			display: block;
+		}
+
+		a {
+			// Box
+			float: none;
+			display: inline-block;
+			padding: {
+				top: 8px;
+				right: 16px;
+				bottom: 8px;
+				left: 16px;
+			}
+
+			// Skin
+			background: {
+				color: $lunch-color-red-dark;
+			}
+
+			@include border-radius(2px);
+
+			// Effects
+			@include transition-property( color );
+			@include transition-duration( 1000ms );
+
 		}
 	}
 }
