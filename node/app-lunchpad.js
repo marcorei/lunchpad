@@ -280,15 +280,21 @@ passport.use('local-login', new LocalStrategy(
 lunchTasks = {
 
 	cleanCheckins: function(){
-
+		console.log('LunchTask: cleaning');
+		venueProvider.dailyReset(function(venueUpdates){
+			console.log('LunchTask: cleaning -- done');
+		},function(error){
+			console.log('error');
+			// consider sending an email to admins.
+		});
 	},
 
 	sendRemindes: function(){
-
+		console.log('LunchTask: send reminders');
 	},
 
 	sendOverview: function(){
-
+		console.log('LunchTask: send overview');
 	}
 
 };
