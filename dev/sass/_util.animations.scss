@@ -82,17 +82,15 @@
  * Comments
  */
 .lunch-comment.ng-enter, .lunch-comment.ng-leave {
-	@include transition-property( transform, max-height );
-	@include transition-duration( 500ms );
+	@include transition-property( transform );
+	@include transition-duration( 200ms );
 }
 
 .lunch-comment.ng-enter {
-	max-height: 0;
 	overflow: visible;
 	@include transform(scale( 1.1, 1.1) rotate(3deg));
 }
 .lunch-comment.ng-enter-active {
-	max-height: 500px;
 	@include transform(scale( 1, 1) rotate(0deg));
 }
 

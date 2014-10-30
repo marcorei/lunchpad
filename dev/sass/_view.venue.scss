@@ -38,7 +38,8 @@
 	// back btn
 	.lunch-fn-back {
 		margin: {
-			top: 0px;
+			top: -4px;
+			left: -20px;
 		}
 		@extend %lunch-venue-head-btn;
 		float: left;
@@ -47,7 +48,8 @@
 	// edit btn
 	.lunch-fn-edit {
 		margin: {
-			top: 0px;
+			top: -4px;
+			right: -20px;
 		}
 		@extend %lunch-venue-head-btn;
 		float: right;
@@ -147,6 +149,7 @@
 		.lunch-fn-back {
 			margin: {
 				top: 5px;
+				left: 0;
 			}
 		}
 
@@ -154,6 +157,7 @@
 		.lunch-fn-edit {
 			margin: {
 				top: 5px;
+				right: 0;
 			}
 		}
 	}
