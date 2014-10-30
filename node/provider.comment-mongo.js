@@ -69,10 +69,11 @@ CommentProvider.prototype.findComment = function(id, onSuccess, onError){
 
 CommentProvider.prototype.findWithVenue = function(vid, onSuccess, onError){
 	db.gc(cn, function(collection){
-
+		console.log(quando.today());
 		collection.find({
 			vid: vid,
-			del: false
+			del: false,
+			date: { '$gte': quando.today() }
 		},{
 			sort:[['date',1]]
 		}).toArray(function(error,comments){
@@ -94,7 +95,8 @@ CommentProvider.prototype.countWithVenue = function(vid, onSuccess, onError){
 
 		collection.count({
 			vid: vid,
-			del: false
+			del: false,
+			date: { '$gte': quando.today() }
 		},function(error,count){
 			if(error) onError(error);
 			else onSuccess(count);

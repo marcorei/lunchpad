@@ -9,7 +9,7 @@ var Quando = function(){};
 
 Quando.prototype.today = function(){
 	var now = new Date();
-	return new Date(now.getYear(),now.getMonth(),now.getDate());
+	return new Date(now.getFullYear(),now.getMonth(),now.getDate());
 }
 
 Quando.prototype.min15 = function(){
