@@ -373,6 +373,7 @@ app.post('/auth/logout', function(req,res){
 
 
 
+
 /*
  * Temporary routes for testing
  */
@@ -435,7 +436,17 @@ app.get('/createTestVenues',function(req,res){
 	});
 });
 
+app.get('/sendReminder', function(req,res){
+	lunchTasks.sendReminder();
+});
 
+app.get('/sendOverview', function(req,res){
+	lunchTaks.sendOverview();
+});
+
+app.get('/cleancheckins', function(req,res){
+	lunchTakscleanCheckins();
+});
 
 
 
