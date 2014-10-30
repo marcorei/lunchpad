@@ -69,7 +69,7 @@ CommentProvider.prototype.findComment = function(id, onSuccess, onError){
 
 CommentProvider.prototype.findWithVenue = function(vid, onSuccess, onError){
 	db.gc(cn, function(collection){
-		console.log(quando.today());
+		
 		collection.find({
 			vid: vid,
 			del: false,

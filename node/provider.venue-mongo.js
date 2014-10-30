@@ -221,7 +221,7 @@ VenueProvider.prototype.findUnfeatured = function(onSuccess, onError){
 		collection.findAndModify({
 			featured: false
 		},[
-			{date:-1}
+			['date',-1]
 		],{
 			$set: {
 				featured: true

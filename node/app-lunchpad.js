@@ -280,7 +280,7 @@ passport.use('local-login', new LocalStrategy(
 lunchTasks = {
 
 	cleanCheckins: function(){
-		console.log('LunchTask: cleaning');
+		console.log('LunchTask: cleaning at '+(new Date().toString()));
 		venueProvider.dailyReset(function(venueUpdates){
 			console.log('LunchTask: cleaning -- done');
 		}, function(error){
@@ -289,18 +289,58 @@ lunchTasks = {
 		});
 	},
 
-	sendRemindes: function(){
-		console.log('LunchTask: send reminders');
-		venueProvider.findUnfeatured(function(venue){
-			console.log('found unfeatured');
-			console.log(venue);
-		}, function(error){
+	sendReminder: function(){
+		console.log('LunchTask: send reminders at '+(new Date().toString()));
+		// danach alle user ids von comments von heute
+		// dann alle user, die das hakerl habe und nicht auf der liste sind
+
+		// das dann an den mailer übergeben
+
+		checkinProvider.aggregateUserIdsFromToday(function(userIds){
+			userProvider.findUsersForReminder(userIds,function(users){
+
+				console.log('user ids we dont wnat');
+				console.log(userIds);
+				console.log('we got so many users!');
+				console.log(users);
+				
+				// Wir haben die user. aber was senden wir Ihnen?
+				// Haben wir ein neues Venues, das kürzlich eingetragen wurden?
+				venueProvider.findUnfeatured(function(venue){
+					if(venue != null){
+						console.log('found unfeatured');
+						console.log(venue);
+
+						mailer.sendMail(
+							'mail.reminder',
+							'A New Venue on Lunchpad!',
+							{
+								venue: venue
+							},users);
+					}else{
+
+						// Jetzt würfeln. Was wird es heute sein.
+						// Rising, all time Favourite, weekday favourite?
+
+					}
+					
+				}, function(error){
+					console.log(error);
+				});
+				
+			},function(error){
+				console.log(error);
+			});
+		},function(error){
 			console.log(error);
 		});
+
+			
+		
 	},
 
 	sendOverview: function(){
-		console.log('LunchTask: send overview');
+		console.log('LunchTask: send overview at '+(new Date().toString()));
 	}
 
 };
@@ -450,14 +490,17 @@ app.get('/createTestVenues',function(req,res){
 
 app.get('/sendreminder', function(req,res){
 	lunchTasks.sendReminder();
+	res.send('reminders sent');
 });
 
 app.get('/sendoverview', function(req,res){
 	lunchTasks.sendOverview();
+	res.send('overview sent');
 });
 
 app.get('/cleancheckins', function(req,res){
 	lunchTasks.cleanCheckins();
+	res.send('checkins cleared');
 });
 
 

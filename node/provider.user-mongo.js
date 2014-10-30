@@ -98,6 +98,31 @@ UserProvider.prototype.findUserByMail = function(mail, onSuccess, onError){
 
 
 /*
+ * Find users who want to be reminded, but have not listed themselves yet.
+ */
+
+UserProvider.prototype.findUsersForReminder = function(exludeIds, onSuccess, onError){
+	db.gc(cn, function(collection){
+
+		collection.find({
+			_id: { $nin: exludeIds },
+			'noti.remind': true
+		},{
+			fields:{
+				mail: 1,
+				nick: 1
+			}
+		}).toArray(function(error,result){
+			if(error) onError(error);
+			else onSuccess(result);
+		});
+
+	},onError);
+}
+
+
+
+/*
  * Change the password
  */
 

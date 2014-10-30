@@ -31,7 +31,8 @@ var Mailer = function(){
 // with queuing and stuff.
 
 Mailer.prototype.sendMail = function(templateName, subject, locals, users){
-	emailTemplates(this.templatesDir, function(err, template){
+	var self = this;
+	emailTemplates(self.templatesDir, function(err, template){
 		if(err){
 			console.log(err);
 		}else{
@@ -42,11 +43,11 @@ Mailer.prototype.sendMail = function(templateName, subject, locals, users){
 				user = users[i];
 				tmpLocals = copyObj(locals);
 				tmpLocals.user = users[i];
-				template(templateName, locals, function(err, html, txt){
+				template(templateName, tmpLocals, function(err, html, txt){
 					if(err){
 						console.log(err);
 					}else{
-						this.transport.sendMail({
+						self.transport.sendMail({
 							from: from,
 							to: user.mail,
 							subject: subject,

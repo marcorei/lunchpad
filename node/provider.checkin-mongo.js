@@ -281,6 +281,40 @@ CheckinProvider.prototype.delTodayForUid = function(uid, onSuccess, onError){
 
 
 /*
+ * Find out who has already checked in today
+ */
+
+CheckinProvider.prototype.aggregateUserIdsFromToday = function(onSuccess, onError){
+	db.gc(cn, function(collection){
+
+		collection.aggregate([
+			{$match:{
+				date: { $gte: quando.today() }
+			}},
+			{$group:{
+				_id: '$uid',
+				num: { $sum: 1 }
+			}}
+		],function(error,results){
+			if(error) onError(error);
+			else{
+				// convert to simple array
+				var arr = [],
+					i;
+				for(i = 0; i < results.length; i++){
+					arr.push(results[i]._id);
+				}
+				onSuccess(arr);
+			}
+		});
+	},onError);
+}
+
+
+
+
+
+/*
  * Save one or more new checkins
  */
 
