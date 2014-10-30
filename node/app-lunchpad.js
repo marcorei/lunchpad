@@ -304,7 +304,7 @@ cronTasks.setupTasks([
 	},
 	{
 		time: '00 */5 9-18 * * 1-5',
-		fn: lunchTaks.sendOverview
+		fn: lunchTasks.sendOverview
 	}
 ]);
 

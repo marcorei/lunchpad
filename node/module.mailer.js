@@ -16,7 +16,7 @@ var path = require('path'),
 
 
 var Mailer = function(){
-	this.templatesDir = path.join(__dirname,config.mailer.templatedir); // TODO: add template Path from config
+	this.templatesDir = path.join(__dirname,'/../templates'); 
 	this.transport = nodemailer.createTransport('SMTP', {
 		host: config.mailer.smtp.host,
 		auth: {
@@ -30,10 +30,7 @@ var Mailer = function(){
 // TODO: consider sending via dedicated SMTP Service later on.
 // with queuing and stuff.
 
-// TODO:
-// - add template Dir to config
-
-Mailer.prototype.sendMail(templateName, subject, locals, users){
+Mailer.prototype.sendMail = function(templateName, subject, locals, users){
 	emailTemplates(this.templatesDir, function(err, template){
 		if(err){
 			console.log(err);
