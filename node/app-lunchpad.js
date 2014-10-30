@@ -181,7 +181,7 @@ io.set('authorization', passportSocketIo.authorize({
 	//success:     onAuthorizeSuccess,
 	//fail:        onAuthorizeFail
 }));
-
+io.set('log level', 1);
 //socket.handshake.user
 // This property is always available from inside a io.on('connection') handler.
 
@@ -283,14 +283,20 @@ lunchTasks = {
 		console.log('LunchTask: cleaning');
 		venueProvider.dailyReset(function(venueUpdates){
 			console.log('LunchTask: cleaning -- done');
-		},function(error){
-			console.log('error');
+		}, function(error){
+			console.log(error);
 			// consider sending an email to admins.
 		});
 	},
 
 	sendRemindes: function(){
 		console.log('LunchTask: send reminders');
+		venueProvider.findUnfeatured(function(venue){
+			console.log('found unfeatured');
+			console.log(venue);
+		}, function(error){
+			console.log(error);
+		});
 	},
 
 	sendOverview: function(){
