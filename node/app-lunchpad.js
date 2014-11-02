@@ -381,7 +381,35 @@ lunchTasks = {
 	sendOverview: function(){
 		console.log('LunchTask: send overview at '+(new Date().toString()));
 
-
+		// Hier machen wir es ander herum, um uns gegebenenfalls eine Abfrage zu sparen:
+		// erst Notifications cheacken, dann User sammeln.
+		notificationProvider.countLt15min(function(count){
+			if(count > 0){
+				userProvider.findUsersForOverview(function(users){
+					notificationProvider.findAll(function(notis){
+						mailer.sendMail(
+							'mail.overview',
+							'New Checkins on Lunchpad!',
+							{
+								notis: notis
+							},users);
+						notificationProvider.delAll(function(notisRemoved){
+							console.log('all notifications removed');
+						}, function(error){
+							console.log(error);
+						});
+					}, function(error){
+						console.log(error);
+					});
+				}, function(error){
+					console.log(error);
+				});
+			}else{
+				console.log('nothing older than 15 minutes, aboarding overview');
+			}
+		}, function(error){
+			console.log(error);
+		});
 	}
 
 };
