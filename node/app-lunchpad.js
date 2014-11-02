@@ -362,20 +362,15 @@ lunchTasks = {
 								break;
 						}
 					}
-
 				}, function(error){
 					console.log(error);
 				});
-
 			},function(error){
 				console.log(error);
 			});
 		},function(error){
 			console.log(error);
 		});
-
-
-
 	},
 
 	sendOverview: function(){
