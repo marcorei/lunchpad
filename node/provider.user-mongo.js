@@ -98,8 +98,8 @@ UserProvider.prototype.findUserByMail = function(mail, onSuccess, onError){
 
 
 /*
- * Find users who want to be reminded, but have not listed themselves yet.
- */
+* Find users who want to be reminded, but have not listed themselves yet.
+*/
 
 UserProvider.prototype.findUsersForReminder = function(exludeIds, onSuccess, onError){
 	db.gc(cn, function(collection){
@@ -107,6 +107,31 @@ UserProvider.prototype.findUsersForReminder = function(exludeIds, onSuccess, onE
 		collection.find({
 			_id: { $nin: exludeIds },
 			'noti.remind': true
+		},{
+			fields:{
+				mail: 1,
+				nick: 1
+			}
+		}).toArray(function(error,result){
+			if(error) onError(error);
+			else onSuccess(result);
+		});
+
+	},onError);
+}
+
+
+
+
+/*
+* Find users who want to get overview emails
+*/
+
+UserProvider.prototype.findUsersForOverview = function(onSuccess, onError){
+	db.gc(cn, function(collection){
+
+		collection.find({
+			'noti.overv': true
 		},{
 			fields:{
 				mail: 1,
