@@ -16,7 +16,7 @@ var path = require('path'),
 
 
 var Mailer = function(){
-	this.templatesDir = path.join(__dirname,'/../templates'); 
+	this.templatesDir = path.join(__dirname,'/../templates');
 	this.transport = nodemailer.createTransport('SMTP', {
 		host: config.mailer.smtp.host,
 		auth: {
@@ -25,7 +25,6 @@ var Mailer = function(){
 		}
 	});
 };
-
 
 // TODO: consider sending via dedicated SMTP Service later on.
 // with queuing and stuff.
@@ -38,34 +37,56 @@ Mailer.prototype.sendMail = function(templateName, subject, locals, users){
 		}else{
 			var i,
 				tmpLocals,
-				user;
+				draft;
 			for(i = 0; i < users.length; i++){
-				user = users[i];
 				tmpLocals = copyObj(locals);
 				tmpLocals.user = users[i];
-				template(templateName, tmpLocals, function(err, html, txt){
-					if(err){
-						console.log(err);
-					}else{
-						self.transport.sendMail({
-							from: from,
-							to: user.mail,
-							subject: subject,
-							html: html,
-							txt: txt
-						}, function(err, response){
-							if(err){
-								console.log(err);
-							}else{
-								console.log('message sent: ' + response.message);
-							}
-						})
-					}
-				});
+				draft = new Draft(
+					template,
+					templateName,
+					locals,
+					subject
+				);
+				draft.send();
 			}
 		}
 	});
 };
+
+/**
+* param template templating engine.
+* param templateName template folder name
+* param locals locals including a user object
+*/
+var Draft = function(template, templateName, locals, subject){
+	this.template = template;
+	this.templateName = templateName;
+	this.locals = locals;
+	this.subject = subject;
+}
+
+Draft.prototype.send = function(){
+	this.template(this.templateName, this.locals, function(err, html, txt){
+		if(err){
+			console.log(err);
+		}else{
+			self.transport.sendMail({
+				from: from,
+				to: this.locals.user.mail,
+				subject: this.subject,
+				html: html,
+				txt: txt
+			}, function(err, response){
+				if(err){
+					console.log(err);
+				}else{
+					console.log('message sent: ' + response.message);
+				}
+			})
+		}
+	});
+}
+
 
 var copyObj = function(sourceObj){
 	var copy = {},
