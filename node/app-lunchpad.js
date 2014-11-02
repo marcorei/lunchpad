@@ -291,10 +291,6 @@ lunchTasks = {
 
 	sendReminder: function(){
 		console.log('LunchTask: send reminders at '+(new Date().toString()));
-		// danach alle user ids von comments von heute
-		// dann alle user, die das hakerl habe und nicht auf der liste sind
-
-		// das dann an den mailer übergeben
 
 		checkinProvider.aggregateUserIdsFromToday(function(userIds){
 			userProvider.findUsersForReminder(userIds,function(users){
@@ -303,7 +299,7 @@ lunchTasks = {
 				console.log(userIds);
 				console.log('we got so many users!');
 				console.log(users);
-				
+
 				// Wir haben die user. aber was senden wir Ihnen?
 				// Haben wir ein neues Venues, das kürzlich eingetragen wurden?
 				venueProvider.findUnfeatured(function(venue){
@@ -312,7 +308,7 @@ lunchTasks = {
 						console.log(venue);
 
 						mailer.sendMail(
-							'mail.reminder',
+							'mail.reminder.new',
 							'A New Venue on Lunchpad!',
 							{
 								venue: venue
@@ -321,13 +317,56 @@ lunchTasks = {
 
 						// Jetzt würfeln. Was wird es heute sein.
 						// Rising, all time Favourite, weekday favourite?
+						var dice = Math.floor(Math.random()*3);
+						switch(dice){
+							case 0:
+								// send all time favourite
+								checkinProvider.aggrAllFavVid(function(venue){
+									mailer.sendMail(
+										'mail.reminder.top',
+										'Your Colleagues Love this Venue!',
+										{
+											venue: venue
+										},users);
+								}, function(error){
+									console.log(error);
+								});
+								break;
 
+							case 1:
+								// send weekday favourite
+								checkinProvider.aggrWdFavVid(function(venue){
+									mailer.sendMail(
+										'mail.reminder.weekday',
+										'Got Plans for Lunch Today?',
+										{
+											venue: venue
+										},users);
+								}, function(error){
+									console.log(error);
+								});
+								break;
+
+							case 2:
+								// send rising venue
+								checkinProvider.aggrRisingVid(function(venue){
+									mailer.sendMail(
+										'mail.reminder.rising',
+										'The New Hot Spot for Lunch!',
+										{
+											venue: venue
+										},users);
+								}, function(error){
+									console.log(error);
+								});
+								break;
+						}
 					}
-					
+
 				}, function(error){
 					console.log(error);
 				});
-				
+
 			},function(error){
 				console.log(error);
 			});
@@ -335,8 +374,8 @@ lunchTasks = {
 			console.log(error);
 		});
 
-			
-		
+
+
 	},
 
 	sendOverview: function(){
