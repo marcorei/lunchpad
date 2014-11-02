@@ -283,7 +283,11 @@ lunchTasks = {
 	cleanCheckins: function(){
 		console.log('LunchTask: cleaning at '+(new Date().toString()));
 		venueProvider.dailyReset(function(venueUpdates){
-			console.log('LunchTask: cleaning -- done');
+			notificationProvider.delAll(function(notiUpdates){
+				console.log('LunchTask: cleaning -- done');
+			}, function(error){
+				console.log(error);
+			});
 		}, function(error){
 			console.log(error);
 			// consider sending an email to admins.
