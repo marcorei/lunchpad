@@ -32,6 +32,7 @@ var path = require('path'),
 	itemProvider = require('./provider.item-mongo.js').itemProvider,
 	checkinProvider = require('./provider.checkin-mongo.js').checkinProvider,
 	commentProvider = require('./provider.comment-mongo.js').commentProvider,
+	notificationProvider = require('./provider.notification-mongo.js').notificationProvider,
 	cronTasks = require('./module.crontasks.js').cronTasks,
 	mailer = require('./module.mailer.js').mailer,
 	// wait and see what else we'll need
@@ -375,6 +376,8 @@ lunchTasks = {
 
 	sendOverview: function(){
 		console.log('LunchTask: send overview at '+(new Date().toString()));
+
+
 	}
 
 };
@@ -759,17 +762,33 @@ io.sockets.on('connection', function (socket) {
 								user: insert
 							});
 
+							// queue notification
+							venueProvider.findVenue(data._id, function(venue){
+								notificationProvider.saveAndDel({
+									uid: user._id,
+									unick: user.nick,
+									uava: user.ava,
+									vid: venue._id
+									vname: venue.name
+								}, function(noti){
+									console.log('notification saved');
+								}, function(error){
+									lunchHelper.sendErrorToSocket(socket,error);
+								})
+							}, function(error){
+								lunchHelper.sendErrorToSocket(socket,error);
+							});
 						},function(error){
-							sendErrorToSocket(socket,error);
+							lunchHelper.sendErrorToSocket(socket,error);
 						});
 					},function(error){
-						sendErrorToSocket(socket,error);
+						lunchHelper.sendErrorToSocket(socket,error);
 					});
 				},function(error){
-					sendErrorToSocket(socket,error);
+					lunchHelper.sendErrorToSocket(socket,error);
 				});
 			},function(error){
-				sendErrorToSocket(socket,error);
+				lunchHelper.sendErrorToSocket(socket,error);
 			});
 		});
 	});
@@ -787,11 +806,16 @@ io.sockets.on('connection', function (socket) {
 						}
 					});
 
+					notificationProvider.delWithUid(user._id, function(notiRemoved){
+						console.log('notifications for user removed');
+					}, function(error){
+						lunchHelper.sendErrorToSocket(socket,error);
+					});
 				},function(error){
-					sendErrorToSocket(socket,error);
+					lunchHelper.sendErrorToSocket(socket,error);
 				});
 			},function(error){
-				sendErrorToSocket(socket,error);
+				lunchHelper.sendErrorToSocket(socket,error);
 			});
 		});
 	});
