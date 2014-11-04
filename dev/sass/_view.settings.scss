@@ -4,5 +4,126 @@
  */
 
 .lunch-view-settings {
+	header {
+		padding: 48px 0 28px 0;
+	}
+	h1 {
+		margin: 0;
+		font: {
+			size: 60px;
+		}
+		text: {
+			align: center;
+		}
+	}
+	.lunch-profile-email {
+		margin: 0;
+		text-align: center;
+	}
+	.lunch-profile {
+		// box
+		display: block;
+		border: {
+			width:0;
+		}
 
+		// typo
+		text: {
+			align: center;
+		}
+		@include border-radius(2px);
+
+		// child
+		h2 {
+			display: none;
+		}
+	}
+	.lunch-altar {
+		width: 85px;
+		height: 85px;
+		margin: 0 auto;
+		padding: 25px;
+		background: {
+			color: $lunch-clr-grey-xxlgt;
+		}
+		@include border-radius(50%);
+	}
+	.lunch-avatar {
+		width: 50px;
+		height: 85px;
+		margin: 0 auto;
+		position: relative;
+
+		.lunch-item-image {
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+	}
+
+	.lunch-runway {
+		padding: 10px 0 0 0;
+		margin: -25px 0 0 0;
+		// skin
+		background: {
+			color: $lunch-clr-white;
+		}
+		border: {
+			width: 0;
+			top-width: 2px;
+			color: $lunch-clr-grey-xxlgt;
+			style: solid;
+		}
+		@include border-radius(2px);
+	}
+
+	.lunch-item {
+		display: inline-block;
+		width: 50px;
+		height: 85px;
+		padding: 5px;
+		position: relative;
+		cursor: pointer;
+		list-style-type: none;
+		background: {
+			color: $lunch-clr-grey-xlgt;
+			image: image-url("mannequin.png");
+			position: center center;
+			repeat: no-repeat;
+		}
+		@include border-radius(2px);
+
+		&:hover {
+			background: {
+				color: $lunch-clr-grey-lgt;
+			}
+		}
+		&.lunch-active {
+			background: {
+				color: $lunch-clr-blue;
+			}
+		}
+		img {
+			width: 50px;
+			height: 85px;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+	}
+
+	.lunch-password-input {
+		float: left;
+		margin: {
+			right: 1em;
+		}
+	}
+
+	section {
+		border-bottom: {
+			width: 2px;
+			style: solid;
+			color: $lunch-clr-grey-xxlgt;
+		}
+	}
 }

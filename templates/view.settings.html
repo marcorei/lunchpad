@@ -1,37 +1,54 @@
-<div class="lunch-view-settings">
+<main class="lunch-view-settings">
 
 	<header>
-		<h1>{{user.nick}}</h1>
-		<p>{{user.mail}}</p>
+		<h1>Marius</h1>
+		<p class="lunch-profile-email"><a href="mailto:mrz@19h13.com">mrz@19h13.com</a></p>
+		<!-- <h1>{{user.nick}}</h1>
+		<p>{{user.mail}}</p> -->
 	</header>
 
-	<section>
-		<h3>Change Item</h3>
-		<div>
-			<img ng-src="user.item" alt="profile item"
-				ng-class="{lunch-item-front: 'user.item.front'}">
-			<img ng-src="user.ava" alt="profile picture">
+	<section class="lunch-profile">
+		<h2>Change Item</h2>
+		<div class="lunch-altar">
+			<div class="lunch-avatar">
+				<!-- <img ng-src="user.item" alt="profile item" ng-class="{lunch-item-front: 'user.item.front'}"> -->
+				<img src="static/img/ft.png" alt="">
+				<img src="static/img/item-party.png"  class="lunch-item-image" alt="">
+				<!-- <img ng-src="user.ava" alt="profile picture"> -->
+			</div>
 		</div>
-		<ul class="lunch-items">
+		<ul class="lunch-runway">
+			<li class="lunch-item">
+				<div class="lunch-avatar">
+					<img src="static/img/item-halloween.png" alt="" class="lunch-item-image">
+				</div>
+			</li>
+			<li class="lunch-item lunch-active">
+				<div class="lunch-avatar">
+					<img src="static/img/item-party.png" alt="" class="lunch-item-image">
+				</div>
+			</li>
 			<li class="lunch-item"
 				ng-repeat="item in user.inv"
 				ng-click="submitActiveItem(item._id)">
-				<span>{{item.name}}</span>
-				<img ng-src="item.url">
+				<div class="lunch-avatar">
+					<span>{{item.name}}</span>
+					<img ng-src="item.url">
+				</div>
 			</li>
 		</ul>
 	</section>
 
 	<section>
-		<h3>Change Notifications</h3>
+		<h2>Change Notifications</h2>
 		<p>
-			<input type="checkbox" name="lunch-overview"
+			<input type="checkbox" name="lunch-overview" id="lunch-overview"
 				ng-change="submitNotifications()"
 				ng-model="user.noti.overv">
 			<label for="lunch-overview">Send me an overview about what venues my collegues chose</label>
 		</p>
 		<p>
-			<input type="checkbox" name="lunch-remind"
+			<input type="checkbox" name="lunch-remind" id="lunch-remind"
 				ng-change="submitNotifications()"
 				ng-model="user.noti.remind">
 			<label for="lunch-remind">Remind me when to choose a venue</label>
@@ -39,33 +56,37 @@
 	</section>
 
 	<section>
-		<h3>Change Password</h3>
+		<h2>Change Password</h2>
 		<form name="passForm">
 			<fieldset>
-				<div>
-					<input type="password" name="oldPass"
-						ng-model="passFormData.oldPass"
-						required>
-					<label for="oldPass">Old Password</label>
-					<div ng-show="passForm.oldPass.$dirty && passForm.oldPass.$invalid">
-						<span>Field required</span>
+				<div class="lunch-password-input">
+					<label class="lunch-input-text-label" for="oldPass">Old Password</label>
+					<div class="lunch-input-contain">
+						<input type="password" id="oldPass" name="oldPass"
+							ng-model="passFormData.oldPass"
+							required>
+						<div class="lunch-input-note" ng-show="passForm.oldPass.$dirty && passForm.oldPass.$invalid">
+							<span>required</span>
+						</div>
 					</div>
 				</div>
-				<div>
-					<input type="password" name="newPass"
-						ng-model="passFormData.newPass"
-						required>
-					<label for="newPass">New Password</label>
-					<div ng-show="passForm.newPass.$dirty && passForm.newPass.$invalid">
-						<span>Field required</span>
+				<div class="lunch-password-input">
+					<label class="lunch-input-text-label" for="newPass">New Password</label>
+					<div  class="lunch-input-contain">
+						<input type="password" name="newPass" id="newPass"
+							ng-model="passFormData.newPass"
+							required>
+						<div class="lunch-input-note" ng-show="passForm.newPass.$dirty && passForm.newPass.$invalid">
+							<span>required</span>
+						</div>
 					</div>
 				</div>
+			</fieldset>
 				<button type="submit" class="lunch-button"
 					ng-click="submitPassForm"
 					ng-disabled="passForm.$invalid">change password</button>
-			</fieldset>
 		</form>
 
 	</section>
 
-</div>
+</main>

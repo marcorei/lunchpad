@@ -46,7 +46,8 @@ $lunch-color-filter-active: #555;
  * Text Input Styles
  */
 textarea,
-input[type="text"] {
+input[type="text"],
+input[type="password"] {
 	padding: {
 		top: 12px;
 		bottom: 12px;
@@ -98,8 +99,54 @@ textarea {
 
 
 
+/**
+ * Checkbox
+ */
+input[type="checkbox"]{
+	margin: {
+		right: 0.5em;
+	}
+}
 
 
+label {
+	@include user-select(none);
+}
+
+
+
+fieldset {
+	border: 0;
+	padding: 0;
+}
+
+
+
+.lunch-input-text-label {
+	display: block;
+	padding: 0;
+}
+
+
+.lunch-input-contain {
+	position: relative;
+	margin: 0.75em 0em;
+	display: inline-block;
+	label{
+
+	}
+
+	.lunch-input-note {
+		position: absolute;
+		top: 0;
+		right: 0;
+		font: {
+			size: 12px;
+		}
+		color: $lunch-clr-red;
+		padding:15px 12px;
+	}
+}
 
 
 

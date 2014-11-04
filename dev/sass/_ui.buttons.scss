@@ -217,3 +217,50 @@
 		}
 	}
 }
+
+
+
+
+.lunch-button {
+	display: inline-block;
+	margin: 1em 0;
+	padding: {
+		top: 18px;
+		bottom: 16px;
+		left: 20px;
+		right: 20px;
+	}
+	border: {
+		width: 0;
+	}
+	text: {
+		transform: uppercase;
+		align: center;
+	}
+	font: {
+		size: 11px;
+	}
+	line: {
+		height: 1em;
+	}
+
+
+	cursor: pointer;
+	color: white;
+	background: {
+		color: $lunch-clr-blue;
+	}
+	@include border-radius(2px);
+
+	// Effects
+	@include transition-property(background);
+	@include transition-duration($lunch-time-out);
+
+
+	// States
+	&:hover {
+		@include transition-duration($lunch-time-over);
+		background-color: $lunch-color-blu-dark;
+	}
+
+}
