@@ -300,11 +300,6 @@ lunchTasks = {
 		checkinProvider.aggregateUserIdsFromToday(function(userIds){
 			userProvider.findUsersForReminder(userIds,function(users){
 
-				console.log('user ids we dont wnat');
-				console.log(userIds);
-				console.log('we got so many users!');
-				console.log(users);
-
 				// Wir haben die user. aber was senden wir Ihnen?
 				// Haben wir ein neues Venues, das kürzlich eingetragen wurden?
 				venueProvider.findUnfeatured(function(venue){
@@ -319,53 +314,104 @@ lunchTasks = {
 								venue: venue
 							},users);
 					}else{
+						var aggrRetries = 0;
 
-						// Jetzt würfeln. Was wird es heute sein.
-						// Rising, all time Favourite, weekday favourite?
-						var dice = Math.floor(Math.random()*3);
-						switch(dice){
-							case 0:
-								// send all time favourite
-								checkinProvider.aggrAllFavVid(function(venue){
+						var tryAggr = function(){
+							if(aggrRetries < 10){
+								aggrRetries++;
+
+								console.log('rolling the dice!');
+								// Jetzt würfeln. Was wird es heute sein.
+								// Rising, all time Favourite, weekday favourite?
+								var dice = Math.floor(Math.random()*3);
+								switch(dice){
+									case 0:
+										sendAllTimeFav();
+										break;
+									case 1:
+										sendWdFav();
+										break;
+									case 2:
+										sendRising();
+										break;
+								}
+							}
+							
+						};
+
+						var sendAllTimeFav = function(){
+							// send all time favourite
+							checkinProvider.aggrAllFavVid(function(venueStats){
+								venueProvider.findVenue(venueStats._id, function(venue){
+									console.log('sending all time fav');
+									console.log(venue);
+									
 									mailer.sendMail(
 										'mail.reminder.top',
 										'Your Colleagues Love this Venue!',
 										{
 											venue: venue
 										},users);
+									
 								}, function(error){
 									console.log(error);
-								});
-								break;
+									tryAggr();
+								});										
+							}, function(error){
+								console.log(error);
+								tryAggr();
+							});
+						};
 
-							case 1:
-								// send weekday favourite
-								checkinProvider.aggrWdFavVid(function(venue){
+						var sendWdFav = function(){
+							// send weekday favourite
+							checkinProvider.aggrWdFavVid(function(venueStats){
+								venueProvider.findVenue(venueStats._id, function(venue){
+									console.log('sending weekday time fav');
+									console.log(venue);
+									
 									mailer.sendMail(
 										'mail.reminder.weekday',
 										'Got Plans for Lunch Today?',
 										{
 											venue: venue
 										},users);
+									
 								}, function(error){
 									console.log(error);
+									tryAggr();
 								});
-								break;
+							}, function(error){
+								console.log(error);
+								tryAggr();
+							});
+						};
 
-							case 2:
-								// send rising venue
-								checkinProvider.aggrRisingVid(function(venue){
+						var sendRising = function(){
+							// send rising venue
+							checkinProvider.aggrRisingVid(function(venueStats){
+								venueProvider.findVenue(venueStats.vid, function(venue){
+									console.log('sending rising');
+									console.log(venue);
+									
 									mailer.sendMail(
 										'mail.reminder.rising',
 										'The New Hot Spot for Lunch!',
 										{
 											venue: venue
 										},users);
+									
 								}, function(error){
 									console.log(error);
+									tryAggr();
 								});
-								break;
-						}
+							}, function(error){
+								console.log(error);
+								tryAggr();
+							});
+						};
+
+						tryAggr();
 					}
 				}, function(error){
 					console.log(error);
