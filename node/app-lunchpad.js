@@ -800,7 +800,7 @@ io.sockets.on('connection', function (socket) {
 									uid: user._id,
 									unick: user.nick,
 									uava: user.ava,
-									vid: venue._id
+									vid: venue._id,
 									vname: venue.name
 								}, function(noti){
 									console.log('notification saved');
