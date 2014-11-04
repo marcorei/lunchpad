@@ -61,7 +61,7 @@ CheckinProvider.prototype.aggrWdFavVid = function(onSuccess, onError){
 		collection.aggregate([
 			{$match:{
 				wd: quando.weekday(),
-				date: { $gte: quando.l60d() }
+				date: { $gt: quando.l60d() }
 			}},
 			{$group:{
 				_id: '$vid',
@@ -92,7 +92,7 @@ CheckinProvider.prototype.aggrAllFavVid = function(onSuccess, onError){
 
 		collection.aggregate([
 			{$match:{
-				date: { $gte: quando.l30d() }
+				date: { $gt: quando.l30d() }
 			}},
 			{$group:{
 				_id: '$vid',
@@ -124,15 +124,15 @@ CheckinProvider.prototype.aggrRisingVid = function(onSuccess, onError){
 
 		collection.aggregate([
 			{$match:{
-				date: { $gte: quando.l7d() }
+				date: { $gt: quando.l7d() }
 			}},
 			{$group:{
 				_id: '$vid',
 				num: { $sum: 1 }
-			}},
+			}}/*,
 			{$match:{
 				num: { $gt: 0 }
-			}}
+			}}*/
 		],function(error,results1){
 			if(error) onError(error);
 			else if(!results1 || results1.length === 0) onError('nothing to aggregate');
@@ -142,7 +142,7 @@ CheckinProvider.prototype.aggrRisingVid = function(onSuccess, onError){
 
 				collection.aggregate([
 					{$match:{
-						date: { $gte: quando.l35d() }
+						date: { $gt: quando.l35d() }
 					}},
 					{$group:{
 						_id: '$vid',
@@ -171,13 +171,12 @@ CheckinProvider.prototype.aggrRisingVid = function(onSuccess, onError){
 							mapped35[results2[i]._id] = results2[i].num;
 						}
 						results2 = null;
-
 						// compare growth
 
 						for(i=0;i<results1.length;i++){
 
 							vid = results1[i]._id;
-							tmpLast4WeekAvg = (mapped35[vid] - results1[i].num) / 4;
+							tmpLast4WeekAvg = mapped35[vid] ? (mapped35[vid] - results1[i].num) / 4 : 0;
 
 							// calcuate
 
@@ -201,8 +200,12 @@ CheckinProvider.prototype.aggrRisingVid = function(onSuccess, onError){
 						}
 
 						// return high
-
-						onSuccess(high);
+						if(vid != ''){
+							onSuccess(high);
+						}else{
+							onError('no rising venue calculated');
+						}
+						
 
 					}
 				})
