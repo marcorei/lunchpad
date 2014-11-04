@@ -42,9 +42,10 @@ Mailer.prototype.sendMail = function(templateName, subject, locals, users){
 				tmpLocals = copyObj(locals);
 				tmpLocals.user = users[i];
 				draft = new Draft(
+					self.transport,
 					template,
 					templateName,
-					locals,
+					tmpLocals,
 					subject
 				);
 				draft.send();
@@ -58,7 +59,8 @@ Mailer.prototype.sendMail = function(templateName, subject, locals, users){
 * param templateName template folder name
 * param locals locals including a user object
 */
-var Draft = function(template, templateName, locals, subject){
+var Draft = function(transport, template, templateName, locals, subject){
+	this.transport = transport;
 	this.template = template;
 	this.templateName = templateName;
 	this.locals = locals;
@@ -66,14 +68,15 @@ var Draft = function(template, templateName, locals, subject){
 }
 
 Draft.prototype.send = function(){
+	var self = this;
 	this.template(this.templateName, this.locals, function(err, html, txt){
 		if(err){
 			console.log(err);
 		}else{
 			self.transport.sendMail({
 				from: from,
-				to: this.locals.user.mail,
-				subject: this.subject,
+				to: self.locals.user.mail,
+				subject: self.subject,
 				html: html,
 				txt: txt
 			}, function(err, response){
