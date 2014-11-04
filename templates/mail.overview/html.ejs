@@ -1,0 +1,16 @@
+<h1> Hello <%= user.nick %> <h1>
+<p>Check out the new checkins</p>
+<ul>
+<% for(var i = 0; i < notis.length; i++) { %>
+	<li><%= notis[i].unick %> in <%= notis[i].vname %></li>
+<% } %>
+</ul>
+
+<!--
+Alle Attribute:
+uid
+unick
+uava
+vid
+vname
+-->
