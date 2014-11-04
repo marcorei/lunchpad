@@ -24,24 +24,24 @@ Quando.prototype.weekday = function(){
 
 Quando.prototype.daysAgo = function(numDays){
 	var day = Quando.prototype.today();
-	day.setDate(today.getDate()-numDays);
+	day.setDate(day.getDate()-numDays);
 	return day;
 }
 
 Quando.prototype.l7d = function(){
-	Quando.prototype.daysAgo(7);
+	return Quando.prototype.daysAgo(7);
 };
 
 Quando.prototype.l30d = function(){
-	Quando.prototype.daysAgo(30);
+	return Quando.prototype.daysAgo(30);
 };
 
 Quando.prototype.l35d = function(){
-	Quando.prototype.daysAgo(35);
+	return Quando.prototype.daysAgo(35);
 };
 
 Quando.prototype.l60d = function(){
-	Quando.prototype.daysAgo(60);
+	return Quando.prototype.daysAgo(60);
 };
 
 exports.quando = new Quando();
