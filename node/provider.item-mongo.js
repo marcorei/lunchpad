@@ -113,7 +113,7 @@ ItemProvider.prototype.saveItems = function(items, onSuccess, onError){
 		var i,
 			item;
 
-		if(items.length === 'undefined') items = [items];
+		if(items.length === undefined) items = [items];
 
 		// expected values
 

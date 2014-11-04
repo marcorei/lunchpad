@@ -47,7 +47,7 @@ NotificationProvider.prototype.countLt15min = function(onSuccess, onError){
 	db.gc(cn, function(collection){
 
 		collection.count({
-			date: {$gt: quando.min15()}
+			date: {$lte: quando.min15()}
 		}, function(error,count){
 			if(error) onError(error);
 			else onSuccess(count);
@@ -118,7 +118,7 @@ NotificationProvider.prototype.save = function(notis, onSuccess, onError){
 		var i,
 			noti;
 
-		if(notis.length === 'undefined') notis = [notis];
+		if(notis.length === undefined) notis = [notis];
 
 		// expected values
 		
