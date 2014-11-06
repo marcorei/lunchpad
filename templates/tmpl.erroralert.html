@@ -5,7 +5,11 @@
 		<button ng-click="closeAll()" class="lunch-flash-close">X</button>
 
 		<ul>
-			<li ng-repeat="message in messages" ng-bind="message"></li>
+			<li
+				ng-repeat="error in errors"
+				ng-bind="error.msg"
+				ng-class="error.type"
+			></li>
 		</ul>
 
 	</div>

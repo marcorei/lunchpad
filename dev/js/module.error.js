@@ -70,7 +70,7 @@ function($window,Socket,LpConfig){
 '$scope','LpError',
 function($scope,LpError){
 
-	$scope.messages = LpError.dumb;
+	$scope.errors = LpError.dumb;
 
 	$scope.close = function(index){
 		$scope.messages.splice(index,1);
@@ -81,6 +81,10 @@ function($scope,LpError){
 			$scope.messages.pop();
 		}
 	}
+
+	// Test
+	LpError.throwError('This is an error!');
+	LpError.throwHint('This is a hint.');
 
 }])
 
