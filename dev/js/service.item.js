@@ -39,7 +39,7 @@ function(Socket,LpConfig,LpError,LpUserIdService,$timeout){
 	};
 
 	var loadItems = function(){
-		socketManager.emit(LpConfig.getEvent('venue.read.list'),{},function(data){
+		socketManager.emit(LpConfig.getEvent('item.read.list'),{},function(data){
 			if(!data.error){
 
 				// clear the items
