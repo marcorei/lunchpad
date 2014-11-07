@@ -16,12 +16,12 @@ function($scope,LpUserService,LpItemService){
 	$scope.users;
 	$scope.items;
 
-	LpUserService.readUserList(function(users)){
+	LpUserService.readUserList(function(users){
 		$scope.users = users;
-	}
+	});
 
 	LpItemService.loadItems(function(items){
 		$scope.items = items;
-	})
+	});
 
 }]);

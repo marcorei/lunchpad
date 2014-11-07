@@ -5,11 +5,13 @@
  */
 
 angular.module('viewSettingsController',[
+	'lpUserIdService',
+	'lpUserService'
 ])
 
 .controller('ViewSettingsController',[
-'$scope','$routeParams','lpUserIdService','LpUserService',
-function($scope,$routeParams,lpUserIdService,LpUserService){
+'$scope','$routeParams','LpUserIdService','LpUserService',
+function($scope,$routeParams,LpUserIdService,LpUserService){
 
 	$scope.user = {};
 	$scope.passFormData = {};
@@ -42,7 +44,7 @@ function($scope,$routeParams,lpUserIdService,LpUserService){
 	};
 
 	// Startup
-	if($routeParams.userId === 'self'){
+	if($routeParams.userId !== 'self'){
 		loadUserData($routeParams.userId);
 	}else{
 		LpUserIdService.getId(function(id){

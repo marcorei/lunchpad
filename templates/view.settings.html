@@ -17,8 +17,8 @@
 				<img src="static/img/ft.png" alt="">
 				<img src="static/img/item-party.png"  class="lunch-item-image" alt="">
 				-->
-				<img ng-src="user.item" alt="profile item" ng-class="{lunch-item-front: 'user.item.front'}">
-				<img ng-src="user.ava" alt="profile picture">
+				<img ng-src="{{user.item}}" alt="profile item" ng-class="{'lunch-item-front': 'user.item.front'}" ng-show="user.item">
+				<img ng-src="{{user.ava}}" alt="profile picture">
 			</div>
 		</div>
 		<ul class="lunch-runway">
