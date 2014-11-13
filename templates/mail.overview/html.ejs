@@ -5,6 +5,20 @@
 	<li><%= notis[i].unick %> in <%= notis[i].vname %></li>
 <% } %>
 </ul>
+<ul>
+<% for(var i = 0; i < venues.length; i++) { %>
+	<li><%= venues[i]._id %> <%= venues[i].name %>
+		<ul>
+		<% for(var j = 0; j < venues[i].users.length; j++) { %>
+			<li>Nick: <%= venues[i].users[j].nick %> <br>
+			ID: <%= venues[i].users[j]._id %> <br>
+			ava: <%= venues[i].users[j].ava %>
+			</li>
+		<% } %>
+		</ul>
+	</li>
+<% } %>
+</ul>
 
 <!--
 Alle Attribute:

@@ -435,11 +435,38 @@ lunchTasks = {
 			if(count > 0){
 				userProvider.findUsersForOverview(function(users){
 					notificationProvider.findAll(function(notis){
+						// convert notis to venues
+						var venuesAggr = {},
+							venues = [],
+							i;
+						for(i = 0; i < notis.length; i++){
+							if(venuesAggr[notis[i].vid] === undefined){
+								venuesAggr[notis[i].vid] = {
+									_id: notis[i].vid,
+									name: notis[i].vname,
+									users: []
+								}
+							}
+							venuesAggr[notis[i].vid].users.push({
+								_id: notis[i].uid,
+								nick: notis[i].unick,
+								ava: notis[i].uava
+							});
+						}
+						for(key in venuesAggr){
+							if(venuesAggr.hasOwnProperty(key)){
+								venues.push(venuesAggr[key]);
+							}
+						}
+
+						console.log(venues);
+
 						mailer.sendMail(
 							'mail.overview',
 							'New Checkins on Lunchpad!',
 							{
-								notis: notis
+								notis: notis,
+								venues: venues
 							},users);
 						notificationProvider.delAll(function(notisRemoved){
 							console.log('all notifications removed');
