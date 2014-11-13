@@ -46,6 +46,12 @@ function($window,Socket,LpConfig){
 		messages[errorCode] = msg;
 	};
 
+	var clear = function(){
+		while(dump.length > 0){
+			dump.pop();
+		}
+	};
+
 	socketManager.on(LpConfig.getEvent('error'),function(data){
 		console.log('Error: '+data);
 		throwError(data.error.msg);
@@ -64,7 +70,8 @@ function($window,Socket,LpConfig){
 		throwError: throwError,
 		throwHint: throwHint,
 		getMsg: getMsg,
-		setMsg: setMsg
+		setMsg: setMsg,
+		clear: clear
 	}
 }])
 
@@ -74,14 +81,14 @@ function($scope,LpError){
 
 	$scope.errors = LpError.dump;
 
+	/*
 	$scope.close = function(index){
 		$scope.messages.splice(index,1);
 	}
+	*/
 
 	$scope.closeAll = function(){
-		while($scope.messages.length > 0){
-			$scope.messages.pop();
-		}
+		LpError.clear();
 	}
 
 	// Test
