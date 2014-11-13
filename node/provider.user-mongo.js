@@ -289,8 +289,8 @@ UserProvider.prototype.updateAktiveItem = function(id, item, onSuccess, onError)
 UserProvider.prototype.updateNoti = function(id, noti, onSuccess, onError){
 	db.gc(cn, function(collection){
 
-		if( !noti.remind ||
-			!noti.overv){
+		if( noti.remind === undefined ||
+			noti.overv === undefined){
 			callback('params invalid');
 			return null;
 		}

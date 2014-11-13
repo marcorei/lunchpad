@@ -102,8 +102,10 @@ var lunchHelper = {
 		code = code || 8000;
 
 		socket.emit('error',{
-			code: code,
-			msg: msg
+			error: {
+				code: code,
+				msg: msg
+			}
 		});
 	},
 
@@ -127,22 +129,22 @@ var lunchAuth = {
 
 	isUser: function(socket, onSuccess){
 		if(socket.handshake.user.logged_in) onSuccess(socket.handshake.user);
-		else sendErrorToSocket('Not logged in!', 666);
+		else lunchHelper.sendErrorToSocket(socket, 'Not logged in!', 666);
 	},
 
 	isAdmin: function(socket, onSuccess){
 		if(socket.handshake.user.logged_in && socket.handshake.user.role === 'admin') onSuccess(socket.handshake.user);
-		else sendErrorToSocket('Admin rights missing', 403);
+		else lunchHelper.sendErrorToSocket(socket, 'Admin rights missing', 403);
 	},
 
 	isOwner: function(socket, uid, onSuccess){
 		if(socket.handshake.user.logged_in && socket.handshake.user._id == uid) onSuccess(socket.handshake.user);
-		else sendErrorToSocket('Owner rights missing', 403);
+		else lunchHelper.sendErrorToSocket(socket, 'Owner rights missing', 403);
 	},
 
 	isOwnerOrAdmin: function(socket, uid, onSuccess){
 		if(socket.handshake.user.logged_in && (socket.handshake.user.role === 'admin' || socket.handshake.user._id == uid)) onSuccess(socket.handshake.user);
-		else sendErrorToSocket('Admin or Owner rights missing', 403);
+		else lunchHelper.sendErrorToSocket(socket, 'Admin or Owner rights missing', 403);
 	}
 
 }
@@ -1114,10 +1116,10 @@ io.sockets.on('connection', function (socket) {
 
 			var e;
 			if(e = new Validate()
-			.v('inLength',[data._id,24,24],'user.id')
+			.v('isLength',[data._id,24,24],'user.id')
 			.v('isLength',[data.pass,5],'user.pass')
 			.e()){
-				sendErrorToSocket(socket,e);
+				lunchHelper.sendErrorToSocket(socket,e);
 				return null;
 			}
 
@@ -1131,18 +1133,18 @@ io.sockets.on('connection', function (socket) {
 				});
 
 			},function(error){
-				sendErrorToSocket(socket,error);
+				lunchHelper.sendErrorToSocket(socket,error);
 			});
 		});
 	});
 
 	socket.on('user update notifications', function(data){
-		lunchAuth.isOwner(socket, function(user){
+		lunchAuth.isOwner(socket, data._id, function(user){
 
 			data.remind = Validate.s('toBoolean',[data.remind,true]);
-			data.overv = Validate.s('toBoolean',[data.overv,true]);
+			data.overv = Validate.s('toBoolean',[data.overv,true]);			
 
-			userProvider.updateNoti( user._id, {
+			userProvider.updateNoti( data._id, {
 				remind: data.remind,
 				overv: data.overv
 			},
@@ -1153,19 +1155,19 @@ io.sockets.on('connection', function (socket) {
 				});
 
 			},function(error){
-				sendErrorToSocket(socket,error);
+				lunchHelper.sendErrorToSocket(socket,error);
 			});
 		});
 	});
 
 	socket.on('user update activeitem', function(data){
-		lunchAuth.isOwner(socket, function(user){
+		lunchAuth.isOwner(socket, data._id, function(user){
 
 			var e;
 			if(e = new Validate()
 			.v('inLength',[data._id,24,24],'user.id')
 			.e()){
-				sendErrorToSocket(socket,e);
+				lunchHelper.sendErrorToSocket(socket,e);
 				return null;
 			}
 
@@ -1184,10 +1186,10 @@ io.sockets.on('connection', function (socket) {
 					});
 
 				},function(error){
-					sendErrorToSocket(socket,error);
+					lunchHelper.sendErrorToSocket(socket,error);
 				});
 			},function(error){
-				sendErrorToSocket(socket,error);
+				lunchHelper.sendErrorToSocket(socket,error);
 			});
 		});
 	});
@@ -1199,12 +1201,12 @@ io.sockets.on('connection', function (socket) {
 			if(e = new Validate()
 			.v('inLength',[data._id,24,24],'user.id')
 			.e()){
-				sendErrorToSocket(socket,e);
+				lunchHelper.sendErrorToSocket(socket,e);
 				return null;
 			}
 
 			if( !Array.isArray(data.inv) ){
-				sendErrorToSocket(socket,new Validate().msgs['user.inv']);
+				lunchHelper.sendErrorToSocket(socket,new Validate().msgs['user.inv']);
 				return null;
 			}
 
@@ -1216,7 +1218,7 @@ io.sockets.on('connection', function (socket) {
 				});
 
 			},function(error){
-				sendErrorToSocket(socket,error);
+				lunchHelper.sendErrorToSocket(socket,error);
 			});
 		});
 	});
@@ -1228,7 +1230,7 @@ io.sockets.on('connection', function (socket) {
 			if(e = new Validate()
 			.v('inLength',[data._id,24,24],'user.id')
 			.e()){
-				sendErrorToSocket(socket,e);
+				lunchHelper.sendErrorToSocket(socket,e);
 			}
 
 			userProvider.deleteUser( data._id,
@@ -1239,7 +1241,7 @@ io.sockets.on('connection', function (socket) {
 				});
 
 			},function(error){
-				sendErrorToSocket(socket,error);
+				lunchHelper.sendErrorToSocket(socket,error);
 			});
 		});
 	});
@@ -1269,7 +1271,7 @@ io.sockets.on('connection', function (socket) {
 				});
 
 			},function(error){
-				sendErrorToSocket(socket,error);
+				lunchHelper.sendErrorToSocket(socket,error);
 			});
 		});
 	});
@@ -1294,7 +1296,7 @@ io.sockets.on('connection', function (socket) {
 				});
 
 			},function(error){
-				sendErrorToSocketCb(cb,error);
+				lunchHelper.sendErrorToSocketCb(cb,error);
 			});
 		});
 	});
@@ -1328,7 +1330,7 @@ io.sockets.on('connection', function (socket) {
 				});
 
 			},function(error){
-				sendErrorToSocketCb(cb,error);
+				lunchHelper.sendErrorToSocketCb(cb,error);
 			});
 		});
 	});
@@ -1343,7 +1345,7 @@ io.sockets.on('connection', function (socket) {
 				});
 
 			},function(error){
-				sendErrorToSocketCb(cb,error);
+				lunchHelper.sendErrorToSocketCb(cb,error);
 			});
 		});
 	});
@@ -1369,10 +1371,10 @@ io.sockets.on('connection', function (socket) {
 					});
 
 				},function(error){
-					sendErrorToSocket(socket,error);
+					lunchHelper.sendErrorToSocket(socket,error);
 				});
 			},function(error){
-				sendErrorToSocket(socket,error);
+				lunchHelper.sendErrorToSocket(socket,error);
 			});
 		});
 	});

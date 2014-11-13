@@ -75,7 +75,7 @@ angular.module('lpConfig',[
 		'user.create.done': 'user create done',
 		'user.update.password': 'user update password',
 		'user.update.password.done': 'user update password done',
-		'user.update.notifications': 'user update norifications',
+		'user.update.notifications': 'user update notifications',
 		'user.update.notifications.done': 'user update notifications done',
 		'user.update.activeitem': 'user update activeitem',
 		'user.update.activeitem.done': 'user update activeitem done',

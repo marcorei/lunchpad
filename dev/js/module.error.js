@@ -27,6 +27,8 @@ function($window,Socket,LpConfig){
 			msg: msg,
 			type: 'error'
 		});
+		console.log('added Error: '+msg);
+		console.log('length: '+dump.length);
 	};
 
 	var throwHint = function(msg){
@@ -46,7 +48,7 @@ function($window,Socket,LpConfig){
 
 	socketManager.on(LpConfig.getEvent('error'),function(data){
 		console.log('Error: '+data);
-		throwError(data.error.code);
+		throwError(data.error.msg);
 
 		/*
 		if(data.error.code === 666){
@@ -70,7 +72,7 @@ function($window,Socket,LpConfig){
 '$scope','LpError',
 function($scope,LpError){
 
-	$scope.errors = LpError.dumb;
+	$scope.errors = LpError.dump;
 
 	$scope.close = function(index){
 		$scope.messages.splice(index,1);
@@ -94,6 +96,7 @@ function(LpConfig){
 	return {
 		restrict: 'A',
 		replace: true,
+		scope: true,
 		templateUrl: LpConfig.getTemplate('tmpl.erroralert'),
 		controller: 'LpErroralertController'
 	}

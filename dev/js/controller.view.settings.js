@@ -27,8 +27,7 @@ function($scope,$routeParams,LpUserIdService,LpUserService){
 
 	$scope.submitNotifications = function(){
 		// TODO: push Error ErrorProvider if other User
-
-		LpUserController.updateNotifications($scope.user.remind, $scope.user.overv);
+		LpUserService.updateNotifications($scope.user.noti.remind, $scope.user.noti.overv, $scope.user._id);
 	};
 
 	$scope.submitActiveItem = function(itemId){
