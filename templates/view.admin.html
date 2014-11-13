@@ -1,24 +1,25 @@
 <main class="lunch-view-admin">
-
-	<h1>Admin Panel</h1>
-
+	<header>
+		<h1>Admin Panel</h1>
+	</header>
 	<form>
 		<fieldset>
-			<div>
-				<select name="event" size="1"
-					ng-model="model.eventName">
-					<option 
-						ng-repeat="event in events" 
-						ng-bind="event"></option>
-				</select>
-			</div>
-			
-			<div>
-				<textarea ng-model="model.eventData"></textarea>
-			</div>
-			
-			<div ng-bind="response">
-			</div>
+
+			<select name="event" size="1"
+				ng-model="model.eventName">
+				<option
+					ng-repeat="event in events"
+					ng-bind="event"></option>
+			</select>
+
+			<textarea ng-model="model.eventData"></textarea>
+		</fieldset>
+		<fieldset>
+			<button type="submit" class="lunch-button">Post Json</button>
+		</fieldset>
+
+			<pre ng-bind="response"></pre>
+
 		</fieldset>
 	</form>
 
