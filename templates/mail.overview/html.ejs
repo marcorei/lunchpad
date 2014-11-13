@@ -1,3 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="initial-scale=1.0">	<!-- So that mobile webkit will display zoomed in -->
+		<meta name="format-detection" content="telephone=no"> <!-- disable auto telephone linking in iOS -->
+		<title>Lunch Mail</title>
+		<link rel="stylesheet" type="text/css" href="mail.overview/style.css">
+	</head>
+
+	<body style="margin:0; padding:0;" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" class="lunch-mail">
+		<div class="lunch-mail-container">
+
+			<div class="lunch-mail-hello">
+				<p>Hello <%= user.nick %>,</p>
+				<p>check out the new checkins on <a href="http://www.lunchpad.co">lunchpad</a>!</p>
+			</div>
+
+			<div class="lunch-mail-content">
+				<% for(var i = 0; i < venues.length; i++) { %>
+					<div class="lunch-mail-venue">
+						<h2><a href="http://www.lunchpad.co/#/venue/<%= venues[i]._id %>"><%= venues[i].name %></a></h2>
+						<ul>
+							<% for(var j = 0; j < venues[i].users.length; j++) { %>
+								<li>
+									<img src="<%= venues[i].users[j].ava %>" alt="<%= venues[i].users[j].nick %>">
+								</li>
+							<% } %>
+						</ul>
+					</div>
+				<% } %>
+			</div>
+
+			<div class="lunch-mail-cya">
+				<p>Thank you for using lunchpad.</p>
+				<p> See you at lunchtime!</p>
+			</div>
+
+			<div class="lunch-mail-footer">
+				<p>You can always update your <a href="http://www.lunchpad.co/#/settings/self">email preferences</a>.</p>
+			</div>
+		</div>
+	</body>
+</html>
+
+
+
+<!--
 <h1> Hello <%= user.nick %> <h1>
 <p>Check out the new checkins</p>
 <ul>
@@ -19,7 +67,7 @@
 	</li>
 <% } %>
 </ul>
-
+-->
 <!--
 Alle Attribute:
 uid
