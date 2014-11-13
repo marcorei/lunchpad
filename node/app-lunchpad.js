@@ -628,7 +628,7 @@ app.get('/createTestVenues',function(req,res){
 	}],function(results){
 		res.send('testvenues created');
 	},function(error){
-		sendErrorToRes(res,error,666,false);
+		lunchHelper.sendErrorToRes(res,error,666,false);
 	});
 });
 
@@ -646,8 +646,43 @@ app.get('/cleancheckins', function(req,res){
 	lunchTasks.cleanCheckins();
 	res.send('checkins cleared');
 });
+/*
+app.get('/addtestitems', function(req,res){
+	itemProvider.saveItems({
+		name: 'party hat',
+		url: 'http://lunchpad.19h13.com/static/img/item-party.png',
+		type: 'hat',
+		front: true
+	},{
+		name: 'the mask',
+		url: 'http://lunchpad.19h13.com/static/img/item-halloween.png',
+		type: 'mask',
+		front: true
+	},function(results){
+		res.send('testitem created');
+	},function(error){
+		lunchHelper.sendErrorToRes(res,error,666,false);
+	});
+});
 
-
+app.get('/addtestitemstousers', function(req,res){
+	itemProvider.saveItems({
+		name: 'party hat',
+		url: 'http://lunchpad.19h13.com/static/img/item-party.png',
+		type: 'hat',
+		front: true
+	},{
+		name: 'the mask',
+		url: 'http://lunchpad.19h13.com/static/img/item-halloween.png',
+		type: 'mask',
+		front: true
+	},function(results){
+		res.send('testitem created');
+	},function(error){
+		lunchHelper.sendErrorToRes(res,error,666,false);
+	});
+});
+*/
 
 
 /*

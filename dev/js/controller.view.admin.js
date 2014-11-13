@@ -10,9 +10,55 @@ angular.module('viewAdminController',[
 ])
 
 .controller('ViewAdminController',[
-'$scope','LpUserService','LpItemService',
-function($scope,LpUserService,LpItemService){
+'$scope',
+function($scope){
 
+	$scope.events = [
+		'error',
+
+		'chat send',
+
+		'venue read list',
+		'venue read one',
+		'venue create',
+
+		'venue update name',
+		'venue update url',
+		'venue delete',
+
+		'checkin create',
+		'checkin delete',
+
+		'comment read list',
+		'comment create',
+		'comment delete',
+
+		'user read list',
+		'user read own id',
+		'user read one',
+		'user create',
+		'user update password',
+		'user update notifications',
+		'user update activeitem',
+		'user update inventory',
+		'user delete',
+
+		'item read list',
+		'item read one',
+		'item read multiple',
+		'item create',
+		'item delete'
+	];
+
+	$scope.model = {
+		eventName: '',
+		eventData: ''
+	}
+
+
+
+
+	/*
 	$scope.users;
 	$scope.items;
 
@@ -23,5 +69,6 @@ function($scope,LpUserService,LpItemService){
 	LpItemService.loadItems(function(items){
 		$scope.items = items;
 	});
+	*/
 
 }]);

@@ -2,108 +2,138 @@
 
 	<h1>Admin Panel</h1>
 
-	<section>
-		<h2>Global Options</h2>
-	</section>
+	<form>
+		<fieldset>
+			<select name="event" size="1"
+				ng-model="model.eventName">
+				<option 
+					ng-repeat="event in events" 
+					ng-bind="event"></option>
+			</select>
 
-	<section>
-		<h2>Users</h2>
+			<texfield ng-model="model.eventData">
 
-		<div><!-- sub-section -->
-			<div><!-- drop-down-group -->
-				<button>Add New User</button>
-				<div><!-- drop-down content -->
-					<form>
-						<fieldset>
-							<div>
+			</texfield>
+		</fieldset>
+	</form>
 
-								<!--
-									IDEA:
-									statt einzelner Inputs können wir auch erstmal ein textfeld
-									mit einer Standard-JSON einsetzen, die man modifizieren
-									und dann direkt absetzen kann.
-									Geht vielleicht schneller für den Anfang.
-								-->
 
-								<input type="text" name="some_name" value="">
-								<label for=""></label>
+
+
+
+
+
+
+
+
+
+
+	<div style="display:none;">
+
+		<section>
+			<h2>Global Options</h2>
+		</section>
+
+		<section>
+			<h2>Users</h2>
+
+			<div><!-- sub-section -->
+				<div><!-- drop-down-group -->
+					<button>Add New User</button>
+					<div><!-- drop-down content -->
+						<form>
+							<fieldset>
 								<div>
-									<span>Error</span>
+
+									<!--
+										IDEA:
+										statt einzelner Inputs können wir auch erstmal ein textfeld
+										mit einer Standard-JSON einsetzen, die man modifizieren
+										und dann direkt absetzen kann.
+										Geht vielleicht schneller für den Anfang.
+									-->
+
+									<input type="text" name="some_name" value="">
+									<label for=""></label>
+									<div>
+										<span>Error</span>
+									</div>
 								</div>
-							</div>
 
-						</fieldset>
-					</form>
+							</fieldset>
+						</form>
+					</div>
 				</div>
-			</div>
 
-			<div>
-				<button>Delete Selected User(s)</button>
 				<div>
-					<form>
-						<fieldset>
-							<div>
-								<input type="text" name="some_name" value="">
-								<label for=""></label>
+					<button>Delete Selected User(s)</button>
+					<div>
+						<form>
+							<fieldset>
 								<div>
-									<span>Error</span>
+									<input type="text" name="some_name" value="">
+									<label for=""></label>
+									<div>
+										<span>Error</span>
+									</div>
 								</div>
-							</div>
 
-						</fieldset>
-					</form>
-				</div>
-			</div>
-		</div>
-
-		<ul class="lunch-users">
-			<li class="lunch-user">
-				<input type="checkbox">
-				<img src="" alt="user's profile pic">
-				<p>name</p>
-				<ul class="lunch-items">
-					<li class="lunch-item"><img src="" alt="item pic"></li>
-				</ul>
-			</li>
-		</ul>
-	</section>
-
-	<section>
-		<button>give item(s)</button>
-		<button>remove item(s)</button>
-	</section>
-
-	<section>
-		<h2>Items</h2>
-
-		<div><!-- sub-section -->
-			<div><!-- drop-down-group -->
-				<button>Add New Item</button>
-				<div><!-- drop-down content -->
-					<form>
-						<fieldset>
-							<div>
-								<input type="text" name="some_name" value="">
-								<label for=""></label>
-								<div>
-									<span>Error</span>
-								</div>
-							</div>
-
-						</fieldset>
-					</form>
+							</fieldset>
+						</form>
+					</div>
 				</div>
 			</div>
 
-			<button>Delete Selected Item(s)</button>
-		</div>
+			<ul class="lunch-users">
+				<li class="lunch-user">
+					<input type="checkbox">
+					<img src="" alt="user's profile pic">
+					<p>name</p>
+					<ul class="lunch-items">
+						<li class="lunch-item"><img src="" alt="item pic"></li>
+					</ul>
+				</li>
+			</ul>
+		</section>
 
-		<ul class="lunch-items">
-			<li class="lunch-item">
-				<input type="checkbox">
-				<img src="" alt="item pic">
-			</li>
-		</ul>
-	</section>
+		<section>
+			<button>give item(s)</button>
+			<button>remove item(s)</button>
+		</section>
+
+		<section>
+			<h2>Items</h2>
+
+			<div><!-- sub-section -->
+				<div><!-- drop-down-group -->
+					<button>Add New Item</button>
+					<div><!-- drop-down content -->
+						<form>
+							<fieldset>
+								<div>
+									<input type="text" name="some_name" value="">
+									<label for=""></label>
+									<div>
+										<span>Error</span>
+									</div>
+								</div>
+
+							</fieldset>
+						</form>
+					</div>
+				</div>
+
+				<button>Delete Selected Item(s)</button>
+			</div>
+
+			<ul class="lunch-items">
+				<li class="lunch-item">
+					<input type="checkbox">
+					<img src="" alt="item pic">
+				</li>
+			</ul>
+		</section>
+
+	</div>
 
 </main>
