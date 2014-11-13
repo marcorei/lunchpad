@@ -5,13 +5,14 @@
 */
 
 angular.module('viewAdminController',[
-	'lpUserService',
-	'lpItemService'
+	'socket'
 ])
 
 .controller('ViewAdminController',[
-'$scope',
-function($scope){
+'$scope','Socket',
+function($scope,Socket){
+
+	var defaultResponse = 'No callback response';
 
 	$scope.events = [
 		'chat send',
@@ -53,10 +54,15 @@ function($scope){
 		eventData: ''
 	}
 
-	$scope.response = 'Sample Text';
+	$scope.response = defaultResponse;
 
 
-
+	$scope.emit = function(){
+		$scope.response = defaultResponse;
+		Socket.emit($scope.model.eventName, $scope.model.eventData, function(response){
+			$scope.response = JSON.stringify(response, undefined, 2);
+		});
+	}
 
 	/*
 	$scope.users;
