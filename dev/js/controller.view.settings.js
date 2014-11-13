@@ -18,7 +18,7 @@ function($scope,$routeParams,LpUserIdService,LpUserService){
 
 
 	$scope.submitPassForm = function(){
-		LpUserService.updatePassword($scope.passFormData.newPass, $scope.passFormData.oldPass, $scope.user.id);
+		LpUserService.updatePassword($scope.passFormData.newPass, $scope.passFormData.oldPass, $scope.user._id);
 		// reset
 		$scope.passFormData.oldPass = '';
 		$scope.passFormData.newPass = '';
