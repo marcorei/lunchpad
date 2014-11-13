@@ -1,5 +1,55 @@
 body {
 	font-family: sans-serif;
+	font-size: 16px;
+}
+
+.lunch-mail a {
+	color: #FF0046;
+	text-decoration: none;
+}
+
+.lunch-mail-venue {
+	border-width: 0px;
+	border-top-width: 0;
+	border-bottom-width: 2px;
+	border-color: #f7f7f7;
+	border-style: solid;
+	border-collapse:collapse;
+}
+
+.lunch-mail-venue:first-child {
+	border-top-width: 2px;
+}
+
+.lunch-mail-venue h2 {
+	margin: 1em 0 6px 0;
+	text-transform: uppercase;
+	font-size: 20px;
+	font-family: "Impact", sans-serif;
+}
+
+.lunch-mail-venue h2 a {
+	color: black;
+}
+
+.lunch-mail-venue h2 a:hover {
+	color: #333;
+}
+
+.lunch-mail-content {
+	margin: 2em 0;
+	width: 100%;
+}
+
+.lunch-mail-content ul {
+	padding: 0;
+	margin: 6px 0 10px 0;
+	display: table;
+}
+
+.lunch-mail-content li {
+	list-style-type: none;
+	float: left;
 }
 
 .lunch-mail-container {
@@ -9,6 +59,12 @@ body {
 }
 
 .lunch-mail-footer {
+	margin-top: 60px;
 	font-size: 12px;
-	color: #cccccc;
+	color: #ddd;
+}
+
+.lunch-mail-footer a {
+	color:#ddd;
+	text-decoration: underline;
 }
