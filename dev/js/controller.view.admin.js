@@ -14,8 +14,6 @@ angular.module('viewAdminController',[
 function($scope){
 
 	$scope.events = [
-		'error',
-
 		'chat send',
 
 		'venue read list',
@@ -54,6 +52,8 @@ function($scope){
 		eventName: '',
 		eventData: ''
 	}
+
+	$scope.response = 'Sample Text';
 
 
 

@@ -4,16 +4,21 @@
 
 	<form>
 		<fieldset>
-			<select name="event" size="1"
-				ng-model="model.eventName">
-				<option 
-					ng-repeat="event in events" 
-					ng-bind="event"></option>
-			</select>
-
-			<texfield ng-model="model.eventData">
-
-			</texfield>
+			<div>
+				<select name="event" size="1"
+					ng-model="model.eventName">
+					<option 
+						ng-repeat="event in events" 
+						ng-bind="event"></option>
+				</select>
+			</div>
+			
+			<div>
+				<textarea ng-model="model.eventData"></textarea>
+			</div>
+			
+			<div ng-bind="response">
+			</div>
 		</fieldset>
 	</form>
 
