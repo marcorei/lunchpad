@@ -121,7 +121,7 @@ NotificationProvider.prototype.save = function(notis, onSuccess, onError){
 		if(notis.length === undefined) notis = [notis];
 
 		// expected values
-		
+
 		for(i=0;i<notis.length;i++){
 
 			noti = notis[i];
@@ -138,7 +138,7 @@ NotificationProvider.prototype.save = function(notis, onSuccess, onError){
 			// fill auto values
 			noti.date = new Date();
 		}
-		
+
 
 		collection.insert(notis, function(error,results) {
 			if(error) onError(error);
@@ -150,6 +150,25 @@ NotificationProvider.prototype.save = function(notis, onSuccess, onError){
 
 	},onError);
 }
+
+
+/*
+IDEA for future notifications system
+
+{
+	"target":"user-id",
+	"type":"checkin/comment"
+	"venue": {
+		"id": "venues-id"
+		"name": "venue-name"
+	},
+	"user": {
+		"id": "user-id",
+		"nick": "user-nick",
+		"ava": "user-ava"
+	}
+}
+*/
 
 
 
