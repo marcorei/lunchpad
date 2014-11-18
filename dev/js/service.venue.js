@@ -162,7 +162,8 @@ function(Socket,LpConfig,LpError,LpUserIdService,$timeout){
 
 
 
-	var onUnhandeltModify = function(){
+	var onUnhandledModify = function(){
+		console.log('unhandled modify, reloading');
 		if(loaded){
 			loaded = false;
 			loadVenues();
@@ -257,7 +258,7 @@ function(Socket,LpConfig,LpError,LpUserIdService,$timeout){
 
 	var onVenueCreateDone = function(data){
 		LpError.throwHint('The new venue ' + data.venue.name + ' has been created!');
-		onUnhandeltModify();
+		onUnhandledModify();
 	}
 
 
@@ -277,8 +278,8 @@ function(Socket,LpConfig,LpError,LpUserIdService,$timeout){
 		socketManager.on(LpConfig.getEvent('comment.create.done'),onCommentCreateDone);
 		socketManager.on(LpConfig.getEvent('comment.delete.done'),onCommentDeleteDone);
 
-		socketManager.on(LpConfig.getEvent('venue.create.done'),onUnhandeltModify);
-		socketManager.on(LpConfig.getEvent('venue.delete.done'),onUnhandeltModify);
+		socketManager.on(LpConfig.getEvent('venue.create.done'),onVenueCreateDone);
+		socketManager.on(LpConfig.getEvent('venue.delete.done'),onUnhandledModify);
 	});
 
 

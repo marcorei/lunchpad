@@ -783,7 +783,7 @@ io.sockets.on('connection', function (socket) {
 				createdBy: user._id
 			},function(result){
 
-				socket.broadcast.emit('venue create done',{
+				io.sockets.emit('venue create done',{
 					venue: {
 						name: data.name
 					}
@@ -813,7 +813,7 @@ io.sockets.on('connection', function (socket) {
 			venueProvider.updateName(data._id, data.name,
 			function(updated){
 
-				socket.broadcast.emit('venue name update done',{
+				io.sockets.emit('venue name update done',{
 					venue: updated
 				});
 
@@ -839,7 +839,7 @@ io.sockets.on('connection', function (socket) {
 			venueProvider.updateUrl(data._id, data.url,
 			function(updated){
 
-				socket.broadcast.emit('venue url update done',{
+				io.sockets.emit('venue url update done',{
 					venue: updated
 				});
 
@@ -865,7 +865,7 @@ io.sockets.on('connection', function (socket) {
 			venueProvider.deleteVenue(data._id,
 			function(removed){
 
-				socket.broadcast.emit('venue delete done',{
+				io.sockets.emit('venue delete done',{
 					removed: removed
 				});
 
