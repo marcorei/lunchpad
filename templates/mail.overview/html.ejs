@@ -8,18 +8,16 @@
 		<link rel="stylesheet" type="text/css" href="mail.overview/style.css">
 	</head>
 
-	<body style="margin:0; padding:0;" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" class="lunch-mail">
+	<body style="margin:0;" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" class="lunch-mail">
 		<div class="lunch-mail-container">
-
 			<div class="lunch-mail-hello">
 				<p>Hello <%= user.nick %>,</p>
 				<p>check out the new checkins on <a href="http://www.lunchpad.co">lunchpad</a>!</p>
 			</div>
-
 			<div class="lunch-mail-content">
 				<% for(var i = 0; i < venues.length; i++) { %>
 					<div class="lunch-mail-venue">
-						<h2><a href="http://www.lunchpad.co/#/venue/<%= venues[i]._id %>"><%= venues[i].name %></a></h2>
+						<h2><%= venues[i].name %></a></h2>
 						<p><a href="http://www.lunchpad.co/#/venue/<%= venues[i]._id %>">visit venue</a></p>
 						<ul>
 							<% for(var j = 0; j < venues[i].users.length; j++) { %>
@@ -31,15 +29,14 @@
 					</div>
 				<% } %>
 			</div>
-
 			<div class="lunch-mail-cya">
 				<p>Thank you for using lunchpad.</p>
 				<p> See you at lunchtime!</p>
 			</div>
-
-			<div class="lunch-mail-footer">
-				<p>You can always update your <a href="http://www.lunchpad.co/#/settings/self">email preferences</a>.</p>
-			</div>
+		</div>
+		<div class="lunch-mail-footer">
+			<p>You can always update your <a href="http://www.lunchpad.co/#/settings/self">email preferences</a>.</p>
+			<a href="http://www.lunchpad.co"><img src="../static/img/logo-mail.gif" alt="lunchpad"></a>
 		</div>
 	</body>
 </html>
