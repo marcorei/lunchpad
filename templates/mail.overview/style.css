@@ -19,18 +19,10 @@ body {
 }
 
 .lunch-mail-venue {
-	padding: 1.25em 0;
-	border-width: 0px;
-	border-top-width: 0;
-	border-bottom-width: 2px;
-	border-color: #f7f7f7;
-	border-style: solid;
-	border-collapse:collapse;
+	margin: 1.75em 0;
 }
 
-.lunch-mail-venue:first-child {
-	border-top-width: 2px;
-}
+
 
 .lunch-mail-venue h2 {
 	margin: 0 0 6px 0;
@@ -41,10 +33,10 @@ body {
 
 .lunch-mail-venue p {
 	margin-top: 6px;
+	margin-bottom: 10px;
 }
 
 .lunch-mail-venue a {
-
 	color: #00B9E7;
 }
 
@@ -75,13 +67,14 @@ body {
 
 .lunch-mail-container {
 	max-width: 500px;
-	padding: 40px 20px 40px 20px;
+	padding: 40px 30px 60px 30px;
 	margin: 0 auto;
 }
 
 .lunch-mail-footer {
-	margin-top: 40px;
-	margin-bottom: 0;
+	max-width: 500px;
+	padding: 40px 30px 20px 30px;
+	margin: 0 auto;
 	font-size: 12px;
 	color: #bbb;
 }
@@ -89,4 +82,8 @@ body {
 .lunch-mail-footer a {
 	color:#bbb;
 	text-decoration: underline;
+}
+
+.lunch-mail-footer p {
+	margin-top: 0;
 }
