@@ -12,6 +12,14 @@ angular.module('viewVenueEditController',[
 '$scope','$location','LpVenueService',
 function($scope,$location,LpVenueService){
 
-	// Diesdas
+	$scope.venueFormData = {};
+
+	$scope.submitVenueForm = function(){
+		LpVenueService.createVenue($scope.venueFormData.venueName, $scope.venueFormData.venueURL);
+		//reset;
+		$scope.venueFormData.venueName = '';
+		$scope.venueFormData.venueURL = '';
+		$scope.venueForm.$setPristine(true);
+	};
 
 }]);

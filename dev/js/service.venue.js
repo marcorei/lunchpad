@@ -21,6 +21,14 @@ function(Socket,LpConfig,LpError,LpUserIdService,$timeout){
 		loaded = false,
 		socketManager = Socket.generateManager(null);
 
+
+	var createVenue = function(name, url){
+		socketManager.emit(LpConfig.getEvent('venue.create'),{
+			name: name,
+			url: url
+		});
+	}
+
 	var getVenueById = function(id, callback){
 		if(loaded){
 			callback(venues[findVenueIndexById(id)]);
@@ -247,6 +255,11 @@ function(Socket,LpConfig,LpError,LpUserIdService,$timeout){
 		venues[index].comc = data.count;
 	};
 
+	var onVenueCreateDone = function(data){
+		LpError.throwHint('The new venue ' + data.venue.name + ' has been created!');
+		onUnhandeltModify();
+	}
+
 
 
 
@@ -273,7 +286,8 @@ function(Socket,LpConfig,LpError,LpUserIdService,$timeout){
 		venues: venues, // bind to this
 		getVenueById: getVenueById, // shortcut with queuing and callback
 		checkIn: checkIn,
-		checkOut: checkOut
+		checkOut: checkOut,
+		createVenue: createVenue
 	};
 
 }]);

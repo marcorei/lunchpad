@@ -40,8 +40,9 @@ function($scope,$location,$routeParams,LpVenueService,LpCommentService){
 	}
 
 	$scope.sendComment = function(){
-		if($scope.formInputTxt.length > 0){
+		if($scope.formInputTxt && $scope.formInputTxt.length > 0){
 			commentsManager.createComment($scope.formInputTxt);
+			$scope.formInputTxt = '';
 		}
 		// TODO: implement error message
 	}

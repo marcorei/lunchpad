@@ -771,24 +771,26 @@ io.sockets.on('connection', function (socket) {
 			if(e = new Validate()
 			.v('isLength',[data.name,2,100],'venue.name.length')
 			.v('isURL',[data.url,{require_protocol: true}],'venue.url')
-			.v('isLength',[data.createdBy,24,24],'venue.id')
+			//.v('isLength',[data.createdBy,24,24],'venue.id')
 			.e()){
-				sendErrorToSocket(socket,e);
+				lunchHelper.sendErrorToSocket(socket,e);
 				return null;
 			}
 
 			venueProvider.save({
 				name: data.name,
 				url: data.url,
-				createdBy: data.createdBy
+				createdBy: user._id
 			},function(result){
 
 				socket.broadcast.emit('venue create done',{
-					result: result
+					venue: {
+						name: data.name
+					}
 				});
 
 			},function(error){
-				sendErrorToSocket(socket,error);
+				lunchHelper.sendErrorToSocket(socket,error);
 			});
 		});
 	});
@@ -801,10 +803,10 @@ io.sockets.on('connection', function (socket) {
 
 			var e;
 			if(e = new Validate()
-			.v('inLength',[data._id,24,24],'venue.id')
+			.v('isLength',[data._id,24,24],'venue.id')
 			.v('isLength',[data.name,2,100],'venue.name.length')
 			.e()){
-				sendErrorToSocket(socket,e);
+				lunchHelper.sendErrorToSocket(socket,e);
 				return null;
 			}
 
@@ -816,7 +818,7 @@ io.sockets.on('connection', function (socket) {
 				});
 
 			},function(error){
-				sendErrorToSocket(socket,error);
+				lunchHelper.sendErrorToSocket(socket,error);
 			});
 		});
 	});
@@ -827,10 +829,10 @@ io.sockets.on('connection', function (socket) {
 
 			var e;
 			if(e = new Validate()
-			.v('inLength',[data._id,24,24],'venue.id')
+			.v('isLength',[data._id,24,24],'venue.id')
 			.v('isURL',[data.url,{require_protocol: true}],'venue.url')
 			.e()){
-				sendErrorToSocket(socket,e);
+				lunchHelper.sendErrorToSocket(socket,e);
 				return null;
 			}
 
@@ -842,7 +844,7 @@ io.sockets.on('connection', function (socket) {
 				});
 
 			},function(error){
-				sendErrorToSocket(socket,error);
+				lunchHelper.sendErrorToSocket(socket,error);
 			});
 
 		});
@@ -854,9 +856,9 @@ io.sockets.on('connection', function (socket) {
 
 			var e;
 			if(e = new Validate()
-			.v('inLength',[data._id,24,24],'venue.id')
+			.v('isLength',[data._id,24,24],'venue.id')
 			.e()){
-				sendErrorToSocket(socket,e);
+				lunchHelper.sendErrorToSocket(socket,e);
 				return null;
 			}
 
@@ -868,7 +870,7 @@ io.sockets.on('connection', function (socket) {
 				});
 
 			},function(error){
-				sendErrorToSocket(socket,error);
+				lunchHelper.sendErrorToSocket(socket,error);
 			});
 		});
 	});
@@ -885,7 +887,7 @@ io.sockets.on('connection', function (socket) {
 			if(e = new Validate()
 			.v('isLength',[data._id,24,24],'checkin.id')
 			.e()){
-				sendErrorToSocket(socket,e);
+				lunchHelper.sendErrorToSocket(socket,e);
 				return null;
 			}
 
@@ -984,7 +986,7 @@ io.sockets.on('connection', function (socket) {
 			if(e = new Validate()
 			.v('isLength',[data._id,24,24],'venue.id')
 			.e()){
-				sendErrorToSocket(socket,e);
+				lunchHelper.sendErrorToSocket(socket,e);
 				return null;
 			}
 
@@ -1057,7 +1059,7 @@ io.sockets.on('connection', function (socket) {
 			if(e = new Validate()
 			.v('inLength',[data._id,24,24],'comment.id')
 			.e()){
-				sendErrorToSocket(socket,e);
+				lunchHelper.sendErrorToSocket(socket,e);
 				return null;
 			}
 
@@ -1074,13 +1076,13 @@ io.sockets.on('connection', function (socket) {
 						});
 
 					},function(error){
-						sendErrorToSocket(socket,error);
+						lunchHelper.sendErrorToSocket(socket,error);
 					});
 				},function(error){
-					sendErrorToSocket(socket,error);
+					lunchHelper.sendErrorToSocket(socket,error);
 				});
 			},function(error){
-				sendErrorToSocket(socket,error);
+				lunchHelper.sendErrorToSocket(socket,error);
 			});
 		});
 	});
@@ -1124,7 +1126,7 @@ io.sockets.on('connection', function (socket) {
 				});
 
 			},function(error){
-				sendErrorToSocket(socket,error);
+				lunchHelper.sendErrorToSocket(socket,error);
 			});
 		});
 	});
@@ -1139,7 +1141,7 @@ io.sockets.on('connection', function (socket) {
 				});
 
 			},function(error){
-				sendErrorToSocketCb(cb,error);
+				lunchHelper.sendErrorToSocketCb(cb,error);
 			});
 		});
 	});
@@ -1458,7 +1460,7 @@ io.sockets.on('connection', function (socket) {
 			if(e = new Validate()
 			.v('isLength',[data._id,24,24],'item.id')
 			.e()){
-				sendErrorToSocketCb(cb,e);
+				lunchHelper.sendErrorToSocketCb(cb,e);
 				return null;
 			}
 

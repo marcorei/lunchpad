@@ -1,3 +1,31 @@
 <main>
-	
+	<form name="venueForm">
+		<fieldset>
+			<div class="">
+				<label class="lunch-input-text-label" for="venueName">Name</label>
+				<div class="lunch-input-contain">
+					<input type="text" id="venueName" name="venueName"
+						ng-model="venueFormData.venueName"
+						required>
+					<div class="lunch-input-note" ng-show="venueForm.venueName.$dirty && venueForm.venueName.$invalid">
+						<span>required</span>
+					</div>
+				</div>
+			</div>
+			<div class="">
+				<label class="lunch-input-text-label" for="venueURL">URL</label>
+				<div class="lunch-input-contain">
+					<input type="url" id="venueURL" name="venueURL"
+						ng-model="venueFormData.venueURL"
+						required>
+					<div class="lunch-input-note" ng-show="venueForm.venueURL.$dirty && venueForm.venueURL.$invalid">
+						<span>required</span>
+					</div>
+				</div>
+			</div>
+			<button type="submit" class="lunch-button"
+					ng-click="submitVenueForm()"
+					ng-disabled="venueForm.$invalid">create venue</button>
+		</fieldset>
+	</form>
 </main>
