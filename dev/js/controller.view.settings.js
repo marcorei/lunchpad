@@ -19,6 +19,7 @@ function($scope,$routeParams,LpUserIdService,LpUserService){
 	//$scope.user = {};
 	$scope.data = userManager.data;
 	$scope.passFormData = {};
+	$scope.itemUpdated = false;
 
 
 	$scope.submitPassForm = function(){
@@ -40,7 +41,7 @@ function($scope,$routeParams,LpUserIdService,LpUserService){
 		}else{
 			userManager.updateActiveItem(null);
 		}
-		
+		$scope.itemUpdated = true;
 	};
 
 
