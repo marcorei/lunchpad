@@ -733,7 +733,7 @@ io.sockets.on('connection', function (socket) {
 			if(e = new Validate()
 			.v('isLength',[data._id,24,24],'venue.id')
 			.e()){
-				sendErrorToSocketCb(cd,e);
+				lunchHelper.sendErrorToSocketCb(cb,e);
 				return null;
 			}
 
@@ -746,7 +746,7 @@ io.sockets.on('connection', function (socket) {
 				});
 
 			},function(error){
-				sendErrorToSocketCb(cb,error);
+				lunchHelper.sendErrorToSocketCb(cb,error);
 			});
 		});
 	});
