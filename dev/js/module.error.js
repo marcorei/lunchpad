@@ -52,8 +52,8 @@ function($window,Socket,LpConfig){
 		}
 	};
 
-	socketManager.on(LpConfig.getEvent('error'),function(data){
-		console.log('Error: '+data);
+	socketManager.on(LpConfig.getEvent('error'), function(data){
+		console.log('Error: ' + data);
 		throwError(data.error.msg);
 
 		/*
@@ -63,6 +63,11 @@ function($window,Socket,LpConfig){
 			throwError(getMsg(data.error.code));
 		}
 		*/
+	});
+
+	socketManager.on(LpConfig.getEvent('hint'), function(data){
+		console.log('Hint: ' + data);
+		throwHint(data.hint.msg);
 	});
 
 	return {

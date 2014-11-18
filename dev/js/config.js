@@ -42,6 +42,7 @@ angular.module('lpConfig',[
 
 	var events = {
 		'error':'error',
+		'hint':'hint',
 
 		'chat.send': 'chat send',
 		'chat.message': 'chat message',
