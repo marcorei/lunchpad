@@ -59,17 +59,29 @@ function($scope,Socket,LpError){
 
 
 	$scope.emit = function(){
-		var json = $scope.model.eventData;
-		if (/^[\],:{}\s]*$/.test(json.replace(/\\["\\\/bfnrtu]/g, '@').
+		var jsonString = $scope.model.eventData,
+			json;
+		if (/^[\],:{}\s]*$/.test(jsonString.replace(/\\["\\\/bfnrtu]/g, '@').
 			replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
 			replace(/(?:^|:|,)(?:\s*\[)+/g, ''))){
-			if(json === ''){
-				json = '{}';
+			if(jsonString === ''){
+				jsonString = '{}';
 			}
-			$scope.response = defaultResponse;
-				Socket.emit($scope.model.eventName, JSON.parse(json), function(response){
-				$scope.response = JSON.stringify(response, undefined, 2);
-			});
+			try{
+				console.log(jsonString);
+				json = JSON.parse(jsonString);
+				$scope.response = defaultResponse;
+				Socket.emit($scope.model.eventName, json, function(response){
+					$scope.response = JSON.stringify(response, undefined, 2);
+				});
+			}catch(e){
+				console.log(e);
+				LpError.throwError('Parsing JSON failed! (Invalid JSON?)');
+			}
+			// $scope.response = defaultResponse;
+			// Socket.emit($scope.model.eventName, JSON.parse(json), function(response){
+			// 	$scope.response = JSON.stringify(response, undefined, 2);
+			// });
 		}else{
 			LpError.throwError('JSON invalid!');
 		}
