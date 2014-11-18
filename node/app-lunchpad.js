@@ -1403,7 +1403,7 @@ io.sockets.on('connection', function (socket) {
 
 				cb({
 					error: null,
-					items: items
+					items: results
 				});
 
 			},function(error){
