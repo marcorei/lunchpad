@@ -1234,35 +1234,50 @@ io.sockets.on('connection', function (socket) {
 
 	socket.on('user update activeitem', function(data){
 		lunchAuth.isOwner(socket, data._id, function(user){
-
+			
 			var e;
 			if(e = new Validate()
-			.v('inLength',[data._id,24,24],'user.id')
+			.v('isLength',[data.itemId,24,24],'user.id')
 			.e()){
-				lunchHelper.sendErrorToSocket(socket,e);
-				return null;
+				//lunchHelper.sendErrorToSocket(socket,e);
+				//return null;
+
+				// don't return error, delete item instead!
+				data.itemId = null;
 			}
 
 			// -------------
 			//	Currently, there is nothing to prevent users to set items active, which are not in there inventory.
 			//  TODO: Add check, if item is indeed in the invetory of the user.
 			// -------------
+			if(data.itemId){
+				itemProvider.findItem(data.itemId,
+				function(item){
+					userProvider.updateActiveItem( user._id, item,
+					function(results){
 
-			itemProvider.findItem(data._id,
-			function(item){
-				userProvider.updateAktiveItem( user._id, item,
+						socket.emit('user update activeitem done',{
+							item: item
+						});
+
+					},function(error){
+						lunchHelper.sendErrorToSocket(socket,error);
+					});
+				},function(error){
+					lunchHelper.sendErrorToSocket(socket,error);
+				});
+			}else{
+				userProvider.updateActiveItem( user._id, null,
 				function(results){
 
-					socket.emit('user update active item done',{
-						updated: true
+					socket.emit('user update activeitem done',{
+						item: null
 					});
 
 				},function(error){
 					lunchHelper.sendErrorToSocket(socket,error);
 				});
-			},function(error){
-				lunchHelper.sendErrorToSocket(socket,error);
-			});
+			}
 		});
 	});
 
@@ -1367,7 +1382,7 @@ io.sockets.on('connection', function (socket) {
 
 			var e;
 			if(e = new Validate()
-			.v('inLength',[data._id,24,24],'item.id')
+			.v('isLength',[data._id,24,24],'item.id')
 			.e()){
 				sendErrorToSocketCb(cb,e);
 				return null;

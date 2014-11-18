@@ -70,9 +70,10 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 		});
 	};
 
-	var updateActiveItem = function(itemId){
+	var updateActiveItem = function(itemId, uid){
 		socketManager.emit(LpConfig.getEvent('user.update.activeitem'),{
-			_id: itemId
+			_id: uid,
+			itemId: itemId
 		});
 	};
 
@@ -98,7 +99,63 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 	// We will skip further notifications because they will most likely come across as spam.
 	// I case of an error, the Error-Service should already catch it.
 
+
+
+	var UserManager = function(scope){
+		var cache = {
+				user: null
+			},
+			self = this;
+		this.userId = -1;
+		this.socketManager;
+
+		var markActiveItemInArr = function(arr, item){
+			var activeId = (item) ? item._id : 0;
+			var i;
+			for(i = 0; i < arr.length; i++){
+				if(arr[i]._id === activeId){
+					arr[i].active = true;
+				}else{
+					arr[i].active = false;
+				}
+			}
+		}
+
+		var onUpdateActiveItemDone = function(data){
+			cache.user.item = data.item;
+			markActiveItemInArr(cache.user.inv, data.item);
+		}
+
+		if(scope == undefined){
+			throw 'scope not defined. UserManager can not work with rootScope';
+		}
+		this.socketManager = Socket.generateManager(scope);
+		this.socketManager.on(LpConfig.getEvent('user.update.activeitem.done'),onUpdateActiveItemDone);
+
+		// API
+
+		this.loadUser = function(userId, callback){
+			readUser(userId, function(user){
+				cache.user = user;
+				markActiveItemInArr(cache.user.inv, cache.user.item);
+				if(callback) callback();
+			});
+		}
+
+		this.updateActiveItem = function(itemId){
+			updateActiveItem(itemId, cache.user._id);
+		}
+
+		this.data = cache;
+	}
+
+	var generateManager = function(scope){
+		return new UserManager(scope);
+	}
+
+
 	return {
+		generateManager: generateManager,
 		createUser: createUser,
 		deleteUser: deleteUser,
 		readUserList: readUserList,

@@ -13,12 +13,16 @@ angular.module('viewSettingsController',[
 '$scope','$routeParams','LpUserIdService','LpUserService',
 function($scope,$routeParams,LpUserIdService,LpUserService){
 
-	$scope.user = {};
+	var userManager = LpUserService.generateManager($scope);
+
+	// Model
+	//$scope.user = {};
+	$scope.data = userManager.data;
 	$scope.passFormData = {};
 
 
 	$scope.submitPassForm = function(){
-		LpUserService.updatePassword($scope.passFormData.newPass, $scope.passFormData.oldPass, $scope.user._id);
+		LpUserService.updatePassword($scope.passFormData.newPass, $scope.passFormData.oldPass, $scope.data.user._id);
 		// reset
 		$scope.passFormData.oldPass = '';
 		$scope.passFormData.newPass = '';
@@ -27,19 +31,25 @@ function($scope,$routeParams,LpUserIdService,LpUserService){
 
 	$scope.submitNotifications = function(){
 		// TODO: push Error ErrorProvider if other User
-		LpUserService.updateNotifications($scope.user.noti.remind, $scope.user.noti.overv, $scope.user._id);
+		LpUserService.updateNotifications($scope.data.user.noti.remind, $scope.data.user.noti.overv, $scope.data.user._id);
 	};
 
 	$scope.submitActiveItem = function(itemId){
-		LpUserProvider.updateActiveItem(itemId);
+		if($scope.data.user.item == null || itemId !== $scope.data.user.item._id){
+			userManager.updateActiveItem(itemId);
+		}else{
+			userManager.updateActiveItem(null);
+		}
+		
 	};
 
 
 
 	var loadUserData = function(id){
-		LpUserService.readUser(id, function(user){
-			$scope.user = user;
-		});
+		// LpUserService.readUser(id, function(user){
+		// 	$scope.user = user;
+		// });
+		userManager.loadUser(id);
 	};
 
 	// Startup

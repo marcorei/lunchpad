@@ -17,8 +17,8 @@
 				<img src="static/img/ft.png" alt="">
 				<img src="static/img/item-party.png"  class="lunch-item-image" alt="">
 				-->
-				<img ng-src="{{user.item}}" alt="profile item" ng-class="{'lunch-item-front': 'user.item.front'}" ng-show="user.item">
-				<img ng-src="{{user.ava}}" alt="profile picture">
+				<img ng-src="{{data.user.item.url}}" alt="profile item" ng-class="{'lunch-item-front': 'user.item.front'}" ng-show="data.user.item">
+				<img ng-src="{{data.user.ava}}" alt="profile picture">
 			</div>
 		</div>
 		<ul class="lunch-runway">
@@ -35,8 +35,9 @@
 			</li>
 			-->
 			<li class="lunch-item"
-				ng-repeat="item in user.inv"
-				ng-click="submitActiveItem(item._id)">
+				ng-repeat="item in data.user.inv"
+				ng-click="submitActiveItem(item._id)"
+				ng-class="{'lunch-active':item.active}">
 				<div class="lunch-avatar">
 					<span>{{item.name}}</span>
 					<img ng-src="{{item.url}}">
@@ -50,13 +51,13 @@
 		<p>
 			<input type="checkbox" name="lunch-overview" id="lunch-overview"
 				ng-change="submitNotifications()"
-				ng-model="user.noti.overv">
+				ng-model="data.user.noti.overv">
 			<label for="lunch-overview">Send me an overview about what venues my collegues chose</label>
 		</p>
 		<p>
 			<input type="checkbox" name="lunch-remind" id="lunch-remind"
 				ng-change="submitNotifications()"
-				ng-model="user.noti.remind">
+				ng-model="data.user.noti.remind">
 			<label for="lunch-remind">Remind me when to choose a venue</label>
 		</p>
 	</section>

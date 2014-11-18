@@ -260,19 +260,21 @@ UserProvider.prototype.removeItemFromInventories = function(iid, onSuccess, onEr
  * Make item active.
  */
 
-UserProvider.prototype.updateAktiveItem = function(id, item, onSuccess, onError){
+UserProvider.prototype.updateActiveItem = function(id, item, onSuccess, onError){
 	db.gc(cn, function(collection){
-
-		collection.update({},{
-			$pull:{
-				inv: _id
+		
+		collection.update({
+			_id: id
+		},{
+			$set:{
+				item: item
 			}
 		},{
 			safe:true,
 			multi:true
-		},function(error,results){
+		},function(error,updates){
 			if(error) onError(error);
-			else onSuccess(results);
+			else onSuccess(updates);
 		});
 
 	},onError);

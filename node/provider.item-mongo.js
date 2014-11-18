@@ -39,11 +39,11 @@ ItemProvider.prototype.findAll = function(onSuccess, onError){
 
 ItemProvider.prototype.findItem = function(id, onSuccess, onError){
 	db.gc(cn, function(collection){
-
+		
 		collection.findOne({
 			_id: db.oID(id)
 		},{},function(error,item){
-			if(!error) onError(error);
+			if(error) onError(error);
 			else if(!item) onError('item not found!');
 			else onSuccess(item);
 		})
