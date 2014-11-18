@@ -3,40 +3,129 @@
 .lunch-flash {
 	position: fixed;
 	z-index: 5;
-	top: 0;
-	left: 38.2%;
+	top: 61px;
+	left: 0;
 	right: 0;
 	background-color: #FFF080;
-	color: #E27F00;
-	font: {
-		family: Georgia;
-	}
+	color: #CB9A31;
+	font-size: 14px;
 
-	padding: {
-		top:20px;
-		left: 60px;
-		bottom: 20px;
-		right: 60px;
-	}
 	p {
 		margin: 0;
 	}
-	.lunch-flash-close {
-		border-radius: 33px;
+
+	ul {
+		margin: 0;
+		padding: {
+			left: 16px;
+			right: 50px;
+		};
+	}
+	li {
+		margin: 0.5em 0;
+		list-style-type: disc;
+	}
+
+	.lunch-fn-close {
+		display: block;
+		width: 40px;
+		position: absolute;
+		right: 0;
+		top: 0;
+		bottom: 0;
+
+		@include border-radius(50%);
+		@include transition-property(color);
+		@include transition-duration($lunch-time-out);
+		cursor: pointer;
+		color: #CB9A31;
 		text-align: center;
-		margin-top: -7px;
-		padding: 7px 4px;
-		width: 25px;
-		text-decoration: none;
 		font: {
-			family: "Helvetica Neue", Arial;
+			weight: bold;
+			size: 20px;
 		}
-		float: right;
-		background-color: #e27f00;
-		color: #fff;
+
+		&:hover {
+			color: #000;
+			@include transition-duration($lunch-time-over);
+		}
+
+		.lunch-icon {
+			display: block;
+			position: absolute;
+			top: 50%;
+			right: 10px;
+			left: auto;
+			@include transform(translateY(-50%));
+		}
 	}
 
 	.lunch-flash-container {
-		max-width: 600px;
+		position: relative;
+		max-width: 620px;
+		margin: 20px;
 	}
+
+
+	.error {
+		color: $lunch-clr-red-drk;
+	}
+
+	.hint {
+
+	}
+}
+
+
+
+@mixin lunch-flash-s() {
+	.lunch-flash {
+		position: fixed;
+		top: 0;
+		left: 200px;
+
+		.lunch-flash-container {
+
+			margin: {
+				left: 60px;
+				right: 20px;
+			}
+
+		}
+		ul {
+			padding: {
+				right: 80px;
+			}
+		}
+
+		.lunch-fn-close {
+			right: 30px;
+		}
+	}
+}
+
+
+
+@mixin lunch-flash-m() {
+	.lunch-flash {
+		left: 38.15%;
+	}
+}
+
+
+
+@mixin lunch-flash-mixins-screen-s() {
+	@include lunch-flash-s;
+}
+
+@mixin lunch-flash-mixins-screen-m() {
+	@include lunch-flash-m;
+}
+
+@media screen and (min-width: $lunch-grid-break-s) {
+	@include lunch-flash-mixins-screen-s;
+}
+
+@media screen and (min-width: $lunch-grid-break-m) {
+	@include lunch-flash-mixins-screen-m;
 }

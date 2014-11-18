@@ -48,7 +48,24 @@
 
 
 
+/* Body */
 
+// Mobile First
+
+body {
+	padding: {
+		top: 0px;
+	}
+}
+
+
+@mixin body-s() {
+	body {
+		padding: {
+			top: 0;
+		}
+	}
+}
 
 
 
