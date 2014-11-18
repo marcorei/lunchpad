@@ -20,6 +20,7 @@
 		margin: 0;
 		text-align: center;
 	}
+
 	.lunch-profile {
 		// box
 		display: block;
@@ -38,6 +39,7 @@
 			display: none;
 		}
 	}
+
 	.lunch-altar {
 		width: 85px;
 		height: 85px;
@@ -47,18 +49,6 @@
 			color: $lunch-clr-grey-xxlgt;
 		}
 		@include border-radius(50%);
-	}
-	.lunch-avatar {
-		width: 50px;
-		height: 85px;
-		margin: 0 auto;
-		position: relative;
-
-		.lunch-item-image {
-			position: absolute;
-			top: 0;
-			left: 0;
-		}
 	}
 
 	.lunch-runway {
@@ -110,6 +100,11 @@
 			top: 0;
 			left: 0;
 		}
+	}
+
+
+	.lunch-item-info {
+		display: none;
 	}
 
 	.lunch-password-input {

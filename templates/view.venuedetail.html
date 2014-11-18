@@ -36,7 +36,15 @@
 		<div class="lunch-venue-guests" ng-class="{'lunch-guests-empty': venue.guests.length == 0}">
 			<ul>
 				<li class="lunch-venue-guest lunch-animate" ng-repeat="user in venue.guests">
-					<img src="{{user.ava}}" class="lunch-user-image" alt="{{user.nick}}">
+					<!-- <img src="{{user.ava}}" class="lunch-user-image" alt="{{user.nick}}"> -->
+					<div class="lunch-avatar">
+						<!--
+						<img src="static/img/ft.png" alt="">
+						<img src="static/img/item-party.png"  class="lunch-item-image" alt="">
+						-->
+						<img ng-src="{{user.item.url}}" alt="profile item" ng-class="{'lunch-item-front': 'user.item.front'}" ng-show="user.item">
+						<img ng-src="{{user.ava}}" alt="profile picture">
+					</div>
 				</li>
 			</ul>
 		</div>
