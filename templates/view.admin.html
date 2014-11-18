@@ -6,17 +6,16 @@
 		<fieldset>
 
 			<select name="event" size="1"
+				ng-options="event as event for event in events"
 				ng-model="model.eventName">
-				<option
-					ng-repeat="event in events"
-					ng-bind="event"></option>
 			</select>
 
-			<textarea ng-model="model.eventData"></textarea>
+			<textarea ng-model="model.eventData" ng-allow-tab></textarea>
 		</fieldset>
 		<fieldset>
-			<button type="submit" class="lunch-button">Post Json</button>
+			<button type="submit" class="lunch-button" ng-click="emit()">Post Json</button>
 		</fieldset>
+
 
 			<pre ng-bind="response"></pre>
 

@@ -5,12 +5,13 @@
 */
 
 angular.module('viewAdminController',[
-	'socket'
+	'socket',
+	'lpError'
 ])
 
 .controller('ViewAdminController',[
-'$scope','Socket',
-function($scope,Socket){
+'$scope','Socket','LpError',
+function($scope,Socket,LpError){
 
 	var defaultResponse = 'No callback response';
 
@@ -58,10 +59,20 @@ function($scope,Socket){
 
 
 	$scope.emit = function(){
-		$scope.response = defaultResponse;
-		Socket.emit($scope.model.eventName, $scope.model.eventData, function(response){
-			$scope.response = JSON.stringify(response, undefined, 2);
-		});
+		var json = $scope.model.eventData;
+		if (/^[\],:{}\s]*$/.test(json.replace(/\\["\\\/bfnrtu]/g, '@').
+			replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
+			replace(/(?:^|:|,)(?:\s*\[)+/g, ''))){
+			if(json === ''){
+				json = '{}';
+			}
+			$scope.response = defaultResponse;
+				Socket.emit($scope.model.eventName, JSON.parse(json), function(response){
+				$scope.response = JSON.stringify(response, undefined, 2);
+			});
+		}else{
+			LpError.throwError('JSON invalid!');
+		}
 	}
 
 	/*
@@ -77,4 +88,24 @@ function($scope,Socket){
 	});
 	*/
 
-}]);
+}])
+
+
+// Code Snippet from:
+// http://stackoverflow.com/questions/6637341/use-tab-to-indent-in-textarea
+
+.directive('ngAllowTab', function () {
+    return function (scope, element, attrs) {
+        element.bind('keydown', function (event) {
+            if (event.which == 9) {
+                event.preventDefault();
+                var start = this.selectionStart;
+                var end = this.selectionEnd;
+                element.val(element.val().substring(0, start) 
+                    + '\t' + element.val().substring(end));
+                this.selectionStart = this.selectionEnd = start + 1;
+                element.triggerHandler('change');
+            }
+        });
+    };
+});
