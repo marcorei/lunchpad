@@ -28,7 +28,7 @@ var UserProvider = function(){
  */
 
 UserProvider.prototype.findAll = function(onSuccess, onError){
-	b.gc(cn, function(collection){
+	db.gc(cn, function(collection){
 
 		collection.find({},{
 			fields: {
