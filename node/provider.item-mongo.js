@@ -23,7 +23,7 @@ var ItemProvider = function(){};
 ItemProvider.prototype.findAll = function(onSuccess, onError){
 	db.gc(cn, function(collection){
 
-		collection.find({},{},function(error,items){
+		collection.find({},{}).toArray(function(error,items){
 			if(error) onError(error);
 			else onSuccess(items);
 		});
@@ -84,7 +84,7 @@ ItemProvider.prototype.deleteItem = function(id, onSuccess, onError){
 	db.gc(cn, function(collection){
 
 		collection.remove({
-			_id: id
+			_id: db.oID(id)
 		},{
 			safe: true
 		},function(error,numRemoved){

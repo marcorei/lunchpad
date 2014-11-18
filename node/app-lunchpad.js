@@ -97,6 +97,16 @@ var lunchHelper = {
 		});
 	},
 
+	sendHintToSocket: function(socket,msg,nolog){
+		if(!nolog) console.log(msg);
+
+		socket.emit('hint',{
+			hint: {
+				msg: msg
+			}
+		});
+	},
+
 	sendErrorToSocket: function(socket,msg,code,nolog){
 		if(!nolog) console.log(msg);
 		code = code || 8000;
@@ -1096,7 +1106,7 @@ io.sockets.on('connection', function (socket) {
 			.v('isLength',[data.pass,5],'user.pass')
 			.v('isURL',[data.ava,{require_protocol: true}],'user.ava')
 			.e()){
-				sendErrorToSocket(socket,e);
+				lunchHelper.sendErrorToSocket(socket,e);
 				return null;
 			}
 
@@ -1261,7 +1271,7 @@ io.sockets.on('connection', function (socket) {
 
 			var e;
 			if(e = new Validate()
-			.v('inLength',[data._id,24,24],'user.id')
+			.v('isLength',[data._id,24,24],'user.id')
 			.e()){
 				lunchHelper.sendErrorToSocket(socket,e);
 				return null;
@@ -1275,9 +1285,10 @@ io.sockets.on('connection', function (socket) {
 			userProvider.updateInventoryById( data._id, data.inv,
 			function(results){
 
-				socket.emit('user update invetory done',{
-					updated: true
-				});
+				// socket.emit('user update inventory done',{
+				// 	updated: true
+				// });
+				lunchHelper.sendHintToSocket(socket,'Inventory updated!');
 
 			},function(error){
 				lunchHelper.sendErrorToSocket(socket,error);
@@ -1290,7 +1301,7 @@ io.sockets.on('connection', function (socket) {
 
 			var e;
 			if(e = new Validate()
-			.v('inLength',[data._id,24,24],'user.id')
+			.v('isLength',[data._id,24,24],'user.id')
 			.e()){
 				lunchHelper.sendErrorToSocket(socket,e);
 			}
@@ -1321,6 +1332,18 @@ io.sockets.on('connection', function (socket) {
 			//  TODO: Add validation
 			// -------------
 
+			data.front = Validate.s('toBoolean',[data.front, true]);
+
+			var e;
+			if(e = new Validate()
+			.v('isLength',[data.name,2,20],'user.nick.length')
+			.v('isLength',[data.type,2,20],'user.nick.length')
+			.v('isURL',[data.url,{require_protocol: true}],'user.ava')
+			.e()){
+				lunchHelper.sendErrorToSocket(socket,e);
+				return null;
+			}
+
 			itemProvider.saveItems({
 				name: data.name,
 				url: data.url,
@@ -1328,9 +1351,10 @@ io.sockets.on('connection', function (socket) {
 				front: data.front
 			},function(results){
 
-				socket.emit('item create done',{
-					results: results
-				});
+				// socket.emit('item create done',{
+				// 	results: results
+				// });
+				lunchHelper.sendHintToSocket(socket,'Item created!');
 
 			},function(error){
 				lunchHelper.sendErrorToSocket(socket,error);
@@ -1417,7 +1441,7 @@ io.sockets.on('connection', function (socket) {
 
 			var e;
 			if(e = new Validate()
-			.v('inLength',[data._id,24,24],'item.id')
+			.v('isLength',[data._id,24,24],'item.id')
 			.e()){
 				sendErrorToSocketCb(cb,e);
 				return null;
@@ -1428,9 +1452,11 @@ io.sockets.on('connection', function (socket) {
 				itemProvider.deleteItem( data._id,
 				function(results){
 
-					socket.emti('item delete done',{
-						_id: data._id
-					});
+					// socket.emit('item delete done',{
+					// 	_id: data._id
+					// });
+
+					lunchHelper.sendHintToSocket(socket,'Item deleted!');
 
 				},function(error){
 					lunchHelper.sendErrorToSocket(socket,error);
