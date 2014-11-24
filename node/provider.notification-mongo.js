@@ -43,11 +43,31 @@ NotificationProvider.prototype.findAll = function(onSuccess, onError){
  * Count older then 15min
  */
 
-NotificationProvider.prototype.countLt15min = function(onSuccess, onError){
+NotificationProvider.prototype.countLt15min = function(type, onSuccess, onError){
 	db.gc(cn, function(collection){
 
 		collection.count({
+			type: type,
 			date: {$lte: quando.min15()}
+		}, function(error,count){
+			if(error) onError(error);
+			else onSuccess(count);
+		});
+
+	},onError);
+}
+
+
+
+/*
+ * Count older then 5min
+ */
+NotificationProvider.prototype.countLt5min = function(type, onSuccess, onError){
+	db.gc(cn, function(collection){
+
+		collection.count({
+			type: type,
+			date: {$lte: quando.min5()}
 		}, function(error,count){
 			if(error) onError(error);
 			else onSuccess(count);
@@ -63,7 +83,7 @@ NotificationProvider.prototype.countLt15min = function(onSuccess, onError){
 /*
  * Delete for uid
  */
-
+/*
 NotificationProvider.prototype.delWithUid = function(uid, onSuccess, onError){
 	db.gc(cn, function(collection){
 
@@ -81,17 +101,15 @@ NotificationProvider.prototype.delWithUid = function(uid, onSuccess, onError){
 
 	},onError);
 }
+*/
 
-
-
-/*
- * Delete all
- */
-
-NotificationProvider.prototype.delAll = function(onSuccess, onError){
+NotificationProvider.prototype.delWithTypeAndUser = function(type, userId, onSuccess, onError){
 	db.gc(cn, function(collection){
 
-		collection.remove({},{
+		collection.remove({
+			'user.id': userId,
+			type: type
+		},{
 			safe: true
 		},function(error,numRemoved){
 			if(error) onError(error);
@@ -104,6 +122,69 @@ NotificationProvider.prototype.delAll = function(onSuccess, onError){
 	},onError);
 }
 
+
+/*
+ * Delete all
+ */
+
+NotificationProvider.prototype.delAll = function(type, onSuccess, onError){
+	db.gc(cn, function(collection){
+
+		collection.remove({
+			type: type
+		},{
+			safe: true
+		},function(error,numRemoved){
+			if(error) onError(error);
+			else{
+				console.log('Notis removed: '+numRemoved);
+				onSuccess(numRemoved);
+			}
+		});
+
+	},onError);
+}
+
+
+/*
+ * Aggregate all comments
+ */
+NotificationProvider.prototype.aggrTargets = function(type, onSuccess, onError){
+	db.gc(cn, function(collection){
+
+		// ????
+
+		collection.aggregate([
+			{$match:{
+				type: type
+			}},
+			{$group:{
+				_id: {
+					target: '$target',
+					venue: '$venue'
+				},
+				users: {
+					'$addToSet': user
+				}
+			}},
+			{$group:{
+				_id: {
+					target: '$target'
+				},
+				venues: {
+					'$push': {
+						venue: '$venue',
+						users: '$users'
+					}
+				}
+			}}
+		], function(error, results){
+			if(error) onError(error);
+			else onSuccess(results);
+		});
+
+	},onError);
+}
 
 
 
@@ -126,11 +207,21 @@ NotificationProvider.prototype.save = function(notis, onSuccess, onError){
 
 			noti = notis[i];
 
-			if( !noti.uid ||
-				!noti.unick ||
-				!noti.uava ||
-				!noti.vid ||
-				!noti.vname ){
+			if( !noti.target || // that's a user
+				!noti.target._id ||
+				!noti.target.nick ||
+				!noti.type || //either comment or checkin
+				!noti.venue ||
+				!noti.venue._id ||
+				!noti.venue.name ||
+				!noti.user ||
+				!noti.user._id ||
+				!noti.user.nick ||
+				!noti.user.ava){
+				// there is no parameter for commets.
+				// place additional data as attributes of existing objects.
+				// this way they wont get lost in the pipeline
+				// noti.user.comment
 				callback('data incomplete');
 				return;
 			}
@@ -152,36 +243,18 @@ NotificationProvider.prototype.save = function(notis, onSuccess, onError){
 }
 
 
-/*
-IDEA for future notifications system
-
-{
-	"target":"user-id",
-	"type":"checkin/comment"
-	"venue": {
-		"id": "venues-id"
-		"name": "venue-name"
-	},
-	"user": {
-		"id": "user-id",
-		"nick": "user-nick",
-		"ava": "user-ava"
-	}
-}
-*/
-
 
 
 /*
  * Save one checkin and delete others from the same user from today
  */
-
+/*
 NotificationProvider.prototype.saveAndDel = function(noti, onSuccess, onError){
 	NotificationProvider.prototype.delWithUid(noti.uid,function(numRemoved){
 		NotificationProvider.prototype.save(noti,onSuccess,onError);
 	},onError);
 }
-
+*/
 
 
 
