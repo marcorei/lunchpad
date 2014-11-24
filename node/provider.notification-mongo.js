@@ -186,6 +186,13 @@ NotificationProvider.prototype.aggrTargets = function(type, onSuccess, onError){
 	},onError);
 }
 
+// So.
+// Zum Eintragen sollten wir eine shortcut fn schreiben,
+// die uns eine noti für einen array von usern erstellen lässt.
+
+// Der UserProvider muss uns noch die Infos holen, welche User denn
+// jeweils für Eintragen der Notification relvant sind.
+
 
 
 
