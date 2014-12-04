@@ -441,6 +441,7 @@ lunchTasks = {
 
 		// Hier machen wir es ander herum, um uns gegebenenfalls eine Abfrage zu sparen:
 		// erst Notifications cheacken, dann User sammeln.
+		/*
 		notificationProvider.countLt15min(function(count){
 			if(count > 0){
 				userProvider.findUsersForOverview(function(users){
@@ -495,6 +496,7 @@ lunchTasks = {
 		}, function(error){
 			console.log(error);
 		});
+		*/
 	}
 
 };
@@ -918,17 +920,34 @@ io.sockets.on('connection', function (socket) {
 
 							// queue notification
 							venueProvider.findVenue(data._id, function(venue){
-								notificationProvider.saveAndDel({
-									uid: user._id,
-									unick: user.nick,
-									uava: user.ava,
-									vid: venue._id,
-									vname: venue.name
-								}, function(noti){
-									console.log('notification saved');
-								}, function(error){
+
+								// notificationProvider.saveAndDel({
+								// 	uid: user._id,
+								// 	unick: user.nick,
+								// 	uava: user.ava,
+								// 	vid: venue._id,
+								// 	vname: venue.name
+								// }, function(noti){
+								// 	console.log('notification saved');
+								// }, function(error){
+								// 	lunchHelper.sendErrorToSocket(socket,error);
+								// })
+
+								userProvider.findUsersForOverview([
+									user._id
+								],function(targets){
+									notificationProvider.saveAndDelWithTypeAndUser({
+										type: 'checkin',
+										venue: venue,
+										user: user
+									},targets,function(numInserted){
+										console.log('Checkin Notification Insert erfolgreich');
+									},function(error){
+										lunchHelper.sendErrorToSocket(socket,error);
+									});
+								},function(error){
 									lunchHelper.sendErrorToSocket(socket,error);
-								})
+								});
 							}, function(error){
 								lunchHelper.sendErrorToSocket(socket,error);
 							});
@@ -960,11 +979,17 @@ io.sockets.on('connection', function (socket) {
 						}
 					});
 
-					notificationProvider.delWithUid(user._id, function(notiRemoved){
-						console.log('notifications for user removed');
-					}, function(error){
+					// notificationProvider.delWithUid(user._id, function(notiRemoved){
+					// 	console.log('notifications for user removed');
+					// }, function(error){
+					// 	lunchHelper.sendErrorToSocket(socket,error);
+					// });
+
+					notificationProvider.delWithTypeAndUser('checkin',user._id,function(numRemoved){
+						console.log('Checkin Notifications removed for: '+user.nick);
+					},function(error){
 						lunchHelper.sendErrorToSocket(socket,error);
-					});
+					})
 				},function(error){
 					lunchHelper.sendErrorToSocket(socket,error);
 				});
@@ -1039,6 +1064,8 @@ io.sockets.on('connection', function (socket) {
 							count: count,
 							comment: comment[0]
 						});
+
+						// enter notification
 
 					},function(error){
 						lunchHelper.sendErrorToSocket(socket,error);
@@ -1216,11 +1243,13 @@ io.sockets.on('connection', function (socket) {
 		lunchAuth.isOwner(socket, data._id, function(user){
 
 			data.remind = Validate.s('toBoolean',[data.remind,true]);
-			data.overv = Validate.s('toBoolean',[data.overv,true]);			
+			data.overv = Validate.s('toBoolean',[data.overv,true]);
+			data.cmts = Validata.s('toBoolean', [data.cmts,true]);	
 
 			userProvider.updateNoti( data._id, {
 				remind: data.remind,
-				overv: data.overv
+				overv: data.overv,
+				cmts: data.cmts
 			},
 			function(results){
 
