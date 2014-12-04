@@ -97,8 +97,8 @@ function($scope,LpError){
 	}
 
 	// Test
-	LpError.throwError('This is an error!');
-	LpError.throwHint('This is a hint.');
+	//LpError.throwError('This is an error!');
+	//LpError.throwHint('This is a hint.');
 
 }])
 
