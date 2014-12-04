@@ -115,7 +115,7 @@ CommentProvider.prototype.aggrUsersWithVenue = function(vid, onSuccess, onError)
 
 		collection.aggregate([
 			{$match:{
-				vid: db.oID(vid)
+				vid: vid
 			}},
 			{$group:{
 				_id: '$vid',

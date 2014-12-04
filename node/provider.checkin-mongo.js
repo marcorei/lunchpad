@@ -325,7 +325,7 @@ CheckinProvider.prototype.aggrUserIdsForVenueFromToday = function(venueId, onSuc
 		collection.aggregate([
 			{$match:{
 				date: { $gte: quando.today() },
-				vid: db.oID(venueId)
+				vid: venueId
 			}},
 			{$group:{
 				_id: '$vid',
