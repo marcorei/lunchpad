@@ -127,10 +127,11 @@ UserProvider.prototype.findUsersForReminder = function(exludeIds, onSuccess, onE
 * Find users who want to get overview emails
 */
 
-UserProvider.prototype.findUsersForOverview = function(onSuccess, onError){
+UserProvider.prototype.findUsersForOverview = function(exludeIds, onSuccess, onError){
 	db.gc(cn, function(collection){
 
 		collection.find({
+			_id: { $nin: exludeIds },
 			'noti.overv': true
 		},{
 			fields:{
@@ -422,7 +423,8 @@ UserProvider.prototype.save = function(users, onSuccess, onError){
 
 			user.noti = {
 				remind: true,
-				overv: true
+				overv: true,
+				cmts: true
 			};
 			user.stats = {
 				cihs: 0,
