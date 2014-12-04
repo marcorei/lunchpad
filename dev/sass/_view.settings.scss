@@ -47,6 +47,9 @@
 			width:0;
 		}
 
+		// pos
+		position: relative;
+
 		// typo
 		text: {
 			align: center;
@@ -78,6 +81,7 @@
 	.lunch-runway {
 		padding: 10px 0 10px 0;
 		margin: -25px 0 0 0;
+
 		// skin
 		background: {
 			color: $lunch-clr-white;
@@ -93,22 +97,28 @@
 
 		.lunch-item {
 			margin: {
-				left: 2px;
-				right: 2px;
+				left: 5px;
+				right: 5px;
 			}
 		}
 	}
 
-	.lunch-runway-empty-note {
+	.lunch-runway-note {
 		color: $lunch-clr-grey;
+		-webkit-font-smoothing: antialiased;
 	}
 
 	.lunch-item {
+		// box
 		display: inline-block;
 		width: 50px;
 		height: 85px;
 		padding: 5px;
+
+		// pos
 		position: relative;
+
+		// skin
 		cursor: pointer;
 		list-style-type: none;
 		background: {
@@ -125,9 +135,12 @@
 			}
 		}
 		&.lunch-active {
-			background: {
-				color: $lunch-clr-blue;
+
+
+			.lunch-item-active {
+				display: block;
 			}
+
 		}
 		img {
 			width: 50px;
@@ -135,6 +148,25 @@
 			position: absolute;
 			top: 0;
 			left: 0;
+		}
+		.lunch-item-active {
+			// box
+			display: none;
+			width: 30px;
+			height: 30px;
+
+			// pos
+			position: absolute;
+			right: -8px;
+			bottom: -8px;
+			z-index: 0;
+
+			// skin
+			@include border-radius(15px);
+
+			background: {
+				color: $lunch-clr-blue;
+			}
 		}
 	}
 

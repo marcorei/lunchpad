@@ -21,21 +21,24 @@
 				<img ng-src="{{data.user.ava}}" alt="profile picture">
 			</div>
 		</div>
-		<ul class="lunch-runway">
-			<p class="lunch-runway-empty-note" ng-show="data.user.inv.length === 0">
-				No items yet.
-			</p>
-			<li class="lunch-item"
+		<div class="lunch-runway">
+			<div class="lunch-item"
 				ng-repeat="item in data.user.inv"
 				ng-click="submitActiveItem(item._id)"
 				ng-class="{'lunch-active':item.active}">
+				<span class="lunch-item-active">&nbsp;</span>
 				<div class="lunch-avatar">
 					<span class="lunch-item-info">{{item.name}}</span>
 					<img ng-src="{{item.url}}">
 				</div>
-			</li>
-		</ul>
-		<div ng-show="itemUpdated">The new item will be added to your next Checkin!</div>
+			</div>
+			<p class="lunch-runway-note" ng-show="data.user.inv.length === 0">
+				No items yet.
+			</p>
+			<p class="lunch-runway-note" ng-show="itemUpdated">
+				The new item will be added to your next Checkin!
+			</p>
+		</div>
 	</section>
 
 	<section>
