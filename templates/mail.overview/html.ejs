@@ -17,8 +17,8 @@
 			<div class="lunch-mail-content">
 				<% for(var i = 0; i < venues.length; i++) { %>
 					<div class="lunch-mail-venue">
-						<h2><%= venues[i].name %></a></h2>
-						<p><a href="http://www.lunchpad.co/#/venue/<%= venues[i]._id %>">visit venue</a></p>
+						<h2><%= venues[i].venue.name %></a></h2>
+						<p><a href="http://www.lunchpad.co/#/venue/<%= venues[i].venue._id %>">visit venue</a></p>
 						<ul>
 							<% for(var j = 0; j < venues[i].users.length; j++) { %>
 								<li>
