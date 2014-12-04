@@ -339,7 +339,7 @@ NotificationProvider.prototype.save = function(notis, targets, onSuccess, onErro
 		collection.insert(inserts, function(error,results) {
 			if(error) onError(error);
 			else{
-				console.log('Checkins created: '+notis.length);
+				console.log('Noti created: '+notis.length);
 				onSuccess(results);
 			}
 		});
