@@ -107,7 +107,7 @@ NotificationProvider.prototype.delWithTypeAndUser = function(type, userId, onSuc
 	db.gc(cn, function(collection){
 
 		collection.remove({
-			'user.id': userId,
+			'user._id': userId,
 			type: type
 		},{
 			safe: true
@@ -200,13 +200,17 @@ NotificationProvider.prototype.aggrTargets = function(type, onSuccess, onError){
  * Save one or more new notifications
  */
 
-NotificationProvider.prototype.save = function(notis, onSuccess, onError){
+NotificationProvider.prototype.save = function(notis, targets, onSuccess, onError){
 	db.gc(cn, function(collection){
 
 		var i,
-			noti;
+			j,
+			noti,
+			target, 
+			inserts = [];
 
 		if(notis.length === undefined) notis = [notis];
+		if(targets.length === undefined) targets = [targets];
 
 		// expected values
 
@@ -214,10 +218,7 @@ NotificationProvider.prototype.save = function(notis, onSuccess, onError){
 
 			noti = notis[i];
 
-			if( !noti.target || // that's a user
-				!noti.target._id ||
-				!noti.target.nick ||
-				!noti.type || //either comment or checkin
+			if(	!noti.type || //either comment or checkin
 				!noti.venue ||
 				!noti.venue._id ||
 				!noti.venue.name ||
@@ -237,8 +238,29 @@ NotificationProvider.prototype.save = function(notis, onSuccess, onError){
 			noti.date = new Date();
 		}
 
+		for(i=0; i<targets.length; i++){
 
-		collection.insert(notis, function(error,results) {
+			target = targets[i];
+
+			if( !target || // that's a user
+				!target._id ||
+				!target.nick){
+				callback('data incomplete');
+				return;
+			}
+
+			for(j=0; j<notis.length; j++){
+				inserts.push({
+					type: noti.type,
+					venue: noti.venue,
+					user: noti.user,
+					target: target
+				});
+			}
+		}
+
+
+		collection.insert(inserts, function(error,results) {
 			if(error) onError(error);
 			else{
 				console.log('Checkins created: '+notis.length);
@@ -262,6 +284,11 @@ NotificationProvider.prototype.saveAndDel = function(noti, onSuccess, onError){
 	},onError);
 }
 */
+NotificationProvider.prototype.saveAndDelWithTypeAndUser = function(noti, targets, onSuccess, onError){
+	NotificationProvider.prototype.delWithTypeAndUser(noti.type, noti.user._id, function(numRemoved){
+		NotificationProvider.prototype.save(noti, targets, onSuccess, onError);
+	}, onError);
+}
 
 
 
