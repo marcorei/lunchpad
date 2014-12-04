@@ -6,7 +6,7 @@
 			<span class="lunch-label">Logout</span>
 		</a>
 		<h1>{{user.nick}}</h1>
-		<p class="lunch-profile-email"><a href="mailto:{{user.mail}}">{{user.mail}}alf@alf.alf</a></p>
+		<p class="lunch-profile-email"><a href="mailto:{{user.mail}}">{{user.mail}}</a></p>
 	</header>
 
 	<section class="lunch-profile">
@@ -22,10 +22,12 @@
 			</div>
 		</div>
 		<div class="lunch-runway">
-			<div class="lunch-item"
+			<a class="lunch-item"
+				href=""
 				ng-repeat="item in data.user.inv"
 				ng-click="submitActiveItem(item._id)"
 				ng-class="{'lunch-active':item.active}">
+
 				<div class="lunch-item-active">
 					<span class="lunch-icon">a</span>
 				</div>
@@ -33,12 +35,12 @@
 					<span class="lunch-item-info">{{item.name}}</span>
 					<img ng-src="{{item.url}}">
 				</div>
-			</div>
+			</a>
 			<p class="lunch-runway-note" ng-show="data.user.inv.length === 0">
 				No items yet.
 			</p>
 			<p class="lunch-runway-note" ng-show="itemUpdated">
-				The new item will be added to your next Checkin!
+				changes appear with your next checkin.
 			</p>
 		</div>
 	</section>

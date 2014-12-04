@@ -67,11 +67,6 @@
 		height: 85px;
 		margin: 0 auto;
 		padding: 25px;
-		border: {
-			width: 5px;
-			style: dotted;
-			color: $lunch-clr-grey-xxlgt;
-		}
 		background: {
 			color: $lunch-clr-grey-xxlgt;
 		}
@@ -80,7 +75,7 @@
 
 	.lunch-runway {
 		padding: 10px 0 10px 0;
-		margin: -25px 0 0 0;
+		margin: -30px 0 0 0;
 
 		// skin
 		background: {
@@ -96,9 +91,16 @@
 		@include border-radius(2px);
 
 		.lunch-item {
-			margin: {
-				left: 5px;
-				right: 5px;
+			@include border-radius(50%);
+			background: {
+				color: transparent;
+			}
+			width: 85px;
+			height: 85px;
+			&:hover {
+				background: {
+					color: $lunch-clr-grey-xxlgt;
+				}
 			}
 		}
 	}
@@ -129,19 +131,34 @@
 		}
 		@include border-radius(2px);
 
-		&:hover {
-			background: {
-				color: $lunch-clr-grey-lgt;
-			}
+		&:focus {
+			outline: none;
 		}
 		&.lunch-active {
-
-
 			.lunch-item-active {
 				display: block;
 			}
-
+			&:hover {
+				.lunch-item-remove {
+					display: block;
+				}
+			}
+			&:focus {
+				.lunch-item-active {
+					background: {
+						color: $lunch-clr-blue;
+					}
+					.lunch-icon-pos {
+						display: block;
+					}
+					.lunch-icon-neg {
+						display: none;
+					}
+				}
+			}
 		}
+
+
 		img {
 			width: 50px;
 			height: 85px;
@@ -149,7 +166,8 @@
 			top: 0;
 			left: 0;
 		}
-		.lunch-item-active {
+		.lunch-item-remove,
+		.lunch-item-active{
 			// box
 			display: none;
 			width: 30px;
@@ -157,26 +175,18 @@
 
 			// pos
 			position: absolute;
-			right: -8px;
-			bottom: -8px;
-			z-index: 0;
 
 			// skin
-			opacity: .85;
 			@include border-radius(15px);
-
-			background: {
-				color: $lunch-clr-blue;
-			}
 
 			.lunch-icon {
 				// box
 				display: block;
 				padding: {
-					top: 2px;
+					top: 3px;
 					left: 3px;
 					right: 3px;
-					bottom: 4px;
+					bottom: 3px;
 				}
 
 				// typo
@@ -184,6 +194,27 @@
 
 				// skin
 				color: $lunch-clr-white;
+			}
+		}
+		.lunch-item-active {
+			//pos
+			bottom: 0px;
+			right: 0px;
+
+			// skin
+			background: {
+				color: $lunch-clr-blue;
+			}
+		}
+
+		.lunch-item-remove {
+			// pos
+			bottom: 32px;
+			right: 0px;
+
+			// skin
+			background: {
+				color: $lunch-clr-grey-lgt;
 			}
 		}
 	}
@@ -218,7 +249,7 @@
 		}
 		#lunch-fn-logout {
 			margin: {
-				top: 5px;
+				top: 8px;
 				right: 0;
 			}
 		}
