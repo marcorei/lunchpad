@@ -26,7 +26,9 @@
 				ng-repeat="item in data.user.inv"
 				ng-click="submitActiveItem(item._id)"
 				ng-class="{'lunch-active':item.active}">
-				<span class="lunch-item-active">&nbsp;</span>
+				<div class="lunch-item-active">
+					<span class="lunch-icon">a</span>
+				</div>
 				<div class="lunch-avatar">
 					<span class="lunch-item-info">{{item.name}}</span>
 					<img ng-src="{{item.url}}">
