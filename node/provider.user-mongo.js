@@ -149,6 +149,35 @@ UserProvider.prototype.findUsersForOverview = function(exludeIds, onSuccess, onE
 
 
 /*
+* Find users who want to get comments emails
+*/
+
+UserProvider.prototype.findUsersForComments = function(excludeIds, includeIds, onSuccess, onError){
+	db.gc(cn, function(collection){
+
+		collection.find({
+			_id: { 
+				$nin: excludeIds,
+				$in: includeIds
+			},
+			'noti.cmts': true
+		},{
+			fields:{
+				mail: 1,
+				nick: 1
+			}
+		}).toArray(function(error,result){
+			if(error) onError(error);
+			else onSuccess(result);
+		});
+
+	},onError);
+}
+
+
+
+
+/*
  * Change the password
  */
 

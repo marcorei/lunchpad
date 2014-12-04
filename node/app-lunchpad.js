@@ -295,8 +295,12 @@ lunchTasks = {
 	cleanCheckins: function(){
 		console.log('LunchTask: cleaning at '+(new Date().toString()));
 		venueProvider.dailyReset(function(venueUpdates){
-			notificationProvider.delAll(function(notiUpdates){
-				console.log('LunchTask: cleaning -- done');
+			notificationProvider.delAll('checkin',function(notiUpdates){
+				notificationProvider.delAll('comment',function(notiUpdates){
+					console.log('LunchTask: cleaning -- done');
+				}, function(error){
+					console.log(error);
+				});
 			}, function(error){
 				console.log(error);
 			});
@@ -441,62 +445,81 @@ lunchTasks = {
 
 		// Hier machen wir es ander herum, um uns gegebenenfalls eine Abfrage zu sparen:
 		// erst Notifications cheacken, dann User sammeln.
-		/*
-		notificationProvider.countLt15min(function(count){
+
+		notificationProvider.countLt15min('checkin', function(count){
 			if(count > 0){
-				userProvider.findUsersForOverview(function(users){
-					notificationProvider.findAll(function(notis){
-						// convert notis to venues
-						var venuesAggr = {},
-							venues = [],
-							i;
-						for(i = 0; i < notis.length; i++){
-							if(venuesAggr[notis[i].vid] === undefined){
-								venuesAggr[notis[i].vid] = {
-									_id: notis[i].vid,
-									name: notis[i].vname,
-									users: []
-								}
-							}
-							venuesAggr[notis[i].vid].users.push({
-								_id: notis[i].uid,
-								nick: notis[i].unick,
-								ava: notis[i].uava
-							});
-						}
-						for(key in venuesAggr){
-							if(venuesAggr.hasOwnProperty(key)){
-								venues.push(venuesAggr[key]);
-							}
-						}
 
-						console.log(venues);
-
+				notificationProvider.aggrTargets('checkin',function(targets){
+					//console.log(targets);
+					//var util = require('util');
+					//console.log(util.inspect(targets, {showHidden: false, depth: null}));
+					var i;
+					for(i=0; i<targets.length; i++){
 						mailer.sendMail(
 							'mail.overview',
 							'New Checkins on Lunchpad!',
 							{
-								notis: notis,
-								venues: venues
-							},users);
-						notificationProvider.delAll(function(notisRemoved){
-							console.log('all notifications removed');
-						}, function(error){
-							console.log(error);
-						});
-					}, function(error){
+								venues: targets[i].venues
+							},
+							[targets[i]._id.target]
+						);
+					}
+					notificationProvider.delAll('checkin',function(numRemoved){
+						console.log('all notifications for checkins removed');
+					},function(error){
 						console.log(error);
 					});
-				}, function(error){
+				},function(error){
 					console.log(error);
 				});
+
 			}else{
 				console.log('nothing older than 15 minutes, aboarding overview');
 			}
-		}, function(error){
+		},function(error){
 			console.log(error);
 		});
-		*/
+	},
+
+	sendComments: function(){
+		console.log('LunchTask: send comments at '+(new Date().toString()));
+
+		// Hier machen wir es ander herum, um uns gegebenenfalls eine Abfrage zu sparen:
+		// erst Notifications cheacken, dann User sammeln.
+
+		//notificationProvider.countLt5min('comment', function(count){
+		//	if(count > 0){
+
+				notificationProvider.aggrTargets('comment',function(targets){
+					//console.log(targets);
+					//var util = require('util');
+					//console.log(util.inspect(targets, {showHidden: false, depth: null}));
+					var i;
+					for(i=0; i<targets.length; i++){
+						mailer.sendMail(
+							'mail.comments',
+							'New Comments at Your Venues!',
+							{
+								venues: targets[i].venues
+							},
+							[targets[i]._id.target]
+						);
+					}
+					notificationProvider.delAll('comment',function(numRemoved){
+						console.log('all notifications for comments removed');
+					},function(error){
+						console.log(error);
+					});
+				},function(error){
+					console.log(error);
+				});
+
+		//	}else{
+		//		console.log('nothing older than 15 minutes, aboarding overview');
+		//	}
+		//},function(error){
+		//	console.log(error);
+		//});
 	}
 
 };
@@ -513,6 +536,10 @@ cronTasks.setupTasks([
 	{
 		time: '00 */5 9-18 * * 1-5',
 		fn: lunchTasks.sendOverview
+	},
+	{
+		time: '00 */2 9-18 * * 1-5',
+		fn: lunchTasks.sendComments
 	}
 ]);
 
@@ -652,6 +679,11 @@ app.get('/sendreminder', function(req,res){
 app.get('/sendoverview', function(req,res){
 	lunchTasks.sendOverview();
 	res.send('overview sent');
+});
+
+app.get('/sendcomments', function(req,res){
+	lunchTasks.sendComments();
+	res.send('comments sent');
 });
 
 app.get('/cleancheckins', function(req,res){
@@ -1073,6 +1105,37 @@ io.sockets.on('connection', function (socket) {
 
 						// enter notification
 
+						// get all relevant users
+						checkinProvider.aggrUserIdsForVenueFromToday(data.vid,
+						function(targetsFromCheckins){
+							commentProvider.aggrUsersWithVenue(data.vid,
+							function(targetsFromComments){
+								var targets = targetsFromCheckins.concat(targetsFromComments);
+
+								userProvider.findUsersForComments([user._id],targets,
+								function(filteredTargets){
+									if(filteredTargets.length > 0){
+										notificationProvider.save({
+											type: 'comment',
+											venue: venue,
+											user: user
+										},filteredTargets,function(numInserted){
+											console.log('Comment Notification Insert erfolgreich');
+										},function(error){
+											lunchHelper.sendErrorToSocket(socket,error);
+										});
+									}else{
+										console.log('No Notification to insert.');
+									}
+								},function(error){
+									lunchHelper.sendErrorToSocket(socket,error);
+								});
+							},function(error){
+								lunchHelper.sendErrorToSocket(socket,error);
+							});
+						},function(error){
+							lunchHelper.sendErrorToSocket(socket,error);
+						});
 					},function(error){
 						lunchHelper.sendErrorToSocket(socket,error);
 					});

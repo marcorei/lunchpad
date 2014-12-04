@@ -315,6 +315,39 @@ CheckinProvider.prototype.aggregateUserIdsFromToday = function(onSuccess, onErro
 
 
 
+/*
+ * Find out who is checked in on a venue
+ */
+
+CheckinProvider.prototype.aggrUserIdsForVenueFromToday = function(venueId, onSuccess, onError){
+	db.gc(cn, function(collection){
+
+		collection.aggregate([
+			{$match:{
+				date: { $gte: quando.today() },
+				vid: db.oID(venueId)
+			}},
+			{$group:{
+				_id: '$vid',
+				users: {
+					'$push': '$uid'
+				}
+			}}
+		], function(error, results){
+			if(error) onError(error);
+			else{
+				if(results.length > 0){
+					onSuccess(results[0].users);
+				}else{
+					onSuccess([]);
+				}		
+			}
+		});
+
+	},onError);
+}
+
+
 
 
 /*

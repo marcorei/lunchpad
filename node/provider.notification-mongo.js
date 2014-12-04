@@ -164,16 +164,16 @@ NotificationProvider.prototype.aggrTargets = function(type, onSuccess, onError){
 					venue: '$venue'
 				},
 				users: {
-					'$addToSet': user
+					'$addToSet': '$user'
 				}
 			}},
 			{$group:{
 				_id: {
-					target: '$target'
+					target: '$_id.target'
 				},
 				venues: {
 					'$push': {
-						venue: '$venue',
+						venue: '$_id.venue',
 						users: '$users'
 					}
 				}
@@ -183,15 +183,77 @@ NotificationProvider.prototype.aggrTargets = function(type, onSuccess, onError){
 			else onSuccess(results);
 		});
 
+		// results looks like this:
+
+		// [  
+		// 	{  
+		// 		_id:{  
+		// 			target:{  
+		// 				_id:54247a1445f75f3216a94e4a,
+		// 				nick:'tester'
+		// 			}
+		// 		},
+		// 		venues:[  
+		// 			{  
+		// 				venue:{  
+		// 					_id:54247a1e45f75f3216a94e4e,
+		// 					name:'Büro'
+		// 				},
+		// 				users:[  
+		// 					{  
+		// 						_id:54247a1445f75f3216a94e4c,
+		// 						nick:'MMRZ',
+		// 						ava:'http://lunchpad.19h13.com/static/img/mrz.png'
+		// 					},
+		// 					{  
+		// 						_id:54247a1445f75f3216a94e4b,
+		// 						nick:'alf',
+		// 						ava:'http://lunchpad.19h13.com/static/img/jf.png'
+		// 					}
+		// 				]
+		// 			}
+		// 		]
+		// 	},
+		// 	{  
+		// 		_id:{  
+		// 			target:{  
+		// 				_id:54247a1445f75f3216a94e4b,
+		// 				nick:'alf'
+		// 			}
+		// 		},
+		// 		venues:[  
+		// 			{  
+		// 				venue:{  
+		// 					_id:54247a1e45f75f3216a94e4e,
+		// 					name:'Büro'
+		// 				},
+		// 				users:[  
+		// 					{  
+		// 						_id:54247a1445f75f3216a94e4c,
+		// 						nick:'MMRZ',
+		// 						ava:'http://lunchpad.19h13.com/static/img/mrz.png'
+		// 					}
+		// 				]
+		// 			},
+		// 			{  
+		// 				venue:{  
+		// 					_id:546bbb7ad0fd69220ae1c10c,
+		// 					name:'Alf'
+		// 				},
+		// 				users:[  
+		// 					{  
+		// 						_id:54247a1445f75f3216a94e4a,
+		// 						nick:'tester',
+		// 						ava:'http://lunchpad.19h13.com/static/img/mr.png'
+		// 					}
+		// 				]
+		// 			}
+		// 		]
+		// 	}
+		// ]
+
 	},onError);
 }
-
-// So.
-// Zum Eintragen sollten wir eine shortcut fn schreiben,
-// die uns eine noti für einen array von usern erstellen lässt.
-
-// Der UserProvider muss uns noch die Infos holen, welche User denn
-// jeweils für Eintragen der Notification relvant sind.
 
 
 
@@ -244,6 +306,7 @@ NotificationProvider.prototype.save = function(notis, targets, onSuccess, onErro
 
 			if( !target || // that's a user
 				!target._id ||
+				!target.mail || //anyone ordered pizza?
 				!target.nick){
 				callback('data incomplete');
 				return;
@@ -252,9 +315,22 @@ NotificationProvider.prototype.save = function(notis, targets, onSuccess, onErro
 			for(j=0; j<notis.length; j++){
 				inserts.push({
 					type: noti.type,
-					venue: noti.venue,
-					user: noti.user,
-					target: target
+					venue: {
+						_id: noti.venue._id,
+						name: noti.venue.name
+					},
+					user: {
+						_id: noti.user._id,
+						nick: noti.user.nick,
+						ava: noti.user.ava,
+						comment: noti.user.comment // this will only be set for comment notis
+					},
+					target: {
+						_id: target._id,
+						nick: target.nick,
+						mail: target.mail
+					},
+					date: noti.date
 				});
 			}
 		}

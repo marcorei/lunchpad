@@ -85,7 +85,6 @@ CommentProvider.prototype.findWithVenue = function(vid, onSuccess, onError){
 }
 
 
-
 /*
  * Count all comments from a venue id
  */
@@ -100,6 +99,39 @@ CommentProvider.prototype.countWithVenue = function(vid, onSuccess, onError){
 		},function(error,count){
 			if(error) onError(error);
 			else onSuccess(count);
+		});
+
+	},onError);
+}
+
+
+
+/*
+ * Get all user ids that commented on a venue
+ */
+
+CommentProvider.prototype.aggrUsersWithVenue = function(vid, onSuccess, onError){
+	db.gc(cn, function(collection){
+
+		collection.aggregate([
+			{$match:{
+				vid: db.oID(vid)
+			}},
+			{$group:{
+				_id: '$vid',
+				users: {
+					'$push': '$user._id'
+				}
+			}}
+		], function(error, results){
+			if(error) onError(error);
+			else{
+				if(results.length > 0){
+					onSuccess(results[0].users);
+				}else{
+					onSuccess([]);
+				}	
+			}
 		});
 
 	},onError);
