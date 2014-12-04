@@ -167,15 +167,11 @@
 /* Collect all Medium Screen Styles here */
 
 @mixin lunch-view-venue-screen-s-mixin() {
-
 	@include lunch-view-venue-screen-s();
-
 }
 
-// Apply
+/* Apply Mediaqueries */
 
 @media screen and (min-width: $lunch-grid-break-s) {
-
 	@include lunch-view-venue-screen-s-mixin;
-
 }

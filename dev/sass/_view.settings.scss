@@ -4,18 +4,37 @@
  */
 
 .lunch-view-settings {
+
+	// container
 	header {
-		padding: 48px 0 28px 0;
-	}
-	h1 {
-		margin: 0;
-		font: {
-			size: 60px;
+		position: relative;
+		padding: {
+			top: 40px;
+			bottom: 40px;
 		}
+	}
+
+	h1 {
+		display: block;
 		text: {
 			align: center;
 		}
+		font: {
+			size: 40px;
+		}
+		margin: 0;
 	}
+
+	#lunch-fn-logout {
+		margin: {
+			top: -4px;
+			right: -20px;
+		}
+		@extend %lunch-venue-head-btn;
+		position: absolute;
+		right: 0;
+	}
+
 	.lunch-profile-email {
 		margin: 0;
 		text-align: center;
@@ -45,6 +64,11 @@
 		height: 85px;
 		margin: 0 auto;
 		padding: 25px;
+		border: {
+			width: 5px;
+			style: dotted;
+			color: $lunch-clr-grey-xxlgt;
+		}
 		background: {
 			color: $lunch-clr-grey-xxlgt;
 		}
@@ -52,7 +76,7 @@
 	}
 
 	.lunch-runway {
-		padding: 10px 0 0 0;
+		padding: 10px 0 10px 0;
 		margin: -25px 0 0 0;
 		// skin
 		background: {
@@ -61,10 +85,22 @@
 		border: {
 			width: 0;
 			top-width: 2px;
+			bottom-width: 2px;
 			color: $lunch-clr-grey-xxlgt;
 			style: solid;
 		}
 		@include border-radius(2px);
+
+		.lunch-item {
+			margin: {
+				left: 2px;
+				right: 2px;
+			}
+		}
+	}
+
+	.lunch-runway-empty-note {
+		color: $lunch-clr-grey;
 	}
 
 	.lunch-item {
@@ -102,7 +138,6 @@
 		}
 	}
 
-
 	.lunch-item-info {
 		display: none;
 	}
@@ -113,12 +148,42 @@
 			right: 1em;
 		}
 	}
+}
 
-	section {
-		border-bottom: {
-			width: 2px;
-			style: solid;
-			color: $lunch-clr-grey-xxlgt;
+/*
+ * Mixin for small+ Screens
+ */
+@mixin lunch-view-settings-s() {
+	.lunch-view-settings {
+		// Container
+		header {
+			padding: {
+				top: 48px;
+			}
+		}
+		h1 {
+			font: {
+				size: 60px;
+			}
+		}
+		#lunch-fn-logout {
+			margin: {
+				top: 5px;
+				right: 0;
+			}
 		}
 	}
+}
+
+
+/* Collect all Medium Screen Styles here */
+
+@mixin lunch-view-settings-screen-s-mixin() {
+	@include lunch-view-settings-s();
+}
+
+/* Apply Mediaqueries */
+
+@media screen and (min-width: $lunch-grid-break-s) {
+	@include lunch-view-settings-screen-s-mixin;
 }

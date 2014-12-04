@@ -1,12 +1,12 @@
 <main class="lunch-view-settings">
 
 	<header>
-		<!--
-		<h1>Marius</h1>
-		<p class="lunch-profile-email"><a href="mailto:mrz@19h13.com">mrz@19h13.com</a></p>
-		-->
+		<a href="/logout" id="lunch-fn-logout">
+			<span class="lunch-icon">o</span>
+			<span class="lunch-label">Logout</span>
+		</a>
 		<h1>{{user.nick}}</h1>
-		<p class="lunch-profile-email"><a href="mailto:{{user.mail}}">{{user.mail}}</a></p>
+		<p class="lunch-profile-email"><a href="mailto:{{user.mail}}">{{user.mail}}alf@alf.alf</a></p>
 	</header>
 
 	<section class="lunch-profile">
@@ -22,18 +22,9 @@
 			</div>
 		</div>
 		<ul class="lunch-runway">
-			<!--
-			<li class="lunch-item" ng-repeat="item in user.inv">
-				<div class="lunch-avatar">
-					<img src="static/img/item-halloween.png" alt="" class="lunch-item-image">
-				</div>
-			</li>
-			<li class="lunch-item lunch-active">
-				<div class="lunch-avatar">
-					<img src="static/img/item-party.png" alt="" class="lunch-item-image">
-				</div>
-			</li>
-			-->
+			<p class="lunch-runway-empty-note" ng-show="data.user.inv.length === 0">
+				No items yet.
+			</p>
 			<li class="lunch-item"
 				ng-repeat="item in data.user.inv"
 				ng-click="submitActiveItem(item._id)"
@@ -48,7 +39,7 @@
 	</section>
 
 	<section>
-		<h2>Change Notifications</h2>
+		<h2>Notification Settings</h2>
 		<p>
 			<input type="checkbox" name="lunch-overview" id="lunch-overview"
 				ng-change="submitNotifications()"
@@ -94,7 +85,5 @@
 					ng-click="submitPassForm()"
 					ng-disabled="passForm.$invalid">change password</button>
 		</form>
-
 	</section>
-
 </main>
