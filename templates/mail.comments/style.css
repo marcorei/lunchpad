@@ -1,0 +1,89 @@
+body {
+	font-family: sans-serif;
+	font-size: 16px;
+	text-align:center;
+	background-color: #eee;
+}
+
+.lunch-mail {
+	padding: 10px;
+}
+
+.lunch-mail-container {
+	background-color: #fff;
+}
+
+.lunch-mail a {
+	color: #FF0046;
+	text-decoration: none;
+}
+
+.lunch-mail-venue {
+	margin: 1.75em 0;
+}
+
+
+
+.lunch-mail-venue h2 {
+	margin: 0 0 6px 0;
+	text-transform: uppercase;
+	font-size: 20px;
+	font-family: "Impact", sans-serif;
+}
+
+.lunch-mail-venue p {
+	margin-top: 6px;
+	margin-bottom: 10px;
+}
+
+.lunch-mail-venue a {
+	color: #00B9E7;
+}
+
+.lunch-mail-venue h2 a {
+	float: none;
+	color: black;
+}
+
+.lunch-mail-venue h2 a:hover {
+	color: #333;
+}
+
+.lunch-mail-content {
+	margin: 3em 0;
+	width: 100%;
+}
+
+.lunch-mail-content ul {
+	padding: 0;
+	margin: 0;
+
+}
+
+.lunch-mail-content li {
+	list-style-type: none;
+	display: inline;
+}
+
+.lunch-mail-container {
+	max-width: 500px;
+	padding: 40px 30px 60px 30px;
+	margin: 0 auto;
+}
+
+.lunch-mail-footer {
+	max-width: 500px;
+	padding: 40px 30px 20px 30px;
+	margin: 0 auto;
+	font-size: 12px;
+	color: #bbb;
+}
+
+.lunch-mail-footer a {
+	color:#bbb;
+	text-decoration: underline;
+}
+
+.lunch-mail-footer p {
+	margin-top: 0;
+}
