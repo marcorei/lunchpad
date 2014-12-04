@@ -262,5 +262,9 @@
 		@include transition-duration($lunch-time-over);
 		background-color: $lunch-color-blu-dark;
 	}
-
+	&:disabled {
+		background: {
+			color: $lunch-clr-grey-lgt;
+		}
+	}
 }

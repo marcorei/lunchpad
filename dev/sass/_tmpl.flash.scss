@@ -9,6 +9,7 @@
 	background-color: #FFF080;
 	color: #CB9A31;
 	font-size: 14px;
+	opacity: .9;
 
 	p {
 		margin: 0;
@@ -42,7 +43,7 @@
 		text-align: center;
 		font: {
 			weight: bold;
-			size: 20px;
+			size: 30px;
 		}
 
 		&:hover {
@@ -109,6 +110,9 @@
 @mixin lunch-flash-m() {
 	.lunch-flash {
 		left: 38.15%;
+		.lunch-fn-close {
+			right: 0;
+		}
 	}
 }
 

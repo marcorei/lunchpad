@@ -56,10 +56,9 @@
 	<section class="lunch-comments">
 		<div class="lunch-comment lunch-animate" ng-repeat="comment in comments">
 			<div class="lunch-comment-info">
-				<div class="lunch-commentator-img">
+				<div class="lunch-commentator-img" ng-class="{'lunch-owner':'comment.owner'}">
 					<img src="{{comment.user.ava}}" alt="">
 				</div>
-				<!-- <time>{{comment.date | date: 'HH:mm'}}</time> -->
 				<time am-time-ago="comment.date"></time>
 				<h3>{{comment.user.nick}}</h3>
 			</div>
@@ -72,7 +71,7 @@
 				<img src="{{user.ava}}" alt="" class="lunch-user-image">
 			</div>
 				<textarea type="text" placeholder="Got something to say?" ng-model="formInputTxt"></textarea>
-				<button class="lunch-fn-comment-send" ng-click="sendComment()">
+				<button class="lunch-button" ng-click="sendComment()" ng-disabled="!formInputTxt">
 					<span class="lunch-label">Post Comment</span>
 				</button>
 		</form>

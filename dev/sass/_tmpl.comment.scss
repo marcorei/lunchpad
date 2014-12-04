@@ -183,6 +183,12 @@ $lunch-comment-body-col: #eee;
 			align: center;
 		}
 		@include border-radius( 25px );
+
+		&.lunch-owner {
+			background: {
+				color: $lunch-clr-red-drk;
+			}
+		}
 	}
 }
 
@@ -268,47 +274,5 @@ $lunch-comment-body-col: #eee;
 
 	button {
 		float: right;
-		display: block;
-		margin: {
-			top: 10px;
-		}
-		padding: {
-			top: 18px;
-			bottom: 16px;
-			left: 20px;
-			right: 20px;
-		}
-		border: {
-			width: 0;
-		}
-		text: {
-			transform: uppercase;
-			align: center;
-		}
-		font: {
-			size: 11px;
-		}
-		line: {
-			height: 1em;
-		}
-
-
-		cursor: pointer;
-		color: white;
-		background: {
-			color: $lunch-clr-blue;
-		}
-		@include border-radius(2px);
-
-		// Effects
-		@include transition-property(background);
-		@include transition-duration($lunch-time-out);
-
-
-		// States
-		&:hover {
-			@include transition-duration($lunch-time-over);
-			background-color: $lunch-color-blu-dark;
-		}
 	}
 }
