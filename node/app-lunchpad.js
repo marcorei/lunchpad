@@ -893,62 +893,68 @@ io.sockets.on('connection', function (socket) {
 				return null;
 			}
 
-			checkinProvider.delTodayForUid(user._id,
-			function(numRemoved){
-				venueProvider.delUserForToday(user._id,
+			// have to reload user in order to get new item
+			userProvider.findUser(user._id.toString(),
+			function(user){
+				checkinProvider.delTodayForUid(user._id,
 				function(numRemoved){
+					venueProvider.delUserForToday(user._id,
+					function(numRemoved){
 
-					checkinProvider.save({
-						uid: user._id,
-						vid: data._id
-					},function(results){
+						checkinProvider.save({
+							uid: user._id,
+							vid: data._id
+						},function(results){
 
-						var insert = {
-							_id: user._id,
-							nick: user.nick,
-							item: user.item,
-							ava: user.ava
-						};
+							var insert = {
+								_id: user._id,
+								nick: user.nick,
+								item: user.item,
+								ava: user.ava
+							};
 
-						venueProvider.addUserToVenue(data._id, insert,
-						function(updates){
-							console.log('emitting checkin create done')
-							io.sockets.emit('checkin create done',{
-								vid: data._id,
-								user: insert
-							});
+							venueProvider.addUserToVenue(data._id, insert,
+							function(updates){
+								console.log('emitting checkin create done')
+								io.sockets.emit('checkin create done',{
+									vid: data._id,
+									user: insert
+								});
 
-							// queue notification
-							venueProvider.findVenue(data._id, function(venue){
+								// queue notification
+								venueProvider.findVenue(data._id, function(venue){
 
-								// notificationProvider.saveAndDel({
-								// 	uid: user._id,
-								// 	unick: user.nick,
-								// 	uava: user.ava,
-								// 	vid: venue._id,
-								// 	vname: venue.name
-								// }, function(noti){
-								// 	console.log('notification saved');
-								// }, function(error){
-								// 	lunchHelper.sendErrorToSocket(socket,error);
-								// })
+									// notificationProvider.saveAndDel({
+									// 	uid: user._id,
+									// 	unick: user.nick,
+									// 	uava: user.ava,
+									// 	vid: venue._id,
+									// 	vname: venue.name
+									// }, function(noti){
+									// 	console.log('notification saved');
+									// }, function(error){
+									// 	lunchHelper.sendErrorToSocket(socket,error);
+									// })
 
-								userProvider.findUsersForOverview([
-									user._id
-								],function(targets){
-									notificationProvider.saveAndDelWithTypeAndUser({
-										type: 'checkin',
-										venue: venue,
-										user: user
-									},targets,function(numInserted){
-										console.log('Checkin Notification Insert erfolgreich');
+									userProvider.findUsersForOverview([
+										user._id
+									],function(targets){
+										notificationProvider.saveAndDelWithTypeAndUser({
+											type: 'checkin',
+											venue: venue,
+											user: user
+										},targets,function(numInserted){
+											console.log('Checkin Notification Insert erfolgreich');
+										},function(error){
+											lunchHelper.sendErrorToSocket(socket,error);
+										});
 									},function(error){
 										lunchHelper.sendErrorToSocket(socket,error);
 									});
-								},function(error){
+								}, function(error){
 									lunchHelper.sendErrorToSocket(socket,error);
 								});
-							}, function(error){
+							},function(error){
 								lunchHelper.sendErrorToSocket(socket,error);
 							});
 						},function(error){
@@ -962,7 +968,7 @@ io.sockets.on('connection', function (socket) {
 				});
 			},function(error){
 				lunchHelper.sendErrorToSocket(socket,error);
-			});
+			});			
 		});
 	});
 
