@@ -22,9 +22,15 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 		},function(data){
 			LpUserIdService.getId(function(userId){
 				for(var i=0; i<data.comments.length; i++){
+					/*
 					if(data.comments[i].user._id == userId){
 						data.comments[i].owner = true;
+					}else{
+						data.comments[i].owner = false;
 					}
+					*/
+					data.comments[i].owner = (data.comments[i].user._id == userId);
+
 					manager.comments.push(data.comments[i]);
 				}
 
@@ -55,7 +61,10 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 
 	var createCommentDone = function(data, manager){
 		if(data.comment.vid == manager.venueId ){
-			manager.comments.push(data.comment);
+			LpUserIdService.getId(function(userId){
+				data.comment.owner = (data.comment.user._id == userId);
+				manager.comments.push(data.comment);
+			});
 		}
 	};
 

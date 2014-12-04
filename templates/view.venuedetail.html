@@ -42,7 +42,7 @@
 						<img src="static/img/ft.png" alt="">
 						<img src="static/img/item-party.png"  class="lunch-item-image" alt="">
 						-->
-						<img ng-src="{{user.item.url}}" alt="profile item" ng-class="{'lunch-item-front': 'user.item.front'}" ng-show="user.item">
+						<img ng-src="{{user.item.url}}" alt="profile item" ng-class="{'lunch-item-front': user.item.front}" ng-show="user.item">
 						<img ng-src="{{user.ava}}" alt="profile picture">
 					</div>
 				</li>
@@ -56,7 +56,7 @@
 	<section class="lunch-comments">
 		<div class="lunch-comment lunch-animate" ng-repeat="comment in comments">
 			<div class="lunch-comment-info">
-				<div class="lunch-commentator-img" ng-class="{'lunch-owner':'comment.owner'}">
+				<div class="lunch-commentator-img" ng-class="{'lunch-owner':comment.owner}">
 					<img src="{{comment.user.ava}}" alt="">
 				</div>
 				<time am-time-ago="comment.date"></time>
