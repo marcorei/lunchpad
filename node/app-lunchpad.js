@@ -487,8 +487,8 @@ lunchTasks = {
 		// Hier machen wir es ander herum, um uns gegebenenfalls eine Abfrage zu sparen:
 		// erst Notifications cheacken, dann User sammeln.
 
-		//notificationProvider.countLt5min('comment', function(count){
-		//	if(count > 0){
+		notificationProvider.countLt5min('comment', function(count){
+			if(count > 0){
 
 				notificationProvider.aggrTargets('comment',function(targets){
 					//console.log(targets);
@@ -514,12 +514,12 @@ lunchTasks = {
 					console.log(error);
 				});
 
-		//	}else{
-		//		console.log('nothing older than 15 minutes, aboarding overview');
-		//	}
-		//},function(error){
-		//	console.log(error);
-		//});
+			}else{
+				console.log('nothing older than 15 minutes, aboarding overview');
+			}
+		},function(error){
+			console.log(error);
+		});
 	}
 
 };
@@ -1108,12 +1108,24 @@ io.sockets.on('connection', function (socket) {
 						// get all relevant users
 						checkinProvider.aggrUserIdsForVenueFromToday(data.vid,
 						function(targetsFromCheckins){
+							console.log('targetsFromCheckins');
+							console.log(targetsFromCheckins);
+
 							commentProvider.aggrUsersWithVenue(data.vid,
 							function(targetsFromComments){
+								console.log('targetsFromComments');
+								console.log(targetsFromComments);
+
 								var targets = targetsFromCheckins.concat(targetsFromComments);
+								console.log('targets');
+								console.log(targets);
 
 								userProvider.findUsersForComments([user._id],targets,
 								function(filteredTargets){
+									console.log('filteredTargets');
+									console.log(filteredTargets);
+
+									user.comment = data.txt;
 									if(filteredTargets.length > 0){
 										notificationProvider.save({
 											type: 'comment',
@@ -1313,7 +1325,7 @@ io.sockets.on('connection', function (socket) {
 
 			data.remind = Validate.s('toBoolean',[data.remind,true]);
 			data.overv = Validate.s('toBoolean',[data.overv,true]);
-			data.cmts = Validata.s('toBoolean', [data.cmts,true]);	
+			data.cmts = Validate.s('toBoolean', [data.cmts,true]);	
 
 			userProvider.updateNoti( data._id, {
 				remind: data.remind,
