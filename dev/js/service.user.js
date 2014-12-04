@@ -60,13 +60,14 @@ function(Socket,LpConfig,LpError,LpUserIdService){
 		});
 	};
 
-	var updateNotifications = function(remind, overv, uid){
+	var updateNotifications = function(remind, overv, cmts, uid){
 		console.log('remind: ');
 		console.log(remind);
 		socketManager.emit(LpConfig.getEvent('user.update.notifications'),{
 			_id: uid,
 			remind: remind,
-			overv: overv
+			overv: overv,
+			cmts: cmts
 		});
 	};
 
