@@ -5,18 +5,39 @@
 
 .lunch-view-admin {
 
+	// box
+	margin: {
+		bottom: 40px;
+	}
+
 	input {
 		display: block;
 	}
 
+	#lunch-fn-formula {
+		@extend %lunch-venue-head-btn;
+		right: 0;
+	}
 	.lunch-button {
 		float: right;
+		margin: 0;
+	}
+
+	h2 {
+		margin: {
+			top: 2em;
+		}
+		&:first-child {
+			margin: {
+				top: 0;
+			}
+		}
 	}
 
 	select {
 		width: 100%;
 	}
-	
+
 	textarea {
 		display: block;
 		width: 100%;
@@ -30,10 +51,6 @@
 	}
 
 	pre {
-		margin: {
-			top: 40px;
-			bottom: 40px;
-		}
 		padding: 12px 10px;
 		font: {
 			family: monospace;

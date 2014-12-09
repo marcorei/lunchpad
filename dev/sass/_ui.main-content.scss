@@ -15,7 +15,12 @@ main {
 		padding: {
 			top: 40px;
 			bottom: 40px;
+			left: 30px;
+			right: 30px;
 		}
+
+		// pos
+		position: relative;
 	}
 
 	h1 {
@@ -66,15 +71,11 @@ main {
 /* Collect all Medium Screen Styles here */
 
 @mixin lunch-main-screen-s-mixin() {
-
 	@include lunch-main-s();
-
 }
 
 // Apply
 
 @media screen and (min-width: $lunch-grid-break-s) {
-
 	@include lunch-main-screen-s-mixin;
-
 }

@@ -13,6 +13,7 @@
 			padding: {
 				top: 0;
 				bottom: 0;
+				left: 0;
 			}
 		}
 	}
@@ -36,15 +37,11 @@
 /* Collect all Medium Screen Styles here */
 
 @mixin lunch-venue-list-screen-s-mixin() {
-
 	@include lunch-venue-list-screen-s;
-
 }
 
 // Apply
 
 @media screen and (min-width: $lunch-grid-break-s) {
-
 	@include lunch-venue-list-screen-s-mixin;
-
 }

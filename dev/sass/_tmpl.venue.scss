@@ -276,6 +276,9 @@ $venue-vertical-padding: 50px;
 		height: 1em;
 	}
 
+	//skin
+	color: $lunch-clr-black;
+
 	// skin
 	@include transition-property(color);
 	@include transition-duration($lunch-time-out);

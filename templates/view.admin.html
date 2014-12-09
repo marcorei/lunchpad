@@ -1,144 +1,28 @@
 <main class="lunch-view-admin">
 	<header>
+		<a ng-click="back()" id="lunch-fn-formula">
+			<span class="lunch-icon">F</span>
+			<span class="lunch-label">Formula</span>
+		</a>
 		<h1>Admin Panel</h1>
 	</header>
 	<form>
+		<h2>Interface</h2>
 		<fieldset>
-
 			<select name="event" size="1"
 				ng-options="event as event for event in events"
 				ng-model="model.eventName">
 			</select>
-
-			<textarea ng-model="model.eventData" ng-allow-tab></textarea>
+			<textarea ng-model="model.eventData" ng-allow-tab id="lunch-json-interface"></textarea>
 		</fieldset>
 		<fieldset>
 			<button type="submit" class="lunch-button" ng-click="emit()">Post Json</button>
 		</fieldset>
-
-
-			<pre ng-bind="response"></pre>
-
-		</fieldset>
 	</form>
 
+	<h2>Response</h2>
+	<pre ng-bind="response"></pre>
 
-
-
-
-
-
-
-
-
-
-
-	<div style="display:none;">
-
-		<section>
-			<h2>Global Options</h2>
-		</section>
-
-		<section>
-			<h2>Users</h2>
-
-			<div><!-- sub-section -->
-				<div><!-- drop-down-group -->
-					<button>Add New User</button>
-					<div><!-- drop-down content -->
-						<form>
-							<fieldset>
-								<div>
-
-									<!--
-										IDEA:
-										statt einzelner Inputs können wir auch erstmal ein textfeld
-										mit einer Standard-JSON einsetzen, die man modifizieren
-										und dann direkt absetzen kann.
-										Geht vielleicht schneller für den Anfang.
-									-->
-
-									<input type="text" name="some_name" value="">
-									<label for=""></label>
-									<div>
-										<span>Error</span>
-									</div>
-								</div>
-
-							</fieldset>
-						</form>
-					</div>
-				</div>
-
-				<div>
-					<button>Delete Selected User(s)</button>
-					<div>
-						<form>
-							<fieldset>
-								<div>
-									<input type="text" name="some_name" value="">
-									<label for=""></label>
-									<div>
-										<span>Error</span>
-									</div>
-								</div>
-
-							</fieldset>
-						</form>
-					</div>
-				</div>
-			</div>
-
-			<ul class="lunch-users">
-				<li class="lunch-user">
-					<input type="checkbox">
-					<img src="" alt="user's profile pic">
-					<p>name</p>
-					<ul class="lunch-items">
-						<li class="lunch-item"><img src="" alt="item pic"></li>
-					</ul>
-				</li>
-			</ul>
-		</section>
-
-		<section>
-			<button>give item(s)</button>
-			<button>remove item(s)</button>
-		</section>
-
-		<section>
-			<h2>Items</h2>
-
-			<div><!-- sub-section -->
-				<div><!-- drop-down-group -->
-					<button>Add New Item</button>
-					<div><!-- drop-down content -->
-						<form>
-							<fieldset>
-								<div>
-									<input type="text" name="some_name" value="">
-									<label for=""></label>
-									<div>
-										<span>Error</span>
-									</div>
-								</div>
-
-							</fieldset>
-						</form>
-					</div>
-				</div>
-
-				<button>Delete Selected Item(s)</button>
-			</div>
-
-			<ul class="lunch-items">
-				<li class="lunch-item">
-					<input type="checkbox">
-					<img src="" alt="item pic">
-				</li>
-			</ul>
-		</section>
-
-	</div>
-
+	<h2>Editor</h2>
+	<textarea ng-model="model.eventData" ng-allow-tab id="lunch-json-interface"></textarea>
 </main>

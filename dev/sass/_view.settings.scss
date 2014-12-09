@@ -5,20 +5,9 @@
 
 .lunch-view-settings {
 
-	// container
-	header {
-		// pos
-		position: relative;
-	}
-
 
 	#lunch-fn-logout {
-		margin: {
-			top: -4px;
-			right: -20px;
-		}
 		@extend %lunch-venue-head-btn;
-		position: absolute;
 		right: 0;
 	}
 
@@ -227,26 +216,11 @@
 	}
 }
 
-/*
- * Mixin for small+ Screens
- */
-@mixin lunch-view-settings-s() {
-	.lunch-view-settings {
-
-		#lunch-fn-logout {
-			margin: {
-				top: 8px;
-				right: 0;
-			}
-		}
-	}
-}
 
 
 /* Collect all Medium Screen Styles here */
 
 @mixin lunch-view-settings-screen-s-mixin() {
-	@include lunch-view-settings-s();
 }
 
 /* Apply Mediaqueries */

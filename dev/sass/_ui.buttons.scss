@@ -83,6 +83,14 @@
 	// box
 	display: block;
 	padding: 10px;
+	margin: {
+		left: -20px;
+		right: -20px;
+		top: -4px;
+	}
+
+	// pos
+	position: absolute;
 
 	// skin
 	color: #aaa;
@@ -126,6 +134,15 @@
 	}
 }
 
+@mixin lunch-venue-head-btn-s {
+	%lunch-venue-head-btn {
+		margin: {
+			top: 8px;
+			left: 0;
+			right: 0;
+		}
+	}
+}
 
 
 
@@ -267,4 +284,20 @@
 			color: $lunch-clr-grey-lgt;
 		}
 	}
+}
+
+
+
+/* Collect Mixins */
+
+@mixin lunch-btn-screen-s () {
+	@include lunch-venue-head-btn-s;
+}
+
+
+
+/* Apply Mediaqueries */
+
+@media screen and (min-width: $lunch-grid-break-s) {
+	@include lunch-venue-head-btn-s;
 }

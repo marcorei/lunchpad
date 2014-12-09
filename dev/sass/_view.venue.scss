@@ -8,7 +8,6 @@
 	/*
 	 * Header: Contains Title, Back and Edit
 	 */
-
 	// Container
 	header {
 		border: {
@@ -20,23 +19,15 @@
 	}
 
 	// back btn
-	.lunch-fn-back {
-		margin: {
-			top: -4px;
-			left: -20px;
-		}
+	#lunch-fn-back {
+		left: 0;
 		@extend %lunch-venue-head-btn;
-		float: left;
 	}
 
 	// edit btn
-	.lunch-fn-edit {
-		margin: {
-			top: -4px;
-			right: -20px;
-		}
+	#lunch-fn-edit {
+		right: 0;
 		@extend %lunch-venue-head-btn;
-		float: right;
 	}
 
 	/*
@@ -61,10 +52,15 @@
 
 	// Container of interaction elements
 	.lunch-venue-interaction {
+		// pos
+		position: relative;
+
+		// box
 		margin: {
 			top: 0;
 			bottom: 0;
 		}
+
 		text: {
 			align: center;
 		}
@@ -113,34 +109,12 @@
 	}
 }
 
-/*
- * Mixin for small+ Screens
- */
-@mixin lunch-view-venue-screen-s() {
-	.lunch-view-venue {
-		// back btn
-		.lunch-fn-back {
-			margin: {
-				top: 5px;
-				left: 0;
-			}
-		}
-
-		// edit btn
-		.lunch-fn-edit {
-			margin: {
-				top: 5px;
-				right: 0;
-			}
-		}
-	}
-}
 
 
 /* Collect all Medium Screen Styles here */
 
 @mixin lunch-view-venue-screen-s-mixin() {
-	@include lunch-view-venue-screen-s();
+
 }
 
 /* Apply Mediaqueries */
