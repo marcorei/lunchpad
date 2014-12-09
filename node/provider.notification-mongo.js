@@ -114,7 +114,7 @@ NotificationProvider.prototype.delWithTypeAndUser = function(type, userId, onSuc
 		},function(error,numRemoved){
 			if(error) onError(error);
 			else{
-				console.log('Notis removed: '+numRemoved);
+				//console.log('Notis removed: '+numRemoved);
 				onSuccess(numRemoved);
 			}
 		});
@@ -137,7 +137,7 @@ NotificationProvider.prototype.delAll = function(type, onSuccess, onError){
 		},function(error,numRemoved){
 			if(error) onError(error);
 			else{
-				console.log('Notis removed: '+numRemoved);
+				//console.log('Notis removed: '+numRemoved);
 				onSuccess(numRemoved);
 			}
 		});
@@ -339,7 +339,7 @@ NotificationProvider.prototype.save = function(notis, targets, onSuccess, onErro
 		collection.insert(inserts, function(error,results) {
 			if(error) onError(error);
 			else{
-				console.log('Noti created: '+notis.length);
+				//console.log('Noti created: '+notis.length);
 				onSuccess(results);
 			}
 		});

@@ -90,7 +90,7 @@ ItemProvider.prototype.deleteItem = function(id, onSuccess, onError){
 		},function(error,numRemoved){
 			if(error) onError(error);
 			else{
-				console.log('Item removed: '+numRemoved);
+				//console.log('Item removed: '+numRemoved);
 				onSuccess(numRemoved);
 			}
 		});
@@ -134,7 +134,7 @@ ItemProvider.prototype.saveItems = function(items, onSuccess, onError){
 		collection.insert(items, function(error,results) {
 			if(error) onError(error);
 			else{
-				console.log('items created: '+items.length);
+				//console.log('items created: '+items.length);
 				onSuccess(results);
 			}
 		});

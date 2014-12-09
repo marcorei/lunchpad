@@ -444,7 +444,7 @@ UserProvider.prototype.save = function(users, onSuccess, onError){
 
 			// hash passwort
 			user.pass = hash.generate( user.pass );
-			console.log('generated hash');
+			//console.log('generated hash');
 
 			// add missing standard values
 			user.item = null; // active item
@@ -462,7 +462,7 @@ UserProvider.prototype.save = function(users, onSuccess, onError){
 
 		}
 
-		console.log('for queue completed. users.lenth: '+users.length);
+		//console.log('for queue completed. users.lenth: '+users.length);
 
 
 		collection.insert(users, function(error,results) {

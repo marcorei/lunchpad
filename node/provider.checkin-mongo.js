@@ -272,7 +272,7 @@ CheckinProvider.prototype.delTodayForUid = function(uid, onSuccess, onError){
 		},function(error,numRemoved){
 			if(error) onError(error);
 			else{
-				console.log('Checkins removed: '+numRemoved);
+				//console.log('Checkins removed: '+numRemoved);
 				onSuccess(numRemoved);
 			}
 		});
@@ -383,7 +383,7 @@ CheckinProvider.prototype.save = function(checkins, onSuccess, onError){
 		collection.insert(checkins, function(error,results) {
 			if(error) onError(error);
 			else{
-				console.log('Checkins created: '+checkins.length);
+				//console.log('Checkins created: '+checkins.length);
 				onSuccess(results);
 			}
 		});

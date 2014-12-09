@@ -613,32 +613,27 @@ app.post('/auth/logout', function(req,res){
  * Temporary routes for testing
  */
 
-app.get('/createTestUser',function(req,res){
-	userProvider.save([{
-		mail: 'mr@19h13.com',
-		nick: 'tester',
-		role: 'admin',
-		pass: 'testlogin',
-		ava: 'http://lunchpad.19h13.com/static/img/mr.png'
-	},{
-		mail: 'jf@19h13.com',
-		nick: 'alf',
-		role: 'admin',
-		pass: 'testlogin',
-		ava: 'http://lunchpad.19h13.com/static/img/jf.png'
-	},{
-		mail: 'mrz@19h13.com',
-		nick: 'MMRZ',
-		role: 'admin',
-		pass: 'testlogin',
-		ava: 'http://lunchpad.19h13.com/static/img/mrz.png'
-	}],function(results){
-		res.send('testuser created');
+app.get('/createFirstAdmin',function(req,res){
+
+	userProvider.findUserByMail('mr@19h13.com',
+	function(result){
+		res.send('First user already exists');
 	},function(error){
-		sendErrorToRes(res,error,666,false);
+		userProvider.save([{
+			mail: 'mr@19h13.com',
+			nick: 'tester',
+			role: 'admin',
+			pass: 'testlogin',
+			ava: 'http://lunchpad.co/static/img/mr.png'
+		}],function(results){
+			res.send('First user created');
+		},function(error){
+			sendErrorToRes(res,error,666,false);
+		});
 	});
 });
 
+/*
 app.get('/createTestVenues',function(req,res){
 	venueProvider.save([{
 		name: 'Trololo',
@@ -690,6 +685,7 @@ app.get('/cleancheckins', function(req,res){
 	lunchTasks.cleanCheckins();
 	res.send('checkins cleared');
 });
+*/
 /*
 app.get('/addtestitems', function(req,res){
 	itemProvider.saveItems({
@@ -947,7 +943,7 @@ io.sockets.on('connection', function (socket) {
 
 							venueProvider.addUserToVenue(data._id, insert,
 							function(updates){
-								console.log('emitting checkin create done')
+								//console.log('emitting checkin create done')
 								io.sockets.emit('checkin create done',{
 									vid: data._id,
 									user: insert
@@ -976,7 +972,7 @@ io.sockets.on('connection', function (socket) {
 											venue: venue,
 											user: user
 										},targets,function(numInserted){
-											console.log('Checkin Notification Insert erfolgreich');
+											//console.log('Checkin Notification Insert erfolgreich');
 										},function(error){
 											lunchHelper.sendErrorToSocket(socket,error);
 										});
@@ -1024,7 +1020,7 @@ io.sockets.on('connection', function (socket) {
 					// });
 
 					notificationProvider.delWithTypeAndUser('checkin',user._id,function(numRemoved){
-						console.log('Checkin Notifications removed for: '+user.nick);
+						//console.log('Checkin Notifications removed for: '+user.nick);
 					},function(error){
 						lunchHelper.sendErrorToSocket(socket,error);
 					})
@@ -1055,7 +1051,7 @@ io.sockets.on('connection', function (socket) {
 
 			commentProvider.findWithVenue(data._id,
 			function(comments){
-				console.log('comments found');
+				//console.log('comments found');
 				cb({
 					error: null,
 					comments: comments
@@ -1108,22 +1104,22 @@ io.sockets.on('connection', function (socket) {
 						// get all relevant users
 						checkinProvider.aggrUserIdsForVenueFromToday(data.vid,
 						function(targetsFromCheckins){
-							console.log('targetsFromCheckins');
-							console.log(targetsFromCheckins);
+							//console.log('targetsFromCheckins');
+							//console.log(targetsFromCheckins);
 
 							commentProvider.aggrUsersWithVenue(data.vid,
 							function(targetsFromComments){
-								console.log('targetsFromComments');
-								console.log(targetsFromComments);
+								//console.log('targetsFromComments');
+								//console.log(targetsFromComments);
 
 								var targets = targetsFromCheckins.concat(targetsFromComments);
-								console.log('targets');
-								console.log(targets);
+								//console.log('targets');
+								//console.log(targets);
 
 								userProvider.findUsersForComments([user._id],targets,
 								function(filteredTargets){
-									console.log('filteredTargets');
-									console.log(filteredTargets);
+									//console.log('filteredTargets');
+									//console.log(filteredTargets);
 
 									user.comment = data.txt;
 									if(filteredTargets.length > 0){
@@ -1132,12 +1128,12 @@ io.sockets.on('connection', function (socket) {
 											venue: venue,
 											user: user
 										},filteredTargets,function(numInserted){
-											console.log('Comment Notification Insert erfolgreich');
+											//console.log('Comment Notification Insert erfolgreich');
 										},function(error){
 											lunchHelper.sendErrorToSocket(socket,error);
 										});
 									}else{
-										console.log('No Notification to insert.');
+										//console.log('No Notification to insert.');
 									}
 								},function(error){
 									lunchHelper.sendErrorToSocket(socket,error);

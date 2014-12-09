@@ -329,7 +329,7 @@ VenueProvider.prototype.save = function(venues, onSuccess, onError){
 		collection.insert(venues, function(error,results) {
 			if(error) onError(error);
 			else{
-				console.log('Venues created: '+venues);
+				//console.log('Venues created: '+venues);
 				onSuccess(results);
 			}
 		});
