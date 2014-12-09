@@ -47,7 +47,8 @@ $lunch-color-filter-active: #555;
  */
 textarea,
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="url"] {
 	padding: {
 		top: 12px;
 		bottom: 12px;

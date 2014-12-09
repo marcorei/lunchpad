@@ -7,23 +7,10 @@
 
 	// container
 	header {
+		// pos
 		position: relative;
-		padding: {
-			top: 40px;
-			bottom: 40px;
-		}
 	}
 
-	h1 {
-		display: block;
-		text: {
-			align: center;
-		}
-		font: {
-			size: 40px;
-		}
-		margin: 0;
-	}
 
 	#lunch-fn-logout {
 		margin: {
@@ -245,17 +232,7 @@
  */
 @mixin lunch-view-settings-s() {
 	.lunch-view-settings {
-		// Container
-		header {
-			padding: {
-				top: 48px;
-			}
-		}
-		h1 {
-			font: {
-				size: 60px;
-			}
-		}
+
 		#lunch-fn-logout {
 			margin: {
 				top: 8px;

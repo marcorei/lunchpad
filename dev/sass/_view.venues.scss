@@ -6,11 +6,27 @@
 
 .lunch-venue-list {
 
+	.lunch-venue {
+
+		header {
+			// box
+			padding: {
+				top: 0;
+				bottom: 0;
+			}
+		}
+	}
 }
 
 @mixin lunch-venue-list-screen-s() {
 	.lunch-venue-list {
-
+		.lunch-venue {
+			// box
+			padding: {
+				top: 0;
+				bottom: 0;
+			}
+		}
 	}
 }
 

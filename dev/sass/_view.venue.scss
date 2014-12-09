@@ -11,28 +11,12 @@
 
 	// Container
 	header {
-		padding: {
-			top: 40px;
-			bottom: 40px;
-		}
 		border: {
 			width: 0;
 			bottom-width: 2px;
 			color: $lunch-clr-grey-xxlgt;
 			style: solid;
 		}
-	}
-
-	// headline
-	h1 {
-		display: block;
-		text: {
-			align: center;
-		}
-		font: {
-			size: 40px;
-		}
-		margin: 0;
 	}
 
 	// back btn
@@ -134,17 +118,6 @@
  */
 @mixin lunch-view-venue-screen-s() {
 	.lunch-view-venue {
-		// Container
-		header {
-			padding: {
-				top: 48px;
-			}
-		}
-		h1 {
-			font: {
-				size: 60px;
-			}
-		}
 		// back btn
 		.lunch-fn-back {
 			margin: {

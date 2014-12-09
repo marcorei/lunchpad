@@ -1,8 +1,8 @@
 /* Add Venue Button */
 
 .lunch-fn-addvenue {
-	
-	
+
+
 	@include transition(all 1);
 
 	float: left;
@@ -35,19 +35,41 @@
 
 
 
+.lunch-venue-edit {
+
+	input {
+		// box
+		display: block;
+		width: 100%;
+		@include box-sizing(border-box);
+	}
+
+	.lunch-input-contain {
+		// box
+		display: block;
+		margin: {
+			top: .5em;
+			bottom: 1.5em;
+		}
+	}
+
+	.lunch-button {
+		float: right;
+	}
+}
 
 
 
 
 // Create Lunch Venue
 
-/* 
- * Deprecated due to Angular rewrite 
+/*
+ * Deprecated due to Angular rewrite
  */
 .lunch-venue-create {
-	
+
 	@extend .clearfix;
-	
+
 	padding: {
 		top: 50px;
 		right: 60px;
@@ -63,7 +85,7 @@
 	}
 
 	.venue-title-input {
-		
+
 		margin: {
 			left:-10px;
 			top: 0px;
@@ -101,7 +123,7 @@
 			top: 5px;
 			bottom: 5px;
 		};
-		
+
 		font: {
 			family: Georgia;
 			style: italic;
@@ -125,7 +147,7 @@
 			border: {
 				style: solid;
 				color: #aaa;
-			
+
 			}
 		}
 	}

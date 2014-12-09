@@ -1,4 +1,7 @@
-<main>
+<main class="lunch-venue-edit">
+	<header>
+		<h1>New Venue</h1>
+	</header>
 	<form name="venueForm">
 		<fieldset>
 			<div class="">
@@ -13,7 +16,7 @@
 				</div>
 			</div>
 			<div class="">
-				<label class="lunch-input-text-label" for="venueURL">URL</label>
+				<label class="lunch-input-text-label" for="venueURL">Website</label>
 				<div class="lunch-input-contain">
 					<input type="url" id="venueURL" name="venueURL"
 						ng-model="venueFormData.venueURL"
@@ -23,6 +26,8 @@
 					</div>
 				</div>
 			</div>
+		</fieldset>
+		<fieldset>
 			<button type="submit" class="lunch-button"
 					ng-click="submitVenueForm()"
 					ng-disabled="venueForm.$invalid">create venue</button>
