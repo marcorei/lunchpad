@@ -234,11 +234,12 @@
 		padding: {
 			top: 12px;
 			right: 50px;
-			bottom: 8px;
+			bottom: 12px;
 			left: 20px;
 		}
 
 		// Skin
+		color: $lunch-clr-white;
 		background: {
 			color: $lunch-color-red-dark;
 		}
@@ -248,6 +249,7 @@
 		font: {
 			size: 1.8em;
 			family: "bebas-neue", Arial;
+			weight: bold;
 		}
 		text-align: right;
 		line-height: 1em;
@@ -424,6 +426,12 @@
 	float: right;
 }
 
+@mixin lunch-fn-settings-mixin-s() {
+	.lunch-fn-settings {
+		display: none;
+	}
+}
+
 
 
 /*
@@ -491,6 +499,8 @@
 	@include lunch-nav-mixin-s;
 	@include lunch-nav-list-mixin-s;
 	@include lunch-nav-elem-mixin-s;
+	@include lunch-fn-settings-mixin-s;
+
 }
 
 
