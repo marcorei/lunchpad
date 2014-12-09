@@ -78,6 +78,10 @@ input[type="url"] {
 		}
 		@include transition-duration($lunch-time-over);
 	}
+	&:required {
+		outline: none;
+		@include box-shadow(none);
+	}
 }
 textarea {
 	resize: vertical;
