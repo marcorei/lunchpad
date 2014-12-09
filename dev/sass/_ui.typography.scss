@@ -1,0 +1,74 @@
+/*
+ * Lunchpad Main Typo Styles
+ * @author Joachim Fröstl <jf@19h13.com>
+ */
+
+
+
+$lunch-typo-copy: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+
+/*
+ * Iconfont
+ */
+@include font-face( "lunch-ico",
+	font-files(
+		'lunch-ico.woff', woff,
+		'lunch-ico.ttf', ttf,
+		'lunch-ico.svg', svg),
+		'lunch-ico.eot');
+
+
+
+
+/*
+ * general
+ */
+body {
+	color: $lunch-clr-black;
+}
+
+
+/*
+ * Icons
+ */
+.lunch-icon {
+	// Skin
+	font: {
+		family: "lunch-ico";
+	}
+	-webkit-font-smoothing: antialiased;
+}
+
+
+/*
+ * Links
+ */
+a {
+	text-decoration: none;
+	color: $lunch-clr-blue;
+	-webkit-font-smoothing: antialiased;
+}
+
+
+/*
+ * headings
+ */
+h2 {
+	margin: 1em 0;
+	&:first-child {
+		margin: {
+			top: 0;
+		}
+	}
+}
+
+
+/*
+ * container
+ */
+section {
+	margin: {
+		bottom: 60px;
+	}
+}
