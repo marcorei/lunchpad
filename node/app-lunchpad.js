@@ -48,6 +48,9 @@ var path = require('path'),
 
 
 
+
+
+
 /*
  * Pimped Date
  * Thank you http://blog.justin.kelly.org.au/!
@@ -209,6 +212,20 @@ io.set('log level', 1);
  */
 
 
+// www to non www redirect 
+
+var wwwRedirect = function(req, res, next) {
+	if (req.headers.host.slice(0, 4) === 'www.') {
+		var newHost = req.headers.host.slice(4);
+		return res.redirect(req.protocol + '://' + newHost + req.originalUrl);
+	}
+	next();
+};
+
+app.set('trust proxy', true);
+app.use(wwwRedirect);
+
+
 // app setup
 
 app.use( express.cookieParser() );
@@ -364,7 +381,7 @@ lunchTasks = {
 									
 									mailer.sendMail(
 										'mail.reminder.top',
-										'Your Colleagues Love this Venue!',
+										'Lunchpad / Your Colleagues Love this Venue!',
 										{
 											venue: venue
 										},users);
@@ -388,7 +405,7 @@ lunchTasks = {
 									
 									mailer.sendMail(
 										'mail.reminder.weekday',
-										'Got Plans for Lunch Today?',
+										'Lunchpad / Got Plans for Lunch Today?',
 										{
 											venue: venue
 										},users);
@@ -412,7 +429,7 @@ lunchTasks = {
 									
 									mailer.sendMail(
 										'mail.reminder.rising',
-										'The New Hot Spot for Lunch!',
+										'Lunchpad / The New Hot Spot for Lunch!',
 										{
 											venue: venue
 										},users);
@@ -457,7 +474,7 @@ lunchTasks = {
 					for(i=0; i<targets.length; i++){
 						mailer.sendMail(
 							'mail.overview',
-							'New Checkins on Lunchpad!',
+							'Lunchpad / New Checkins!',
 							{
 								venues: targets[i].venues
 							},
@@ -498,7 +515,7 @@ lunchTasks = {
 					for(i=0; i<targets.length; i++){
 						mailer.sendMail(
 							'mail.comments',
-							'New Comments at Your Venues!',
+							'Lunchpad / New Comments at Your Venues!',
 							{
 								venues: targets[i].venues
 							},
@@ -515,7 +532,7 @@ lunchTasks = {
 				});
 
 			}else{
-				console.log('nothing older than 15 minutes, aboarding overview');
+				console.log('nothing older than 5 minutes, aboarding comments');
 			}
 		},function(error){
 			console.log(error);
@@ -1603,6 +1620,29 @@ io.sockets.on('connection', function (socket) {
 
 
 
-server.listen(1986,function(){
-	console.log('listening on 1986');
-});
+
+
+
+
+var initListenTimeout,
+	initListenTimeoutCount = 0;
+var initListen = function(){
+	if(initListenTimeout){
+		clearTimeout(initListenTimeout);
+	}
+	console.log('trying to start server');
+	if(initListenTimeoutCount < 5){
+		initListenTimeoutCount++;
+		try{
+			server.listen(1986,function(){
+				console.log('listening on 1986');
+			});
+		}catch(e){
+			console.log('Server start failed, starting again in 1000');
+			console.log('Fail count: '+initListenTimeoutCount);
+			initListenTimeout = setTimeout(initListen,1000);
+		}
+	}
+};
+
+initListen();
