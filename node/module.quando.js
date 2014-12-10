@@ -18,6 +18,12 @@ Quando.prototype.min15 = function(){
 	return now;
 }
 
+Quando.prototype.min5 = function(){
+	var now = new Date();
+	now.setMinutes(now.getMinutes()-5);
+	return now;
+}
+
 Quando.prototype.weekday = function(){
 	return new Date().getDay();
 }
