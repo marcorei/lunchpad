@@ -15,43 +15,119 @@ function($scope,Socket,LpError){
 
 	var defaultResponse = 'No callback response';
 
-	$scope.events = [
-		'chat send',
+	$scope.events = [{ 
+		'name': 'chat send',
+		'snippet': '{}' 
+	},
 
-		'venue read list',
-		'venue read one',
-		'venue create',
+	{
+		'name': 'venue read list',
+		'snippet': '{}'
+	},{
+		'name': 'venue read one',
+		'snippet': '{}'
+	},{
+		'name': 'venue create',
+		'snippet': '{ \n\t\"name\": \"\", \n\t\"url": \"\" \n}'
+	},
 
-		'venue update name',
-		'venue update url',
-		'venue delete',
 
-		'checkin create',
-		'checkin delete',
+	{
+		'name': 'venue update name',
+		'snippet': '{}'
+	},{
+		'name': 'venue update url',
+		'snippet': '{}'
+	},{
+		'name': 'venue delete',
+		'snippet': '{}'
+	},
 
-		'comment read list',
-		'comment create',
-		'comment delete',
 
-		'user read list',
-		'user read own id',
-		'user read one',
-		'user create',
-		'user update password',
-		'user update notifications',
-		'user update activeitem',
-		'user update inventory',
-		'user delete',
+	{
+		'name': 'checkin create',
+		'snippet': '{}'
+	},
+	{
+		'name': 'checkin delete',
+		'snippet': '{}'
+	},
 
-		'item read list',
-		'item read one',
-		'item read multiple',
-		'item create',
-		'item delete'
-	];
+	{
+		'name': 'comment read list',
+		'snippet': '{ \n\t\"_id\": \"\" \n}'
+	},
+	{
+		'name': 'comment create',
+		'snippet': '{}'
+	},
+	{
+		'name': 'comment delete',
+		'snippet': '{}'
+	},
+
+
+	{
+		'name': 'user read list',
+		'snippet': '{}'
+	},
+	{
+		'name': 'user read own id',
+		'snippet': '{}'
+	},
+	{
+		'name': 'user read one',
+		'snippet': '{ \n\t\"_id\": \"\" \n}'
+	},
+	{
+		'name': 'user create',
+		'snippet': '{ \n\t\"ava\": \"http://lunchpad.co/static/img/user/newAcc.png\", \n\t\"mail\": \"@19h13.com\", \n\t\"nick\": \"\", \n\t\"role\": \"user\", \n\t\"pass\": \"\" \n}'
+	},
+	{
+		'name': 'user update password',
+		'snippet': '{}'
+	},
+	{
+		'name': 'user update notifications',
+		'snippet': '{}'
+	},
+	{
+		'name': 'user update activeitem',
+		'snippet': '{}'
+	},
+	{
+		'name': 'user update inventory',
+		'snippet': '{ \n\t\"_id\": \"\", \n\t\"inv\":[ \n\t\t \n\t] \n}'
+	},
+	{
+		'name': 'user delete',
+		'snippet': '{}'
+	},
+
+
+	{
+		'name': 'item read list',
+		'snippet': '{}'
+	},
+	{
+		'name': 'item read one',
+		'snippet': '{ \n\t\"_id\": \"\" \n}'
+	},
+	{
+		'name': 'item read multiple',
+		'snippet': '{}'
+	},
+	{
+		'name': 'item create',
+		'snippet': '{ \n\t\"name\": \"\", \n\t\"url\": \"http://lunchpad.co/static/img/item/.png\", \n\t\"type\": \"\", \n\t\"front\": true \n}'
+	},
+	{
+		'name': 'item delete',
+		'snippet': '{}'
+	}];
 
 	$scope.model = {
-		eventName: '',
+		event: {},
 		eventData: ''
 	}
 
@@ -71,7 +147,7 @@ function($scope,Socket,LpError){
 				console.log(jsonString);
 				json = JSON.parse(jsonString);
 				$scope.response = defaultResponse;
-				Socket.emit($scope.model.eventName, json, function(response){
+				Socket.emit($scope.model.event.name, json, function(response){
 					$scope.response = JSON.stringify(response, undefined, 2);
 				});
 			}catch(e){
@@ -85,6 +161,10 @@ function($scope,Socket,LpError){
 		}else{
 			LpError.throwError('JSON invalid!');
 		}
+	}
+
+	$scope.snippetPlease = function(){
+		$scope.model.eventData = $scope.model.event.snippet;
 	}
 
 	/*

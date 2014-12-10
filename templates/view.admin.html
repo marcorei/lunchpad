@@ -1,6 +1,6 @@
 <main class="lunch-view-admin">
 	<header>
-		<a ng-click="back()" id="lunch-fn-formula">
+		<a ng-click="snippetPlease()" id="lunch-fn-formula">
 			<span class="lunch-icon">F</span>
 			<span class="lunch-label">Formula</span>
 		</a>
@@ -10,8 +10,8 @@
 		<h2>Interface</h2>
 		<fieldset>
 			<select name="event" size="1"
-				ng-options="event as event for event in events"
-				ng-model="model.eventName">
+				ng-options="event as event.name for event in events"
+				ng-model="model.event">
 			</select>
 			<textarea ng-model="model.eventData" ng-allow-tab id="lunch-json-interface"></textarea>
 		</fieldset>
