@@ -17,13 +17,16 @@
 			<div class="lunch-mail-content">
 				<% for(var i = 0; i < venues.length; i++) { %>
 					<div class="lunch-mail-venue">
+						<a href="http://www.lunchpad.co/#/venue/<%= venues[i].venue._id %>" class="lunch-cta-btn">view venue</a>
 						<h2><%= venues[i].venue.name %></a></h2>
-						<p><a href="http://www.lunchpad.co/#/venue/<%= venues[i].venue._id %>">visit venue</a></p>
 						<ul>
 							<% for(var j = 0; j < venues[i].users.length; j++) { %>
-								<li>
-									<img src="<%= venues[i].users[j].ava %>" alt="<%= venues[i].users[j].nick %>">
-									<p><%= venues[i].users[j].comment %></p>
+								<li class="lunch-mail-comment">
+									<div class="lunch-mail-commentator-img">
+										<img src="<%= venues[i].users[j].ava %>" alt="<%= venues[i].users[j].nick %>">
+									</div>
+									<p class="lunch-mail-commentator"><%= venues[i].users[j].nick %></p>
+									<p class="lunch-mail-comment-content"><%= venues[i].users[j].comment %></p>
 								</li>
 							<% } %>
 						</ul>
@@ -37,7 +40,7 @@
 		</div>
 		<div class="lunch-mail-footer">
 			<p>You can always update your <a href="http://www.lunchpad.co/#/settings/self">email preferences</a>.</p>
-			<a href="http://www.lunchpad.co"><img src="../static/img/logo-mail.gif" alt="lunchpad"></a>
+			<p><a class="lunch-mail-footer-logo" href="http://www.lunchpad.co"><img src="http://www.lunchpad.co/static/img/logo-mail.gif" alt="lunchpad"></a></p>
 		</div>
 	</body>
 </html>

@@ -17,8 +17,8 @@
 			<div class="lunch-mail-content">
 				<% for(var i = 0; i < venues.length; i++) { %>
 					<div class="lunch-mail-venue">
+						<a href="http://www.lunchpad.co/#/venue/<%= venues[i].venue._id %>" class="lunch-cta-btn">view venue</a>
 						<h2><%= venues[i].venue.name %></a></h2>
-						<p><a href="http://www.lunchpad.co/#/venue/<%= venues[i].venue._id %>">visit venue</a></p>
 						<ul>
 							<% for(var j = 0; j < venues[i].users.length; j++) { %>
 								<li>
@@ -36,7 +36,7 @@
 		</div>
 		<div class="lunch-mail-footer">
 			<p>You can always update your <a href="http://www.lunchpad.co/#/settings/self">email preferences</a>.</p>
-			<a href="http://www.lunchpad.co"><img src="../static/img/logo-mail.gif" alt="lunchpad"></a>
+			<p><a class="lunch-mail-footer-logo" href="http://www.lunchpad.co"><img src="http://www.lunchpad.co/static/img/logo-mail.gif" alt="lunchpad"></a></p>
 		</div>
 	</body>
 </html>
