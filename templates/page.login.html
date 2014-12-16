@@ -8,7 +8,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<title>19:13 Lunchpad</title>
 		<meta name="description" content="">
-		<meta name="viewport" content="width=device-width">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<!-- Style -->
 		<link rel="stylesheet" href="../static/css/app.css">
@@ -21,33 +21,55 @@
 	</head>
 	<body class="lunch-page-login">
 	
-	<header>
-		<a  href="#" class="lunch-logo">
-			<img src="../static/img/logo-lp.png" alt="">
-		</a>
-	</header>
-	<form action="/auth/login" method="post" class="lunch-login-form">
-		
-		<label for="username" class="lunch-inp-label">Username</label>
-		<input type="text" name="username" class="lunch-inp-username">
-
-		<label for="password" class="lunch-inp-label">Password</label>
-		<input type="password" name="password" class="lunch-inp-password">
-		
-		<button type="submit" class="lunch-fn-login">Login</button>
-	</form>
+		<header>
+			<div  href="#" class="lunch-logo">
+				<img src="../static/img/logo-lp.png" alt="">
+			</div>
+			<h1>Lunchpad.co</h1>
+		</header>
 
 
-	<footer class="lunch-footer">
-		<nav>
-			<ul>
-				<li><a href="http://www.19h13.com" title="19:13 Werbeagentur">19:13 Command Center</a></li>
-				<li><a href="/manifesto" title="Manifesto">Lunch Manifesto</a></li>
-				<li><a href="https://github.com/marcorei/lunchpad" title="Manifesto">Source auf Github</a></li>
-				<li>by <a href="https://twitter.com/marcorei" title="marcorei auf twitter">@marcorei</a> &amp; <a href="https://twitter.com/joggaf" title="joggaf auf twitter">@joggaf</a></li>
-			</ul>
-		</nav>
-	</footer>
+		<section class="lunch-section-manifesto">
+			<h2><a href="/manifesto" title="Manifesto">The Lunch Manifesto.</a></h2>
+			<p><a href="/manifesto" title="Manifesto">Read more.</a></p>
+		</section>
+
+		<section class="lunch-section-login">
+			<form action="/auth/login" method="post" class="lunch-login-form">
+				<fieldset>
+					<div>
+						<label for="username" class="lunch-input-text-label">Username</label>
+						<div class="lunch-input-contain">
+							<input type="text" name="username" class="lunch-inp-username">
+						</div>
+					</div>
+					<div>
+						<label for="password" class="lunch-input-text-label">Password</label>
+						<div class="lunch-input-contain">
+							<input type="password" name="password" class="lunch-inp-password">
+						</div>
+					</div>
+				</fieldset>
+				<fieldset>
+					<button type="submit" class="lunch-button">Login</button>
+				</fieldset>
+				
+
+				
+				
+				
+			</form>
+		</section>
+
+		<footer class="lunch-footer">
+			<nav>
+				<ul>
+					<li><a href="http://www.19h13.com" title="19:13 Werbeagentur">19:13 Command Center</a></li>
+					<li><a href="https://github.com/marcorei/lunchpad" title="Manifesto">Source auf Github</a></li>
+					<li>by <a href="https://twitter.com/marcorei" title="marcorei auf twitter">@marcorei</a> &amp; <a href="https://twitter.com/joggaf" title="joggaf auf twitter">@joggaf</a></li>
+				</ul>
+			</nav>
+		</footer>
 
 	</body>
 </html>

@@ -54,11 +54,15 @@ html {
 	-webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape while allowing user zoom */
 }
 html, body {
-	height: auto;
+	height: 100%;
 	background-color: #fff;
 }
 
 body {
 	overflow-y: scroll;
 	overflow-x: hidden;
+}
+
+*{
+	outline: none;
 }
