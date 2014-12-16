@@ -13,6 +13,7 @@ p {
 }
 
 .lunch-mail-container {
+	position: relative;
 	max-width: 500px;
 	padding: 60px 40px;
 	margin: 0 auto;
@@ -26,7 +27,7 @@ p {
 }
 
 .lunch-mail-content {
-	margin: 3em 0;
+	margin: 3em 0 4em 0;
 	width: 100%;
 }
 
@@ -46,6 +47,7 @@ p {
 * Venue Mail
 */
 .lunch-mail-venue {
+	position: relative;
 	margin: 0;
 	padding: 1.5em 0 1.5em 0;
 	border-bottom: 2px solid #f7f7f7;
@@ -76,19 +78,56 @@ p {
 
 
 /*
+* Reminder
+*/
+.lunch-mail-venue.lunch-new {
+	background-color: #FF0046;
+	border: none;
+	color: white;
+	padding: 20px;
+}
+
+.lunch-mail-venue.lunch-new .lunch-cta-btn {
+	background-color: white;
+	color: #ff0046;
+}
+
+.lunch-mail-interferer {
+
+	color: white;
+	padding: 4px 10px;
+	font-size: 20px;
+	letter-spacing: 1px;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+.lunch-mail-venue.lunch-new h2 {
+	margin: 1em 0;
+	font-size: 30px;
+}
+
+
+/*
 * Comment Mail
 */
 .lunch-mail-content .lunch-mail-comment {
 	display: block;
-	margin: 2.5em 0;
+	margin: 0 0;
+	padding: 1.25em 0;
+	border-bottom: 2px solid #f7f7f7;
+}
+.lunch-mail-content .lunch-mail-comment:first-child {
+	border-top: 2px solid #f7f7f7;
 }
 
 .lunch-mail-commentator {
 	color: #00B9E7;
-	margin: 1em 0 0 50px;
+	margin: 0 0 0 50px;
 }
 .lunch-mail-comment-content {
-	margin: 0 0 1em 50px;
+	margin: 0 0 0 50px;
 }
 
 .lunch-mail-commentator-img {
@@ -100,6 +139,16 @@ p {
 
 	background-color: #eee;
 	border-radius: 20px;
+}
+
+.lunch-mail-content.lunch-comments .lunch-mail-venue {
+	padding: 0;
+	margin: 4em 0;
+	border-bottom: 0;
+	botder-top: 0;
+}
+.lunch-mail-content.lunch-comments .lunch-mail-venue:first-child {
+	border-top: 0;
 }
 
 
