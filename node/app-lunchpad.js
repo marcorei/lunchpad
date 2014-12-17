@@ -547,7 +547,7 @@ cronTasks.setupTasks([
 		fn: lunchTasks.cleanCheckins
 	},
 	{
-		time: '00 00 11 * * 1-5',
+		time: '00 30 10 * * 1-5',
 		fn: lunchTasks.sendReminder
 	},
 	{
