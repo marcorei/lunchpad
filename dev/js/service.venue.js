@@ -157,6 +157,23 @@ function(Socket,LpConfig,LpError,LpUserIdService,$timeout){
 		}
 	}
 
+	var markOneAsVisited = function(id){
+		LpUserIdService.getId(function(userId){
+			socketManager.emit(LpConfig.getEvent('notification.delete.venue'),{
+				_id: userId,
+				venueId: id
+			});
+		});
+	}
+
+	var markAllAsVisited = function(){
+		LpUserIdService.getId(function(userId){
+			socketManager.emit(LpConfig.getEvent('notification.delete.all'),{
+				_id: userId
+			});
+		});
+	}
+
 
 
 
@@ -288,7 +305,9 @@ function(Socket,LpConfig,LpError,LpUserIdService,$timeout){
 		getVenueById: getVenueById, // shortcut with queuing and callback
 		checkIn: checkIn,
 		checkOut: checkOut,
-		createVenue: createVenue
+		createVenue: createVenue,
+		markOneAsVisited: markOneAsVisited,
+		markAllAsVisited: markAllAsVisited
 	};
 
 }]);

@@ -1610,6 +1610,55 @@ io.sockets.on('connection', function (socket) {
 
 
 
+	// Notifications
+
+	socket.on('notification delete venue', function(data){
+		lunchAuth.isOwnerOrAdmin(socket, data._id, function(user){
+
+			var e;
+			id(e = new Validate()
+			.v('isLength',[data._id,24,24],'item.id')
+			.v('isLength',[data.venueId,24,24],'item.id')
+			.e()){
+				lunchHelper.sendErrorToSocket(socket,e);
+				return null;
+			}
+
+			notificationProvider.delWithTargetAndVenue( data._id, data.venueId, undefined,
+			function(numRemoved){
+
+				// DEBUG!
+
+			},function(error){
+				lunchHelper.sendErrorToSocket(socket, error);
+			});
+
+		});
+	});
+
+	socket.on('notification delete all', function(data){
+		lunchAuth.isOwnerOrAdmin(socket, data._id, function(user){
+
+			var e;
+			id(e = new Validate()
+			.v('isLength',[data._id,24,24],'item.id')
+			.e()){
+				lunchHelper.sendErrorToSocket(socket,e);
+				return null;
+			}
+
+			notificationProvider.delWithTargetAndVenue( data._id, undefined, 'checkin'
+			function(numRemoved){
+
+				// DEBUG!
+
+			},function(error){
+				lunchHelper.sendErrorToSocket(socket, error);
+			});
+
+		});
+	});
+
 
 	socket.on('disconnect', function(){
 	});

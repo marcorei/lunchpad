@@ -62,6 +62,9 @@ function($scope,$location,$routeParams,LpVenueService,LpCommentService){
 
 				//load comments
 				commentsManager.loadComments(venue._id);
+
+				//mark venue as visited
+				LpVenueService.markOneAsVisited(venue._id);
 			}
 		});
 

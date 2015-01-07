@@ -124,6 +124,37 @@ NotificationProvider.prototype.delWithTypeAndUser = function(type, userId, onSuc
 
 
 /*
+ * Delete for target and venue
+ */
+
+NotificationProvider.prototype.delWithTargetAndVenue = function(targetId, venueId, type, onSuccess, onError){
+	db.gc(cn, function(collection){
+
+		var selectObj = {};
+		selectObj['target._id'] = targetId;
+		if(venueId != undefined){
+			selectObj['venue._id'] = venueId;
+		}
+		if(type != undefined){
+			selectObj['type'] = type;
+		}
+
+		collection.remove(selectObj,
+		{
+			safe: true
+		},function(error,numRemoved){
+			if(error) onError(error);
+			else{
+				//console.log('Notis removed: '+numRemoved);
+				onSuccess(numRemoved);
+			}
+		});
+
+	});
+}
+
+
+/*
  * Delete all
  */
 

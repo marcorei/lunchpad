@@ -29,4 +29,7 @@ function($scope,$location,LpVenueService){
 		$location.path('/venue/'+id);
 	}
 
+	// Mark all as visited
+	LpVenueService.markAllAsVisited();
+
 }]);

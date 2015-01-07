@@ -90,7 +90,10 @@ angular.module('lpConfig',[
 		'item.create': 'item create',
 		'item.create.done': 'item create done',
 		'item.delete': 'item delete',
-		'item.delete.done': 'item delete done'
+		'item.delete.done': 'item delete done',
+
+		'notification.delete.venue': 'notification delete venue',
+		'notification.delete.all': 'notification delete all'
 	}
 
 	this.$get = function(){
