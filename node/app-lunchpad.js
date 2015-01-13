@@ -720,7 +720,7 @@ app.get('/createTestVenues',function(req,res){
 	});
 });
 */
-
+/*
 app.get('/sendreminder', function(req,res){
 	lunchTasks.sendReminder();
 	res.send('reminders sent');
@@ -740,7 +740,7 @@ app.get('/cleancheckins', function(req,res){
 	lunchTasks.cleanCheckins();
 	res.send('checkins cleared');
 });
-
+*/
 /*
 app.get('/addtestitems', function(req,res){
 	itemProvider.saveItems({
