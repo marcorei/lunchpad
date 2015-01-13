@@ -78,7 +78,7 @@
 
 			shepherd.addStep("notifications",{
 				title: "Improved Notifications",
-				text: "Visit your profile and turn on the new and improved notification features!",
+				text: "We added new and improved notifications! <br>Go to your profile to update your settings.",
 				attachTo: "#navProfileBtn left",
 				buttons: [
 					{
@@ -95,7 +95,7 @@
 
 			shepherd.addStep("profile",{
 				title: "Items",
-				text: "Pimp your CHaracter with items! <br>A free party hat is already in your inventory ;)",
+				text: "Pimp your Character with items! <br>A free party hat is already in your inventory ;)",
 				attachTo: "#navProfileBtn left",
 				buttons: [
 					{
