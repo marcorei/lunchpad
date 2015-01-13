@@ -83,7 +83,8 @@ Draft.prototype.send = function(){
 				if(err){
 					console.log(err);
 				}else{
-					console.log('message sent: ' + response.message);
+					//console.log('message sent: ' + response.message);
+					console.log('email sent to: ' + self.locals.user.mail);
 				}
 			})
 		}

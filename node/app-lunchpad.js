@@ -350,7 +350,7 @@ lunchTasks = {
 
 		checkinProvider.aggregateUserIdsFromToday(function(userIds){
 			userProvider.findUsersForReminder(userIds,function(users){
-
+				
 				// Wir haben die user. aber was senden wir Ihnen?
 				// Haben wir ein neues Venues, das kürzlich eingetragen wurden?
 				venueProvider.findUnfeatured(function(venue){
@@ -374,7 +374,8 @@ lunchTasks = {
 								console.log('rolling the dice!');
 								// Jetzt würfeln. Was wird es heute sein.
 								// Rising, all time Favourite, weekday favourite?
-								var dice = Math.floor(Math.random()*3);
+								//var dice = Math.floor(Math.random()*3);
+								var dice = 0;
 								switch(dice){
 									case 0:
 										sendAllTimeFav();
