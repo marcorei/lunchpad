@@ -374,8 +374,8 @@ lunchTasks = {
 								console.log('rolling the dice!');
 								// Jetzt würfeln. Was wird es heute sein.
 								// Rising, all time Favourite, weekday favourite?
-								//var dice = Math.floor(Math.random()*3);
-								var dice = 0;
+								var dice = Math.floor(Math.random()*3);
+								//var dice = 2;
 								switch(dice){
 									case 0:
 										sendAllTimeFav();
