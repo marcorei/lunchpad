@@ -131,9 +131,9 @@ NotificationProvider.prototype.delWithTargetAndVenue = function(targetId, venueI
 	db.gc(cn, function(collection){
 
 		var selectObj = {};
-		selectObj['target._id'] = targetId;
+		selectObj['target._id'] = db.oID(targetId);
 		if(venueId != undefined){
-			selectObj['venue._id'] = venueId;
+			selectObj['venue._id'] = db.oID(venueId);
 		}
 		if(type != undefined){
 			selectObj['type'] = type;
