@@ -12,7 +12,10 @@ module.exports = function (grunt) {
 		'bower_components/angular-sanitize/angular-sanitize.min.js',
 		'bower_components/moment/min/moment.min.js',
 		'bower_components/moment/locale/de.js',
-		'bower_components/angular-moment/angular-moment.min.js'
+		'bower_components/angular-moment/angular-moment.min.js',
+
+		// Temporary onboarding
+		'bower_components/shepherd.js/shepherd.min.js'
 	];
 
 
