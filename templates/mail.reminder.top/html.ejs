@@ -1,2 +1,37 @@
-<h1> Hello <%= user.nick %> <h1>
-<p>Check out the top venue <%= venue.name %>, <span>added at <%= venue.createdAt %></span>.
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="initial-scale=1.0">	<!-- So that mobile webkit will display zoomed in -->
+	<meta name="format-detection" content="telephone=no"> <!-- disable auto telephone linking in iOS -->
+	<title>Lunch Mail</title>
+	<link rel="stylesheet" type="text/css" href="mail.overview/style.css">
+</head>
+
+<body style="margin:0;" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" class="lunch-mail">
+	<div class="lunch-mail-container">
+		<div class="lunch-mail-hello">
+			<p>Hello <%= user.nick %>,</p>
+			<p>check out this venue on <a href="http://www.lunchpad.co">lunchpad</a>!</p>
+		</div>
+		<div class="lunch-mail-content">
+			<div class="lunch-mail-venue lunch-new">
+				<img class="lunch-mail-venue-interferer" src="http://www.lunchpad.co/static/img/mail-reminder-top.png" alt="TOP VENUE!">
+				<div class="lunch-mail-venue-header">
+					<h2><%= venue.name %></a></h2>
+					<p>This is the most often visited venue of all time.</p>
+				</div>
+				<a href="http://www.lunchpad.co/#/venue/<%= venue._id %>" class="lunch-cta-btn">view venue</a>
+			</div>
+		</div>
+		<div class="lunch-mail-cya">
+			<p>Thank you for using lunchpad.</p>
+			<p> See you at lunchtime!</p>
+		</div>
+	</div>
+	<div class="lunch-mail-footer">
+		<p>You can always update your <a href="http://www.lunchpad.co/#/settings/self">email preferences</a>.</p>
+		<p><a class="lunch-mail-footer-logo" href="http://www.lunchpad.co"><img src="http://www.lunchpad.co/static/img/logo-mail.gif" alt="lunchpad"></a></p>
+	</div>
+</body>
+</html>

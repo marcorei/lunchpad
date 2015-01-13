@@ -1,2 +1,17 @@
-Hello <%= user.nick %>
-Check out the new checkins
+Hello <%= user.nick %>,
+Check out the new comments on www.lunchpad.co!
+
+<% for(var i = 0; i < venues.length; i++) { %>
+	<%= venues[i].venue.name %> (www.lunchpad.co/#/venue/<%= venues[i].venue._id %>)
+	<% for(var j = 0; j < venues[i].users.length; j++) { %>
+		<%= venues[i].users[j].nick %>:
+		<%= venues[i].users[j].comment %>
+	<% } %>
+<% } %>
+
+Thank you for using lunchpad.
+See you at lunchtime!
+
+
+
+You can always update your email preferences (www.lunchpad.co/#/settings/self).

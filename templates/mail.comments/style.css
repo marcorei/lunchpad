@@ -5,7 +5,7 @@ body {
 }
 
 p {
-	margin: .4em 0;
+	margin: .2em 0;
 	line-height: 1.35em;
 }
 .lunch-mail {
@@ -81,31 +81,41 @@ p {
 * Reminder
 */
 .lunch-mail-venue.lunch-new {
-	background-color: #FF0046;
-	border: none;
+	position: relative;
+	background-color: #333;
 	color: white;
-	padding: 20px;
+	padding: 30px 30px 40px;
+	border: none;
+	border-radius: 2px;
 }
 
 .lunch-mail-venue.lunch-new .lunch-cta-btn {
-	background-color: white;
-	color: #ff0046;
+	float: none;
+	display: inline-block;
 }
 
-.lunch-mail-interferer {
-
-	color: white;
-	padding: 4px 10px;
-	font-size: 20px;
-	letter-spacing: 1px;
+.lunch-mail-venue-interferer {
 	position: absolute;
-	left: 0;
-	top: 0;
+	top: -45px;
+	right: -35px;
+}
+
+@media screen and (min-width: 480px) {
+	.lunch-mail-venue-interferer {
+		position: absolute;
+		top: -45px;
+		right: 40px;
+	}
 }
 
 .lunch-mail-venue.lunch-new h2 {
-	margin: 1em 0;
+	margin: 0 0;
 	font-size: 30px;
+	letter-spacing: 1px;
+}
+
+.lunch-mail-venue.lunch-new .lunch-mail-venue-header {
+	margin: 0 0 40px;
 }
 
 
