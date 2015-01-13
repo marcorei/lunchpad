@@ -287,8 +287,26 @@ passport.use('local-login', new LocalStrategy(
 				return done( null, false, {message:'Incorrect password.'} );
 			}
 			console.log('user authenticated: ' + user.nick + ' (' + mail + ')');
-			return done(null, user);
 
+			if(user.inactive === false){
+				return done(null, user);
+			}else{
+				userProvider.updateNoti(user._id.toString(), {
+					remind: true,
+					overv: true,
+					cmts: true
+				}, function(result){
+					userProvider.setActive(user._id.toString(), false,
+					function(result){
+						return done(null, user);
+					},
+					function(error){
+						done(error);
+					});
+				}, function(error){
+					done(error);
+				});
+			}
 		},function(error){
 			console.log(error);
 			return done(error);
@@ -376,6 +394,12 @@ lunchTasks = {
 							// send all time favourite
 							checkinProvider.aggrAllFavVid(function(venueStats){
 								venueProvider.findVenue(venueStats._id, function(venue){
+
+									if(venue.deleted === true){
+										tryAgrr();
+										return;
+									}
+
 									console.log('sending all time fav');
 									console.log(venue);
 									
@@ -400,6 +424,12 @@ lunchTasks = {
 							// send weekday favourite
 							checkinProvider.aggrWdFavVid(function(venueStats){
 								venueProvider.findVenue(venueStats._id, function(venue){
+
+									if(venue.deleted === true){
+										tryAgrr();
+										return;
+									}
+
 									console.log('sending weekday time fav');
 									console.log(venue);
 									
@@ -424,6 +454,12 @@ lunchTasks = {
 							// send rising venue
 							checkinProvider.aggrRisingVid(function(venueStats){
 								venueProvider.findVenue(venueStats.vid, function(venue){
+
+									if(venue.deleted === true){
+										tryAgrr();
+										return;
+									}
+
 									console.log('sending rising');
 									console.log(venue);
 									
@@ -682,6 +718,7 @@ app.get('/createTestVenues',function(req,res){
 		lunchHelper.sendErrorToRes(res,error,666,false);
 	});
 });
+*/
 
 app.get('/sendreminder', function(req,res){
 	lunchTasks.sendReminder();
@@ -702,7 +739,7 @@ app.get('/cleancheckins', function(req,res){
 	lunchTasks.cleanCheckins();
 	res.send('checkins cleared');
 });
-*/
+
 /*
 app.get('/addtestitems', function(req,res){
 	itemProvider.saveItems({
@@ -1616,7 +1653,7 @@ io.sockets.on('connection', function (socket) {
 		lunchAuth.isOwnerOrAdmin(socket, data._id, function(user){
 
 			var e;
-			id(e = new Validate()
+			if(e = new Validate()
 			.v('isLength',[data._id,24,24],'item.id')
 			.v('isLength',[data.venueId,24,24],'item.id')
 			.e()){
@@ -1628,6 +1665,7 @@ io.sockets.on('connection', function (socket) {
 			function(numRemoved){
 
 				// DEBUG!
+				//console.log("all notifications for one venue removed!");
 
 			},function(error){
 				lunchHelper.sendErrorToSocket(socket, error);
@@ -1640,17 +1678,18 @@ io.sockets.on('connection', function (socket) {
 		lunchAuth.isOwnerOrAdmin(socket, data._id, function(user){
 
 			var e;
-			id(e = new Validate()
+			if(e = new Validate()
 			.v('isLength',[data._id,24,24],'item.id')
 			.e()){
 				lunchHelper.sendErrorToSocket(socket,e);
 				return null;
 			}
 
-			notificationProvider.delWithTargetAndVenue( data._id, undefined, 'checkin'
+			notificationProvider.delWithTargetAndVenue( data._id, undefined, 'checkin',
 			function(numRemoved){
 
 				// DEBUG!
+				//console.log("checkin notifications for all venues removed!");
 
 			},function(error){
 				lunchHelper.sendErrorToSocket(socket, error);
