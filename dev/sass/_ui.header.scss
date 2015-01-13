@@ -253,6 +253,15 @@
 		}
 		text-align: right;
 		line-height: 1em;
+		@include transition-duration($lunch-time-out);
+
+		// States
+		&:hover{
+			background: {
+				color: shade($lunch-clr-red-drk, 10);
+			}
+			@include transition-duration($lunch-time-over);
+		}
 	}
 }
 
