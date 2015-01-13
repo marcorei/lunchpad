@@ -15,7 +15,7 @@
 				<p>check out the new comments on <a href="http://www.lunchpad.co">lunchpad</a>!</p>
 			</div>
 			<div class="lunch-mail-content lunch-comments">
-				<% for(var i = venues.length-1; i >= 0; i++) { %>
+				<% for(var i = venues.length-1; i >= 0; i--) { %>
 					<div class="lunch-mail-venue">
 						<a href="http://www.lunchpad.co/#/venue/<%= venues[i].venue._id %>" class="lunch-cta-btn">view venue</a>
 						<h2><%= venues[i].venue.name %></a></h2>
