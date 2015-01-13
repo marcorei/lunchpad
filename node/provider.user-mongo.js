@@ -37,7 +37,8 @@ UserProvider.prototype.findAll = function(onSuccess, onError){
 				nick:1,
 				ava:1,
 				item:1,
-				role:1
+				role:1,
+				inactive: 1
 			}
 		}).toArray(function(error,users){
 			if(error) onError(error);
@@ -84,7 +85,8 @@ UserProvider.prototype.findUserByMail = function(mail, onSuccess, onError){
 			fields:{
 				mail:1,
 				nick:1,
-				pass:1
+				pass:1,
+				inactive: 1
 			}
 		},function(error,result){
 			if(error) onError(error);
@@ -381,7 +383,29 @@ UserProvider.prototype.updateStats = function(id, stats, onSuccess, onError){
 }
 
 
+/*
+ * Change the active status
+ */
+UserProvider.prototype.setActive = function(id, active, onSuccess, onError){
+	db.gc(cn, function(collection){
 
+		collection.update({
+			_id: db.oID(id)
+		},{
+			$set:{
+				inactive: (active === true)
+			}
+		},{
+			safe:true,
+			multi:false
+		},function(error,result){
+			if(error) onError(error);
+			if(!result) onError('nothing updated, user not found');
+			else onSuccess(result);
+		});
+
+	},onError);
+}
 
 
 /*
@@ -449,11 +473,12 @@ UserProvider.prototype.save = function(users, onSuccess, onError){
 			// add missing standard values
 			user.item = null; // active item
 			user.inv = []; // inventory (all items)
+			user.inactive = true; // for switching on notification settings
 
 			user.noti = {
-				remind: true,
-				overv: true,
-				cmts: true
+				remind: false,
+				overv: false,
+				cmts: false
 			};
 			user.stats = {
 				cihs: 0,
