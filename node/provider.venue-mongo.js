@@ -34,7 +34,9 @@ var VenueProvider = function(){
 VenueProvider.prototype.findAll = function(onSuccess, onError){
 	db.gc(cn, function(collection){
 
-		collection.find({},{
+		collection.find({
+			deleted: undefined
+		},{
 			fields:{
 				name:1,
 				url:1,
@@ -271,7 +273,7 @@ VenueProvider.prototype.dailyReset = function(onSuccess, onError){
 
 VenueProvider.prototype.deleteVenue = function(id, onSuccess, onError){
 	db.gc(cn, function(collection){
-
+		/*
 		collection.remove({
 			_id: db.oID(id)
 		},{
@@ -281,6 +283,22 @@ VenueProvider.prototype.deleteVenue = function(id, onSuccess, onError){
 			if(error) onError(error);
 			else if(!removed) onError('nothing to remove');
 			else onSuccess(removed);
+		});
+		*/
+
+		collection.findAndModify({
+			_id: db.oID(id)
+		},[],{
+			$set:{
+				deleted: true
+			}
+		},{
+			multi: false,
+			save: true
+		},function(error,venue){
+			if(error) onError(error);
+			else if(!venue) onError('venue not found');
+			else onSuccess(venue);
 		});
 
 	},onError);
