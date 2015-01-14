@@ -211,7 +211,18 @@
 		}
 
 		// Effects
-		@include border-radius( 0px );
+		@include border-radius(0px);
+		@include user-select(none);
+
+		// States
+		&:hover{
+			.lunch-account-name {
+				background: {
+					color: shade($lunch-clr-red-drk, 10);
+				}
+				@include transition-duration($lunch-time-over);
+			}
+		}
 	}
 
 	// Avatar
@@ -254,14 +265,6 @@
 		text-align: right;
 		line-height: 1em;
 		@include transition-duration($lunch-time-out);
-
-		// States
-		&:hover{
-			background: {
-				color: shade($lunch-clr-red-drk, 10);
-			}
-			@include transition-duration($lunch-time-over);
-		}
 	}
 }
 
