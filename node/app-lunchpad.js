@@ -1705,6 +1705,25 @@ io.sockets.on('connection', function (socket) {
 
 
 
+	// Admin statistic routes
+	
+	socket.on('stats innovator', function(data, cb){
+		lunchAuth.isAdmin(socket, function(user){
+
+			checkinProvider.aggrInnovators(function(results){
+
+				cb({
+					error: null,
+					results: results
+				});
+
+			}, function(error){
+				lunchHelper.sendErrorToSocketCb(cb,error);
+			});
+
+		});
+	});
+
 });
 
 
