@@ -580,7 +580,7 @@ lunchTasks = {
 
 cronTasks.setupTasks([
 	{
-		time: '00 00 00 * * 1-7',
+		time: '00 00 00 * * 0-6',
 		fn: lunchTasks.cleanCheckins
 	},
 	{
