@@ -255,6 +255,56 @@ CheckinProvider.prototype.aggrBabo = function(onSuccess, onError){
 
 
 
+/*
+ * Aggregate Innovator
+ */
+
+CheckinProvider.prototype.aggrInnovators = function(onSuccess, onError){
+	db.gc(cn, function(collection){
+
+		// Der Plan: 
+		// - Alle Checkins nach (Tag und Venue) gruppieren, beim Pushen nach Zeit sortieren
+		// - Jeweils das früheste Checkin jedes Eintrags projecten
+		// - Nach Usern gruppieren, checkins zählen
+		// - Nach Anzahl der checkins sortieren
+
+		collection.aggregate([
+			{$match:{
+				date: { $gte: quando.l30d() }
+			}},
+			{$sort:{
+				date: 1 // Wir wollen die ältesten / ersten checkins zuerst
+			}},
+			{$group:{
+				_id: {
+					day: {
+						$dayOfYear: '$date',
+					},
+					vid: '$vid'
+				},
+				firstUser: {
+					$first: '$uid'
+				}
+			}},
+			{$group:{
+				_id: '$firstUser.uid',
+				numFirstCheckins: {
+					$sum: 1
+				}
+			}},
+			{$sort:{
+				numFirstCheckins: -1
+			}}
+		], function(error,results){
+			if(error) onError(error);
+			else onSuccess(results);
+		});
+
+	}, onError);
+}
+
+
+
 
 
 
