@@ -34,6 +34,7 @@ var VenueProvider = function(){
 VenueProvider.prototype.findAll = function(onSuccess, onError){
 	db.gc(cn, function(collection){
 
+		/*
 		collection.find({
 			deleted: undefined
 		},{
@@ -48,6 +49,26 @@ VenueProvider.prototype.findAll = function(onSuccess, onError){
 			if(error) onError(error);
 			else onSuccess(results);
 		});
+		*/
+		collection.aggregate([
+			{$match:{
+				deleted: undefined
+			}},
+			{$project:{
+				name: true,
+				url: true,
+				guests: true,
+				comc: true,
+				numGuests: {$size: '$guests'}
+			}},
+			{$sort:{
+				numGuests: -1,
+				name: 1
+			}}
+		], function(error, results){
+			if(error) onError(error);
+			else onSuccess(results);
+		}
 
 	},onError);
 }
