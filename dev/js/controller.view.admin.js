@@ -124,6 +124,20 @@ function($scope,Socket,LpError){
 	{
 		'name': 'item delete',
 		'snippet': '{}'
+	},
+
+	{
+		'name': 'notification delete venue',
+		'snippet': '{ \n\t\"_id\": \"\", \n\t\"_venueId\": \"\" \n}'
+	},
+	{
+		'name': 'notification delete all',
+		'snippet': '{ \n\t\"_id\": \"\"}'
+	},
+
+	{
+		'name': 'stats innovator',
+		'snippet': ''
 	}];
 
 	$scope.model = {

@@ -93,7 +93,9 @@ angular.module('lpConfig',[
 		'item.delete.done': 'item delete done',
 
 		'notification.delete.venue': 'notification delete venue',
-		'notification.delete.all': 'notification delete all'
+		'notification.delete.all': 'notification delete all',
+
+		'stats.innovator': 'stats innovator'
 	}
 
 	this.$get = function(){
