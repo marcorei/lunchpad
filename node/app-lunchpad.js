@@ -588,11 +588,11 @@ cronTasks.setupTasks([
 		fn: lunchTasks.sendReminder
 	},
 	{
-		time: '00 */5 9-18 * * 1-5',
+		time: '00 */5 9-16 * * 1-5',
 		fn: lunchTasks.sendOverview
 	},
 	{
-		time: '00 */2 9-18 * * 1-5',
+		time: '00 */2 9-16 * * 1-5',
 		fn: lunchTasks.sendComments
 	}
 ]);
