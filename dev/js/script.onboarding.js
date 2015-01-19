@@ -95,7 +95,7 @@
 
 			shepherd.addStep("profile",{
 				title: "Items",
-				text: "Pimp your Character with items! <br>A free party hat is already in your inventory ;)",
+				text: "Pimp your Character with items! <br>You can earn new items through contests and on special occasions.",
 				attachTo: "#navProfileBtn left",
 				buttons: [
 					{
