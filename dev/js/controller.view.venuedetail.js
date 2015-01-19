@@ -6,7 +6,8 @@
 
 angular.module('viewVenueDetailController',[
 'lpVenueService',
-'lpCommentService'
+'lpCommentService',
+'ngSanitize'
 ])
 
 .controller('ViewVenueDetailController',[

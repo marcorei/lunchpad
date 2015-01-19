@@ -64,15 +64,17 @@
 				<time am-time-ago="comment.date"></time>
 				<h3>{{comment.user.nick}}</h3>
 			</div>
-			<p>{{comment.txt}}</p>
+			<p ng-bind-html="comment.txt"></p>
 		</div>
 
 
-		<form action="" class="lunch-comment lunch-comment-input">
+		<form action="" ng-submit="sendComment()" class="lunch-comment lunch-comment-input">
 			<div class="lunch-commentator-img">
 				<img src="{{user.ava}}" alt="" class="lunch-user-image">
 			</div>
-				<textarea type="text" placeholder="Got something to say?" ng-model="formInputTxt"></textarea>
+				<textarea type="text" placeholder="Got something to say?" 
+					ng-model="formInputTxt"
+					ng-keyup="$event.keyCode == 13 ? sendComment() : null"></textarea>
 				<button class="lunch-button" ng-click="sendComment()" ng-disabled="!formInputTxt">
 					<span class="lunch-label">Post Comment</span>
 				</button>
