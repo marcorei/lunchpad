@@ -115,6 +115,7 @@ CommentProvider.prototype.aggrUsersWithVenue = function(vid, onSuccess, onError)
 
 		collection.aggregate([
 			{$match:{
+				date: { $gte: quando.today() },
 				vid: vid
 			}},
 			{$group:{
