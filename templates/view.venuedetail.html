@@ -1,0 +1,83 @@
+<main class="lunch-view-venue lunch-animate">
+
+	<header>
+		<a ng-click="back()" id="lunch-fn-back">
+			<span class="lunch-icon">B</span>
+			<span class="lunch-label">back</span>
+		</a>
+		<!--
+		<a ng-click="edit(venue._id)" class="lunch-fn-edit">
+			<span class="lunch-icon">E</span>
+			<span class="lunch-label">edit</span>
+		</a>
+		-->
+		<h1>{{venue.name}}</h1>
+	</header>
+
+	<section class="lunch-venue-reception">
+		<div class="lunch-venue-interaction">
+			<a class="lunch-fn-menu" href="{{venue.url}}" target="_blank">
+				<span class="lunch-icon">M</span>
+				<span class="lunch-label">View Menu</span>
+			</a>
+			<a ng-hide="venue.attending" class="lunch-fn-attend" ng-click="checkIn(venue._id)">
+				<span class="lunch-icon">Y</span>
+				<span class="lunch-label">lunch here</span>
+			</a>
+			<a ng-show="venue.attending" class="lunch-fn-quit" ng-click="checkOut(venue._id)">
+				<span class="lunch-icon">N</span>
+				<span class="lunch-label">Cancel</span>
+			</a>
+			<a class="lunch-fn-invite" href="mailto:?subject=Lunchpad%20%2F%20What%20about%20Lunch%20at%20{{venue.name}}%3F&body=Join%20me%20for%20lunch%20at%20{{venue.name}}!%0Ahttp%3A%2F%2Flunchpad.co%2F%23%2Fvenue%2F{{venue._id}}%0A%0A">
+				<span class="lunch-icon">I</span>
+				<span class="lunch-label">Invite</span>
+			</a>
+		</div>
+
+
+		<div class="lunch-venue-guests" ng-class="{'lunch-guests-empty': venue.guests.length == 0}">
+			<ul>
+				<li class="lunch-venue-guest lunch-animate" ng-repeat="user in venue.guests">
+					<!-- <img src="{{user.ava}}" class="lunch-user-image" alt="{{user.nick}}"> -->
+					<div class="lunch-avatar">
+						<!--
+						<img src="static/img/ft.png" alt="">
+						<img src="static/img/item-party.png"  class="lunch-item-image" alt="">
+						-->
+						<img ng-src="{{user.item.url}}" alt="profile item" ng-class="{'lunch-item-front': user.item.front}" ng-show="user.item">
+						<img ng-src="{{user.ava}}" alt="profile picture">
+					</div>
+				</li>
+			</ul>
+		</div>
+	</section>
+
+
+
+
+	<section class="lunch-comments">
+		<div class="lunch-comment lunch-animate" ng-repeat="comment in comments">
+			<div class="lunch-comment-info">
+				<div class="lunch-commentator-img" ng-class="{'lunch-owner':comment.owner}">
+					<img ng-src="{{comment.user.ava}}" alt="">
+				</div>
+				<time am-time-ago="comment.date"></time>
+				<h3>{{comment.user.nick}}</h3>
+			</div>
+			<p ng-bind-html="comment.txt"></p>
+		</div>
+
+
+		<form action="" ng-submit="sendComment()" class="lunch-comment lunch-comment-input">
+			<div class="lunch-commentator-img">
+				<img src="{{user.ava}}" alt="" class="lunch-user-image">
+			</div>
+				<textarea type="text" placeholder="Got something to say?" 
+					ng-model="formInputTxt"
+					ng-keyup="$event.keyCode == 13 ? sendComment() : null"></textarea>
+				<button class="lunch-button" ng-click="sendComment()" ng-disabled="!formInputTxt">
+					<span class="lunch-label">Post Comment</span>
+				</button>
+		</form>
+	</section>
+</main>

@@ -1,0 +1,216 @@
+/*
+ * Lunchpad. Header/Nav
+ * @author Markus Riegel <mr@19h13.com>
+ */
+
+@import "compass/css3/transform";
+@import "compass/css3/transition";
+@import "compass/css3/box-sizing";
+@import "compass/css3/border-radius";
+@import "compass/css3/box-shadow";
+
+$backgroundcolor: #000;
+$lunch-color-blu: #00B9E7;
+$fontcolor: #fff;
+
+.shepherd-element {
+	position: absolute;
+	display: none;
+
+	&.shepherd-open {
+		display: block;
+	}
+
+	//max-width: 100%;
+	max-width: 500px;
+	max-height: 100%;
+	z-index: 999;
+
+	.shepherd-content {
+		@include border-radius(5px);
+		@include transform(translateZ(0));
+		@include box-shadow(0px 0px 10px rgba(0, 0, 0, 0.2));
+
+		position: relative;
+		padding: 27px;
+		background-color: $backgroundcolor;
+		color: $fontcolor;
+
+		&::before {
+			content: "";
+			display: block;
+			position: absolute;
+			width: 0;
+			width: 0;
+			border: {
+				color: transparent;
+				width: 16px;
+				style: solid;
+			};
+		}
+	}
+
+	&.shepherd-has-title{
+		.shepherd-content {
+
+			header {
+				*zoom: 1;
+				padding: 1em;
+
+				a.shepherd-cancel-link {
+					padding: 0;
+					margin-bottom: 0;
+
+					float: right;
+					font-weight: bold;
+
+					//top: 0.1em;
+					padding: 5px;
+					margin-bottom: -0.8em;
+				}
+
+				&::after {
+					content: "";
+					display: table;
+					clear: both;
+				}
+
+				h3 {
+					margin: 0;
+					line-height: 1;
+					font-size: 30px;
+				}
+			}
+
+			.shepherd-text {
+				padding: 1em;
+
+				p {
+					margin: 0 0 0.5em 0;
+					line-height: 1.3em;
+
+					&:last-child {
+						margin-bottom: 0;
+					}
+				}
+			}
+
+			footer {
+				padding: 0 1em 1em;
+
+				.shepherd-buttons {
+					text-align: right;
+					list-style: none;
+					padding: 0;
+					margin: 0;
+
+					li {
+						display: inline;
+						margin: 0;
+						padding: 0;
+						padding-left: 6px;
+
+						a {
+							font-weight: bold;
+						}
+
+						.shepherd-button.shepherd-button-secondary {
+							background-color: #888;
+
+							&:hover {
+								background-color: #444;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	&.shepherd-has-cancel-link {
+		.shepherd-content header h3 {
+			float: left;
+		}
+	}
+}
+
+
+
+
+
+.shepherd-element.shepherd-element-attached-bottom.shepherd-element-attached-center .shepherd-content {
+	margin-bottom: 16px; }
+	.shepherd-element.shepherd-element-attached-bottom.shepherd-element-attached-center .shepherd-content:before {
+		top: 100%;
+		left: 50%;
+		margin-left: -16px;
+		border-top-color: $backgroundcolor; }
+.shepherd-element.shepherd-element-attached-top.shepherd-element-attached-center .shepherd-content {
+	margin-top: 16px; }
+	.shepherd-element.shepherd-element-attached-top.shepherd-element-attached-center .shepherd-content:before {
+		bottom: 100%;
+		left: 50%;
+		margin-left: -16px;
+		border-bottom-color: $backgroundcolor; }
+.shepherd-element.shepherd-element-attached-right.shepherd-element-attached-middle .shepherd-content {
+	margin-right: 16px; }
+	.shepherd-element.shepherd-element-attached-right.shepherd-element-attached-middle .shepherd-content:before {
+		left: 100%;
+		top: 50%;
+		margin-top: -16px;
+		border-left-color: $backgroundcolor; }
+.shepherd-element.shepherd-element-attached-left.shepherd-element-attached-middle .shepherd-content {
+	margin-left: 16px; }
+	.shepherd-element.shepherd-element-attached-left.shepherd-element-attached-middle .shepherd-content:before {
+		right: 100%;
+		top: 50%;
+		margin-top: -16px;
+		border-right-color: $backgroundcolor; }
+.shepherd-element.shepherd-element-attached-top.shepherd-element-attached-left.shepherd-target-attached-bottom .shepherd-content {
+	margin-top: 16px; }
+	.shepherd-element.shepherd-element-attached-top.shepherd-element-attached-left.shepherd-target-attached-bottom .shepherd-content:before {
+		bottom: 100%;
+		left: 16px;
+		border-bottom-color: $backgroundcolor; }
+.shepherd-element.shepherd-element-attached-top.shepherd-element-attached-right.shepherd-target-attached-bottom .shepherd-content {
+	margin-top: 16px; }
+	.shepherd-element.shepherd-element-attached-top.shepherd-element-attached-right.shepherd-target-attached-bottom .shepherd-content:before {
+		bottom: 100%;
+		right: 16px;
+		border-bottom-color: $backgroundcolor; }
+.shepherd-element.shepherd-element-attached-bottom.shepherd-element-attached-left.shepherd-target-attached-top .shepherd-content {
+	margin-bottom: 16px; }
+	.shepherd-element.shepherd-element-attached-bottom.shepherd-element-attached-left.shepherd-target-attached-top .shepherd-content:before {
+		top: 100%;
+		left: 16px;
+		border-top-color: $backgroundcolor; }
+.shepherd-element.shepherd-element-attached-bottom.shepherd-element-attached-right.shepherd-target-attached-top .shepherd-content {
+	margin-bottom: 16px; }
+	.shepherd-element.shepherd-element-attached-bottom.shepherd-element-attached-right.shepherd-target-attached-top .shepherd-content:before {
+		top: 100%;
+		right: 16px;
+		border-top-color: $backgroundcolor; }
+.shepherd-element.shepherd-element-attached-top.shepherd-element-attached-right.shepherd-target-attached-left .shepherd-content {
+	margin-right: 16px; }
+	.shepherd-element.shepherd-element-attached-top.shepherd-element-attached-right.shepherd-target-attached-left .shepherd-content:before {
+		top: 16px;
+		left: 100%;
+		border-left-color: $backgroundcolor; }
+.shepherd-element.shepherd-element-attached-top.shepherd-element-attached-left.shepherd-target-attached-right .shepherd-content {
+	margin-left: 16px; }
+	.shepherd-element.shepherd-element-attached-top.shepherd-element-attached-left.shepherd-target-attached-right .shepherd-content:before {
+		top: 16px;
+		right: 100%;
+		border-right-color: $backgroundcolor; }
+.shepherd-element.shepherd-element-attached-bottom.shepherd-element-attached-right.shepherd-target-attached-left .shepherd-content {
+	margin-right: 16px; }
+	.shepherd-element.shepherd-element-attached-bottom.shepherd-element-attached-right.shepherd-target-attached-left .shepherd-content:before {
+		bottom: 16px;
+		left: 100%;
+		border-left-color: $backgroundcolor; }
+.shepherd-element.shepherd-element-attached-bottom.shepherd-element-attached-left.shepherd-target-attached-right .shepherd-content {
+	margin-left: 16px; }
+	.shepherd-element.shepherd-element-attached-bottom.shepherd-element-attached-left.shepherd-target-attached-right .shepherd-content:before {
+		bottom: 16px;
+		right: 100%;
+		border-right-color: $backgroundcolor; }

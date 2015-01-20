@@ -1,0 +1,300 @@
+/**
+ * Lunchpad. Input/Elements
+ * @author Joachim Fröstl <jf@19h13.com>
+ */
+
+
+
+
+
+
+
+
+
+
+/*
+ * Vars
+ */
+$lunch-color-filter: #d5d5d5;
+$lunch-color-filter-active: #555;
+
+
+
+
+
+
+
+
+/*
+ * Venue List Filter
+ */
+
+.lunch-venue-filter {
+	width: auto;
+	margin: {
+		top: 28px;
+	}
+	padding: 0;
+	position: relative;
+	background: {
+		color: transparent;
+	}
+}
+
+
+/*
+ * Text Input Styles
+ */
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="url"] {
+	padding: {
+		top: 12px;
+		bottom: 12px;
+		right: 10px;
+		left: 10px;
+	}
+	border: {
+		width: 2px;
+		style: solid;
+		color: $lunch-clr-grey-xlgt;
+	}
+	-webkit-appearance:none;
+	@include box-sizing( border-box );
+	@include border-radius(2px);
+	@include transition-property(border, background);
+	@include transition-duration($lunch-time-out);
+
+	// States
+	&:hover,
+	&:focus {
+		// Skin
+		border: {
+			color: $lunch-clr-grey-lgt;
+		}
+		background: {
+			color:$lunch-clr-grey-xxlgt;
+		}
+		@include transition-duration($lunch-time-over);
+	}
+	&:required {
+		outline: none;
+		@include box-shadow(none);
+	}
+}
+textarea {
+	resize: vertical;
+}
+
+
+
+
+/*
+ * Mixin for medium screens
+ */
+@mixin lunch-venue-filter-mixin-m() {
+
+	.lunch-venue-filter {
+		margin: {
+			right: 20px;
+		}
+	}
+}
+
+
+
+/**
+ * Checkbox
+ */
+input[type="checkbox"]{
+	margin: {
+		right: 0.5em;
+	}
+}
+
+
+label {
+	@include user-select(none);
+}
+
+
+
+fieldset {
+	border: 0;
+	padding: 0;
+}
+
+
+
+.lunch-input-text-label {
+	display: block;
+	padding: 0;
+}
+
+
+.lunch-input-contain {
+	position: relative;
+	margin: 0.75em 0em;
+	display: inline-block;
+	label{
+
+	}
+
+	.lunch-input-note {
+		position: absolute;
+		top: 0;
+		right: 0;
+		font: {
+			size: 12px;
+		}
+		color: $lunch-clr-red;
+		padding:15px 12px;
+	}
+}
+
+
+
+/*
+ * Lunch Venue Filter Input
+ * Mobile First
+ */
+
+.lunch-venue-filter-input {
+
+	// Box
+	display: block;
+	width: 100%;
+	padding: {
+		top: 10px;
+		right: 10px;
+		bottom: 10px;
+		left: 40px;
+	};
+	margin:{
+		left: 0;
+		right: auto;
+	}
+	border: {
+		width: 0px;
+		bottom-width: 2px;
+		style: dashed;
+		color: #d5d5d5;
+	}
+	@include box-sizing( border-box );
+
+	// Skin
+	background: {
+		color: transparent;
+	}
+	font: {
+		size: 18px;
+		family: $lunch-typo-copy;
+		style: normal;
+	}
+
+	// Effects
+	@include transition-property( border-color );
+	@include transition-duration( 200ms );
+
+	// States
+	&:focus,
+	&:hover {
+		border: {
+			color: $lunch-color-filter-active;
+		}
+		~.lunch-venue-filter-btn{
+			color: $lunch-color-filter-active;
+		}
+	}
+}
+
+
+
+/*
+ * Mixin for medium screens
+ */
+@mixin lunch-venue-filter-input-mixin-s() {
+
+	.lunch-venue-filter-input {
+
+	}
+}
+
+
+
+
+
+
+
+
+
+/*
+ * Lunch Venue Filter Btn
+ */
+
+.lunch-venue-filter-btn {
+
+	// Box
+	padding: 0;
+
+	// Position
+	position: absolute;
+	right: 20px;
+	top: 10px;
+
+	// Skin
+	font: {
+		family: 'lunch-ico';
+		size: 30px;
+	}
+	color: #ccc;
+
+	// Effects
+	@include transition-property( color );
+	@include transition-duration( 0.5s );
+
+
+	// States
+	&:hover {
+		cursor: text;
+	}
+}
+
+
+
+
+
+
+
+
+/*
+ * Collect all Small Sceen Styles here
+ */
+@mixin lunch-inputs-mixins-s() {
+	@include lunch-venue-filter-input-mixin-s();
+}
+
+/*
+ * Collect all Medium Screen Styles here
+ */
+@mixin lunch-inputs-mixins-m() {
+	@include lunch-venue-filter-mixin-m;
+}
+/*
+ * Apply Small
+ */
+@media screen and ( min-width: $lunch-grid-break-s ) {
+	@include lunch-inputs-mixins-s;
+}
+
+/*
+ * Apply Medium
+ */
+@media screen and ( min-width: $lunch-grid-break-m ) {
+	@include lunch-inputs-mixins-m;
+}
+
+/*
+ * Apply Large
+ */

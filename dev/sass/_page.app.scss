@@ -1,262 +1,71 @@
-/*
- * App Page
+/**
+ * Lunchpad Appage
+ * @author Joachim Fröstl <jf@19h13.com>
  */
+
+
+
+
+
+
+
 
 
 .lunch-apppage-head,
 .lunch-apppage-body {
-
 	@extend .lunch-grid-column;
 }
-@mixin hoverrotateStart( ){
-	-moz-transform: rotate(0deg);  /* FF3.5+ */
-       -o-transform: rotate(0deg);  /* Opera 10.5 */
-  -webkit-transform: rotate(0deg);  /* Saf3.1+, Chrome */
-      -ms-transform: rotate(0deg);  /* IE9 */
-          transform: rotate(0deg);  
-}
-
-@mixin hoverrotate( ){
-	-moz-transform: rotate(360deg);  /* FF3.5+ */
-       -o-transform: rotate(360deg);  /* Opera 10.5 */
-  -webkit-transform: rotate(360deg);  /* Saf3.1+, Chrome */
-      -ms-transform: rotate(360deg);  /* IE9 */
-          transform: rotate(360deg);  
-}
-
-
-
-/* Apppage Header */
-
-// Mobile First
-
-.lunch-apppage-head {
-	
-	// Skin
-	
-	background: {
-		color: $agencycolor;
-	}
-
-	color: white;
-
-	.lunch-logo-container {
-		@extend .clearfix;
-	}
-
-	.lunch-logo {
-
-	}
-
-	.lunch-fn-notify,
-	.lunch-fn-logout {
-		cursor: pointer;
-
-		.lunch-inp-notify {
-			cursor: pointer;
-		}
-		label {
-			cursor: pointer;
-		}
-		@include transition( color 1000ms );
-
-		&:hover{
-
-			color: #000;
-			@include transition( color 200ms );
-			}
-		
-		}
-
-}
 
 
 
 
 
 
-// Desktop Second
-
-@mixin lunch-apppage-head-desktop() {
-
-	.lunch-apppage-head {
-		
-		text-align: right;
-		width: 38.2%;
-
-		
-		// Positioning
-
-		position: fixed;
-
-		top: 0;
-		bottom: 0;
-		left: 0;
-
-
-		.lunch-container {
-
-			float: right;
-			width: 300px;
-		}
-
-		.lunch-logo-container {
-
-			display: block;
-
-			text-align: right;
-
-
-			border: {
-				width: 0px;
-				bottom-width: 0px;
-				style: solid;
-				color: white;
-			}
-		}
-
-		.lunch-logo {
-			text-align: right;
-			display: block;
-			height: 122px;
-			width: 260px;
-			float: right;
-			
-
-			padding: {
-				top: 100px;
-				right: 80px;
-				left: 20px;
-				bottom: 40px;
-			}
-		}
-		
-		.lunch-user {
-			position: relative;
-			// background-color: #D6003B;
-		}
-		.lunch-user-image {
-			display: block;
-			position: absolute;
-			top: -28px;
-			right: 35px;
-
-		}
-		.lunch-user-name {
-			text-align: right;
-			line-height: 1em;
-			padding: {
-				left: 60px;
-				top: 20px;
-				bottom: 15px;
-				right: 80px;
-				
-			}
-			font: {
-				size: 1.8em;
-				family: "bebas-neue", Arial;
-			}
-		}
-		.lunch-user-surname {
-			font: {
-				family: Georgia;
-			}
-		}
-	}
-}
-
-
-.lunch-fn-notify,
-.lunch-fn-logout, 
-.lunch-timer {
-	
-	font: {
-		family: Georgia;
-	}
-	position: relative;
-
-	text-decoration: none;
-
-	color: white;
-
-	display: block;
-	padding: {
-		top: 6px;
-		bottom: 6px;
-		left: 60px;
-		right: 80px;
-	}
-
-}
 
 
 
 .lunch-inp-notify {
 	margin-right: 5px;
-	// position: absolute;
-	// top: 12px;
-	// right: 50px;
 }
 
 
 
 
 
-
-// Lunch Flash
-
-.lunch-flash {
-	position: fixed;
-	z-index: 5;
-	top: 0;
-	left: 38.2%;
-	right: 0;
-	background-color: #FFF080;
-	color: #E27F00;
-	font: {
-		family: Georgia;
-	}
-	
-	padding: {
-		top:20px;
-		left: 60px;
-		bottom: 20px;
-		right: 60px;
-	}
-	p {
-		margin: 0;
-	}
-	.lunch-flash-close {
-		border-radius: 33px;
-		text-align: center;
-		margin-top: -7px;
-		padding: 7px 4px;
-		width: 25px;
-		text-decoration: none;
-		font: {
-			family: "Helvetica Neue", Arial;
-		}
-		float: right;
-		background-color: #e27f00;
-		color: #fff;
-	}
-
-	.lunch-flash-container {
-		max-width: 600px;
-	}
-}
 
 
 
 
 .lunch-venue-create-container{
-	margin-left: 38.2%;
-	width: 61.8%;
+
+	background-color: #efefef;
+
+	.lunch-venue-create{
+		max-width: 600px;
+	}
+
 }
 
 
 
+/* Body */
 
+// Mobile First
+
+body {
+	padding: {
+		top: 0px;
+	}
+}
+
+
+@mixin body-s() {
+	body {
+		padding: {
+			top: 0;
+		}
+	}
+}
 
 
 
@@ -265,13 +74,13 @@
 // Mobile First
 
 .lunch-apppage-body {
-	
+
 	position: relative;
 
 	min-height: 100%;
-	
+
 	padding: {
-		top: 65px;
+		top: 70px;
 		bottom: 0px;
 	}
 
@@ -282,420 +91,93 @@
 
 
 
-
-
-// Desktop Second
-
-@mixin lunch-apppage-body-desktop() {
+/*
+ * Appage Body Medium sized Screens
+ */
+@mixin lunch-apppage-body-s() {
 
 	.lunch-apppage-body {
-		
-		margin-left: 38.2%;
-		
+
+		// box
+		padding: {
+			left: 200px;
+		}
+		padding: {
+			top: 0;
+		}
+		width: 100%;
+		@include box-sizing (border-box);
+	}
+
+	.lunch-venues {
+		max-width: 700px;
+	}
+}
+
+
+/*
+ * Appage Body Medium sized Screens
+ */
+@mixin lunch-apppage-body-m() {
+
+	.lunch-apppage-body {
+
+		// box
+		margin: {
+			left: 38.2%;
+		}
+		padding: {
+			left: 0;
+			top: 0;
+		}
 		width: 61.8%;
-		
-		// float: left;
-	}
-}
-
-
-.lunch-venues {
-	margin: {
-		top:59px;
-	}
-}
-
-
-.lunch-venue, .void-venue {
-
-	// General Venue Styles
-
-	@extend .clearfix;
-
-	position: relative;
-
-	background: {
-		color: white;
+		@include box-sizing(content-box);
 	}
 
-	border: {
-		width: 0px;
-		bottom-width: 1px;
-		style: solid;
-		color: #eee;
-	}
-
-	margin: {
-		top: 0px;
-		bottom: 0px;
-		left: 0px;
-		right: 0px;
-	}
-
-	padding: {
-		top: 50px;
-		right: 60px;
-		bottom: 50px;
-		left: 60px;
-	}
-}
-
-
-
-// Special Voidvenue
-.void-venue {
-	background: {
-		color: #fff;
-	}
-	border: {
-		bottom-width: 0px;
-	}
-
-	.lunch-fn-attend {
-		background: {
-			color: $agencycolor;
-		}
-
-		&:hover {
-			background-color: #FF1A59;
-			@include hoverrotate();
-		}
-	}
-
-	.lunch-venue-header {
-		color: $agencycolor;
-		font: {
-			family: Georgia;
-			style: italic;
-		}
-	}
-}
-
-// Venue Title
-
-.lunch-venue-title {
-	
-	font: {
-		size: 2.4em;
-	}
-
-	margin: {
-		top: 0;
-		bottom: 5px;
-	}
-
-	display: block;
-}
-
-
-
-// Venue Header
-
-.lunch-venue-header {
-	margin-bottom: 30px;
-}
-
-
-// Venue Interaction
-
-.lunch-venue-interaction {
-
-	clear: left;
-	border: {
-		width: 0px;
-		top-width: 0px;
-		style: solid;
-		color: #efefef;
-	}
-
-	padding:  {
-		top: 20px;
-	}
-}
-
-
-.lunch-fn-menu {
-	
-	text-decoration: none;
-
-	font: {
-		family: Georgia;
-		style: italic;
-	}
-
-	border: {
-		width: 0px;
-		bottom-width: 1px;
-		style: dashed;
-		color: #ddd;
-	}
-
-	color: #666;
-	right: 0;
-	top: 10px;
-	bottom: 50%;
-
-	@include transition( all 1000ms );
-
-	&:hover{
-		border: {
-			bottom-color: #00BEEE;
-		}
-		color: #00BEEE;
-		@include transition( all 200ms );
-		}
-	
-}
-
-
-
-
-// Lunch Venue Guests
-
-.lunch-venue-guests-container,
-.lunch-void-guests-container {
-	max-width: 600px;
-	margin-top: 50px;
-}
-
-// Venue Group
-
-.lunch-venue-guests {
-	float: left;
-}
-
-.lunch-fn-attend {
-	
-
-	display: block;
-
-	float: left;
-
-	margin-right: 10px;
-
-	text-align: right;
-	
-	padding: 10px 20px;
-	//width: 150px;
-
-	text-decoration: none;
-	
-	font: {
-		family: Georgia;
-		style: regular;
-	}
-
-	color: white;
-	background: {
-		color: #00B9E7;
-	}
-
-	float: right;
-	width: 50px;
-	height: 20px;
-	margin: {
-		left: 20px;
-		right: 0px;
-		top: 12px;
-	}
-
-	text-align: center;
-	padding: 22px 7px;
-	border-radius: 34px;
-	text-decoration: none;
-	font-family: Georgia;
-	
-	@include hoverrotateStart();
-
-	@include transition( all 1000ms );
-
-	&:hover{
-		color: #efefef;
-		background: {
-			color: #15D0FF;
-		}
-		@include hoverrotate();
-		@include transition( all 200ms );
-	}
-	
-}
-
-
-
-
-.lunch-fn-addvenue {
-	
-
-	@include transition(all 1);
-
-	display: block;
-
-	float: left;
-
-	margin-right: 10px;
-
-	text-align: right;
-	
-	padding: 10px 20px;
-	//width: 150px;
-
-	text-decoration: none;
-	
-	font: {
-		family: Georgia;
-		style: regular;
-	}
-
-	color: white;
-	background: {
-		color: #ccc;
-	}
-
-	float: right;
-	width: 50px;
-	height: 20px;
-	margin: {
-		left: 20px;
-		right: 0;
-		top: 50px;
-	}
-	text-align: center;
-	padding: 22px 7px;
-	border-radius: 34px;
-	text-decoration: none;
-	font-family: Georgia;
-	background: {
-		color: #98D300;
-	}
-	@include transition( all 1000ms );
-	@include hoverrotateStart();
-
-	&:hover {
-
-		background-color: #ADE61A;
-
-		@include hoverrotate();
-		@include transition( all 200ms );
+	.lunch-venues {
+		max-width: 700px;
 	}
 }
 
 
 
 
-
-
-// Create Lunch Venue
-
-.lunch-venue-create {
-	
-	background-color: #efefef;
-	@extend .clearfix;
-	
-	padding: {
-		top: 50px;
-		right: 60px;
-		bottom: 50px;
-		left: 60px;
-	}
-
-	border: {
-		width: 0px;
-		bottom-width: 0px;
-		style: solid;
-		color: #dedede;
-	}
-
-	.venue-title-input {
-		
-		margin: {
-			left:-10px;
-			top: 0px;
-		}
-
-		padding: 10px;
-
-		padding: {
-			bottom: 5px;
-		}
-
-		font: {
-			family: "bebas-neue";
-			size: 2.4em;
-		}
-		min-width: 450px;
-		background-color: #eee;
-		border: {
-			width: 1px;
-			style: dashed;
-			color: #ccc;
-		}
-	}
-
-	.venue-menu-input {
-
-		min-width: 450px;
-		margin: {
-			left:-10px;
-			top: 10px;
-		}
-		padding: {
-			left: 10px;
-			right: 10px;
-			top: 5px;
-			bottom: 5px;
-		};
-		
-		font: {
-			family: Georgia;
-			style: italic;
-		}
-
-		background-color: #eee;
-		border: {
-			width: 1px;
-			style: dashed;
-			color: #ccc;
-		}
-
-	}
-	.venue-title-input,
-	.venue-menu-input {
-		display: block;
-
-		&:focus {
-			outline: none;
-			border: {
-				style: solid;
-				color: #aaa;
-			
-			}
-		}
-	}
+/*
+* Collection of all Small Screen Style Mixins
+*/
+@mixin lunch-apppage-body-mixins-screen-s() {
+	@include lunch-apppage-body-s;
 }
 
 
-.void-venue-template,
-.lunch-venue-template,
-.lunch-flash-template {
-	display: none;
+
+/*
+* Collection of all Medium Screen Style Mixins
+*/
+@mixin lunch-apppage-body-mixins-screen-m() {
+	@include lunch-apppage-body-m;
 }
 
 
-/* Desktop Second */
 
-// Collect all Desktopstyles here
-
-@mixin lunch-apppage-desktop() {
-
-	@include lunch-apppage-head-desktop;
-	@include lunch-apppage-body-desktop;
-
+/*
+* Apply Mediaquery Mixins
+*/
+@media screen and (min-width: $lunch-grid-break-s) {
+	@include lunch-apppage-body-mixins-screen-s;
+}
+@media screen and (min-width: $lunch-grid-break-m) {
+	@include lunch-apppage-body-mixins-screen-m;
 }
 
-// Apply
-
-@media screen and (min-width: 960px) {
-
-	@include lunch-apppage-desktop;
-
+/*
+* IE fixes
+*/
+.lt-ie9 {
+	@include lunch-apppage-body-mixins-screen-m;
 }
+
+/*
+* No JS
+*/
+.no-js {}

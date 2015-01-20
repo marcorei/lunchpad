@@ -1,0 +1,102 @@
+<main class="lunch-view-settings">
+
+	<header>
+		<a href="/logout" id="lunch-fn-logout">
+			<span class="lunch-icon">o</span>
+			<span class="lunch-label">Logout</span>
+		</a>
+		<h1>{{user.nick}}</h1>
+		<p class="lunch-profile-email"><a href="mailto:{{user.mail}}">{{user.mail}}</a></p>
+	</header>
+
+	<section class="lunch-profile">
+		<h2>Change Item</h2>
+		<div class="lunch-altar">
+			<div class="lunch-avatar">
+				<!--
+				<img src="static/img/ft.png" alt="">
+				<img src="static/img/item-party.png"  class="lunch-item-image" alt="">
+				-->
+				<img ng-src="{{data.user.item.url}}" alt="profile item" ng-class="{'lunch-item-front': 'user.item.front'}" ng-show="data.user.item">
+				<img ng-src="{{data.user.ava}}" alt="profile picture">
+			</div>
+		</div>
+		<div class="lunch-runway">
+			<a class="lunch-item"
+				href=""
+				ng-repeat="item in data.user.inv"
+				ng-click="submitActiveItem(item._id)"
+				ng-class="{'lunch-active':item.active}">
+
+				<div class="lunch-item-active">
+					<span class="lunch-icon">a</span>
+				</div>
+				<div class="lunch-avatar">
+					<span class="lunch-item-info">{{item.name}}</span>
+					<img ng-src="{{item.url}}">
+				</div>
+			</a>
+			<p class="lunch-runway-note" ng-show="data.user.inv.length === 0">
+				No items yet.
+			</p>
+			<p class="lunch-runway-note" ng-show="itemUpdated">
+				changes appear with your next checkin.
+			</p>
+		</div>
+	</section>
+
+	<section>
+		<h2>Notification Settings</h2>
+		<p>
+			<input type="checkbox" name="lunch-overview" id="lunch-overview"
+				ng-change="submitNotifications()"
+				ng-model="data.user.noti.overv">
+			<label for="lunch-overview">Send me an overview about what venues my collegues chose</label>
+		</p>
+		<p>
+			<input type="checkbox" name="lunch-remind" id="lunch-remind"
+				ng-change="submitNotifications()"
+				ng-model="data.user.noti.remind">
+			<label for="lunch-remind">Remind me when to choose a venue</label>
+		</p>
+		<p>
+			<input type="checkbox" name="lunch-cmts" id="lunch-cmts"
+				ng-change="submitNotifications()"
+				ng-model="data.user.noti.cmts">
+			<label for="lunch-cmts">Notify me about new comments my venue and the venues I commented on</label>
+		</p>
+	</section>
+
+	<section>
+		<h2>Change Password</h2>
+		<form name="passForm">
+			<fieldset>
+				<div class="lunch-password-input">
+					<label class="lunch-input-text-label" for="oldPass">Old Password</label>
+					<div class="lunch-input-contain">
+						<input type="password" id="oldPass" name="oldPass"
+							ng-model="passFormData.oldPass"
+							required>
+						<div class="lunch-input-note" ng-show="passForm.oldPass.$dirty && passForm.oldPass.$invalid">
+							<span>required</span>
+						</div>
+					</div>
+				</div>
+				<div class="lunch-password-input">
+					<label class="lunch-input-text-label" for="newPass">New Password</label>
+					<div  class="lunch-input-contain">
+						<input type="password" name="newPass" id="newPass"
+							ng-model="passFormData.newPass"
+							required>
+						<div class="lunch-input-note" ng-show="passForm.newPass.$dirty && passForm.newPass.$invalid">
+							<span>required</span>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+				<button type="submit" class="lunch-button"
+					ng-click="submitPassForm()"
+					ng-disabled="passForm.$invalid">change password</button>
+		</form>
+	</section>
+</main>

@@ -1,0 +1,51 @@
+<main class="lunch-venue-list">
+	<form class="lunch-venue-filter">
+			<input type="text" class="lunch-venue-filter-input" id="lunch-venue-filter-input" ng-model="searchInput.name">
+			<label for="lunch-venue-filter-input" class="lunch-venue-filter-btn">S</label>
+	</form>
+
+
+	<div class="lunch-venues">
+
+		<div ng-repeat="venue in venues | filter:searchInput" class="lunch-venue lunch-animate">
+
+			<div class="lunch-venue-wrapper">
+
+				<header class="lunch-venue-header">
+					<h2 class="lunch-venue-title" ng-click="showDetail(venue._id)">{{venue.name}}</h2>
+					<div class="lunch-venue-info">
+						<span ng-show="venue.comc" ng-click="showDetail(venue._id)" class="lunch-venue-commentcount">
+							<span class="lunch-venue-commentcount-arrow">&nbsp;</span>{{venue.comc}} Comments
+						</span>
+						<a href="{{venue.url}}" class="lunch-fn-menu" target="blank">View Menu</a>
+					</div>
+				</header>
+
+				<div class="lunch-venue-guests" ng-class="{'lunch-guests-empty': venue.guests.length == 0}">
+					<ul>
+						<li class="lunch-venue-guest lunch-animate" ng-repeat="user in venue.guests">
+								<!-- <img src="{{user.ava}}" class="lunch-user-image" alt="{{user.nick}}"> -->
+							<div class="lunch-avatar">
+								<!--
+								<img src="static/img/ft.png" alt="">
+								<img src="static/img/item-party.png"  class="lunch-item-image" alt="">
+								-->
+								<img ng-src="{{user.item.url}}" alt="profile item" ng-class="{'lunch-item-front': 'user.item.front'}" ng-show="user.item">
+								<img ng-src="{{user.ava}}" alt="profile picture">
+							</div>
+						</li>
+
+					</ul>
+				</div>
+
+				<a ng-hide="venue.attending" ng-click="checkIn(venue._id)" class="lunch-fn-attend">
+					<span class="lunch-icon">Y</span>
+				</a>
+				<a ng-show="venue.attending" ng-click="checkOut(venue._id)" class="lunch-fn-quit">
+					<span class="lunch-icon">N</span>
+				</a>
+
+			</div>
+		</div>
+	</div>
+</main>

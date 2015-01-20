@@ -1,0 +1,230 @@
+/*
+ * Styles for lunchpad settings view
+ * @author Joachim Fröstl <jf@19h13.com>
+ */
+
+.lunch-view-settings {
+
+
+	#lunch-fn-logout {
+		@extend %lunch-venue-head-btn;
+		right: 0;
+	}
+
+	.lunch-profile-email {
+		margin: 0;
+		text-align: center;
+	}
+
+	.lunch-profile {
+		// box
+		display: block;
+		border: {
+			width:0;
+		}
+
+		// pos
+		position: relative;
+
+		// typo
+		text: {
+			align: center;
+		}
+		@include border-radius(2px);
+
+		// child
+		h2 {
+			display: none;
+		}
+	}
+
+	.lunch-altar {
+		width: 85px;
+		height: 85px;
+		margin: 0 auto;
+		padding: 25px;
+		background: {
+			color: $lunch-clr-grey-xxlgt;
+		}
+		@include border-radius(50%);
+	}
+
+	.lunch-runway {
+		// box
+		padding: 10px 0 10px 0;
+		margin: -30px 0 0 0;
+		border: {
+			width: 0;
+			top-width: 2px;
+			bottom-width: 2px;
+			color: $lunch-clr-grey-xxlgt;
+			style: solid;
+		}
+
+		// skin
+		background: {
+			color: $lunch-clr-white;
+		}
+
+		@include border-radius(2px);
+
+		.lunch-item {
+			// box
+			width: 85px;
+			height: 85px;
+			margin: 0 2px;
+
+			// skin
+			@include border-radius(50%);
+			background: {
+				color: transparent;
+			}
+			&:hover {
+				background: {
+					color: $lunch-clr-grey-xlgt;
+				}
+			}
+		}
+	}
+
+	.lunch-runway-note {
+		color: $lunch-clr-grey;
+		-webkit-font-smoothing: antialiased;
+	}
+
+	.lunch-item {
+		// box
+		display: inline-block;
+		width: 50px;
+		height: 85px;
+		padding: 5px;
+
+		// pos
+		position: relative;
+
+		// skin
+		cursor: pointer;
+		list-style-type: none;
+		background: {
+			color: $lunch-clr-grey-xlgt;
+			image: image-url("mannequin.png");
+			position: center center;
+			repeat: no-repeat;
+		}
+		@include border-radius(2px);
+
+		&:focus {
+			outline: none;
+		}
+		&.lunch-active {
+			background: {
+				color: $lunch-clr-grey-xxlgt;
+			}
+			.lunch-item-active {
+				display: block;
+			}
+			&:hover {
+				.lunch-item-remove {
+					display: block;
+				}
+			}
+			&:focus {
+				.lunch-item-active {
+					background: {
+						color: $lunch-clr-blue;
+					}
+					.lunch-icon-pos {
+						display: block;
+					}
+					.lunch-icon-neg {
+						display: none;
+					}
+				}
+			}
+		}
+
+
+		img {
+			width: 50px;
+			height: 85px;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+		.lunch-item-remove,
+		.lunch-item-active{
+			// box
+			display: none;
+			width: 30px;
+			height: 30px;
+
+			// pos
+			position: absolute;
+
+			// skin
+			@include border-radius(15px);
+
+			.lunch-icon {
+				// box
+				display: block;
+				padding: {
+					top: 3px;
+					left: 3px;
+					right: 3px;
+					bottom: 3px;
+				}
+
+				// typo
+				font-size: 24px;
+
+				// skin
+				color: $lunch-clr-white;
+			}
+		}
+		.lunch-item-active {
+			//pos
+			bottom: 0px;
+			right: 0px;
+
+			// skin
+			background: {
+				color: $lunch-clr-blue;
+			}
+		}
+
+		.lunch-item-remove {
+			// pos
+			bottom: 32px;
+			right: 0px;
+
+			// skin
+			background: {
+				color: $lunch-clr-grey-lgt;
+			}
+		}
+	}
+
+	.lunch-item-info {
+		display: none;
+	}
+
+	.lunch-password-input {
+		float: left;
+		margin: {
+			right: 1em;
+		}
+	}
+}
+
+
+
+/* Collect all Medium Screen Styles here */
+
+@mixin lunch-view-settings-screen-s-mixin() {
+}
+
+/* Apply Mediaqueries */
+
+@media screen and (min-width: $lunch-grid-break-s) {
+	@include lunch-view-settings-screen-s-mixin;
+}

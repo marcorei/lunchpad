@@ -1,0 +1,184 @@
+body {
+	font-family: sans-serif;
+	font-size: 16px;
+	background-color: #eee;
+}
+
+p {
+	margin: .2em 0;
+	line-height: 1.35em;
+}
+.lunch-mail {
+	padding: 30px 15px;
+}
+
+.lunch-mail-container {
+	position: relative;
+	max-width: 500px;
+	padding: 60px 40px;
+	margin: 0 auto;
+	border-radius: 2px;
+	background-color: #fff;
+}
+
+.lunch-mail a {
+	color: #FF0046;
+	text-decoration: none;
+}
+
+.lunch-mail-content {
+	margin: 3em 0 4em 0;
+	width: 100%;
+}
+
+.lunch-mail-content ul {
+	padding: 0;
+	margin: 0;
+
+}
+
+.lunch-mail-content li {
+	list-style-type: none;
+	display: inline;
+}
+
+
+/*
+* Venue Mail
+*/
+.lunch-mail-venue {
+	position: relative;
+	margin: 0;
+	padding: 1.5em 0 1.5em 0;
+	border-bottom: 2px solid #f7f7f7;
+}
+.lunch-mail-venue:first-child {
+	border-top: 2px solid #f7f7f7;
+}
+
+.lunch-mail-venue h2 {
+	margin: 3px 0 1em 0;
+	text-transform: uppercase;
+	font-size: 20px;
+	font-family: "Impact", sans-serif;
+}
+
+.lunch-mail-venue a {
+	background-color: #00B9E7;
+	color: white;
+	float: right;
+	display: block;
+	padding: 7px 10px;
+	border-radius: 2px;
+	font-size: 14px;
+}
+.lunch-mail-venue a:hover {
+	background-color: #0083A3;
+}
+
+
+/*
+* Reminder
+*/
+.lunch-mail-venue.lunch-new {
+	position: relative;
+	background-color: #333;
+	color: white;
+	padding: 30px 30px 40px;
+	border: none;
+	border-radius: 2px;
+}
+
+.lunch-mail-venue.lunch-new .lunch-cta-btn {
+	float: none;
+	display: inline-block;
+}
+
+.lunch-mail-venue-interferer {
+	position: absolute;
+	top: -45px;
+	right: -35px;
+}
+
+@media screen and (min-width: 480px) {
+	.lunch-mail-venue-interferer {
+		position: absolute;
+		top: -45px;
+		right: 40px;
+	}
+}
+
+.lunch-mail-venue.lunch-new h2 {
+	margin: 0 0;
+	font-size: 30px;
+	letter-spacing: 1px;
+}
+
+.lunch-mail-venue.lunch-new .lunch-mail-venue-header {
+	margin: 0 0 40px;
+}
+
+
+/*
+* Comment Mail
+*/
+.lunch-mail-content .lunch-mail-comment {
+	display: block;
+	margin: 0 0;
+	padding: 1.25em 0;
+	border-bottom: 2px solid #f7f7f7;
+}
+.lunch-mail-content .lunch-mail-comment:first-child {
+	border-top: 2px solid #f7f7f7;
+}
+
+.lunch-mail-commentator {
+	color: #00B9E7;
+	margin: 0 0 0 50px;
+}
+.lunch-mail-comment-content {
+	margin: 0 0 0 50px;
+}
+
+.lunch-mail-commentator-img {
+	float: left;
+	height: 40px;
+	height: 40px;
+	margin: -2px 10px 0 0;
+	overflow: hidden;
+
+	background-color: #eee;
+	border-radius: 20px;
+}
+
+.lunch-mail-content.lunch-comments .lunch-mail-venue {
+	padding: 0;
+	margin: 4em 0;
+	border-bottom: 0;
+	botder-top: 0;
+}
+.lunch-mail-content.lunch-comments .lunch-mail-venue:first-child {
+	border-top: 0;
+}
+
+
+/*
+* Footer
+*/
+.lunch-mail-footer {
+	max-width: 500px;
+	padding: 20px 40px 20px 40px;
+	margin: 0 auto;
+	font-size: 12px;
+	color: #bbb;
+	text-align: center;
+}
+
+.lunch-mail-footer a {
+	color:#bbb;
+	text-decoration: underline;
+}
+
+.lunch-mail-footer p {
+	margin: 1em 0;
+}

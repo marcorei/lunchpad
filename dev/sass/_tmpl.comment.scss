@@ -1,0 +1,278 @@
+/*
+ * Styles for venue view
+ * @author Joachim Fröstl <jf@19h13.com>
+ */
+
+
+
+
+
+
+
+
+
+/*
+ * Comment Variables
+ */
+$lunch-comment-body-col: #eee;
+
+
+
+
+
+
+
+
+/*
+ * Arrow pointing from Comment body
+ */
+.lunch-comment-arrow{
+
+	// Box
+	width: 0;
+	height: 0;
+	border-top: 7px solid transparent;
+	border-bottom: 7px solid transparent;
+	border-right: 7px solid  $lunch-comment-body-col;
+
+	// Position
+	position: absolute;
+	left: -7px;
+	top: 12px;
+}
+
+
+
+
+
+
+
+
+
+/*
+ * Container for all comment elements
+ */
+.lunch-comments {
+	// Box
+	padding: {
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+
+}
+
+
+
+
+
+
+
+
+
+/*
+ * List of all comments
+ */
+.lunch-comments-list {
+
+}
+
+
+
+
+
+
+
+
+
+/*
+ * Single comment entity
+ */
+.lunch-comment {
+	$lunch-comment-padding: 20px;
+
+	padding: {
+		top: 0;
+		bottom: 0;
+		left: 70px;
+		right: 0;
+	}
+	border: {
+		width: 0;
+		top-width: 2px;
+		style: solid;
+		color: $lunch-clr-grey-xxlgt;
+	}
+	overflow: hidden;
+	@include box-sizing(border-box);
+	position: relative;
+	font: {
+		family: $lunch-typo-copy;
+		weight: 400;
+	}
+	-webkit-font-smoothing: antialiased;
+	line: {
+		height: 1.4em;
+	}
+
+	// Pseudoelements
+	&:first-child {
+		border-top: {
+			width: 0;
+		}
+	}
+
+	// Children
+	// Content
+	p {
+		margin: {
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+		}
+		padding: {
+			right: 50px;
+			bottom: $lunch-comment-padding;
+		}
+	}
+
+	// Info
+	.lunch-comment-info {
+		margin: {
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom:0;
+		}
+		padding: {
+			top: $lunch-comment-padding;
+		}
+	}
+
+	// Timestamp
+	time {
+		float: right;
+		color: $lunch-clr-grey;
+	}
+
+	// Commentator Name
+	h3 {
+		margin: 0;
+		color: $lunch-clr-blue;
+		font: {
+			family: $lunch-typo-copy;
+			size: 1em;
+			weight: 400;
+		}
+	}
+
+	//Contains Image of commentator
+	.lunch-commentator-img {
+		width: 50px;
+		height: 50px;
+		overflow: hidden;
+		position: absolute;
+		left: 0;
+		top: ($lunch-comment-padding - 2px);
+		background: {
+			color: $lunch-clr-grey-lgt;
+		}
+		text: {
+			align: center;
+		}
+		@include border-radius( 25px );
+
+		&.lunch-owner {
+			background: {
+				color: $lunch-clr-blue;
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ * Comment input
+ */
+.lunch-comment-input {
+
+	$lunch-comment-inp-color: #ddd;
+
+	border: none;
+	margin: {
+		top: 50px;
+		bottom: 50px;
+	}
+
+
+
+	// Children
+	.lunch-commentator-img {
+		top: 0px;
+		background: {
+			color: $lunch-clr-blue;
+		}
+	}
+
+	textarea {
+		display: block;
+		overflow: hidden;
+		height: 50px;
+		width: 100%;
+		border: {
+			width: 0;
+		}
+		padding: {
+			top: 1em;
+			bottom: 1em;
+			right: 10px;
+			left: 10px;
+		}
+		resize: vertical;
+		border: {
+			width: 2px;
+			style: solid;
+			color: $lunch-clr-grey-xlgt;
+		}
+		@include box-sizing( border-box );
+		@include border-radius(2px);
+		@include transition-property(border, background);
+		@include transition-duration($lunch-time-out);
+
+		// States
+		&:hover,
+		&:focus {
+			// Skin
+			border: {
+				color: $lunch-clr-grey-lgt;
+			}
+			background: {
+				color:$lunch-clr-grey-xxlgt;
+			}
+			@include transition-duration($lunch-time-over);
+		}
+	}
+
+	button {
+		float: right;
+	}
+}

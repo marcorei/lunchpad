@@ -1,0 +1,24 @@
+{
+  "name": "lunchpad",
+  "version": "0.0.0",
+  "authors": [
+    "Markus Riegel <mr@19h13.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "modernizr": "~2.7.1",
+    "angular": "~1.2.13",
+    "angular-route": "~1.2.13",
+    "angular-animate": "~1.2.13",
+    "angular-sanitize": "~1.2.13",
+    "angular-moment": "~0.8.2",
+    "shepherd.js": "~0.5.1"
+  }
+}

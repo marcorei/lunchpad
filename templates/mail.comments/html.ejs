@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="initial-scale=1.0">	<!-- So that mobile webkit will display zoomed in -->
+		<meta name="format-detection" content="telephone=no"> <!-- disable auto telephone linking in iOS -->
+		<title>Lunch Mail</title>
+		<link rel="stylesheet" type="text/css" href="mail.overview/style.css">
+	</head>
+
+	<body style="margin:0;" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" class="lunch-mail">
+		<div class="lunch-mail-container">
+			<div class="lunch-mail-hello">
+				<p>Hello <%= user.nick %>,</p>
+				<p>check out the new comments on <a href="http://www.lunchpad.co">lunchpad</a>!</p>
+			</div>
+			<div class="lunch-mail-content lunch-comments">
+				<% for(var i = venues.length-1; i >= 0; i--) { %>
+					<div class="lunch-mail-venue">
+						<a href="http://www.lunchpad.co/#/venue/<%= venues[i].venue._id %>" class="lunch-cta-btn">view venue</a>
+						<h2><%= venues[i].venue.name %></a></h2>
+						<ul>
+							<% for(var j = 0; j < venues[i].users.length; j++) { %>
+								<li class="lunch-mail-comment">
+									<div class="lunch-mail-commentator-img">
+										<img src="<%= venues[i].users[j].ava %>" alt="<%= venues[i].users[j].nick %>">
+									</div>
+									<p class="lunch-mail-commentator"><%= venues[i].users[j].nick %></p>
+									<p class="lunch-mail-comment-content"><%= venues[i].users[j].comment %></p>
+								</li>
+							<% } %>
+						</ul>
+					</div>
+				<% } %>
+			</div>
+			<div class="lunch-mail-cya">
+				<p>Thank you for using lunchpad.</p>
+				<p> See you at lunchtime!</p>
+			</div>
+		</div>
+		<div class="lunch-mail-footer">
+			<p>You can always update your <a href="http://www.lunchpad.co/#/settings/self">email preferences</a>.</p>
+			<p><a class="lunch-mail-footer-logo" href="http://www.lunchpad.co"><img src="http://www.lunchpad.co/static/img/logo-mail.gif" alt="lunchpad"></a></p>
+		</div>
+	</body>
+</html>

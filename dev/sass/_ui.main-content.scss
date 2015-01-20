@@ -1,0 +1,81 @@
+/*
+* Main Content for lunchpad
+* @author Joachim Fröstl <jf@19h13.com>
+*/
+
+main {
+	max-width: 620px;
+	margin: {
+		left: 20px;
+		right: 20px;
+	}
+
+	header {
+		// box
+		padding: {
+			top: 40px;
+			bottom: 40px;
+			left: 30px;
+			right: 30px;
+		}
+
+		// pos
+		position: relative;
+	}
+
+	h1 {
+		// box
+		display: block;
+		margin: 0;
+
+		// typo
+		font: {
+			size: 40px;
+		}
+		text: {
+			align: center;
+		}
+	}
+}
+
+@mixin lunch-main-s() {
+	main {
+		max-width: 620px;
+		margin: {
+			left: 60px;
+			right: 20px;
+		}
+
+		header {
+			// box
+			padding: {
+				top: 48px;
+				bottom: 40px;
+			}
+		}
+
+		h1 {
+			// box
+			margin: 0;
+
+			// typo
+			font: {
+				size: 60px;
+			}
+		}
+	}
+}
+
+
+
+/* Collect all Medium Screen Styles here */
+
+@mixin lunch-main-screen-s-mixin() {
+	@include lunch-main-s();
+}
+
+// Apply
+
+@media screen and (min-width: $lunch-grid-break-s) {
+	@include lunch-main-screen-s-mixin;
+}

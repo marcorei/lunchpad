@@ -1,0 +1,550 @@
+/*
+ * Lunchpad. Header/Nav
+ * @author Joachim Fröstl <jf@19h13.com>
+ */
+
+
+
+
+
+
+
+
+
+/*
+ * Mobile first
+ */
+.lunch-header {
+
+	// Box
+	width: 100%;
+
+	// Skin
+	background: {
+		color: $lunch-color-red;
+	}
+	color: white;
+
+	// Position
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1;
+
+	// Logo
+	.lunch-logo {
+
+		// Box
+		display: none;
+		float: left;
+		height: 50px; // Overwrite Loginpage Styling
+		padding: {
+			left: 0;
+			top: 0;
+			bottom: 0;
+		}
+		margin: {
+			left: 30px;
+			top: 10px;
+			bottom: 10px;
+		}
+
+		// Childs
+		img {
+			height: 100%;
+		}
+	}
+}
+
+
+
+/*
+* Medium sized Screens
+*/
+@mixin lunch-header-screen-s() {
+
+	.lunch-header {
+
+		// box
+		width: 200px;
+		padding: {
+			right: 20px;
+		}
+		@include box-sizing(border-box);
+
+		// pos
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 99;
+
+		// typo
+		text-align: right;
+
+		// child: nav contain
+		.lunch-nav-container {
+			float: right;
+			width: 300px;
+		}
+
+		// child: logo
+		.lunch-logo {
+
+			// Box
+			display: block;
+			float: none;
+			height: 122px;
+			width: auto;
+			padding: {
+				right: 0;
+				left: 0;
+				top: 0;
+				bottom: 0;
+			}
+			margin: {
+				top: 60px;
+				left: auto;
+				right: 0;
+				bottom: 60px;
+			}
+
+			// Childs
+			text-align: right;
+			img {
+				height: auto;
+			}
+		}
+	}
+}
+
+
+
+/*
+ * Medium sized Screens
+ */
+@mixin lunch-header-screen-m() {
+
+	.lunch-header {
+
+		// box
+		width: 38.2%;
+		padding: {
+			right: 60px;
+		}
+	}
+}
+
+
+
+/*
+ * Header User styles, mobile first
+ */
+.lunch-account {
+
+	// Box
+	display: none;
+	height: 50px;
+	width: 50px;
+	max-width: 200px;
+	margin: {
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	};
+	float: right;
+
+	// Skin
+	background: {
+		color: $lunch-color-red-dark;
+	}
+	text-align: center;
+	overflow: hidden;
+
+	// Effects
+	@include border-radius( 25px );
+
+}
+
+
+
+/*
+ * Account Name
+ */
+.lunch-account-name {
+	display: none;
+}
+
+
+
+/*
+ * Medium sized screens
+ */
+@mixin lunch-header-account-screen-s() {
+
+	// Account/User
+	.lunch-account {
+
+		// Box
+		display: block;
+		width: auto;
+		height: auto;
+		max-width: 200px;
+		margin: {
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: auto;
+		};
+		float: none;
+		overflow: visible;
+
+		// Position
+		position: relative;
+
+
+		// Skin
+		text-align: right;
+		background: {
+			color: transparent;
+		}
+
+		// Effects
+		@include border-radius(0px);
+		@include user-select(none);
+
+		// States
+		&:hover{
+			.lunch-account-name {
+				background: {
+					color: shade($lunch-clr-red-drk, 10);
+				}
+				@include transition-duration($lunch-time-over);
+			}
+		}
+	}
+
+	// Avatar
+	.lunch-account-image {
+
+		// Box
+		display: block;
+
+		// Position
+		position: absolute;
+		bottom: 5px;
+		right: 0;
+	}
+
+	// Name of account
+	.lunch-account-name {
+
+		// Box
+		display: inline-block;
+		padding: {
+			top: 12px;
+			right: 50px;
+			bottom: 12px;
+			left: 20px;
+		}
+
+		// Skin
+		color: $lunch-clr-white;
+		background: {
+			color: $lunch-color-red-dark;
+		}
+		@include border-radius(2px);
+
+		// Typo
+		font: {
+			size: 1.8em;
+			family: "bebas-neue", Arial;
+			weight: bold;
+		}
+		text-align: right;
+		line-height: 1em;
+		@include transition-duration($lunch-time-out);
+	}
+}
+
+
+
+/*
+ * Nav Container
+ */
+
+
+/*
+ * Mixin for small screens
+ */
+@mixin lunch-nav-mixin-s() {
+	.lunch-nav {
+		// box
+		overflow: visible;
+		// skin
+		text-align: right;
+	}
+}
+
+/*
+ * Mixin for medium sized screens
+ */
+@mixin lunch-nav-mixin-m() {
+	.lunch-nav {
+		// box
+		overflow: visible;
+		// skin
+		text-align: right;
+	}
+}
+
+
+
+/*
+ * Nav List
+ */
+.lunch-nav-list {
+
+	// Box
+	//height: 0;
+	width: 100%;
+	padding: {
+		top: 0;
+		right: 10px;
+		bottom: 0;
+		left: 10px;
+	}
+	margin: {
+		top: 0;
+		bottom: 0;
+	}
+	clear: left;
+	@include box-sizing(border-box);
+
+
+	// Skin
+	text-align: left;
+	overflow: hidden;
+
+	// Effects
+	@include transition-property( height padding );
+	@include transition-duration( 0.5s );
+}
+
+/*
+ * Mixin for small screens
+ */
+@mixin lunch-nav-list-mixin-s() {
+	.lunch-nav-list {
+		// box
+		height: auto;
+		padding: {
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+		}
+		@include box-sizing(content-box);
+
+		// pos
+		position: static;
+
+		// skin
+		background: {
+			color: transparent;
+		}
+		text-align: right;
+	}
+}
+
+
+
+/*
+ * Single Nav Element
+ */
+.lunch-nav-elem {
+
+	// Box
+	display: block;
+	overflow: hidden;
+	float: left;
+
+	// Skin
+	text-decoration: none;
+	font: {
+		family: $lunch-typo-copy;
+	}
+
+
+
+	// States
+	&:hover{
+		a {
+			background: {
+				color: shade($lunch-clr-red-drk, 10);
+			}
+			@include transition-duration($lunch-time-over);
+		}
+	}
+
+	// Children
+	a {
+		// Skin
+		text-align: center;
+		color: $lunch-color-white;
+		text-decoration: none;
+		-webkit-font-smoothing: antialiased;
+		background: {
+			color: $lunch-clr-red-drk;
+		}
+
+		@include transition-property(background-color);
+		@include transition-duration($lunch-time-out);
+	}
+
+	.lunch-label {
+		display: none;
+	}
+
+	.lunch-icon {
+		display: block;
+		font: {
+			size: 40px;
+		}
+		padding: {
+			top: 10px;
+			right: 10px;
+			bottom: 10px;
+			left: 10px;
+		}
+		margin: 0 auto;
+	}
+}
+
+
+.lunch-fn-venues {
+	float: left;
+}
+
+.lunch-fn-new {
+	margin: {
+		left: auto;
+	}
+}
+.lunch-fn-new,
+.lunch-fn-settings,
+.lunch-fn-admin {
+	float: right;
+}
+
+@mixin lunch-fn-settings-mixin-s() {
+	.lunch-fn-settings {
+		display: none;
+	}
+}
+
+
+
+/*
+ * Mixin for small screens
+ */
+@mixin lunch-nav-elem-mixin-s() {
+
+	.lunch-nav-elem {
+
+		// box
+		width: auto;
+		display: block;
+		margin: {
+			top: 2px;
+		}
+		float: none;
+
+		&:first-child {
+			padding: {
+				top: 0;
+			}
+			border: {
+				width: 0px;
+			}
+		}
+
+
+		// child
+		.lunch-icon {
+			display: none;
+		}
+		.lunch-label {
+			display: block;
+		}
+
+		a {
+			// Box
+			float: none;
+			display: inline-block;
+			padding: {
+				top: 8px;
+				right: 16px;
+				bottom: 8px;
+				left: 16px;
+			}
+
+			// Skin
+			background: {
+				color: $lunch-color-red-dark;
+			}
+
+			@include border-radius(2px);
+		}
+	}
+}
+
+
+
+/*
+* Collection of all Small Screen Style Mixins
+*/
+@mixin lunch-header-mixins-screen-s() {
+	@include lunch-header-screen-s;
+	@include lunch-header-account-screen-s;
+	@include lunch-nav-mixin-s;
+	@include lunch-nav-list-mixin-s;
+	@include lunch-nav-elem-mixin-s;
+	@include lunch-fn-settings-mixin-s;
+
+}
+
+
+
+/*
+ * Collection of all Medium Screen Style Mixins
+ */
+@mixin lunch-header-mixins-screen-m() {
+	@include lunch-nav-mixin-m;
+	@include lunch-header-screen-m;
+}
+
+
+
+/*
+ * Apply Mediaquery Mixins
+ */
+@media screen and (min-width: $lunch-grid-break-s) {
+	@include lunch-header-mixins-screen-s;
+}
+@media screen and (min-width: $lunch-grid-break-m) {
+	@include lunch-header-mixins-screen-m;
+}
+
+/*
+ * IE fixes
+ */
+.lt-ie9 {
+	@include lunch-header-mixins-screen-m;
+}
+
+/*
+ * No JS
+ */
+.no-js {}

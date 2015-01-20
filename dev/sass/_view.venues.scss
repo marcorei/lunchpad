@@ -1,0 +1,47 @@
+/*
+* Lunchpad. Venue List Styles
+* @author Joachim Fröstl <jf@19h13.com>
+*/
+
+
+.lunch-venue-list {
+
+	.lunch-venue {
+
+		header {
+			// box
+			padding: {
+				top: 0;
+				bottom: 0;
+				left: 0;
+			}
+		}
+	}
+}
+
+@mixin lunch-venue-list-screen-s() {
+	.lunch-venue-list {
+		.lunch-venue {
+			// box
+			padding: {
+				top: 0;
+				bottom: 0;
+			}
+		}
+	}
+}
+
+
+
+
+/* Collect all Medium Screen Styles here */
+
+@mixin lunch-venue-list-screen-s-mixin() {
+	@include lunch-venue-list-screen-s;
+}
+
+// Apply
+
+@media screen and (min-width: $lunch-grid-break-s) {
+	@include lunch-venue-list-screen-s-mixin;
+}

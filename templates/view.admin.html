@@ -1,0 +1,28 @@
+<main class="lunch-view-admin">
+	<header>
+		<a ng-click="snippetPlease()" id="lunch-fn-formula">
+			<span class="lunch-icon">F</span>
+			<span class="lunch-label">Formula</span>
+		</a>
+		<h1>Admin Panel</h1>
+	</header>
+	<form>
+		<h2>Interface</h2>
+		<fieldset>
+			<select name="event" size="1"
+				ng-options="event as event.name for event in events"
+				ng-model="model.event">
+			</select>
+			<textarea ng-model="model.eventData" ng-allow-tab id="lunch-json-interface"></textarea>
+		</fieldset>
+		<fieldset>
+			<button type="submit" class="lunch-button" ng-click="emit()">Post Json</button>
+		</fieldset>
+	</form>
+
+	<h2>Response</h2>
+	<pre ng-bind="response"></pre>
+
+	<h2>Editor</h2>
+	<textarea></textarea>
+</main>

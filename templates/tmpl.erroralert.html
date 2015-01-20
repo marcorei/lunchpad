@@ -1,0 +1,17 @@
+<div class="lunch-flash" ng-show="errors.length">
+
+	<div class="lunch-flash-container">
+
+		<a ng-click="closeAll()" class="lunch-fn-close"><span class="lunch-icon">&times;</span></a>
+
+		<ul>
+			<li
+				ng-repeat="error in errors"
+				ng-bind="error.msg"
+				ng-class="error.type"
+			></li>
+		</ul>
+
+	</div>
+
+</div>

@@ -1,0 +1,37 @@
+/*
+* Grid for lunchpad
+* @author Joachim Fröstl <jf@19h13.com>
+*/
+
+
+
+/* Mobile First */
+
+// Contain the Grid
+
+.lunch-grid-container {
+}
+
+
+.lunch-grid-column {
+	float: none;
+	width: 100%;
+}
+
+
+
+
+
+/* Collect all Medium Screen Styles here */
+
+@mixin lunch-grid-screen-s-mixin() {
+
+}
+
+// Apply
+
+@media screen and (min-width: $lunch-grid-break-s) {
+
+	@include lunch-grid-screen-s-mixin;
+
+}

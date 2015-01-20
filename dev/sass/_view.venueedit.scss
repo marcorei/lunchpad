@@ -1,0 +1,154 @@
+/* Add Venue Button */
+
+.lunch-fn-addvenue {
+
+
+	@include transition(all 1);
+
+	float: left;
+
+	margin-right: 10px;
+
+	float: right;
+	width: 50px;
+	height: 20px;
+	margin: {
+		left: 20px;
+		right: 0;
+		top: 50px;
+	}
+
+	background: {
+		color: #98D300;
+	}
+	@include transition( all 1000ms );
+	// @include hoverrotateStart();
+
+	&:hover {
+
+		background-color: #ADE61A;
+
+		//@include hoverrotate();
+		@include transition( all 200ms );
+	}
+}
+
+
+
+.lunch-venue-edit {
+
+	input {
+		// box
+		display: block;
+		width: 100%;
+		@include box-sizing(border-box);
+	}
+
+	.lunch-input-contain {
+		// box
+		display: block;
+		margin: {
+			top: .5em;
+			bottom: 1.5em;
+		}
+	}
+
+	.lunch-button {
+		float: right;
+	}
+}
+
+
+
+
+// Create Lunch Venue
+
+/*
+ * Deprecated due to Angular rewrite
+ */
+.lunch-venue-create {
+
+	@extend .clearfix;
+
+	padding: {
+		top: 50px;
+		right: 60px;
+		bottom: 50px;
+		left: 60px;
+	}
+
+	border: {
+		width: 0px;
+		bottom-width: 0px;
+		style: solid;
+		color: #dedede;
+	}
+
+	.venue-title-input {
+
+		margin: {
+			left:-10px;
+			top: 0px;
+		}
+
+		padding: 10px;
+
+		padding: {
+			bottom: 5px;
+		}
+
+		font: {
+			family: "bebas-neue";
+			size: 2.4em;
+		}
+		min-width: 450px;
+		background-color: #eee;
+		border: {
+			width: 1px;
+			style: dashed;
+			color: #ccc;
+		}
+	}
+
+	.venue-menu-input {
+
+		min-width: 450px;
+		margin: {
+			left:-10px;
+			top: 10px;
+		}
+		padding: {
+			left: 10px;
+			right: 10px;
+			top: 5px;
+			bottom: 5px;
+		};
+
+		font: {
+			family: Georgia;
+			style: italic;
+		}
+
+		background-color: #eee;
+		border: {
+			width: 1px;
+			style: dashed;
+			color: #ccc;
+		}
+
+	}
+
+	.venue-title-input,
+	.venue-menu-input {
+		display: block;
+
+		&:focus {
+			outline: none;
+			border: {
+				style: solid;
+				color: #aaa;
+
+			}
+		}
+	}
+}

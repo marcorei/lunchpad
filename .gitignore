@@ -25,9 +25,10 @@ dev/.sass-cache/*
 .gitshots
 
 # Exclude compiled css because of merging errors.
-static/css/ie.css
-static/css/print.css
-static/css/screen.css
+static/css/*
+
+# Exclude compiled js
+static/js/*
 
 
 
@@ -36,6 +37,11 @@ static/css/screen.css
 
 # exclude modules
 node/node_modules/*
+dev/node_modules/*
 
 # exclude config file
 node/config.json
+
+# exclude bower
+dev/bower_components
+templates/mail.prototype.html

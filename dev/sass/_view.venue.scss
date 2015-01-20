@@ -1,0 +1,124 @@
+/*
+ * Styles for venue view
+ * @author Joachim Fröstl <jf@19h13.com>
+ */
+
+.lunch-view-venue {
+
+	/*
+	 * Header: Contains Title, Back and Edit
+	 */
+	// Container
+	header {
+		border: {
+			width: 0;
+			bottom-width: 2px;
+			color: $lunch-clr-grey-xxlgt;
+			style: solid;
+		}
+	}
+
+	// back btn
+	#lunch-fn-back {
+		left: 0;
+		@extend %lunch-venue-head-btn;
+	}
+
+	// edit btn
+	#lunch-fn-edit {
+		right: 0;
+		@extend %lunch-venue-head-btn;
+	}
+
+	/*
+	 * Reception: Contains Guests and Interaction
+	 */
+	.lunch-venue-reception {
+		margin: {
+			top: -26px;
+		}
+	}
+
+	// Guests
+	.lunch-venue-guests {
+		text: {
+			align: center;
+		}
+	}
+	.lunch-venue-guest {
+		display: inline-block;
+		float: none;
+	}
+
+	// Container of interaction elements
+	.lunch-venue-interaction {
+		// pos
+		position: relative;
+
+		// box
+		margin: {
+			top: 0;
+			bottom: 0;
+		}
+
+		text: {
+			align: center;
+		}
+	}
+
+	// Buttons
+	.lunch-fn-invite,
+	.lunch-fn-menu,
+	.lunch-fn-attend,
+	.lunch-fn-quit {
+		float: none;
+		position: static;
+		@extend %lunch-round-btn;
+	}
+
+	.lunch-fn-attend {
+		.lunch-icon {
+			color: white;
+			background: {
+				color: $lunch-clr-blue;
+			}
+		}
+		&:hover {
+			.lunch-icon {
+				background: {
+					color: $lunch-clr-blue-drk;
+				}
+			}
+		}
+	}
+
+	.lunch-fn-quit {
+		.lunch-icon {
+			color: white;
+			background: {
+				color: $lunch-clr-red;
+			}
+		}
+		&:hover {
+			.lunch-icon {
+				background: {
+					color: $lunch-clr-red-drk;
+				}
+			}
+		}
+	}
+}
+
+
+
+/* Collect all Medium Screen Styles here */
+
+@mixin lunch-view-venue-screen-s-mixin() {
+
+}
+
+/* Apply Mediaqueries */
+
+@media screen and (min-width: $lunch-grid-break-s) {
+	@include lunch-view-venue-screen-s-mixin;
+}
