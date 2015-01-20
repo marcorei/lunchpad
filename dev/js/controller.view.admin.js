@@ -137,7 +137,12 @@ function($scope,Socket,LpError){
 
 	{
 		'name': 'stats innovator',
-		'snippet': ''
+		'snippet': '{}'
+	},
+
+	{
+		'name': 'clear all',
+		'snippet': '{}'
 	}];
 
 	$scope.model = {

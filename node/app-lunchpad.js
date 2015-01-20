@@ -218,7 +218,11 @@ var wwwRedirect = function(req, res, next) {
 	if (req.headers.host.slice(0, 4) === 'www.') {
 		var newHost = req.headers.host.slice(4);
 		return res.redirect(req.protocol + '://' + newHost + req.originalUrl);
+	}else if(req.headers.host === 'lunchpad.19h13.com'){
+		var newHost = 'lunchpad.co';
+		return res.redirect(req.protocol + '://' + newHost + req.originalUrl);
 	}
+
 	next();
 };
 
@@ -1700,8 +1704,7 @@ io.sockets.on('connection', function (socket) {
 	});
 
 
-	socket.on('disconnect', function(){
-	});
+	
 
 
 
@@ -1724,6 +1727,18 @@ io.sockets.on('connection', function (socket) {
 		});
 	});
 
+	socket.on('clear all', function(data){
+		lunchAuth.isAdmin(socket, function(user){
+			lunchTasks.cleanCheckins();
+			lunchHelper.sendErrorToSocket(socket, 'clean comand executed, check server logs');
+		});
+	});
+
+
+	// Disconnect
+
+	socket.on('disconnect', function(){
+	});
 });
 
 

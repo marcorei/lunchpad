@@ -95,7 +95,9 @@ angular.module('lpConfig',[
 		'notification.delete.venue': 'notification delete venue',
 		'notification.delete.all': 'notification delete all',
 
-		'stats.innovator': 'stats innovator'
+		'stats.innovator': 'stats innovator',
+
+		'clear.all': 'clear all'
 	}
 
 	this.$get = function(){
