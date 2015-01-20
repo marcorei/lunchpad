@@ -287,7 +287,7 @@ CheckinProvider.prototype.aggrInnovators = function(onSuccess, onError){
 				}
 			}},
 			{$group:{
-				_id: '$firstUser.uid',
+				_id: '$firstUser',
 				numFirstCheckins: {
 					$sum: 1
 				}

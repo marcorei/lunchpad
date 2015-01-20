@@ -68,7 +68,7 @@ VenueProvider.prototype.findAll = function(onSuccess, onError){
 		], function(error, results){
 			if(error) onError(error);
 			else onSuccess(results);
-		}
+		});
 
 	},onError);
 }
