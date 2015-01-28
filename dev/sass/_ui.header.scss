@@ -156,9 +156,9 @@
 	float: right;
 
 	// Skin
-	background: {
-		color: $lunch-color-red-dark;
-	}
+	// background: {
+	// 	color: $lunch-color-red-dark;
+	// }
 	text-align: center;
 	overflow: hidden;
 
@@ -215,14 +215,14 @@
 		@include user-select(none);
 
 		// States
-		&:hover{
-			.lunch-account-name {
-				background: {
-					color: shade($lunch-clr-red-drk, 10);
-				}
-				@include transition-duration($lunch-time-over);
-			}
-		}
+		// &:hover{
+		// 	.lunch-account-name {
+		// 		background: {
+		// 			color: shade($lunch-clr-red-drk, 10);
+		// 		}
+		// 		@include transition-duration($lunch-time-over);
+		// 	}
+		// }
 	}
 
 	// Avatar
@@ -251,9 +251,9 @@
 
 		// Skin
 		color: $lunch-clr-white;
-		background: {
-			color: $lunch-color-red-dark;
-		}
+		// background: {
+		// 	color: $lunch-color-red-dark;
+		// }
 		@include border-radius(2px);
 
 		// Typo
@@ -440,7 +440,7 @@
 
 @mixin lunch-fn-settings-mixin-s() {
 	.lunch-fn-settings {
-		display: none;
+		// display: none;
 	}
 }
 
