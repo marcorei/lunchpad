@@ -79,7 +79,7 @@
 			shepherd.addStep("notifications",{
 				title: "Improved Notifications",
 				text: "We added new and improved notifications! <br>Go to your profile to update your settings.",
-				attachTo: "#navProfileBtn left",
+				attachTo: ".lunch-fn-settings left",
 				buttons: [
 					{
 						text: 'Back',
@@ -96,7 +96,7 @@
 			shepherd.addStep("profile",{
 				title: "Items",
 				text: "Pimp your Character with items! <br>You can earn new items through contests and on special occasions.",
-				attachTo: "#navProfileBtn left",
+				attachTo: ".lunch-fn-settings left",
 				buttons: [
 					{
 						text: 'Back',

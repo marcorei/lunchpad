@@ -2,10 +2,16 @@
 
 	<a class="lunch-account" href="#/settings/self" id="navProfileBtn">
 		<img src="{{user.ava}}" alt="" class="lunch-account-image">
-		<div class="lunch-account-name">{{user.nick}}</div>
+		<div class="lunch-account-name">&nbsp;</div>
 	</a>
 
 	<ul class="lunch-nav-list">
+		<li class="lunch-nav-elem lunch-fn-settings">
+			<a href="#/settings/self">
+				<span class="lunch-icon">P</span>
+				<span class="lunch-label">Preferences</span>
+			</a>
+		</li>
 		<li class="lunch-nav-elem lunch-fn-venues">
 			<a href="#/venues">
 				<span class="lunch-icon">L</span>
@@ -16,12 +22,6 @@
 			<a href="#/edit/new">
 				<span class="lunch-icon">+</span>
 				<span class="lunch-label">New Venue</span>
-			</a>
-		</li>
-		<li class="lunch-nav-elem lunch-fn-settings">
-			<a href="#/settings/self">
-				<span class="lunch-icon">P</span>
-				<span class="lunch-label">Profile</span>
 			</a>
 		</li>
 		<li class="lunch-nav-elem lunch-fn-admin" ng-show="user.role == 'admin'">
