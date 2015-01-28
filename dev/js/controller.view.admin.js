@@ -139,6 +139,18 @@ function($scope,Socket,LpError){
 		'name': 'stats innovator',
 		'snippet': '{}'
 	},
+	{
+		'name': 'stats allfav',
+		'snippet': '{}'
+	},
+	{
+		'name': 'stats wdfav',
+		'snippet': '{}'
+	},
+	{
+		'name': 'stats rising',
+		'snippet': '{}'
+	},
 
 	{
 		'name': 'clear all',

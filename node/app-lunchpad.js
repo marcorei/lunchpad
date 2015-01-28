@@ -1727,6 +1727,57 @@ io.sockets.on('connection', function (socket) {
 		});
 	});
 
+	socket.on('stats allfav', function(data, cb){
+		lunchAuth.isAdmin(socket, function(user){
+
+			checkinProvider.aggrAllFavVid(function(venueStats){
+
+				cb({
+					error: null,
+					venueStats: venueStats
+				});
+
+			}, function(error){
+				lunchHelper.sendErrorToSocketCb(cb,error);
+			});	
+
+		});
+	});
+
+	socket.on('stats wdfav', function(data, cb){
+		lunchAuth.isAdmin(socket, function(user){
+
+			checkinProvider.aggrWdFavVid(function(venueStats){
+
+				cb({
+					error: null,
+					venueStats: venueStats
+				});
+
+			}, function(error){
+				lunchHelper.sendErrorToSocketCb(cb,error);
+			});	
+
+		});
+	});
+
+	socket.on('stats rising', function(data, cb){
+		lunchAuth.isAdmin(socket, function(user){
+
+			checkinProvider.aggrRisingVid(function(venueStats){
+
+				cb({
+					error: null,
+					venueStats: venueStats
+				});
+
+			}, function(error){
+				lunchHelper.sendErrorToSocketCb(cb,error);
+			});	
+
+		});
+	});
+
 	socket.on('clear all', function(data){
 		lunchAuth.isAdmin(socket, function(user){
 			lunchTasks.cleanCheckins();
