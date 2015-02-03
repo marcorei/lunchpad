@@ -68,7 +68,7 @@ CheckinProvider.prototype.aggrWdFavVid = function(onSuccess, onError){
 				num: { $sum: 1 }
 			}},
 			{$sort:{
-				_id: -1
+				num: -1
 			}},
 			{$limit: 1}
 		],function(error,results){
@@ -99,7 +99,7 @@ CheckinProvider.prototype.aggrAllFavVid = function(onSuccess, onError){
 				num: { $sum: 1 }
 			}},
 			{$sort:{
-				_id: -1
+				num: -1
 			}},
 			{$limit: 1}
 		],function(error,results){
