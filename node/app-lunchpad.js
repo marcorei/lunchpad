@@ -640,7 +640,7 @@ app.get('/logout', function(req,res){
 	//res.json({ error: null });
 	res.redirect('/login#hint=loggedout');
 });
-app.get('/manifesto', lunchHelper.sendHtml('page.manifesto.html'));
+//app.get('/manifesto', lunchHelper.sendHtml('page.manifesto.html'));
 
 
 // Action-Requests not send via socket (login / logout via passport)

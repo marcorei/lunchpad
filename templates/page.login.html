@@ -17,9 +17,14 @@
 		<!-- Type kit -->
 		<script type="text/javascript" src="//use.typekit.net/tjo7bse.js"></script>
 		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+		<!-- angular and socket.io -->
+		<script type="text/javascript" src="./socket.io/socket.io.js"></script>
+		<script type="text/javascript" src="../static/js/libraries.js"></script>
+		<script type="text/javascript" src="../static/js/app.js"></script>
 		
 	</head>
-	<body class="lunch-page-login">
+	<body ng-app="lunchpadLogin" class="lunch-page-login">
 	
 		<header>
 			<div  href="#" class="lunch-logo">
@@ -35,17 +40,7 @@
 		</section>
 		-->
 
-		<section class="lunch-section-itempromobox">
-			<div class="lunch-itempromobox-cont">
-				<div class="lunch-itempromobox-img">
-					<img src="http://lunchpad.co/static/img/itempromobox/lightsaber-ad.png" alt="lightsaber" />
-				</div>
-				
-
-				<h2>It takes strength to&nbsp;resist the dark&nbsp;side.</h2>
-				<p>To control the force an empty venue you must choose – only the best will become a Jedi on February&nbsp;14th.</p>
-			</div>
-		</section>
+		<section lp-promo="./static/promo/tmpl.lightsaber.html"></section>
 
 		<section class="lunch-section-login">
 			<form action="/auth/login" method="post" class="lunch-login-form">
