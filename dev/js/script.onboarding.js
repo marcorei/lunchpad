@@ -3,7 +3,7 @@
  *
  * @author Markus Riegel <riegel.markus@googlemail.com>
  */
-
+/*
 (function(window,Shepherd,undefined){
 
 	function createCookie(name, value, days) {
@@ -123,3 +123,4 @@
 	});
 
 })(window,Shepherd);
+*/
