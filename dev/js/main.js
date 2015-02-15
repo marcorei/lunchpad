@@ -26,8 +26,8 @@ angular.module('lunchpad',[
 	'mrShepherd'
 ])
 
-.config(['$routeProvider','LpConfigProvider','$animateProvider','MrShepherdTourProvider'
-	function($routeProvider,LpConfigProvider,$animateProvider){
+.config(['$routeProvider','LpConfigProvider','$animateProvider','MrShepherdTourProvider',
+	function($routeProvider,LpConfigProvider,$animateProvider,MrShepherdTourProvider){
 		var LpConfig = LpConfigProvider.$get();
 
 		$routeProvider.

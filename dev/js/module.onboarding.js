@@ -46,7 +46,7 @@ angular.module('mrShepherd',[
 			},
 			steps: function(){
 				return options.steps;
-			}
+			},
 			tour: function(){
 				var tour = new Shepherd.Tour({
 						defaults: options.defaults
@@ -59,7 +59,7 @@ angular.module('mrShepherd',[
 					step = options.steps[i];
 					// check buttons for actions
 					for(j = 0; j < step.options.buttons.length; j++){
-						buttons = step.options.buttons[j];
+						button = step.options.buttons[j];
 						switch(button.action){
 							case 'next':
 								button.action = tour.next; break;
@@ -69,20 +69,21 @@ angular.module('mrShepherd',[
 					}
 					tour.addStep(step.name, step.options);
 				}
+				return tour;
 			}
 		}
 	};
 
 	this.setName = function(name){
-		this.tour.name = name;
+		this.options.name = name;
 	};
 
 	this.setDefaults = function(defaults){
-		this.tour.defaults = defaults;
+		this.options.defaults = defaults;
 	};
 
 	this.addStep = function(id, options){
-		steps.push({
+		this.options.steps.push({
 			id: id,
 			options: options
 		});
@@ -125,7 +126,7 @@ function(MrShepherdTour){
 				var tour = MrShepherdTour.tour();
 
 				var tourComplete = function(){
-					createCookie((MrShepherdTour.name(), "completed", 999999);
+					createCookie(MrShepherdTour.name(), "completed", 999999);
 				}
 
 				tour.on('complete', tourComplete);
