@@ -1,0 +1,85 @@
+.lunch-section-itempromobox {
+
+	box-sizing: border-box;
+
+	h2, p {
+		color: $lunch-color-white;
+	}
+
+	h2 {
+		font: {
+			size: 40px;
+		}
+
+		margin:{
+			top: 0;
+			bottom: 5px;
+		}
+	}
+
+	background:{
+		color: $lunch-clr-black;
+	};
+
+	padding:{
+		top: 60px;
+		bottom: 60px;
+		left: 40px;
+		right: 40px;
+	};
+
+
+	.lunch-itempromobox-cont {}
+	.lunch-itempromobox-img {
+		margin:{
+			left: auto;
+			right: auto;
+		};
+		width: 175px;
+	}
+
+}
+
+@media screen and (min-width: 900px){
+
+	.lunch-itempromobox-img {
+		position: absolute;
+		left: -11px;
+		top: -18px;
+		margin:{
+			left:0;
+			right:0;
+		}
+	}
+
+	.lunch-section-itempromobox {
+		background: {
+			image: image-url("http://lunchpad.co/static/img/itempromobox/lightsaber-ad-bg.gif");
+			position: center center;
+			size: cover;
+			//attachment: fixed;
+		}
+
+
+		.lunch-itempromobox-cont {
+			width: 350px;
+			max-width: 100%;
+
+			position: relative;
+
+			margin:{
+				left: auto;
+				right: auto;
+			};
+
+			padding:{
+				left: 190px;
+			}
+
+			h2, p {
+				text-align: left;
+			}
+		}
+	}
+
+}

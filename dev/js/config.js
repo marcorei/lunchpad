@@ -96,6 +96,9 @@ angular.module('lpConfig',[
 		'notification.delete.all': 'notification delete all',
 
 		'stats.innovator': 'stats innovator',
+		'stats.allfav': 'stats allfav',
+		'stats.wdfav': 'stats wdfav',
+		'stats.rising': 'stats rising',
 
 		'clear.all': 'clear all'
 	}

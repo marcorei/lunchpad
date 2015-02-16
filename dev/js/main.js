@@ -22,11 +22,12 @@ angular.module('lunchpad',[
 	'lpError',
 	'lpNavi',
 
-	'angularMoment'
+	'angularMoment',
+	'mrShepherd'
 ])
 
-.config(['$routeProvider','LpConfigProvider','$animateProvider',
-	function($routeProvider,LpConfigProvider,$animateProvider){
+.config(['$routeProvider','LpConfigProvider','$animateProvider','MrShepherdTourProvider',
+	function($routeProvider,LpConfigProvider,$animateProvider,MrShepherdTourProvider){
 		var LpConfig = LpConfigProvider.$get();
 
 		$routeProvider.
@@ -67,6 +68,67 @@ angular.module('lunchpad',[
 			});
 
 		$animateProvider.classNameFilter(/lunch-animate/);
+
+		MrShepherdTourProvider.setName('onboardingMain');
+		MrShepherdTourProvider.addStep('welcome', {
+			title: 'Even Better!',
+			text: 'Welcome to the new Lunchpad!',
+			buttons: [
+				{
+					text: 'Next',
+					classes: 'lunch-button',
+					action: 'next'
+				}
+			]
+		});
+		MrShepherdTourProvider.addStep('detail', {
+			title: 'Venue Detail',
+			text: 'Click on a venue name! <br>You can add comments on the detail page!',
+			attachTo: '.lunch-venue-title bottom',
+			buttons: [
+				{
+					text: 'Back',
+					classes: 'lunch-button shepherd-button-secondary',
+					action: 'back'
+				}, {
+					text: 'Next',
+					classes: 'lunch-button',
+					action: 'next'
+				}
+			]
+		});
+		MrShepherdTourProvider.addStep('notifications', {
+			title: 'Improved Notifications',
+			text: 'We added new and improved notifications! <br>Go to your profile to update your settings.',
+			attachTo: '.lunch-fn-settings left',
+			buttons: [
+				{
+					text: 'Back',
+					classes: 'lunch-button shepherd-button-secondary',
+					action:'back'
+				}, {
+					text: 'Next',
+					classes: 'lunch-button',
+					action: 'next'
+				}
+			]
+		});
+		MrShepherdTourProvider.addStep('profile', {
+			title: 'Items',
+			text: 'Pimp your Character with items! <br>You can earn new items through contests and on special occasions.',
+			attachTo: '.lunch-fn-settings left',
+			buttons: [
+				{
+					text: 'Back',
+					classes: 'lunch-button shepherd-button-secondary',
+					action: 'back'
+				}, {
+					text: 'Done',
+					classes: 'lunch-button',
+					action: 'next'
+				}
+			]
+		});
 	}
 ])
 /*

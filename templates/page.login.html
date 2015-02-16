@@ -17,9 +17,14 @@
 		<!-- Type kit -->
 		<script type="text/javascript" src="//use.typekit.net/tjo7bse.js"></script>
 		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+		<!-- angular and socket.io -->
+		<script type="text/javascript" src="./socket.io/socket.io.js"></script>
+		<script type="text/javascript" src="../static/js/libraries.js"></script>
+		<script type="text/javascript" src="../static/js/app.js"></script>
 		
 	</head>
-	<body class="lunch-page-login">
+	<body ng-app="lunchpadLogin" class="lunch-page-login">
 	
 		<header>
 			<div  href="#" class="lunch-logo">
@@ -28,11 +33,7 @@
 			<h1>Lunchpad.co</h1>
 		</header>
 
-
-		<section class="lunch-section-manifesto">
-			<h2><a href="/manifesto" title="Manifesto">The Lunch Manifesto.</a></h2>
-			<p><a href="/manifesto" title="Manifesto">Read more.</a></p>
-		</section>
+		<section lp-promo="./static/promo/tmpl.manifesto.html"></section>
 
 		<section class="lunch-section-login">
 			<form action="/auth/login" method="post" class="lunch-login-form">

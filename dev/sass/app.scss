@@ -34,11 +34,11 @@
 @import "tmpl.venue";
 @import "tmpl.flash";
 @import "tmpl.comment";
+@import "tmpl.itempromobox";
 
 // Pages
 @import "page.app";
 @import "page.login";
-@import "page.manifesto";
 
 // Views
 @import "view.venues";
@@ -46,6 +46,7 @@
 @import "view.venue";
 @import "view.venueedit";
 @import "view.admin";
+
 
 
 

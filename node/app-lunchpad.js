@@ -640,7 +640,7 @@ app.get('/logout', function(req,res){
 	//res.json({ error: null });
 	res.redirect('/login#hint=loggedout');
 });
-app.get('/manifesto', lunchHelper.sendHtml('page.manifesto.html'));
+//app.get('/manifesto', lunchHelper.sendHtml('page.manifesto.html'));
 
 
 // Action-Requests not send via socket (login / logout via passport)
@@ -1723,6 +1723,57 @@ io.sockets.on('connection', function (socket) {
 			}, function(error){
 				lunchHelper.sendErrorToSocketCb(cb,error);
 			});
+
+		});
+	});
+
+	socket.on('stats allfav', function(data, cb){
+		lunchAuth.isAdmin(socket, function(user){
+
+			checkinProvider.aggrAllFavVid(function(venueStats){
+
+				cb({
+					error: null,
+					venueStats: venueStats
+				});
+
+			}, function(error){
+				lunchHelper.sendErrorToSocketCb(cb,error);
+			});	
+
+		});
+	});
+
+	socket.on('stats wdfav', function(data, cb){
+		lunchAuth.isAdmin(socket, function(user){
+
+			checkinProvider.aggrWdFavVid(function(venueStats){
+
+				cb({
+					error: null,
+					venueStats: venueStats
+				});
+
+			}, function(error){
+				lunchHelper.sendErrorToSocketCb(cb,error);
+			});	
+
+		});
+	});
+
+	socket.on('stats rising', function(data, cb){
+		lunchAuth.isAdmin(socket, function(user){
+
+			checkinProvider.aggrRisingVid(function(venueStats){
+
+				cb({
+					error: null,
+					venueStats: venueStats
+				});
+
+			}, function(error){
+				lunchHelper.sendErrorToSocketCb(cb,error);
+			});	
 
 		});
 	});
