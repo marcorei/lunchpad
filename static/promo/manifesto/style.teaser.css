@@ -1,0 +1,34 @@
+/*
+ * Lunchpad Manifesto Teaser
+ * @author Markus Riegel <mr@19h13.com>
+ */
+
+.lunch-section-manifesto {
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-bottom: 60px;
+	padding-top: 60px;
+
+	background-color: #111;
+}
+
+.lunch-section-manifesto h2 {
+	font-size: 40px;
+	margin-bottom: 5px;
+}
+
+.lunch-section-manifesto h2 a, .lunch-section-manifesto p a {
+	color: #fff;
+}
+
+.lunch-section-manifesto h2 a:hover, .lunch-section-manifesto p a:hover {
+	color: #00B9E7;
+}
+
+@media screen and (min-width: 900px){
+	.lunch-section-manifesto {	
+		background-image: url("/static/promo/manifesto/bg.jpg");
+		background-position: center center;
+		background-size: cover;
+	}
+}

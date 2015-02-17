@@ -13,6 +13,7 @@ module.exports = function (grunt) {
 		'bower_components/moment/min/moment.min.js',
 		'bower_components/moment/locale/de.js',
 		'bower_components/angular-moment/angular-moment.min.js',
+		'bower_components/angular-css-injector/angular-css-injector.js',
 
 		// Temporary onboarding
 		'bower_components/shepherd.js/shepherd.min.js'
