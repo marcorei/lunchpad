@@ -1,0 +1,10 @@
+/*
+ * Lunchpad Lightsaber Teaser
+ * @author Markus Riegel <mr@19h13.com>
+ */
+
+@media screen and (min-width: 900px){
+	.lunch-section-itempromobox {
+		background-image: url("/static/promo/lightsaber/lightsaber-ad-bg.gif");
+	}
+}

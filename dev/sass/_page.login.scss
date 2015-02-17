@@ -6,7 +6,7 @@
 
 .lunch-page-login {
 
-	header, .lunch-section-manifesto, footer {
+	header, footer {
 		padding: {
 			left: 30px;
 			right: 30px;
@@ -55,36 +55,7 @@
 		}
 	}
 
-	.lunch-section-manifesto {
-
-		background:{
-			color: $lunch-clr-black;
-		}
-
-		padding:{
-			bottom: 60px;
-			top: 60px;
-		};
-
-		h2, p {
-			a {
-				color: $lunch-clr-white;
-				&:hover {
-					color: $lunch-clr-blue;
-				}
-			}
-		}
-
-		h2 {
-			font: {
-				size: 40px;
-			}
-			margin: {
-				bottom: 5px;
-			}
-		}
-
-	}
+	
 
 
 	.lunch-section-login {
@@ -160,7 +131,7 @@
 }
 
 
-.lunch-page-login, .lunch-page-manifesto {
+.lunch-page-login {
 
 	footer {
 		border: {
@@ -209,17 +180,4 @@
 
 
 
-@media screen and (min-width: 900px){
 
-	.lunch-page-login {
-
-		.lunch-section-manifesto {
-			background: {
-				image: image-url("manifesto-bg.jpg");
-				position: center center;
-				size: cover;
-				//attachment: fixed;
-			}
-		}
-	}
-}

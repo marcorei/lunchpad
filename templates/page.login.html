@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if lt IE 7]>      <html ng-app="lunchpadLogin" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html ng-app="lunchpadLogin" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html ng-app="lunchpadLogin" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html ng-app="lunchpadLogin" class="no-js"> <!--<![endif]-->
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -24,7 +24,7 @@
 		<script type="text/javascript" src="../static/js/app.js"></script>
 		
 	</head>
-	<body ng-app="lunchpadLogin" class="lunch-page-login">
+	<body class="lunch-page-login">
 	
 		<header>
 			<div  href="#" class="lunch-logo">
@@ -33,7 +33,7 @@
 			<h1>Lunchpad.co</h1>
 		</header>
 
-		<section lp-promo="./static/promo/tmpl.manifesto.html"></section>
+		<section lp-promo="manifesto"></section>
 
 		<section class="lunch-section-login">
 			<form action="/auth/login" method="post" class="lunch-login-form">
