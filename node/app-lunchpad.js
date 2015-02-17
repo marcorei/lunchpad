@@ -364,7 +364,7 @@ lunchTasks = {
 
 						mailer.sendMail(
 							'mail.reminder.new',
-							'A New Venue on Lunchpad!',
+							'Lunchpad / Your daily reminder!',
 							{
 								venue: venue
 							},users);
@@ -410,7 +410,7 @@ lunchTasks = {
 									
 									mailer.sendMail(
 										'mail.reminder.top',
-										'Lunchpad / Your Colleagues Love this Venue!',
+										'Lunchpad / Your daily reminder!',
 										{
 											venue: venue
 										},users);
@@ -440,7 +440,7 @@ lunchTasks = {
 									
 									mailer.sendMail(
 										'mail.reminder.weekday',
-										'Lunchpad / Got Plans for Lunch Today?',
+										'Lunchpad / Your daily reminder!',
 										{
 											venue: venue
 										},users);
@@ -470,7 +470,7 @@ lunchTasks = {
 									
 									mailer.sendMail(
 										'mail.reminder.rising',
-										'Lunchpad / The New Hot Spot for Lunch!',
+										'Lunchpad / Your daily reminder!',
 										{
 											venue: venue
 										},users);
