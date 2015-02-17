@@ -1,0 +1,62 @@
+/*
+ * Lunchpad Manifesto Teaser
+ * @author Markus Riegel <mr@19h13.com>
+ */
+
+.lunch-section-buzzfeed {
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-bottom: 60px;
+	padding-top: 60px;
+
+	background-color: #000;
+	-webkit-font-smoothing: antialiased;
+}
+
+/* Button */
+.lunch-section-buzzfeed .lunch-button {
+	padding-left: 40px;
+	padding-right: 40px;
+	background-color: #a6e562;
+	color: #000;
+	font-size: 13px;
+	-webkit-font-smoothing: antialiased;
+}
+.lunch-section-buzzfeed .lunch-button:hover {
+	background-color: #8fd940;
+}
+
+/* Visual */
+.lunch-section-buzzfeed .lunch-itempromobox-img {
+	width: 220px;
+}
+
+.lunch-section-buzzfeed p {
+	line-height: 1.4em;
+}
+
+
+@media screen and (min-width: 900px){
+
+	.lunch-section-buzzfeed {
+		background-image: url("/static/promo/buzzfeed/promo-buzz-bg.jpg"), url("/static/promo/buzzfeed/promo-buzz-bg-tile.gif");
+		background-position: top right, top left;
+		background-size: auto;
+		background-repeat: no-repeat, repeat;
+	}
+
+	.lunch-section-buzzfeed .lunch-itempromobox-cont {
+		padding-left: 240px;
+		width: 380px;
+	}
+
+	.lunch-section-buzzfeed .lunch-itempromobox-img {
+		top: 0;
+		left: 0;
+	}
+
+	.lunch-section-buzzfeed p:last-child,
+	.lunch-section-buzzfeed .lunch-button {
+		margin-bottom: 0;
+	}
+}
