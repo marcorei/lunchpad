@@ -13,68 +13,68 @@
 
 
 // state change animation
-.lunch-view-container.ng-enter, .lunch-view-container.ng-leave {
-	@include transition-property( transform, opacity );
-	@include transition-duration( 700ms );
-}
+// .lunch-view-container.ng-enter, .lunch-view-container.ng-leave {
+// 	@include transition-property( transform, opacity );
+// 	@include transition-duration( 700ms );
+// }
 
 
 
-/*
- * Animations on View Container
- */
-.lunch-view-container.ng-enter {
-	position: fixed;
-	top: 0;
-	left:0;
-	opacity: 0;
-	@include transform(translateX(100%));
-	//width: 100%;
-}
+// /*
+//  * Animations on View Container
+//  */
+// .lunch-view-container.ng-enter {
+// 	position: fixed;
+// 	top: 0;
+// 	left:0;
+// 	opacity: 0;
+// 	@include transform(translateX(100%));
+// 	//width: 100%;
+// }
 
-.lunch-view-container.ng-enter-active {
-	opacity: 1;
-	@include transform(translateX(0%));
-}
+// .lunch-view-container.ng-enter-active {
+// 	opacity: 1;
+// 	@include transform(translateX(0%));
+// }
 
-.lunch-view-container.ng-leave {
-	position: relative;
-	opacity: 1;
-	@include transform(translateX(0%));
-}
+// .lunch-view-container.ng-leave {
+// 	position: relative;
+// 	opacity: 1;
+// 	@include transform(translateX(0%));
+// }
 
-.lunch-view-container.ng-leave-active {
-	opacity: 0;
-	@include transform(translateX(-100%));
-}
+// .lunch-view-container.ng-leave-active {
+// 	opacity: 0;
+// 	@include transform(translateX(-100%));
+// }
 
-/*
- * Come back
- */
-.back .lunch-view-container.ng-enter {
-	position: fixed;
-	// width: 100%;
-	top: 0;
-	left:0;
-	opacity: 0;
-	@include transform(translateX(-100%));
-}
+// /*
+//  * Come back
+//  */
+// .back .lunch-view-container.ng-enter {
+// 	position: fixed;
+// 	// width: 100%;
+// 	top: 0;
+// 	left:0;
+// 	opacity: 0;
+// 	@include transform(translateX(-100%));
+// }
 
-.back .lunch-view-container.ng-enter-active {
-	opacity: 1;
-	@include transform(translateX(0%));
-}
+// .back .lunch-view-container.ng-enter-active {
+// 	opacity: 1;
+// 	@include transform(translateX(0%));
+// }
 
-.back .lunch-view-container.ng-leave {
-	position: relative;
-	opacity: 1;
-	@include transform(translateX(0%));
-}
+// .back .lunch-view-container.ng-leave {
+// 	position: relative;
+// 	opacity: 1;
+// 	@include transform(translateX(0%));
+// }
 
-.back .lunch-view-container.ng-leave-active {
-	opacity: 0;
-	@include transform(translateX(100%));
-}
+// .back .lunch-view-container.ng-leave-active {
+// 	opacity: 0;
+// 	@include transform(translateX(100%));
+// }
 
 
 
