@@ -214,6 +214,20 @@
 			right: 1em;
 		}
 	}
+
+
+	.lunch-email-preferences {
+		input[type="checkbox"] {
+			float: left;
+		}
+		label {
+			display: block;
+			padding: {
+				left: 30px;
+			}
+			line-height: 1.3em;
+		}
+	}
 }
 
 
