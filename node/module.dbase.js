@@ -23,7 +23,11 @@ var db;
 var DBase = function(){
 
 	db = new Db(config.mongodb.db, new Server(config.mongodb.host, config.mongodb.port, {auto_reconnect: true}),{w:1});
-	db.open(function(){});
+	db.open(function(){
+		if(config.mongodb.user !== undefined){
+			db.authenticate(config.mongodb.user, config.mongodb.password, function(err, result){});
+		}
+	});
 
 };
 

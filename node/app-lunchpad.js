@@ -175,7 +175,9 @@ var lunchAuth = {
 var mongoStore = new MongoStore({
 	host: config.mongodb.host,
 	port: config.mongodb.port,
-	db: config.mongodb.db
+	db: config.mongodb.db,
+	username: config.mongodb.user,
+	password: config.mongodb.password
 	// stringify: true
 });
 
